@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Conexão Barber — Seu primeiro corte começa na primeira aula</title>
+<meta name="description" content="Conexão Barber, por HAIR Academia da Beleza: mais de 4.000 profissionais formados. Seu primeiro corte acontece na primeira aula. Gere seu voucher e garanta sua vaga.">
+
+<!--
+════════════════════════════════════════════════════════════════
+  CONEXÃO BARBER — LANDING PAGE UNIVERSAL · versão cósmica
+  · Fundo: universo 3D (estrelas) atrás de toda a página
+  · Abertura: infinito verde 3D → CONEXÃO → BARBER → rasgo → frase
+  · Mídia real: pasta fotos/ e videos/ (viaja junto com a página)
+  · Galeria "O Quadro": moldura dourada 3D com fotos passando
+  · Voucher ritual BA-XXXX → WhatsApp 5516974050099
+  Para adicionar fotos novas na galeria: procure por GALERIA_FOTOS
+  no código e acrescente uma linha com o nome do arquivo.
+════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════ TOKENS ══════════ */
+:root{
+  --preto:#070908;
+  --carvao:#121212;
+  --branco:#F5F1E8;
+  --branco-40:rgba(245,241,232,.4);
+  --branco-65:rgba(245,241,232,.68);
+  --ouro:#D4AF37;
+  --ouro-claro:#E8C97A;
+  --ouro-escuro:#8C6B22;
+  --verde:#0FA96B;
+  --vermelho:#E5342B;
+  --vermelho-escuro:#A81F18;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  background:var(--preto);
+  color:var(--branco);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,video{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+::selection{background:var(--ouro);color:var(--preto)}
+
+/* ══════════ COSMOS (fundo universal) ══════════ */
+/* fallback CSS caso WebGL não exista */
+.cosmos-css{
+  background-image:url('fotos/arte-infinito-cosmos.jpg');
+  background-size:cover;
+  background-position:center;
+  background:#050505 url('fotos/arte-infinito-cosmos.jpg') center/cover no-repeat;
+}
+.cosmos-css{background-image:url("fotos/arte-nebulosa-poster.jpg");background-size:cover;background-position:center top}
+
+/* ══════════ TIPOGRAFIA ══════════ */
+.eyebrow{
+  font-size:.68rem;font-weight:600;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--ouro);margin-bottom:1.4rem;
+}
+h1,h2{
+  font-family:var(--serif);font-weight:900;text-transform:uppercase;
+  line-height:1.06;letter-spacing:.01em;
+}
+h2{font-size:clamp(2rem,7.5vw,4.2rem)}
+.lead{
+  font-size:clamp(1rem,3.8vw,1.25rem);color:var(--branco-65);
+  max-width:36ch;margin-top:1.6rem;
+}
+.gold{
+  background:linear-gradient(100deg,var(--ouro-escuro) 0%,var(--ouro-claro) 45%,#FFF3D6 52%,var(--ouro) 60%,var(--ouro-escuro) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* ══════════ COSMOS-5: fundo + splash oficial ══════════ */
+/* ═══ ▓ FUNDO CÓSMICO 3D — pontos finos (NÃO ALTERADO) ▓ ═══ */
+#cosmos{position:fixed; inset:0; z-index:0; display:block}
+
+/* NEBULOSA WEBB — LÁ NO FUNDO, quebrada em RAJADAS (trovão distante) atrás das estrelas */
+.rajadas{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.raj{position:absolute; border-radius:50%; opacity:0; mix-blend-mode:screen; filter:blur(50px); will-change:opacity}
+@keyframes flare{0%{opacity:0} 10%{opacity:0} 50%{opacity:var(--pk)} 90%{opacity:0} 100%{opacity:0}}
+
+/* COMETA distante por trás (profundidade) */
+.cometa{position:fixed; top:-4%; left:106%; width:2px; height:2px; z-index:0; border-radius:50%; background:#fff; box-shadow:0 0 6px 1px rgba(255,255,255,.9),0 0 15px 4px rgba(185,205,255,.5); opacity:0; filter:blur(.3px); animation:cometaMove 13s cubic-bezier(.45,0,.55,1) 2.6s infinite}
+.cometa::after{content:""; position:absolute; right:1px; top:50%; transform:translateY(-50%); width:150px; height:1.4px; background:linear-gradient(90deg,rgba(255,255,255,0),rgba(200,215,255,.55)); filter:blur(.5px)}
+@keyframes cometaMove{0%{transform:translate(0,0) rotate(19deg);opacity:0}9%{opacity:.5}60%{opacity:.5}74%{opacity:0}100%{transform:translate(-138vw,62vh) rotate(19deg);opacity:0}}
+/* ═══ ▓ FIM DO BLOCO — <script> do cosmos no rodapé ▓ ═══ */
+
+.splash{position:relative; z-index:2; min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px}
+
+/* entrada: pixel minúsculo -> tamanho real, rápido */
+@keyframes surge{0%{opacity:0;transform:scale(.02);filter:blur(2px)}55%{opacity:1}100%{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes surgebar{0%{opacity:0;transform:scale(.02)}100%{opacity:1;transform:scale(1)}}
+@keyframes brilhoVarre{0%{background-position:132% 50%}100%{background-position:-32% 50%}}
+@keyframes flutua{50%{transform:translateY(-8px)}}
+/* SÍMBOLO DO INFINITO — brilho contínuo e vivo */
+@keyframes brilhoLogo{
+  0%,100%{filter:drop-shadow(0 0 16px rgba(232,201,122,.30)) drop-shadow(0 6px 18px rgba(0,0,0,.6))}
+  50%{filter:drop-shadow(0 0 30px rgba(232,201,122,.60)) drop-shadow(0 6px 18px rgba(0,0,0,.6))}
+}
+
+.logo-in{display:inline-block; opacity:0; transform:scale(.02); filter:blur(2px); animation:surge 1s cubic-bezier(.2,.7,.2,1) .4s both}
+.logo{width:196px; height:auto; margin-bottom:10px; mix-blend-mode:screen;
+  filter:drop-shadow(0 0 16px rgba(232,201,122,.30)) drop-shadow(0 6px 18px rgba(0,0,0,.6));
+  animation: brilhoLogo 3.4s ease-in-out 1.5s infinite, flutua 5s ease-in-out 5s infinite;
+}
+
+/* LETRAS — proporção atual, SEMPRE em linha reta */
+.wordmark{font-family:'Playfair Display',serif; font-weight:900; font-size:clamp(26px,7.8vw,58px); letter-spacing:.03em; line-height:1; white-space:nowrap; text-shadow:0 2px 10px rgba(0,0,0,.8); max-width:100%}
+.wordmark .c, .wordmark .b{display:inline-block; opacity:0; transform:scale(.02); background-size:260% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent}
+.wordmark .c{background-image:linear-gradient(100deg,#cfd4cd 0%,#ffffff 42%,#ffffff 50%,#fffafa 58%,#c9cec7 100%); animation:surge .9s cubic-bezier(.2,.7,.2,1) 1.6s both, brilhoVarre 5s ease-in-out 2.7s infinite alternate}
+.wordmark .b{background-image:linear-gradient(100deg,#8C6B22 0%,#D4AF37 26%,#F7E39B 44%,#FFFFFF 50%,#F7E39B 56%,#E8C97A 74%,#8C6B22 100%); animation:surge .9s cubic-bezier(.2,.7,.2,1) 2.9s both, brilhoVarre 5s ease-in-out 4.0s infinite alternate}
+
+.tagline{margin-top:14px; font-size:clamp(10px,2.6vw,12px); letter-spacing:.5em; text-indent:.5em; font-weight:500; color:rgba(244,241,234,.62); text-transform:uppercase; white-space:nowrap}
+.barra{margin-top:26px; width:min(180px,52vw); height:3px; border-radius:3px; background:rgba(255,255,255,.08); overflow:hidden; opacity:0; animation:surgebar .7s ease-out 4.1s both}
+.barra::after{content:""; display:block; height:100%; width:40%; border-radius:3px; background:linear-gradient(90deg,var(--verde),var(--ouro)); animation:carrega 1.9s cubic-bezier(.5,0,.2,1) 4.3s infinite}
+@keyframes carrega{0%{transform:translateX(-120%)}100%{transform:translateX(360%)}}
+
+@media (prefers-reduced-motion:reduce){
+  .raj,.cometa,.logo,.logo-in,.wordmark .c,.wordmark .b,.barra,.barra::after{animation:none}
+  .logo-in,.wordmark .c,.wordmark .b,.barra{opacity:1; transform:none; filter:none}
+  .cometa{display:none}
+  .barra::after{width:60%}
+}
+
+
+/* NEBULOSA VERDE-ESCURA — a milhares de km, alto/esquerda, com estrias */
+.nebulosa-verde{
+  position:fixed; top:-8%; left:-10%;
+  width:58vmax; height:40vmax;
+  z-index:0; pointer-events:none;
+  transform:rotate(-14deg);
+  mix-blend-mode:screen;
+  filter:blur(24px);
+  opacity:.42;
+  background:
+    repeating-linear-gradient(114deg,
+      rgba(4,46,29,0) 0 16px,
+      rgba(7,84,52,.30) 16px 23px,
+      rgba(4,46,29,0) 23px 46px,
+      rgba(6,61,38,.18) 46px 52px,
+      rgba(4,46,29,0) 52px 84px),
+    radial-gradient(58% 44% at 36% 38%, rgba(9,92,57,.50), rgba(5,56,35,.22) 55%, transparent 76%);
+  animation:respiraNebulosa 18s ease-in-out infinite;
+}
+@keyframes respiraNebulosa{0%,100%{opacity:.34}50%{opacity:.5}}
+
+/* PROTOESTRELAS — pontos mínimos com fechos de luz */
+.protoestrelas{position:fixed; top:0; left:0; width:42vw; height:38vh; z-index:0; pointer-events:none}
+.proto{
+  position:absolute; width:2px; height:2px; border-radius:50%;
+  background:#EAFFF4; opacity:.25;
+  animation:fechoProto var(--dur,6s) ease-in-out var(--del,0s) infinite;
+}
+@keyframes fechoProto{
+  0%,86%,100%{opacity:.22; box-shadow:0 0 2px 0 rgba(226,255,242,.35)}
+  91%{opacity:1; box-shadow:0 0 6px 2px rgba(230,255,244,.95),0 0 14px 4px rgba(15,169,107,.45)}
+  95%{opacity:.4; box-shadow:0 0 3px 1px rgba(226,255,242,.5)}
+}
+@media (prefers-reduced-motion:reduce){
+  .nebulosa-verde,.proto{animation:none}
+}
+
+#cosmos{pointer-events:none}
+.rajadas,.cometa{pointer-events:none}
+
+/* ══════════ ABERTURA (overlay) ══════════ */
+#abertura{
+  position:fixed;inset:0;z-index:100;
+  background:transparent;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+#abertura .splash{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;width:100%}
+#rasgo{
+  position:absolute;z-index:20;left:50%;top:50%;
+  width:180vmax;height:3px;
+  background:linear-gradient(90deg,transparent,var(--ouro-claro) 18%,#FFF7E0 50%,var(--ouro-claro) 82%,transparent);
+  box-shadow:0 0 24px rgba(232,201,122,.9),0 0 80px rgba(201,162,75,.5);
+  transform:translate(-50%,-50%) rotate(-16deg) scaleX(0);
+  transform-origin:center;
+}
+#frase{
+  position:absolute;z-index:30;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:0 8vw;opacity:0;
+}
+#frase p{
+  font-family:var(--serif);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.4rem,6vw,3.2rem);line-height:1.25;
+  letter-spacing:.06em;max-width:18ch;
+}
+#frase em{font-style:normal;color:var(--ouro-claro)}
+#pular{
+  position:absolute;z-index:70;right:5vw;bottom:6.5svh;
+  background:rgba(5,5,5,.4);border:1px solid rgba(245,241,232,.25);
+  color:var(--branco-65);font-family:var(--sans);font-size:.7rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  padding:.7rem 1.3rem;border-radius:100px;cursor:pointer;
+  transition:border-color .2s var(--ease),color .2s var(--ease);
+}
+#pular:hover,#pular:focus-visible{border-color:var(--ouro);color:var(--ouro-claro)}
+#scrollHint{
+  position:absolute;z-index:70;left:50%;bottom:6svh;transform:translateX(-50%);
+  font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--branco-40);opacity:0;display:flex;flex-direction:column;align-items:center;gap:.6rem;
+}
+#scrollHint::after{
+  content:"";width:1px;height:34px;
+  background:linear-gradient(var(--ouro),transparent);
+  animation:desce 1.8s var(--ease) infinite;
+}
+@keyframes desce{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ══════════ FILME ══════════ */
+main{position:relative;z-index:1}
+.tela{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:15svh 7vw 13svh;overflow:hidden;
+}
+.tela::before{ /* scrim leve para legibilidade sobre o cosmos */
+  content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(5,5,5,0) 0%,rgba(5,5,5,.32) 50%,rgba(5,5,5,0) 100%);
+}
+.tela>.conteudo{position:relative;z-index:5;max-width:1100px;margin:0 auto;width:100%}
+
+.reveal{opacity:0;transform:translateY(16px)}
+.reveal.on{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.territorio{
+  font-family:var(--serif);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.3rem,5.4vw,2.6rem);line-height:1.3;
+  clip-path:inset(0 100% 0 0);
+}
+.territorio.on{clip-path:inset(0 0 0 0);transition:clip-path 1.1s var(--ease)}
+.territorio strong{color:var(--ouro-claro);font-weight:900}
+
+/* mídia solta nas telas */
+.midia{
+  position:relative;border-radius:8px;overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.6);
+  border:1px solid rgba(201,162,75,.22);
+}
+.midia::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 60%,rgba(5,5,5,.5));
+}
+.legenda-midia{
+  position:absolute;left:1rem;bottom:.9rem;z-index:2;
+  font-size:.62rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ouro-claro);
+}
+.r-3x4{aspect-ratio:3/4}
+.r-16x9{aspect-ratio:16/9}
+.r-4x3{aspect-ratio:4/3}
+.r-9x16{aspect-ratio:9/16}
+
+.grade-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.4rem}
+.grade-3{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2.4rem}
+@media(min-width:760px){
+  .grade-3{grid-template-columns:1fr 1fr 1fr}
+  .duo{display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center}
+}
+
+/* ══════════ PROVA SOCIAL ══════════ */
+#prova{isolation:isolate}
+#prova .fundo-prova{
+  position:absolute;inset:0;z-index:1;opacity:.22;
+}
+#prova .fundo-prova img{filter:saturate(.7)}
+#prova .fundo-prova::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(90% 80% at 50% 50%,transparent 20%,var(--preto) 85%);
+}
+#prova .numero{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(4.6rem,22vw,13rem);line-height:.95;
+}
+#prova .rotulo{
+  font-size:clamp(.8rem,2.6vw,1.05rem);letter-spacing:.5em;
+  text-transform:uppercase;color:var(--branco-65);margin-top:1rem;
+}
+
+/* ══════════ MOLDURA DOURADA (componente) ══════════ */
+.palco3d{perspective:1200px}
+.moldura{
+  position:relative;
+  padding:clamp(8px,2vw,12px);
+  border-radius:12px;
+  background:
+    linear-gradient(135deg,#6d5217 0%,#E8C97A 18%,#8C6B22 38%,#F5E3B0 52%,#8C6B22 66%,#E8C97A 84%,#6d5217 100%);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.75),
+    0 0 60px rgba(201,162,75,.18),
+    inset 0 1px 0 rgba(255,247,224,.7);
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.moldura::before{ /* friso interno */
+  content:"";position:absolute;inset:5px;border-radius:9px;
+  border:1px solid rgba(255,247,224,.55);pointer-events:none;z-index:3;
+}
+.canto{
+  position:absolute;width:14px;height:14px;z-index:4;
+  background:linear-gradient(135deg,#F5E3B0,#8C6B22);
+  transform:rotate(45deg);
+  box-shadow:0 0 10px rgba(232,201,122,.6);
+}
+.canto.c1{top:-6px;left:-6px}.canto.c2{top:-6px;right:-6px}
+.canto.c3{bottom:-6px;left:-6px}.canto.c4{bottom:-6px;right:-6px}
+.passepartout{
+  background:#0A0908;
+  padding:clamp(8px,2.4vw,16px);
+  border-radius:8px;
+}
+.tela-quadro{
+  position:relative;overflow:hidden;border-radius:5px;
+  background:#000;
+}
+.tela-quadro .slide{
+  position:absolute;inset:0;opacity:0;transform:scale(1.06);
+  transition:opacity 1s var(--ease),transform 5.5s linear;
+}
+.tela-quadro .slide.ativo{opacity:1;transform:scale(1)}
+.tela-quadro .slide video{background:#000}
+.placa{
+  margin:.9rem auto 0;width:fit-content;max-width:90%;
+  text-align:center;
+  font-size:.6rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ouro-claro);
+  border:1px solid rgba(201,162,75,.4);
+  border-radius:100px;
+  padding:.5rem 1.2rem;
+  background:rgba(10,9,8,.6);
+}
+
+/* controles dourados */
+.controles{
+  display:flex;align-items:center;justify-content:center;
+  gap:1.1rem;margin-top:1.3rem;
+}
+.btn-ouro{
+  width:52px;height:52px;border-radius:50%;
+  border:none;cursor:pointer;position:relative;
+  background:linear-gradient(145deg,#F5E3B0 0%,#C9A24B 40%,#8C6B22 100%);
+  box-shadow:0 8px 24px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,247,224,.8),0 0 18px rgba(201,162,75,.35);
+  color:#1a1305;font-size:1.5rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .15s var(--ease),box-shadow .15s var(--ease);
+}
+.btn-ouro:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,247,224,.8),0 0 26px rgba(232,201,122,.55)}
+.btn-ouro:active{transform:scale(.94)}
+.btn-ouro::after{ /* filete interno */
+  content:"";position:absolute;inset:4px;border-radius:50%;
+  border:1px solid rgba(26,19,5,.35);pointer-events:none;
+}
+.pontos{display:flex;gap:.55rem}
+.ponto{
+  width:9px;height:9px;border-radius:50%;border:1px solid var(--ouro);
+  background:transparent;cursor:pointer;padding:0;
+  transition:background .25s var(--ease),transform .25s var(--ease);
+}
+.ponto.ativo{background:linear-gradient(145deg,#F5E3B0,var(--ouro));transform:scale(1.35);box-shadow:0 0 10px rgba(232,201,122,.7)}
+
+/* ══════════ GALERIA "O QUADRO" ══════════ */
+#galeria .conteudo{max-width:760px}
+#galeria .moldura-wrap{margin-top:2.6rem}
+#galeria .tela-quadro{aspect-ratio:4/5}
+@media(min-width:900px){#galeria .tela-quadro{aspect-ratio:16/11}}
+
+/* ══════════ HERÓI PAIVA ══════════ */
+#heroi blockquote{
+  font-family:var(--serif);font-size:clamp(1.1rem,4.2vw,1.7rem);
+  font-weight:500;line-height:1.45;
+  border-left:2px solid var(--ouro);padding-left:1.4rem;margin-top:2rem;
+}
+#heroi .tela-quadro{aspect-ratio:3/4}
+#heroi .moldura-wrap{margin-top:2.2rem}
+@media(min-width:760px){#heroi .moldura-wrap{margin-top:0}}
+
+/* ══════════ ECOSSISTEMA ══════════ */
+.infinito-mini{width:96px;height:auto;margin-bottom:1.6rem;mix-blend-mode:screen}
+#ecossistema .arte{
+  margin-top:2.4rem;border-radius:8px;overflow:hidden;
+  border:1px solid rgba(201,162,75,.25);
+  box-shadow:0 24px 70px rgba(0,0,0,.6);
+  max-width:520px;
+}
+
+/* ══════════ OFERTA + VOUCHER ══════════ */
+#oferta{padding-bottom:20svh}
+#oferta .palco{
+  margin-top:3rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:1.6rem;
+}
+#btnVoucher{
+  position:relative;border:none;cursor:pointer;
+  font-family:var(--sans);font-weight:800;
+  font-size:clamp(1rem,4vw,1.35rem);letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;background:linear-gradient(160deg,var(--vermelho),var(--vermelho-escuro));
+  padding:1.6rem 3rem;border-radius:14px;
+  box-shadow:0 0 0 0 rgba(229,52,43,.6),0 18px 50px rgba(229,52,43,.35);
+  animation:pulsa 1.9s var(--ease) infinite;
+  transition:transform .2s var(--ease);
+  width:min(100%,480px);
+}
+#btnVoucher:hover{transform:translateY(-2px)}
+#btnVoucher:active{transform:scale(.98)}
+@keyframes pulsa{
+  0%{box-shadow:0 0 0 0 rgba(229,52,43,.55),0 18px 50px rgba(229,52,43,.35)}
+  70%{box-shadow:0 0 0 26px rgba(229,52,43,0),0 18px 50px rgba(229,52,43,.35)}
+  100%{box-shadow:0 0 0 0 rgba(229,52,43,0),0 18px 50px rgba(229,52,43,.35)}
+}
+#palcoCodigo{display:none;flex-direction:column;align-items:center;gap:1rem}
+#codigoVoucher{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(2.6rem,12vw,4.6rem);letter-spacing:.14em;
+}
+#btnCopiar{
+  background:rgba(5,5,5,.5);border:1px solid rgba(201,162,75,.5);
+  color:var(--ouro-claro);font-size:.75rem;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;
+  padding:.85rem 1.8rem;border-radius:100px;cursor:pointer;
+  transition:background .2s var(--ease),color .2s var(--ease);
+}
+#btnCopiar:hover,#btnCopiar.copiado{background:var(--ouro);color:var(--preto)}
+#validacao{margin-top:2.4rem;width:min(100%,480px);display:flex;flex-direction:column;gap:.9rem}
+#validacao label{
+  font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--branco-65);text-align:center;
+}
+.linha-validacao{display:flex;gap:.6rem}
+#campoVoucher{
+  flex:1;background:rgba(18,18,18,.85);
+  border:1px solid rgba(245,241,232,.18);border-radius:10px;
+  color:var(--branco);font-family:var(--sans);font-size:1.05rem;
+  letter-spacing:.14em;text-transform:uppercase;text-align:center;
+  padding:1.05rem .8rem;outline:none;min-width:0;
+  transition:border-color .2s var(--ease);
+}
+#campoVoucher:focus-visible{border-color:var(--ouro)}
+#campoVoucher.erro{border-color:var(--vermelho);animation:treme .35s var(--ease)}
+#campoVoucher.ok{border-color:var(--verde)}
+@keyframes treme{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+#btnValidar{
+  background:var(--branco);color:var(--preto);border:none;border-radius:10px;
+  font-weight:800;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:0 1.4rem;cursor:pointer;transition:opacity .2s var(--ease);
+}
+#btnValidar:hover{opacity:.85}
+#msgValidacao{font-size:.8rem;text-align:center;min-height:1.3em;color:var(--branco-65)}
+#msgValidacao.ok{color:var(--verde);font-weight:600}
+#msgValidacao.erro{color:var(--vermelho)}
+#btnWhats{
+  display:none;text-decoration:none;text-align:center;width:min(100%,480px);
+  background:linear-gradient(120deg,var(--ouro-escuro),var(--ouro) 40%,var(--ouro-claro) 55%,var(--ouro));
+  color:var(--preto);font-weight:800;
+  font-size:clamp(.95rem,3.6vw,1.15rem);letter-spacing:.14em;text-transform:uppercase;
+  padding:1.5rem 2rem;border-radius:14px;
+  box-shadow:0 18px 60px rgba(201,162,75,.35);margin-top:1.2rem;
+}
+
+
+/* ══════════ DIVISÓRIAS CÓSMICAS (artes oficiais em 3D) ══════════ */
+.divisoria{
+  position:relative;min-height:72svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:10svh 7vw;overflow:hidden;
+}
+.arte-flutuante{
+  width:min(64vw,300px);
+  perspective:900px;
+}
+.arte-flutuante img{
+  width:100%;height:auto;border-radius:10px;
+  box-shadow:0 40px 90px rgba(0,0,0,.8),0 0 60px rgba(201,162,75,.16);
+  animation:flutua3d 7s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes flutua3d{
+  0%,100%{transform:translateY(0) rotateY(-6deg) rotateX(2deg)}
+  50%{transform:translateY(-14px) rotateY(6deg) rotateX(-2deg)}
+}
+.arte-flutuante::after{ /* luz de estúdio sob a peça */
+  content:"";display:block;margin:26px auto 0;
+  width:70%;height:22px;border-radius:50%;
+  background:radial-gradient(50% 100% at 50% 50%,rgba(201,162,75,.35),transparent 70%);
+  filter:blur(6px);
+  animation:respiraLuz 7s ease-in-out infinite;
+}
+@keyframes respiraLuz{0%,100%{opacity:.55;transform:scaleX(1)}50%{opacity:.9;transform:scaleX(1.12)}}
+.divisoria .frase-div{
+  margin-top:2.2rem;text-align:center;
+  font-family:var(--serif);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1rem,4.2vw,1.7rem);letter-spacing:.14em;
+  color:var(--branco-65);
+}
+.divisoria .frase-div b{color:var(--ouro-claro);font-weight:900}
+#galeria .portal{
+  width:min(58vw,260px);margin:2.2rem auto 0;perspective:900px;
+}
+#galeria .portal img{
+  width:100%;height:auto;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.8)) drop-shadow(0 0 40px rgba(15,169,107,.15));
+  animation:flutua3d 8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion:reduce){
+  .arte-flutuante img,#galeria .portal img,.arte-flutuante::after{animation:none}
+}
+/* ══════════ BOTÃO DE SOM ══════════ */
+#btnSom{
+  position:fixed;left:5vw;bottom:5svh;z-index:90;
+  width:48px;height:48px;border-radius:50%;
+  border:1px solid rgba(201,162,75,.55);
+  background:rgba(7,9,8,.72);color:var(--ouro-claro);
+  font-size:1.05rem;cursor:pointer;display:none;
+  align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+  transition:box-shadow .2s var(--ease);
+}
+#btnSom.visivel{display:flex}
+#btnSom:hover{box-shadow:0 8px 24px rgba(0,0,0,.5),0 0 18px rgba(201,162,75,.4)}
+
+/* ══════════ RODAPÉ ══════════ */
+footer{
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.85) 40%);
+  padding:9svh 7vw 7svh;text-align:center;
+}
+footer .infinito-mini{margin:0 auto 1.4rem}
+footer .nome{
+  font-family:var(--serif);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;font-size:.95rem;
+}
+footer .nome b{color:var(--ouro-claro)}
+footer small{display:block;margin-top:1rem;font-size:.68rem;letter-spacing:.12em;color:var(--branco-40)}
+
+
+
+/* ══════════ HERO EXPERIENCE ══════════ */
+.hero{min-height:100svh;justify-content:center;align-items:center;text-align:center;padding-top:6svh}
+.hero-arte{
+  position:relative;width:min(92vw,470px);height:min(66svh,640px);
+  will-change:transform,opacity;
+}
+.hero-arte img{
+  object-fit:cover;object-position:center;
+  -webkit-mask-image:radial-gradient(72% 66% at 50% 46%,#000 52%,rgba(0,0,0,.55) 72%,transparent 94%);
+  mask-image:radial-gradient(72% 66% at 50% 46%,#000 52%,rgba(0,0,0,.55) 72%,transparent 94%);
+}
+.hero-titulo{
+  margin-top:-4svh;position:relative;z-index:6;
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.55rem,7vw,3.4rem);
+  letter-spacing:.22em;text-indent:.22em;
+  white-space:nowrap;text-transform:uppercase;
+}
+.seta-scroll{
+  position:absolute;left:50%;bottom:5svh;transform:translateX(-50%);
+  opacity:.45;z-index:6;
+}
+.seta-scroll span{
+  display:block;width:12px;height:12px;
+  border-right:1px solid var(--branco);border-bottom:1px solid var(--branco);
+  transform:rotate(45deg);
+  animation:setinha 2s var(--ease) infinite;
+}
+@keyframes setinha{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(6px,6px)}}
+
+/* ══════════ PRIMEIRA COPY — lateral, assimétrica ══════════ */
+.copy-lateral{max-width:1100px}
+.copy-lateral h2{max-width:16ch}
+.ritmo{margin-top:2.6rem;display:flex;flex-direction:column;gap:1.05rem}
+.ritmo p{
+  font-size:clamp(1.02rem,3.9vw,1.35rem);
+  color:var(--branco-65);max-width:30ch;
+}
+.ritmo .pausa{margin-top:1.6rem;color:var(--branco)}
+.ritmo .destaque{margin-top:1.6rem;color:var(--branco);font-weight:600}
+.ritmo .ouro{font-family:var(--serif);font-weight:900;text-transform:uppercase;
+  font-size:clamp(1.3rem,5.2vw,2rem);color:var(--ouro-claro);letter-spacing:.04em}
+.navalha-canto{
+  position:absolute;right:-14vw;top:4svh;z-index:1;
+  width:min(300px,58vw);opacity:.85;pointer-events:none;
+  will-change:transform;
+}
+.navalha-canto img{
+  -webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000 40%,transparent 88%);
+  mask-image:radial-gradient(70% 70% at 50% 50%,#000 40%,transparent 88%);
+}
+@media(min-width:900px){.navalha-canto{right:2vw;top:12svh}}
+
+/* ══════════ ARTES OFICIAIS DO UNIVERSO (atmosfera 3D) ══════════ */
+.divisoria{
+  position:relative;min-height:88svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.6rem;padding:10svh 7vw;overflow:hidden;
+}
+.arte-flutuante{
+  width:min(320px,72vw);border-radius:14px;overflow:hidden;
+  border:1px solid rgba(212,175,55,.28);
+  box-shadow:0 40px 110px rgba(0,0,0,.75),0 0 70px rgba(15,169,107,.12);
+  transform-style:preserve-3d;will-change:transform;
+}
+.divisoria .eyebrow{margin:0}
+.portal-galeria{
+  width:min(230px,54vw);margin:0 auto 2.2rem;border-radius:12px;overflow:hidden;
+  border:1px solid rgba(212,175,55,.3);
+  box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 60px rgba(212,175,55,.15);
+  transform-style:preserve-3d;will-change:transform;
+}
+#oferta .fundo-climax{
+  position:absolute;inset:0;z-index:1;opacity:.3;pointer-events:none;
+}
+#oferta .fundo-climax img{object-position:center top}
+#oferta .fundo-climax::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(85% 75% at 50% 55%,transparent 15%,var(--preto) 80%);
+}
+#oferta .conteudo,#oferta .palco{position:relative;z-index:5}
+
+/* ══════════ TRILHA SONORA ══════════ */
+#btnSom{
+  position:fixed;left:4vw;bottom:4.5svh;z-index:90;
+  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(145deg,#F5E3B0 0%,#C9A24B 40%,#8C6B22 100%);
+  box-shadow:0 8px 24px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,247,224,.8);
+  color:#1a1305;font-size:1.25rem;display:none;align-items:center;justify-content:center;
+  transition:transform .15s var(--ease);
+}
+#btnSom:active{transform:scale(.92)}
+#btnSom.mudo{filter:grayscale(.85);opacity:.75}
+
+/* campo discreto para trocar a trilha (uso do Augusto) */
+#trocaTrilha{
+  position:fixed;left:calc(4vw + 60px);bottom:4.5svh;z-index:90;
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(18,18,18,.5);border:1px solid rgba(245,241,232,.2);
+  color:var(--branco-40);font-size:.85rem;line-height:1;cursor:pointer;
+  transition:opacity .2s var(--ease),border-color .2s var(--ease);
+  opacity:.3;
+}
+#trocaTrilha:hover,#trocaTrilha:focus-within{opacity:.9;border-color:var(--ouro)}
+#trocaTrilha input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+
+/* ══════════ ACESSIBILIDADE ══════════ */
+:focus-visible{outline:2px solid var(--ouro-claro);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  #btnVoucher,#scrollHint::after{animation:none}
+  .reveal,.territorio{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+  .tela-quadro .slide{transition:opacity .3s ease}
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos" aria-hidden="true"></canvas>
+
+<!-- NEBULOSA EM RAJADAS (fundo profundo) -->
+<div class="rajadas" aria-hidden="true">
+  <div class="raj" style="left:30%;top:50%;width:340px;height:340px;--pk:.30;background:radial-gradient(circle,rgba(232,150,70,.9),transparent 68%);animation:flare 11s ease-in-out 0s infinite"></div>
+  <div class="raj" style="left:64%;top:54%;width:300px;height:300px;--pk:.24;background:radial-gradient(circle,rgba(205,72,55,.9),transparent 68%);animation:flare 13s ease-in-out 3.5s infinite"></div>
+  <div class="raj" style="left:48%;top:48%;width:440px;height:440px;--pk:.16;background:radial-gradient(circle,rgba(170,90,210,.85),transparent 70%);animation:flare 14s ease-in-out 6s infinite"></div>
+  <div class="raj" style="left:82%;top:16%;width:360px;height:360px;--pk:.26;background:radial-gradient(circle,rgba(232,150,70,.9),transparent 68%);animation:flare 15s ease-in-out 8s infinite"></div>
+  <div class="raj" style="left:14%;top:82%;width:340px;height:340px;--pk:.28;background:radial-gradient(circle,rgba(150,80,210,.9),transparent 68%);animation:flare 12s ease-in-out 2s infinite"></div>
+  <div class="raj" style="left:6%;top:56%;width:260px;height:260px;--pk:.20;background:radial-gradient(circle,rgba(40,150,170,.9),transparent 66%);animation:flare 16s ease-in-out 9.5s infinite"></div>
+</div>
+
+<div class="nebulosa-verde" aria-hidden="true"></div>
+<div class="protoestrelas" aria-hidden="true">
+  <span class="proto" style="top:13%;left:11%;--dur:6.5s;--del:0.4s"></span>
+  <span class="proto" style="top:29%;left:36%;--dur:5.0s;--del:4.7s"></span>
+  <span class="proto" style="top:32%;left:34%;--dur:5.6s;--del:0.7s"></span>
+  <span class="proto" style="top:16%;left:6%;--dur:5.7s;--del:4.4s"></span>
+  <span class="proto" style="top:4%;left:9%;--dur:9.2s;--del:5.0s"></span>
+  <span class="proto" style="top:21%;left:5%;--dur:7.4s;--del:3.2s"></span>
+  <span class="proto" style="top:10%;left:4%;--dur:7.3s;--del:1.1s"></span>
+  <span class="proto" style="top:16%;left:11%;--dur:7.2s;--del:4.6s"></span>
+  <span class="proto" style="top:20%;left:13%;--dur:5.0s;--del:4.6s"></span>
+  <span class="proto" style="top:9%;left:25%;--dur:5.0s;--del:5.7s"></span>
+  <span class="proto" style="top:21%;left:5%;--dur:7.6s;--del:4.0s"></span>
+  <span class="proto" style="top:20%;left:29%;--dur:8.4s;--del:3.7s"></span>
+</div>
+
+<div class="cometa" aria-hidden="true"></div>
+
+
+<main id="filme">
+
+
+  <!-- HERO EXPERIENCE — universo → imagem → texto -->
+  <section class="tela hero" id="hero">
+    <div class="hero-arte" aria-hidden="true">
+      <img src="fotos/arte-infinito-podio.jpg" alt="" decoding="async">
+    </div>
+    <h1 class="hero-titulo">CONEXÃO <span class="gold">BARBER</span></h1>
+    <div class="seta-scroll" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ATO 1 — A DOR (copy oficial do briefing) -->
+  <section class="tela" id="dor">
+    <figure class="navalha-canto" aria-hidden="true" data-camada-arte>
+      <img src="fotos/arte-navalha.jpg" alt="" loading="lazy" decoding="async">
+    </figure>
+    <div class="conteudo copy-lateral">
+      <h2 class="reveal">Quanto tempo você ainda vai trocar a sua vida por um salário que <span class="gold">não muda?</span></h2>
+      <div class="ritmo">
+        <p class="reveal">Bater ponto.</p>
+        <p class="reveal">Pedir permissão.</p>
+        <p class="reveal">Ver o ano passar.</p>
+        <p class="reveal">E perceber que a promessa nunca chega.</p>
+        <p class="reveal pausa">Você conhece essa história.</p>
+        <p class="reveal">E sabe que ela não termina diferente se nada mudar.</p>
+        <p class="reveal destaque">A independência que você procura pode estar na área da beleza.</p>
+        <p class="reveal">Seja dono do seu próprio negócio.</p>
+        <p class="reveal">Construa sua liberdade.</p>
+        <p class="reveal ouro">Construa sua virada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATO 2 — A VIRADA -->
+  <section class="tela" id="virada">
+    <div class="conteudo">
+      <p class="eyebrow reveal">A virada</p>
+      <h2 class="reveal">Existe uma profissão de verdade <span class="gold">esperando por você.</span></h2>
+      <p class="lead reveal">A barbearia é um dos mercados que mais cresce no Brasil. Quem domina a navalha define o próprio horário, o próprio preço e o próprio futuro. Não é sorte. É ofício — e ofício se aprende.</p>
+      <p class="territorio" style="margin-top:3rem">Aqui, você não assiste aula. <strong>Você vive a profissão.</strong></p>
+    </div>
+  </section>
+
+  <!-- DIVISÓRIA — NAVALHA RELÍQUIA -->
+  <section class="divisoria" aria-hidden="true">
+    <div class="arte-flutuante reveal"><img src="fotos/arte-navalha.jpg" alt="" loading="lazy" decoding="async"></div>
+    <p class="frase-div reveal">O ofício é uma <b>herança.</b></p>
+  </section>
+
+  <!-- ATO 3 — PRIMEIRA VITÓRIA -->
+  <section class="tela" id="vitoria">
+    <div class="conteudo duo">
+      <div>
+        <p class="eyebrow reveal">Primeira vitória</p>
+        <h2 class="reveal">Seu primeiro corte acontece <span class="gold">na primeira aula.</span></h2>
+        <p class="lead reveal">Sem meses de teoria antes de tocar numa máquina. No seu primeiro dia, você já sente o peso dela na mão, já corta, já sai diferente de como entrou. É ali que muita gente entende, pela primeira vez: "eu consigo".</p>
+      </div>
+      <figure class="midia r-9x16 reveal" style="max-width:340px;margin:2.2rem auto 0">
+        <video src="videos/pratica-sala.mp4" poster="videos/pratica-sala-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption class="legenda-midia">Aula real · aluno em ação</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ATO 4 — O MÉTODO -->
+  <section class="tela" id="metodo">
+    <div class="conteudo duo">
+      <figure class="midia r-9x16 reveal" style="max-width:340px;margin:0 auto 2.2rem">
+        <video src="videos/tecnica-mao-na-mao.mp4" poster="videos/tecnica-mao-na-mao-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption class="legenda-midia">O ofício se passa de mão em mão</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow reveal">O método</p>
+        <h2 class="reveal">O professor pega na sua mão. <span class="gold">Literalmente.</span></h2>
+        <p class="lead reveal">Modelos reais, cabelos reais, situações reais de barbearia — com o professor do seu lado, guiando cada movimento até a técnica virar sua. Quando você se forma, já sabe o que é estar do outro lado da cadeira.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATO 5 — PERTENCIMENTO -->
+  <section class="tela" id="pertencimento">
+    <div class="conteudo">
+      <p class="eyebrow reveal">Pertencimento</p>
+      <h2 class="reveal">Aqui, ninguém se forma <span class="gold">sozinho.</span></h2>
+      <p class="lead reveal">Turmas que viram equipe. Eventos que viram memória. Uma comunidade inteira de gente que começou exatamente de onde você está agora.</p>
+      <div class="grade-3">
+        <figure class="midia r-4x3 reveal">
+          <img src="fotos/turma-fazenda.jpg" alt="Turma da Conexão Barber reunida em confraternização" loading="lazy" decoding="async">
+          <figcaption class="legenda-midia">Turma</figcaption>
+        </figure>
+        <figure class="midia r-4x3 reveal">
+          <img src="fotos/evento-auditorio-01.jpg" alt="Evento da HAIR Academia com auditório lotado de alunos" loading="lazy" decoding="async">
+          <figcaption class="legenda-midia">Evento</figcaption>
+        </figure>
+        <figure class="midia r-4x3 reveal">
+          <video src="videos/turma-pratica.mp4" poster="videos/turma-pratica-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <figcaption class="legenda-midia">Sala cheia · prática</figcaption>
+        </figure>
+      </div>
+      <p class="territorio" style="margin-top:3rem">A sensação de quem chega é uma só: <strong>"eu consigo me enxergar aqui."</strong></p>
+      <figure class="midia r-16x9 reveal" style="margin-top:2.4rem">
+        <img src="fotos/turma-grupo-natureza.jpg" alt="Grupo de alunos e professores da Conexão Barber" loading="lazy" decoding="async">
+        <figcaption class="legenda-midia">A comunidade Conexão</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ATO 6 — HISTÓRIA DO HERÓI: PAIVA -->
+  <section class="tela" id="heroi">
+    <div class="conteudo duo">
+      <div>
+        <p class="eyebrow reveal">A história do herói</p>
+        <h2 class="reveal">Ele entrou como aluno. <span class="gold">Voltou como referência.</span></h2>
+        <blockquote class="reveal">Willian Paiva chegou do mesmo jeito que você pode chegar amanhã: querendo uma chance. Hoje, ele está do outro lado — barbeiro visagista, professor, prova viva de até onde esse caminho leva.</blockquote>
+        <p class="lead reveal">Deslize o quadro e veja a trajetória: o aluno, o profissional e a história contada por ele mesmo.</p>
+      </div>
+      <div class="moldura-wrap reveal">
+        <div class="palco3d">
+          <div class="moldura" id="molduraPaiva">
+            <span class="canto c1"></span><span class="canto c2"></span><span class="canto c3"></span><span class="canto c4"></span>
+            <div class="passepartout">
+              <div class="tela-quadro" id="quadroPaiva" aria-label="Trajetória de Willian Paiva"></div>
+            </div>
+          </div>
+        </div>
+        <div class="placa" id="placaPaiva">O ALUNO</div>
+        <div class="controles">
+          <button class="btn-ouro" id="paivaAnt" type="button" aria-label="Anterior">‹</button>
+          <div class="pontos" id="paivaPontos"></div>
+          <button class="btn-ouro" id="paivaProx" type="button" aria-label="Próximo">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATO 7 — PROVA SOCIAL -->
+  <section class="tela" id="prova">
+    <div class="fundo-prova" aria-hidden="true">
+      <img src="fotos/evento-plateia-03.jpg" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="conteudo" style="text-align:center">
+      <p class="eyebrow reveal">Prova, não promessa</p>
+      <div class="numero gold reveal">+4.000</div>
+      <div class="rotulo reveal">Profissionais formados</div>
+      <p class="lead reveal" style="margin-left:auto;margin-right:auto">Dez anos de escola em Ribeirão Preto-SP. Mais de quatro mil histórias que começaram com uma decisão igual à que está na sua frente agora.</p>
+    </div>
+  </section>
+
+  <!-- ATO 8 — GALERIA "O QUADRO" -->
+  <section class="tela" id="galeria">
+    <div class="conteudo" style="text-align:center">
+      <figure class="portal-galeria reveal" data-tilt>
+        <img src="fotos/arte-portal.jpg" alt="Quadro portal dourado com nebulosa — identidade da galeria Conexão" loading="lazy" decoding="async">
+      </figure>
+      <p class="eyebrow reveal">O quadro Conexão</p>
+      <h2 class="reveal">Cada foto aqui é <span class="gold">gente de verdade.</span></h2>
+      <p class="lead reveal" style="margin-left:auto;margin-right:auto">Aulas, eventos, ações na rua, turmas inteiras. Passe o quadro e veja o universo que espera por você.</p>
+      <div class="portal reveal" aria-hidden="true"><img src="fotos/arte-quadro-portal.jpg" alt="" loading="lazy" decoding="async"></div>
+      <div class="moldura-wrap reveal">
+        <div class="palco3d">
+          <div class="moldura" id="molduraGaleria">
+            <span class="canto c1"></span><span class="canto c2"></span><span class="canto c3"></span><span class="canto c4"></span>
+            <div class="passepartout">
+              <div class="tela-quadro" id="quadroGaleria" aria-label="Galeria de fotos reais da Conexão Barber"></div>
+            </div>
+          </div>
+        </div>
+        <div class="placa" id="placaGaleria"></div>
+        <div class="controles">
+          <button class="btn-ouro" id="galAnt" type="button" aria-label="Foto anterior">‹</button>
+          <div class="pontos" id="galPontos"></div>
+          <button class="btn-ouro" id="galProx" type="button" aria-label="Próxima foto">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATO 9 — ECOSSISTEMA -->
+  <section class="tela" id="ecossistema">
+    <div class="conteudo">
+      <img class="infinito-mini reveal" src="fotos/infinito-oficial-mini.jpg" alt="" aria-hidden="true">
+      <p class="eyebrow reveal">O universo Conexão</p>
+      <h2 class="reveal">Você não entra para um curso. <span class="gold">Entra para um universo.</span></h2>
+      <p class="lead reveal">Formação, comunidade, eventos e uma rede que continua com você depois do certificado. O infinito da marca não é enfeite: é o compromisso de que a conexão não termina na formatura.</p>
+      <figure class="arte reveal">
+        <img src="fotos/arte-infinito-podio.jpg" alt="Símbolo do infinito Conexão Barber em pódio dourado no cosmos" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <!-- DIVISÓRIA — MÁQUINA DO UNIVERSO -->
+  <section class="divisoria" aria-hidden="true">
+    <div class="arte-flutuante reveal"><img src="fotos/arte-maquina.jpg" alt="" loading="lazy" decoding="async"></div>
+    <p class="frase-div reveal">Suas ferramentas já <b>te esperam.</b></p>
+  </section>
+
+  <!-- DIVISÓRIA — A FERRAMENTA (máquina DNA visual) -->
+  <section class="divisoria" id="ferramenta">
+    <p class="eyebrow reveal">A ferramenta já espera por você</p>
+    <figure class="arte-flutuante reveal" data-tilt>
+      <img src="fotos/arte-maquina.jpg" alt="Máquina de corte preta e dourada com o infinito Conexão no cosmos" loading="lazy" decoding="async">
+    </figure>
+  </section>
+
+  <!-- ATO 10 — OFERTA + VOUCHER -->
+  <section class="tela" id="oferta">
+    <div class="fundo-climax" aria-hidden="true">
+      <img src="fotos/arte-nebulosa-climax.jpg" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="conteudo" style="text-align:center">
+      <p class="eyebrow reveal">O gesto que muda tudo</p>
+      <h2 class="reveal">Sua vaga começa com <span class="gold">um gesto seu.</span></h2>
+      <p class="lead reveal" style="margin-left:auto;margin-right:auto">Gere seu voucher pessoal, guarde o código e apresente no WhatsApp. Ele é a sua senha de entrada no universo Conexão Barber.</p>
+
+      <div class="palco">
+        <button id="btnVoucher" type="button">Gerar meu voucher agora</button>
+
+        <div id="palcoCodigo" aria-live="polite">
+          <div id="codigoVoucher" class="gold">BA-0000</div>
+          <button id="btnCopiar" type="button">Copiar voucher</button>
+        </div>
+
+        <div id="validacao">
+          <label for="campoVoucher">Cole seu voucher para liberar o WhatsApp</label>
+          <div class="linha-validacao">
+            <input id="campoVoucher" type="text" inputmode="text" autocomplete="off" maxlength="7" placeholder="BA-0000" aria-label="Cole seu voucher">
+            <button id="btnValidar" type="button">Validar</button>
+          </div>
+          <p id="msgValidacao"></p>
+        </div>
+
+        <a id="btnWhats" href="#" target="_blank" rel="noopener">Quero minha vaga — chamar no WhatsApp</a>
+        <p class="lead" style="margin:1.4rem auto 0;font-size:.85rem;max-width:44ch">Gerar o voucher é grátis e não te compromete com nada. A conversa no WhatsApp é só o primeiro passo — quem decide o próximo é você.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<audio id="trilha" src="audio/trilha.mp3" loop preload="none"></audio>
+<button id="btnSom" type="button" aria-label="Ligar ou desligar a música">♪</button>
+<label id="trocaTrilha" for="inputTrilha" aria-label="Trocar trilha sonora" title="Trocar música">
+  <input id="inputTrilha" type="file" accept="audio/*">
+  <span>+</span>
+</label>
+
+<footer>
+  <img class="infinito-mini" src="fotos/infinito-oficial-mini.jpg" alt="" aria-hidden="true">
+  <p class="nome">Conexão <b>Barber</b></p>
+  <small>por HAIR Academia da Beleza · 10 anos de escola · +4.000 profissionais formados · Ribeirão Preto-SP · Trilha: "Powerful" — David Fesliyan (FesliyanStudios.com)</small>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<script>
+(function(){
+"use strict";
+
+var reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var temGSAP = typeof gsap !== "undefined";
+var temTHREE = typeof THREE !== "undefined";
+
+/* ─────────── SMOOTH SCROLL ─────────── */
+var lenis = null;
+try{
+  if(typeof Lenis !== "undefined" && !reduzMovimento){
+    lenis = new Lenis({ smoothWheel:true, lerp:0.09 });
+    (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+  }
+}catch(e){ lenis = null; }
+
+/* ─────────── COSMOS-5 (intacto) + fallback ─────────── */
+var cosmosOK = false;
+try{
+  if(typeof THREE !== "undefined"){
+    (function(){
+    var canvas = document.getElementById("cosmos");
+  if(!canvas) return;
+
+  var cRenderer, cCena, cCamera, nuvens=[];
+  var pointer={x:0,y:0}, alvo={x:0,y:0};
+
+  cRenderer = new THREE.WebGLRenderer({ canvas:canvas, alpha:true, antialias:false });
+  cRenderer.setPixelRatio(Math.min(window.devicePixelRatio,1.8));
+  cRenderer.setSize(window.innerWidth, window.innerHeight);
+  cCena = new THREE.Scene();
+  cCamera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, .1, 200);
+  cCamera.position.z = 40;
+
+  function nuvem(qtd, cor, tam, spread){
+    var pos = new Float32Array(qtd*3);
+    for(var i=0;i<qtd;i++){
+      pos[i*3]   = (Math.random()-.5)*spread;
+      pos[i*3+1] = (Math.random()-.5)*spread*1.6;
+      pos[i*3+2] = -Math.random()*80;
+    }
+    var g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos,3));
+    var m = new THREE.PointsMaterial({ color:cor, size:tam, transparent:true, opacity:.85, sizeAttenuation:true, depthWrite:false });
+    var p = new THREE.Points(g,m);
+    cCena.add(p); nuvens.push(p); return p;
+  }
+
+  nuvem(1300, 0xF5F1E8, .16, 120);  // branco quente
+  nuvem(240,  0xE8C97A, .22, 110);  // dourado
+  nuvem(150,  0x9B6BFF, .20, 115);  // roxa
+  nuvem(40,   0x0FA96B, .20, 100);  // verde: pouquíssimas
+
+  window.addEventListener("resize", function(){
+    cCamera.aspect = window.innerWidth/window.innerHeight;
+    cCamera.updateProjectionMatrix();
+    cRenderer.setSize(window.innerWidth, window.innerHeight);
+  }, {passive:true});
+  function mover(e){ var t=e.touches?e.touches[0]:e; pointer.x=t.clientX/window.innerWidth-.5; pointer.y=t.clientY/window.innerHeight-.5; }
+  window.addEventListener("pointermove", mover, {passive:true});
+  window.addEventListener("touchmove", mover, {passive:true});
+
+  var t0 = performance.now();
+  (function laco(){
+    requestAnimationFrame(laco);
+    alvo.x += (pointer.x-alvo.x)*.05;
+    alvo.y += (pointer.y-alvo.y)*.05;
+    var dt = (performance.now()-t0)*0.00004;
+    for(var i=0;i<nuvens.length;i++){
+      var f = 1 - i*0.13;
+      nuvens[i].rotation.y = dt*f + alvo.x*0.5*f;
+      nuvens[i].rotation.x = dt*0.6*f - alvo.y*0.4*f;
+      nuvens[i].position.z = (i*3) + Math.sin(dt*20 + i)*2;
+    }
+    cRenderer.render(cCena, cCamera);
+  })();
+
+  if(reduzMovimento){ cRenderer.render(cCena, cCamera); }
+    })();
+    cosmosOK = true;
+  }
+}catch(e){ cosmosOK = false; }
+if(!cosmosOK){
+  document.getElementById("cosmos").classList.add("cosmos-css");
+  document.querySelectorAll(".rajadas,.cometa").forEach(function(el){ el.style.display="none"; });
+}
+
+/* ─────────── HERO: dissolve contínuo no scroll (sem troca de página) ─────────── */
+if(temGSAP && typeof ScrollTrigger !== "undefined" && !reduzMovimento){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.to(".hero-arte", {
+    y:-90, opacity:0, scale:.96, ease:"none",
+    scrollTrigger:{ trigger:"#hero", start:"top top", end:"85% top", scrub:true }
+  });
+  gsap.to(".hero-titulo", {
+    y:-40, opacity:0, ease:"none",
+    scrollTrigger:{ trigger:"#hero", start:"12% top", end:"95% top", scrub:true }
+  });
+  gsap.to(".seta-scroll", { opacity:0,
+    scrollTrigger:{ trigger:"#hero", start:"top top", end:"30% top", scrub:true } });
+  // camada artística mais lenta que o conteúdo (navalha emerge do universo)
+  gsap.fromTo(".navalha-canto", { y:120, rotation:-6 }, { y:-80, rotation:5, ease:"none",
+    scrollTrigger:{ trigger:"#dor", start:"top bottom", end:"bottom top", scrub:true } });
+}
+
+/* ─────────── REVEALS ─────────── */
+var observador = new IntersectionObserver(function(entradas){
+  entradas.forEach(function(ent){
+    if(ent.isIntersecting){ ent.target.classList.add("on"); observador.unobserve(ent.target); }
+  });
+}, { threshold:.3 });
+document.querySelectorAll(".reveal,.territorio").forEach(function(el){ observador.observe(el); });
+
+/* ─────────── PARALLAX + tilt 3D das molduras ─────────── */
+if(temGSAP && typeof ScrollTrigger !== "undefined" && !reduzMovimento){
+  gsap.registerPlugin(ScrollTrigger);
+  if(lenis){ lenis.on("scroll", ScrollTrigger.update); }
+  document.querySelectorAll(".midia").forEach(function(m){
+    gsap.fromTo(m, { y:36 }, { y:-16, ease:"none",
+      scrollTrigger:{ trigger:m, start:"top bottom", end:"bottom top", scrub:true } });
+  });
+  gsap.fromTo("#prova .numero", { scale:.9 }, { scale:1, ease:"none",
+    scrollTrigger:{ trigger:"#prova", start:"top 80%", end:"center center", scrub:true } });
+  // flutuação 3D contínua das molduras (o quadro "vivo")
+  ["#molduraPaiva","#molduraGaleria"].forEach(function(sel, i){
+    gsap.to(sel, { rotationY:i? -5:5, rotationX:i? 2.5:-2.5, duration:4.2, yoyo:true, repeat:-1, ease:"sine.inOut" });
+  });
+}
+
+/* ─────────── COMPONENTE: QUADRO (carrossel na moldura) ─────────── */
+function criaQuadro(cfg){
+  var tela = document.getElementById(cfg.tela);
+  var pontosEl = document.getElementById(cfg.pontos);
+  var placa = cfg.placa ? document.getElementById(cfg.placa) : null;
+  var slides = [], atual = 0, timer = null, total = 0;
+
+  cfg.itens.forEach(function(item, idx){
+    var wrap = document.createElement("div");
+    wrap.className = "slide";
+    var el;
+    if(item.video){
+      el = document.createElement("video");
+      el.src = item.video;
+      if(item.poster) el.poster = item.poster;
+      el.controls = true;
+      el.playsInline = true;
+      el.preload = "metadata";
+    } else {
+      el = document.createElement("img");
+      el.src = item.foto;
+      el.alt = item.alt || "";
+      el.loading = "lazy";
+      el.decoding = "async";
+      el.onerror = function(){ // foto ausente: remove slide e ponto sem quebrar nada
+        wrap.remove();
+        var i = slides.indexOf(wrap);
+        if(i>-1){ slides.splice(i,1); cfg.itens.splice(i,1); montaPontos(); if(atual>=slides.length) atual=0; mostra(atual,false); }
+      };
+    }
+    wrap.appendChild(el);
+    tela.appendChild(wrap);
+    slides.push(wrap);
+  });
+
+  function montaPontos(){
+    pontosEl.innerHTML = "";
+    slides.forEach(function(_, i){
+      var b = document.createElement("button");
+      b.className = "ponto";
+      b.type = "button";
+      b.setAttribute("aria-label","Ir para item "+(i+1));
+      b.addEventListener("click", function(){ mostra(i,true); pausa(); });
+      pontosEl.appendChild(b);
+    });
+  }
+  montaPontos();
+
+  function mostra(i, interacao){
+    if(!slides.length) return;
+    atual = (i + slides.length) % slides.length;
+    slides.forEach(function(s, k){
+      s.classList.toggle("ativo", k === atual);
+      var v = s.querySelector("video");
+      if(v && k !== atual){ v.pause(); }
+    });
+    Array.prototype.forEach.call(pontosEl.children, function(p, k){
+      p.classList.toggle("ativo", k === atual);
+    });
+    if(placa && cfg.itens[atual]){ placa.textContent = cfg.itens[atual].placa || ""; }
+    // slide de vídeo pausa a passagem automática
+    if(cfg.itens[atual] && cfg.itens[atual].video){ para(); }
+    else if(!interacao){ /* segue autoplay */ }
+  }
+
+  function prox(){ mostra(atual+1,false); }
+  function para(){ if(timer){ clearInterval(timer); timer = null; } }
+  function toca(){ para(); if(!reduzMovimento){ timer = setInterval(prox, cfg.intervalo || 4200); } }
+  function pausa(){ para(); setTimeout(toca, 9000); }
+
+  document.getElementById(cfg.ant).addEventListener("click", function(){ mostra(atual-1,true); pausa(); });
+  document.getElementById(cfg.prox).addEventListener("click", function(){ mostra(atual+1,true); pausa(); });
+
+  // swipe no celular
+  var x0 = null;
+  tela.addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX; }, { passive:true });
+  tela.addEventListener("touchend", function(e){
+    if(x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 40){ mostra(atual + (dx<0?1:-1), true); pausa(); }
+    x0 = null;
+  }, { passive:true });
+
+  mostra(0,false);
+  toca();
+}
+
+/* QUADRO DO PAIVA: aluno → profissional → trajetória em vídeo */
+criaQuadro({
+  tela:"quadroPaiva", pontos:"paivaPontos", placa:"placaPaiva",
+  ant:"paivaAnt", prox:"paivaProx", intervalo:4600,
+  itens:[
+    { foto:"fotos/paiva-aluno.jpg", alt:"Willian Paiva na época de aluno, cortando em sala de aula", placa:"O ALUNO" },
+    { foto:"fotos/paiva-profissional.jpg", alt:"Willian Paiva como profissional, trabalhando com navalha", placa:"O PROFISSIONAL" },
+    { video:"videos/paiva-trajetoria.mp4", poster:"videos/paiva-trajetoria-poster.jpg", placa:"A TRAJETÓRIA · dê o play" }
+  ]
+});
+
+/* GALERIA_FOTOS — para acrescentar fotos novas, adicione linhas aqui.
+   Fotos que não existirem na pasta são puladas automaticamente. */
+criaQuadro({
+  tela:"quadroGaleria", pontos:"galPontos", placa:"placaGaleria",
+  ant:"galAnt", prox:"galProx", intervalo:4000,
+  itens:[
+    { foto:"fotos/evento-treino-cabecas.jpg", alt:"Treinamento com cabeças de treino em evento da HAIR Academia", placa:"TREINAMENTO · EVENTO" },
+    { foto:"fotos/evento-auditorio-02.jpg", alt:"Auditório lotado em evento de formação", placa:"EVENTO · AUDITÓRIO CHEIO" },
+    { foto:"fotos/acao-cortes-gratuitos.jpg", alt:"Ação social de cortes gratuitos na praça", placa:"AÇÃO SOCIAL · CORTES GRATUITOS" },
+    { foto:"fotos/acao-sbt.jpg", alt:"Equipe em ação com o SBT na praça", placa:"AÇÃO · NA MÍDIA" },
+    { foto:"fotos/evento-plateia-01.jpg", alt:"Plateia de alunos em evento", placa:"EVENTO · PLATEIA" },
+    { foto:"fotos/turma-piscina.jpg", alt:"Turma reunida em confraternização", placa:"CONFRATERNIZAÇÃO" },
+    { foto:"fotos/turma-grupo-natureza.jpg", alt:"Grupo de alunos e professores reunidos", placa:"A COMUNIDADE" }
+  ]
+});
+
+
+/* ─────────── TRILHA SONORA — curva oficial: 10→15→20→25→30→35→38% e mantém ─────────── */
+var trilha = document.getElementById("trilha");
+var btnSom = document.getElementById("btnSom");
+var trilhaOK = false, mudo = false, rampa = null;
+
+function sobeVolume(){
+  if(rampa) clearInterval(rampa);
+  var degraus = [
+    { t:0,     v:.10 },
+    { t:5000,  v:.15 },
+    { t:10000, v:.20 },
+    { t:15000, v:.25 },
+    { t:20000, v:.30 },
+    { t:25000, v:.35 },
+    { t:30000, v:.38 }
+  ];
+  var inicio = Date.now();
+  rampa = setInterval(function(){
+    var dt = Date.now() - inicio, alvo = .10;
+    for(var i=0;i<degraus.length;i++){ if(dt >= degraus[i].t) alvo = degraus[i].v; }
+    trilha.volume += (alvo - trilha.volume) * .12;
+    if(dt > 32000 && Math.abs(trilha.volume - .38) < .008){
+      trilha.volume = .38;
+      clearInterval(rampa); rampa = null;
+    }
+  }, 250);
+}
+function ligaTrilha(){
+  if(trilhaOK || mudo || !trilha) return;
+  trilha.volume = .10;
+  var p = trilha.play();
+  if(p && p.then){
+    p.then(function(){ trilhaOK = true; btnSom.style.display = "flex"; btnSom.textContent = "♪"; sobeVolume(); })
+     .catch(function(){ /* autoplay bloqueado; aguarda primeiro gesto */ });
+  }
+}
+if(trilha && btnSom){
+  trilha.addEventListener("error", function(){ btnSom.style.display = "none"; trilhaOK = false; });
+  // tenta autoplay ao entrar (briefing); se o navegador bloquear, o primeiro gesto libera
+  ligaTrilha();
+  ["click","touchstart","keydown"].forEach(function(ev){
+    window.addEventListener(ev, function(){ if(!trilhaOK){ ligaTrilha(); } }, { passive:true });
+  });
+  btnSom.addEventListener("click", function(e){
+    e.stopPropagation();
+    mudo = !mudo;
+    btnSom.classList.toggle("mudo", mudo);
+    btnSom.textContent = mudo ? "✕" : "♪";
+    if(mudo){ trilha.pause(); }
+    else { trilha.play(); if(!rampa && trilha.volume < .37){ sobeVolume(); } }
+  });
+
+  // campo discreto: trocar a trilha na hora, sem mexer em código
+  var inputTrilha = document.getElementById("inputTrilha");
+  if(inputTrilha){
+    inputTrilha.addEventListener("change", function(){
+      var arq = inputTrilha.files && inputTrilha.files[0];
+      if(!arq) return;
+      var estava = trilhaOK && !mudo;
+      if(rampa){ clearInterval(rampa); rampa = null; }
+      trilha.pause();
+      trilha.src = URL.createObjectURL(arq);
+      trilha.load();
+      trilhaOK = false;
+      if(estava || !mudo){
+        trilha.oncanplay = function(){
+          trilha.oncanplay = null;
+          ligaTrilha();
+        };
+      }
+    });
+  }
+}
+
+/* ─────────── MEDIÇÃO (Meta Pixel) ───────────
+   Para ativar: descomente o bloco abaixo e troque SEU_PIXEL_ID.
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','SEU_PIXEL_ID');fbq('track','PageView');
+*/
+function rastreia(evento){
+  try{ if(typeof fbq === "function"){ fbq("track", evento); } }catch(e){}
+}
+
+/* ─────────── RITUAL DO VOUCHER ─────────── */
+var WHATSAPP = "5516974050099";
+var btnVoucher = document.getElementById("btnVoucher");
+var palcoCodigo = document.getElementById("palcoCodigo");
+var codigoEl = document.getElementById("codigoVoucher");
+var btnCopiar = document.getElementById("btnCopiar");
+var campo = document.getElementById("campoVoucher");
+var btnValidar = document.getElementById("btnValidar");
+var msg = document.getElementById("msgValidacao");
+var btnWhats = document.getElementById("btnWhats");
+var voucherAtual = "";
+
+function geraCodigo(){
+  var n = "";
+  for(var i=0;i<4;i++){ n += Math.floor(Math.random()*10); }
+  return "BA-" + n;
+}
+btnVoucher.addEventListener("click", function(){
+  rastreia("InitiateCheckout");
+  voucherAtual = geraCodigo();
+  palcoCodigo.style.display = "flex";
+  btnVoucher.style.display = "none";
+  if(temGSAP && !reduzMovimento){
+    gsap.fromTo(palcoCodigo, { opacity:0, y:14, scale:.96 }, { opacity:1, y:0, scale:1, duration:.7, ease:"back.out(1.6)" });
+    var alvo = voucherAtual, passos = 14, p = 0;
+    var sorteio = setInterval(function(){
+      p++;
+      if(p >= passos){ clearInterval(sorteio); codigoEl.textContent = alvo; }
+      else { codigoEl.textContent = geraCodigo(); }
+    }, 55);
+  } else { codigoEl.textContent = voucherAtual; }
+});
+btnCopiar.addEventListener("click", function(){
+  function feito(){
+    btnCopiar.textContent = "Copiado ✓";
+    btnCopiar.classList.add("copiado");
+    setTimeout(function(){ btnCopiar.textContent = "Copiar voucher"; btnCopiar.classList.remove("copiado"); }, 2200);
+  }
+  function copiaFallback(){
+    var t = document.createElement("textarea");
+    t.value = voucherAtual;
+    document.body.appendChild(t);
+    t.select();
+    try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(t);
+    feito();
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(voucherAtual).then(feito).catch(copiaFallback);
+  } else { copiaFallback(); }
+});
+campo.addEventListener("input", function(){
+  var v = campo.value.toUpperCase().replace(/[^A-Z0-9]/g,"");
+  if(v.indexOf("BA") === 0){ v = v.slice(2); }
+  v = v.replace(/[^0-9]/g,"").slice(0,4);
+  campo.value = v.length ? "BA-" + v : "";
+  campo.classList.remove("erro","ok");
+  msg.textContent = ""; msg.className = "";
+});
+function valida(){
+  var v = campo.value.trim().toUpperCase();
+  var ok = /^BA-\d{4}$/.test(v);
+  if(ok){
+    campo.classList.remove("erro"); campo.classList.add("ok");
+    msg.textContent = "Voucher válido. Sua vaga está liberada.";
+    msg.className = "ok";
+    var texto = encodeURIComponent("Olá! Conquistei meu voucher " + v + " na página da Conexão Barber e quero garantir minha vaga.");
+    btnWhats.href = "https://wa.me/" + WHATSAPP + "?text=" + texto;
+    btnWhats.style.display = "block";
+    btnWhats.onclick = function(){ rastreia("Lead"); };
+    if(temGSAP && !reduzMovimento){
+      gsap.fromTo(btnWhats, { opacity:0, y:16 }, { opacity:1, y:0, duration:.6, ease:"power3.out" });
+    }
+  } else {
+    campo.classList.remove("ok"); campo.classList.add("erro");
+    msg.textContent = "Código inválido. O formato é BA-0000 (BA, traço e 4 números).";
+    msg.className = "erro";
+    btnWhats.style.display = "none";
+  }
+}
+btnValidar.addEventListener("click", valida);
+campo.addEventListener("keydown", function(e){ if(e.key === "Enter"){ valida(); } });
+
+})();
+</script>
+</body>
+</html>
