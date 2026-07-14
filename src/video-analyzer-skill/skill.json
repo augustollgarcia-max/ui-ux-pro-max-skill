@@ -1,0 +1,56 @@
+{
+  "name": "video-analyzer-skill",
+  "version": "1.0.0",
+  "description": "Skill para analisar vídeos e extrair configurações de áudio e templates visuais",
+  "author": "augustollgarcia-max",
+  "license": "MIT",
+  "type": "skill",
+  "enabled": true,
+  "triggers": [
+    {
+      "type": "keyword",
+      "pattern": "vídeo|video|link|youtube|análise|analisar",
+      "description": "Ativa quando Claude detecta menção de vídeo"
+    },
+    {
+      "type": "url",
+      "domains": ["youtube.com", "youtu.be", "vimeo.com", "dailymotion.com"],
+      "description": "Ativa automaticamente quando recebe link de vídeo"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "analyze_video_from_link",
+      "description": "Análise completa: extrai áudio setup + templates visuais",
+      "input": "video_url",
+      "output": "complete_analysis"
+    },
+    {
+      "name": "get_audio_recommendations",
+      "description": "Recomendações de configuração de áudio",
+      "input": "video_url",
+      "output": "audio_setup"
+    },
+    {
+      "name": "get_visual_specs",
+      "description": "Especificações visuais para templates",
+      "input": "video_url",
+      "output": "visual_specs"
+    }
+  ],
+  "requirements": {
+    "python": ">=3.8",
+    "packages": [
+      "yt-dlp>=2023.0.0"
+    ]
+  },
+  "instructions": {
+    "pt-BR": "Quando o usuário enviar um link de vídeo, analise automaticamente para extrair:\n1. Configuração de áudio (microfone, interface, software, settings)\n2. Especificações visuais (resolução, aspect ratio, fps)\n3. Recomendações completas para setup e templates",
+    "en": "When user sends a video link, automatically analyze to extract:\n1. Audio configuration (microphone, interface, software, settings)\n2. Visual specifications (resolution, aspect ratio, fps)\n3. Complete recommendations for setup and templates"
+  },
+  "examples": {
+    "prompt_1": "Analise este vídeo para eu montar meu estúdio: https://youtube.com/watch?v=...",
+    "prompt_2": "Extraia as especificações de áudio deste link: https://vimeo.com/...",
+    "prompt_3": "Quais templates visuais esse vídeo usa? https://youtube.com/..."
+  }
+}
