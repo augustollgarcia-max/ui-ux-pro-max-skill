@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050705">
+<title>HAIR Academia da Beleza — Da sala de aula ao mercado da beleza</title>
+<meta name="description" content="Formação profissional em beleza, tecnologia e carreira. Conexão Barber, Conexão Beauty e Conexão Brow &amp; Lash em Ribeirão Preto/SP. Mais de 4.000 profissionais formados desde 2017.">
+
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/PlayfairDisplay-var-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Inter-var-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/hero-hair-1152.webp" fetchpriority="high">
+
+<style>
+/* ═══════════════ TOKENS ═══════════════ */
+:root{
+  --bg:#050705;
+  --bg-2:#0A0F0C;
+  --bg-3:#080B08;
+  --gold:#D3AD58;
+  --gold-deep:#C9A227;
+  --gold-line:rgba(201,162,39,.26);
+  --green:#0A6F50;
+  --green-2:#0C7C59;
+  --green-ico:#17805F;
+  --purple:#3A1F4D;
+  --text:#F6F3ED;
+  --muted:#B9BCB7;
+  --muted-2:#9DA19C;
+
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+
+  --max:1320px;
+  --gutter:60px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0}
+p{margin:0}
+::selection{background:var(--gold);color:#0b0b0b}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+.wrap{width:min(var(--max),calc(100% - (var(--gutter) * 2)));margin-inline:auto}
+
+/* M7 — kickers */
+.kicker{
+  font-size:.66rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+}
+
+/* ═══════════════ BOTÕES ═══════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:46px;padding:0 30px;
+  border:1px solid transparent;border-radius:6px;
+  font-size:.73rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease);
+  white-space:nowrap;
+}
+.btn.primary{background:var(--green);color:#fff}
+.btn.primary:hover{background:var(--green-2);transform:translateY(-1px)}
+.btn.ghost{border-color:rgba(201,162,39,.45);color:var(--text);background:transparent}
+.btn.ghost:hover{border-color:var(--gold);background:rgba(201,162,39,.07)}
+.btn.gold{background:var(--gold);color:#12100A;font-weight:700}
+.btn.gold:hover{background:#E0BE6E}
+
+/* ═══════════════ HEADER ═══════════════ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  padding:18px 0;
+  transition:background .3s var(--ease),border-color .3s var(--ease),padding .3s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.header.stuck{background:rgba(5,7,5,.94);backdrop-filter:blur(14px);border-bottom-color:var(--gold-line);padding:12px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo img{width:104px;height:auto;mix-blend-mode:screen}
+.navlinks{display:flex;gap:32px;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#E4E2DC}
+.navlinks a{position:relative;padding:6px 0;transition:color .2s var(--ease)}
+.navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--gold);transition:right .3s var(--ease)}
+.navlinks a:hover{color:var(--gold)}
+.navlinks a:hover::after{right:0}
+.nav-cta{padding:11px 20px;border-radius:7px;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#12100A;transition:background .25s var(--ease)}
+.nav-cta:hover{background:#E0BE6E}
+.menu{display:none;border:0;background:none;color:var(--text);width:46px;height:46px;padding:0}
+.menu span{display:block;width:24px;height:1.5px;background:currentColor;margin:5px auto;transition:transform .3s var(--ease),opacity .2s}
+.menu[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.menu[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.mobile-nav{
+  position:fixed;inset:0;z-index:55;background:rgba(5,7,5,.985);backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 34px;
+  opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;
+}
+.mobile-nav.open{opacity:1;visibility:visible}
+.mobile-nav a{font-family:var(--serif);font-size:1.9rem;padding:13px 0;border-bottom:1px solid rgba(201,162,39,.16)}
+.mobile-nav .btn{margin-top:26px}
+
+/* ═══════════════ M1 · HERO ═══════════════ */
+.hero{
+  position:relative;
+  min-height:clamp(580px,51.7vw,880px);
+  display:flex;align-items:center;
+  overflow:hidden;
+  padding-top:104px;padding-bottom:54px;
+}
+.hero-photo{position:absolute;inset:0 0 0 22%;z-index:0;background:var(--bg)}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center 36%;
+  filter:contrast(1.07) saturate(.92) brightness(.97);
+}
+.hero-photo::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      var(--bg) 0%,
+      var(--bg) 14%,
+      rgba(5,7,5,.93) 26%,
+      rgba(5,7,5,.66) 36%,
+      rgba(5,7,5,.28) 46%,
+      rgba(5,7,5,.04) 58%,
+      rgba(0,0,0,.18) 100%),
+    linear-gradient(0deg,rgba(5,7,5,.72) 0%,rgba(5,7,5,.10) 24%,transparent 44%),
+    linear-gradient(180deg,rgba(5,7,5,.60) 0%,rgba(5,7,5,.22) 11%,transparent 19%);
+}
+.hero .wrap{position:relative;z-index:2}
+.hero-content{max-width:57%}
+.hero h1{
+  font-size:clamp(2.55rem,4.3vw,4.35rem);
+  line-height:.93;
+  letter-spacing:-.022em;
+  margin:16px 0 0;
+}
+.hero h1 .l{display:block}
+.hero h1 .gold{color:var(--gold)}
+.hero p.lead{
+  margin-top:38px;
+  font-size:clamp(.98rem,1.3vw,1.19rem);
+  line-height:1.5;
+  font-weight:300;
+  color:#D8D6D0;
+  max-width:clamp(300px,30vw,440px);
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;max-width:780px}
+.hero-proofs{display:flex;gap:40px;flex-wrap:wrap;margin-top:36px}
+.proof{display:flex;align-items:center;gap:11px;font-size:.79rem;color:#DCDAD4;font-weight:400}
+.proof svg{width:19px;height:19px;flex:none;stroke:var(--gold);fill:none;stroke-width:1.5}
+
+/* arco dourado */
+.hero-arc{position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:108%;height:104px;z-index:3;pointer-events:none}
+.hero-arc svg{width:100%;height:100%;display:block}
+
+/* ═══════════════ PILARES ═══════════════ */
+.pillars{background:var(--bg-3);border-bottom:1px solid rgba(201,162,39,.14)}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);min-height:160px}
+.pillar{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;padding:34px 32px 34px 0}
+.pillar + .pillar{border-left:1px solid rgba(201,162,39,.14);padding-left:32px}
+.pillar svg{width:42px;height:42px;fill:none;stroke-width:1.4}
+.pillar .g{stroke:var(--green-ico)}
+.pillar .y{stroke:var(--gold)}
+.pillar b{display:block;font-size:.79rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.pillar p{margin-top:9px;font-size:.76rem;line-height:1.55;color:var(--muted-2);font-weight:300}
+
+/* ═══════════════ M3 · FORMAÇÕES ═══════════════ */
+.formations{padding:52px 0 30px}
+.section-head{text-align:center;margin-bottom:36px}
+.section-head h2{font-size:clamp(1.7rem,2.5vw,2.25rem);margin-top:14px;letter-spacing:-.01em}
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.course{
+  position:relative;
+  display:flex;flex-direction:column;
+  border:1px solid rgba(201,162,39,.3);
+  border-radius:6px;overflow:hidden;
+  background:var(--bg-3);
+  transition:border-color .3s var(--ease),transform .3s var(--ease);
+}
+.course:hover{border-color:rgba(201,162,39,.62);transform:translateY(-3px)}
+.course-photo{position:relative;aspect-ratio:430/238;overflow:hidden}
+.course-photo img{width:100%;height:100%;object-fit:cover;filter:contrast(1.04) saturate(.98) brightness(1.1)}
+.course-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,7,5,.42),transparent 58%)}
+.badge{
+  position:absolute;left:20px;bottom:-11px;z-index:3;
+  width:83px;height:83px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.14);
+}
+.badge svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.4}
+.badge.b-barber{background:var(--green)}
+.badge.b-beauty{background:var(--gold-deep)}
+.badge.b-brow{background:#4B2A63}
+.course-body{flex:1;display:flex;flex-direction:column;padding:52px 22px 22px}
+.course-body h3{font-size:clamp(1.4rem,1.95vw,1.78rem);margin-bottom:12px}
+.course-body p{font-size:.94rem;line-height:1.65;color:#CFD1CC;font-weight:300;flex:1}
+.course .saiba{
+  align-self:flex-start;margin-top:20px;
+  display:inline-flex;align-items:center;gap:10px;
+  min-height:39px;padding:0 20px;
+  border:1px solid rgba(201,162,39,.45);border-radius:5px;
+  font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text);background:transparent;
+  transition:border-color .25s var(--ease),background .25s var(--ease);
+}
+.course .saiba:hover{border-color:var(--gold);background:rgba(201,162,39,.09)}
+.course.c-brow .course-body{background:linear-gradient(160deg,var(--purple) 0%,#1B1024 62%,var(--bg-3) 100%)}
+
+/* ═══════════════ AUTORIDADE ═══════════════ */
+.authority{background:linear-gradient(180deg,#071009 0%,#050B07 100%);border-block:1px solid rgba(201,162,39,.16)}
+.auth-grid{display:grid;grid-template-columns:repeat(4,1fr);min-height:168px;align-items:center}
+.auth{display:flex;align-items:center;gap:16px;padding:28px 26px 28px 0}
+.auth + .auth{border-left:1px solid rgba(201,162,39,.16);padding-left:34px}
+.auth svg{width:34px;height:34px;flex:none;fill:none;stroke:var(--gold);stroke-width:1.3}
+.auth b{display:block;font-family:var(--serif);font-size:clamp(1.2rem,1.7vw,1.6rem);color:var(--gold);font-weight:500;line-height:1.12;white-space:nowrap;min-width:0;overflow-wrap:anywhere}
+.auth span{display:block;margin-top:6px;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+
+/* ═══════════════ M6 · METODOLOGIA ═══════════════ */
+.method{display:grid;grid-template-columns:38% 62%;min-height:439px;border-bottom:1px solid rgba(201,162,39,.14)}
+.method-copy{padding:44px 46px 44px max(var(--gutter),calc((100vw - var(--max)) / 2));display:flex;flex-direction:column;justify-content:center}
+.method-copy h2{font-size:clamp(1.55rem,2.25vw,2rem);line-height:1.14;margin:14px 0 16px;letter-spacing:-.01em}
+.method-copy > p{font-size:.86rem;line-height:1.6;color:var(--muted);font-weight:300;max-width:44ch}
+.method-list{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px;margin-top:28px}
+.method-item{display:grid;grid-template-columns:32px 1fr;gap:12px}
+.method-item .ico{width:32px;height:32px;border-radius:8px;background:rgba(23,128,95,.16);border:1px solid rgba(23,128,95,.4);display:grid;place-items:center}
+.method-item .ico svg{width:17px;height:17px;fill:none;stroke:var(--green-ico);stroke-width:1.5}
+.method-item b{display:block;font-size:.82rem;font-weight:600}
+.method-item span{display:block;margin-top:5px;font-size:.74rem;line-height:1.5;color:var(--muted-2);font-weight:300}
+.method-photo{position:relative;overflow:hidden;min-height:439px}
+.method-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%;filter:contrast(1.05) saturate(.92)}
+.method-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,5,.9) 0%,rgba(5,7,5,.24) 16%,transparent 42%)}
+
+/* ═══════════════ AÇÃO SOCIAL ═══════════════ */
+.impact{display:grid;grid-template-columns:50% 1fr;gap:56px;align-items:center;padding:32px 60px 32px 24px;border-bottom:1px solid rgba(201,162,39,.14)}
+.impact-photo{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:2.4}
+.impact-photo img{width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:contrast(1.05) saturate(.95)}
+.impact-copy{max-width:560px}
+.impact-copy h2{font-size:clamp(1.55rem,2.25vw,2rem);line-height:1.14;margin:14px 0 16px;letter-spacing:-.01em}
+.impact-copy p{font-size:.88rem;line-height:1.62;color:var(--muted);font-weight:300}
+.impact-copy .btn{margin-top:26px}
+
+/* ═══════════════ CTA FINAL ═══════════════ */
+.final{padding:44px 0 46px;text-align:center;background:linear-gradient(180deg,#050705 0%,#071009 100%)}
+.final h2{font-size:clamp(1.65rem,2.45vw,2.2rem);color:var(--gold);letter-spacing:-.01em}
+.final p{margin-top:12px;font-size:.92rem;color:var(--muted);font-weight:300}
+.final-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.final-actions svg{width:19px;height:19px;fill:currentColor}
+
+/* ═══════════════ RODAPÉ ═══════════════ */
+.footer{border-top:1px solid rgba(201,162,39,.18);background:var(--bg);padding:48px 0 34px}
+.foot-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:44px;align-items:start}
+.foot-brand img{width:112px;mix-blend-mode:screen;margin-bottom:18px}
+.foot-brand p{font-size:.8rem;line-height:1.7;color:var(--muted-2);font-weight:300}
+.foot-col h4{font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 16px}
+.foot-col a,.foot-col p{display:block;font-size:.82rem;line-height:2;color:var(--muted);font-weight:300}
+.foot-col a:hover{color:var(--gold)}
+.foot-wa{display:inline-flex;align-items:center;gap:9px;margin-top:8px;color:var(--text);font-weight:500}
+.foot-wa svg{width:17px;height:17px;fill:currentColor;color:#25D366}
+.foot-base{margin-top:40px;padding-top:22px;border-top:1px solid rgba(201,162,39,.13);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.72rem;color:#7E827C;font-weight:300}
+
+/* ═══════════════ MODAL ═══════════════ */
+.modal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(3,4,3,.86);backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.modal-box{
+  position:relative;width:min(680px,100%);max-height:88vh;overflow-y:auto;
+  background:linear-gradient(170deg,#0C120E 0%,#070A07 100%);
+  border:1px solid rgba(201,162,39,.34);border-radius:10px;
+  padding:40px 40px 34px;
+}
+.modal-box h3{font-size:1.85rem;margin:14px 0 14px;line-height:1.16}
+.modal-box .m-intro{font-size:.92rem;line-height:1.62;color:#D2D4CF;font-weight:300}
+.modal-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid rgba(201,162,39,.3);border-radius:50%;background:transparent;color:var(--text);font-size:1.3rem;line-height:1;display:grid;place-items:center}
+.modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.m-block{margin-top:24px;padding-top:20px;border-top:1px solid rgba(201,162,39,.16)}
+.m-block h4{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 12px}
+.m-block p{font-size:.88rem;line-height:1.62;color:#C9CBC6;font-weight:300}
+.m-block ul{margin:0;padding-left:18px}
+.m-block li{font-size:.88rem;line-height:1.75;color:#C9CBC6;font-weight:300}
+.modal-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.modal-actions svg{width:18px;height:18px;fill:currentColor}
+
+/* ═══════════════ REVEAL ═══════════════ */
+/* reveal é progressive enhancement: sem JS o conteúdo permanece visível */
+html.js-anim .rv{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+html.js-anim .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ═══════════════ M8 · TABLET ═══════════════ */
+@media(max-width:1180px){
+  :root{--gutter:44px}
+  .hero-content{max-width:62%}
+  .pillar{padding:28px 20px 28px 0}
+  .pillar + .pillar{padding-left:22px}
+  .pillar p{font-size:.72rem}
+  .auth + .auth{padding-left:24px}
+  .method{grid-template-columns:44% 56%}
+  .method-copy{padding:44px 32px 44px var(--gutter)}
+  .method-list{gap:18px 20px}
+}
+@media(max-width:1024px){
+  .navlinks{gap:22px;font-size:.63rem}
+  .hero-content{max-width:72%}
+  .pillars-grid{grid-template-columns:repeat(2,1fr)}
+  .pillar{border-left:0;padding:26px 22px}
+  .pillar + .pillar{border-left:0;padding-left:22px}
+  .pillar:nth-child(even){border-left:1px solid rgba(201,162,39,.14)}
+  .pillar:nth-child(n+3){border-top:1px solid rgba(201,162,39,.14)}
+  .form-grid{grid-template-columns:1fr 1fr}
+  .auth-grid{grid-template-columns:repeat(2,1fr)}
+  .auth{padding:24px 20px}
+  .auth + .auth{border-left:0;padding-left:20px}
+  .auth:nth-child(even){border-left:1px solid rgba(201,162,39,.16)}
+  .auth:nth-child(n+3){border-top:1px solid rgba(201,162,39,.16)}
+  .impact{grid-template-columns:1fr;gap:32px;padding:44px var(--gutter)}
+  .impact-photo{aspect-ratio:16/9}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ═══════════════ M8 · MOBILE ═══════════════ */
+@media(max-width:900px){
+  :root{--gutter:22px}
+  .navlinks,.nav-cta{display:none}
+  .menu{display:block}
+  .header{padding:12px 0;background:rgba(5,7,5,.88);backdrop-filter:blur(12px)}
+  .logo img{width:88px}
+
+  /* hero mobile: foto própria no topo, conteúdo em bloco escuro */
+  .hero{
+    display:block;min-height:0;padding:0;
+    padding-top:0;padding-bottom:44px;
+  }
+  .hero-photo{position:relative;inset:auto;height:46vh;min-height:300px;max-height:420px}
+  .hero-photo img{object-position:center 34%}
+  .hero-photo::after{
+    background:linear-gradient(0deg,var(--bg) 0%,rgba(5,7,5,.82) 16%,rgba(5,7,5,.12) 54%,rgba(0,0,0,.34) 100%);
+  }
+  .hero .wrap{margin-top:-54px}
+  .hero-content{max-width:none}
+  .hero h1{font-size:clamp(2.35rem,10.5vw,3.1rem);margin-top:14px}
+  .hero p.lead{max-width:38ch;font-size:1rem;margin-top:18px}
+  .hero-actions{display:grid;grid-template-columns:1fr;gap:11px;margin-top:26px}
+  .hero-actions .btn{width:100%}
+  .hero-proofs{display:grid;grid-template-columns:1fr;gap:15px;margin-top:30px}
+  .hero-arc{display:none}
+
+  .pillars-grid{grid-template-columns:1fr 1fr;min-height:0}
+  .pillar{grid-template-columns:34px 1fr;gap:13px;padding:22px 16px}
+  .pillar svg{width:30px;height:30px}
+  .pillar b{font-size:.7rem}
+  .pillar p{font-size:.68rem;margin-top:6px}
+
+  .formations{padding:44px 0 8px}
+  .section-head{margin-bottom:28px}
+  .form-grid{grid-template-columns:1fr;gap:18px}
+  .course-photo{aspect-ratio:16/10}
+  .course-body{padding:50px 20px 22px}
+  .course-body h3{font-size:1.55rem}
+
+  .auth-grid{grid-template-columns:1fr 1fr;min-height:0}
+  .auth{gap:12px;padding:22px 14px}
+  .auth svg{width:26px;height:26px}
+  .auth b{font-size:1.12rem;white-space:normal}
+  .auth span{font-size:.68rem;letter-spacing:.08em}
+  .course .saiba{min-height:46px;font-size:.7rem}
+  .pillar p{font-size:.72rem}
+
+  .method{grid-template-columns:1fr;min-height:0}
+  .method-photo{min-height:0;aspect-ratio:16/10;order:-1}
+  .method-photo::after{background:linear-gradient(0deg,rgba(5,7,5,.72),transparent 46%)}
+  .method-copy{padding:36px var(--gutter) 42px}
+  .method-list{grid-template-columns:1fr;gap:18px}
+
+  .impact{padding:38px var(--gutter) 44px;gap:26px}
+  .impact-photo{aspect-ratio:4/3}
+
+  .final{padding:44px 0 48px}
+  .final-actions{display:grid;grid-template-columns:1fr;gap:12px}
+  .final-actions .btn{width:100%}
+
+  .footer{padding:40px 0 28px}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+  .foot-base{flex-direction:column;gap:8px}
+
+  .modal{padding:0;align-items:flex-end}
+  .modal-box{max-height:92vh;border-radius:14px 14px 0 0;padding:34px 22px 30px}
+  .modal-box h3{font-size:1.55rem}
+  .modal-actions{display:grid;grid-template-columns:1fr}
+}
+
+@media(max-width:460px){
+  .pillars-grid{grid-template-columns:1fr}
+  .pillar:nth-child(even){border-left:0}
+  .pillar:nth-child(n+2){border-top:1px solid rgba(201,162,39,.14)}
+  .auth-grid{grid-template-columns:1fr}
+  .auth:nth-child(even){border-left:0}
+  .auth:nth-child(n+2){border-top:1px solid rgba(201,162,39,.16)}
+  .hero h1{font-size:2.25rem}
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="wrap nav">
+    <a href="#inicio" class="logo" aria-label="HAIR Academia da Beleza — início">
+      <img src="assets/logo-wordmark.png" alt="HAIR Academia da Beleza" width="104" height="43">
+    </a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="#a-hair">A HAIR</a>
+      <a href="#formacoes">Formações</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#conexao-hair">Conexão Hair</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="nav-cta" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Acessar Conexão</a>
+    <button class="menu" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegação móvel">
+  <a href="#a-hair">A HAIR</a>
+  <a href="#formacoes">Formações</a>
+  <a href="#metodologia">Metodologia</a>
+  <a href="#conexao-hair">Conexão Hair</a>
+  <a href="#contato">Contato</a>
+  <a class="btn gold" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Acessar Conexão</a>
+</nav>
+
+<main>
+
+<!-- ══════════ PEÇA A · HERO ══════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-photo">
+    <picture>
+      <source type="image/webp" srcset="assets/hero-hair-480.webp 480w, assets/hero-hair-768.webp 768w, assets/hero-hair-1152.webp 1152w" sizes="(max-width:900px) 100vw, 72vw">
+      <img src="assets/female-class-3.jpg" alt="Professora da HAIR Academia conduzindo aula prática de corte em cabelo longo no salão escola" fetchpriority="high" width="1152" height="1536">
+    </picture>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="kicker">Formação profissional em beleza</div>
+      <h1>
+        <span class="l">Da sala de aula</span>
+        <span class="l gold">ao mercado</span>
+        <span class="l gold">da beleza.</span>
+      </h1>
+      <p class="lead">Formação prática, tecnologia e carreira para quem quer viver da beleza com excelência.</p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#formacoes">Conhecer as formações</a>
+        <a class="btn ghost" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Já sou aluno</a>
+        <button class="btn ghost" type="button" data-install>Instalar Conexão Hair</button>
+      </div>
+
+      <div class="hero-proofs">
+        <div class="proof">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Ribeirão Preto/SP</span>
+        </div>
+        <div class="proof">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3.2v3.4M16 3.2v3.4"/></svg>
+          <span>Desde 2017</span>
+        </div>
+        <div class="proof">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.3"/><path d="M2.8 19.5c0-3.2 2.8-5.2 6.2-5.2s6.2 2 6.2 5.2M16.5 6.2a3 3 0 0 1 0 5.6M18.5 19.5c0-2-.7-3.5-1.9-4.5"/></svg>
+          <span>Mais de 4.000 profissionais formados</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-arc" aria-hidden="true">
+    <svg viewBox="0 0 1600 120" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="arcG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#C9A227" stop-opacity="0"/>
+          <stop offset="26%" stop-color="#C9A227" stop-opacity=".55"/>
+          <stop offset="50%" stop-color="#F0D68F" stop-opacity=".95"/>
+          <stop offset="74%" stop-color="#C9A227" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#C9A227" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M0 118 Q 800 4 1600 118" fill="none" stroke="url(#arcG)" stroke-width="1.7"/>
+      <path d="M800 43 l5.5 12.5 12.5 5.5 -12.5 5.5 -5.5 12.5 -5.5 -12.5 -12.5 -5.5 12.5 -5.5 Z" fill="#F0D68F" opacity=".95"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ PEÇA C · PILARES ══════════ -->
+<section class="pillars" id="a-hair">
+  <div class="wrap pillars-grid">
+    <div class="pillar rv">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 2.5 8.6 12 13.2l9.5-4.6L12 4Z"/><path d="M6.4 10.8v4.9c0 1.7 2.5 3.1 5.6 3.1s5.6-1.4 5.6-3.1v-4.9M21 9v5.2"/></svg>
+      <div><b>Educação</b><p>Base técnica estruturada com professores especialistas.</p></div>
+    </div>
+    <div class="pillar rv">
+      <svg class="y" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.2" cy="17.6" r="2.9"/><circle cx="17.8" cy="17.6" r="2.9"/><path d="M8.4 15.6 18.6 4.2M15.6 15.6 5.4 4.2"/></svg>
+      <div><b>Prática</b><p>Modelos reais, barbearia e salão escola para você aprender fazendo.</p></div>
+    </div>
+    <div class="pillar rv">
+      <svg class="g" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="1.6"/><rect x="10.2" y="10.2" width="3.6" height="3.6" rx=".6"/><path d="M9.5 3.4v3.1M14.5 3.4v3.1M9.5 17.5v3.1M14.5 17.5v3.1M3.4 9.5h3.1M3.4 14.5h3.1M17.5 9.5h3.1M17.5 14.5h3.1"/></svg>
+      <div><b>Tecnologia</b><p>HARA IA + HARA Vision acelerando sua evolução técnica e profissional.</p></div>
+    </div>
+    <div class="pillar rv">
+      <svg class="y" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="7.2" width="18.4" height="12.6" rx="2.2"/><path d="M8.6 7.2V5.6a2 2 0 0 1 2-2h2.8a2 2 0 0 1 2 2v1.6M2.8 12.4h18.4"/></svg>
+      <div><b>Mercado</b><p>Carreira e oportunidades reais de trabalho e empreendedorismo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PEÇA B · FORMAÇÕES ══════════ -->
+<section class="formations" id="formacoes">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="kicker">Nossas formações</div>
+      <h2>Três caminhos. Um propósito.</h2>
+    </div>
+
+    <div class="form-grid">
+
+      <article class="course c-barber rv">
+        <div class="course-photo">
+          <img src="assets/card-barber.webp" loading="lazy" decoding="async" style="object-position:center 34%" alt="Barbeiro profissional executando corte com tesoura e pente em cliente">
+          <div class="badge b-barber" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="6.2" cy="17.6" r="2.9"/><circle cx="17.8" cy="17.6" r="2.9"/><path d="M8.4 15.6 18.6 4.2M15.6 15.6 5.4 4.2"/></svg>
+          </div>
+        </div>
+        <div class="course-body">
+          <h3>Conexão Barber</h3>
+          <p>Barbearia profissional completa. Do corte clássico ao navalhado, com atendimento e gestão.</p>
+          <button class="saiba" type="button" data-course="barber">Saiba mais <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+
+      <article class="course c-beauty rv">
+        <div class="course-photo">
+          <img src="assets/card-beauty.webp" loading="lazy" decoding="async" style="object-position:center 42%" alt="Resultado de corte e finalização feminina executado por aluna da HAIR">
+          <div class="badge b-beauty" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3.2c-2.4 3.1-4.6 5.6-4.6 8.6a4.6 4.6 0 0 0 9.2 0c0-3-2.2-5.5-4.6-8.6Z"/><path d="M9.8 19.8h4.4"/></svg>
+          </div>
+        </div>
+        <div class="course-body">
+          <h3>Conexão Beauty</h3>
+          <p>Cabeleireiro profissional. Corte, coloração, tratamentos e finalizações com excelência.</p>
+          <button class="saiba" type="button" data-course="beauty">Saiba mais <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+
+      <article class="course c-brow rv">
+        <div class="course-photo">
+          <img src="assets/card-brow.webp" loading="lazy" decoding="async" style="object-position:58% 46%" alt="Profissional executando design de sobrancelha em atendimento">
+          <div class="badge b-brow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M2.6 12S6.4 6.2 12 6.2 21.4 12 21.4 12 17.6 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.7"/></svg>
+          </div>
+        </div>
+        <div class="course-body">
+          <h3>Conexão Brow &amp; Lash</h3>
+          <p>Design do olhar completo. Sobrancelhas, cílios, design e atendimento especializado.</p>
+          <button class="saiba" type="button" data-course="brow">Saiba mais <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ AUTORIDADE ══════════ -->
+<section class="authority">
+  <div class="wrap auth-grid">
+    <div class="auth rv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.3"/><path d="M2.8 19.5c0-3.2 2.8-5.2 6.2-5.2s6.2 2 6.2 5.2M16.5 6.2a3 3 0 0 1 0 5.6M18.5 19.5c0-2-.7-3.5-1.9-4.5"/></svg>
+      <div><b>+4.000</b><span>Profissionais formados</span></div>
+    </div>
+    <div class="auth rv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3.2v3.4M16 3.2v3.4"/></svg>
+      <div><b>Desde 2017</b><span>Transformando vidas</span></div>
+    </div>
+    <div class="auth rv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <div><b>Ribeirão Preto/SP</b><span>Escola presencial</span></div>
+    </div>
+    <div class="auth rv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.4 8.2h15.2l-1.2 11a2 2 0 0 1-2 1.8H7.6a2 2 0 0 1-2-1.8l-1.2-11Z"/><path d="M8.8 8.2V6.4a3.2 3.2 0 0 1 6.4 0v1.8"/></svg>
+      <div><b>LDB</b><span>Loja do Barbeiro</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PEÇA C · METODOLOGIA ══════════ -->
+<section class="method" id="metodologia">
+  <div class="method-copy">
+    <div class="kicker rv">Metodologia HAIR</div>
+    <h2 class="rv">Aprender. Praticar.<br>Evoluir. Conectar.<br>Profissionalizar.</h2>
+    <p class="rv">Nossa metodologia foi criada para formar profissionais completos, prontos para o mercado e para a vida real.</p>
+    <div class="method-list">
+      <div class="method-item rv">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 2.5 8.6 12 13.2l9.5-4.6L12 4Z"/><path d="M6.4 10.8v4.9c0 1.7 2.5 3.1 5.6 3.1s5.6-1.4 5.6-3.1v-4.9"/></svg></div>
+        <div><b>Aprender</b><span>Conteúdo técnico estruturado com professores especialistas.</span></div>
+      </div>
+      <div class="method-item rv">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5 8.5 14M14.8 4.4l4.8 4.8M13 6.2l4.8 4.8-6.6 6.6H6.4v-4.8L13 6.2Z"/></svg></div>
+        <div><b>Evoluir</b><span>Feedback com HARA Vision e plano de desenvolvimento.</span></div>
+      </div>
+      <div class="method-item rv">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.2" cy="17.6" r="2.6"/><circle cx="17.8" cy="17.6" r="2.6"/><path d="M8.2 15.8 18.4 4.6M15.8 15.8 5.6 4.6"/></svg></div>
+        <div><b>Praticar</b><span>Prática intensiva com modelos reais e acompanhamento.</span></div>
+      </div>
+      <div class="method-item rv">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.2 13.8a4 4 0 0 0 6 .5l2.4-2.4a4.2 4.2 0 0 0-6-6l-1.4 1.4"/><path d="M13.8 10.2a4 4 0 0 0-6-.5l-2.4 2.4a4.2 4.2 0 0 0 6 6l1.4-1.4"/></svg></div>
+        <div><b>Conectar</b><span>Acesso ao mercado, parcerias e oportunidades reais.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="method-photo">
+    <img src="assets/method-class.webp" loading="lazy" decoding="async" alt="Professora e alunas da HAIR Academia em aula prática no salão escola">
+  </div>
+</section>
+
+<!-- ══════════ AÇÃO SOCIAL ══════════ -->
+<section class="impact" id="conexao-hair">
+  <div class="impact-photo rv">
+    <img src="assets/social-action.webp" loading="lazy" decoding="async" alt="Equipe da HAIR realizando cortes gratuitos em ação social ao ar livre">
+  </div>
+  <div class="impact-copy">
+    <div class="kicker rv">Ação social</div>
+    <h2 class="rv">Beleza que transforma.<br>Dignidade em cada corte.</h2>
+    <p class="rv">Acreditamos que a beleza transforma vidas. Nossas ações sociais levam autoestima, cuidado e esperança para quem mais precisa.</p>
+    <a class="btn primary rv" href="#contato">Conhecer a HAIR</a>
+  </div>
+</section>
+
+<!-- ══════════ PEÇA D · CTA FINAL ══════════ -->
+<section class="final" id="contato">
+  <div class="wrap">
+    <h2 class="rv">O futuro da sua carreira começa agora.</h2>
+    <p class="rv">Escolha sua formação e transforme sua vida com a HAIR Academia da Beleza.</p>
+    <div class="final-actions">
+      <a class="btn primary rv" href="#formacoes">Conhecer as formações</a>
+      <a class="btn ghost rv" data-wa-generic href="#" target="_blank" rel="noopener">
+        Falar no WhatsApp
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ RODAPÉ ══════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-wordmark.png" alt="HAIR Academia da Beleza" width="118" height="49" loading="lazy">
+        <p>Formação profissional em beleza, tecnologia e carreira.<br>Mais de 4.000 profissionais formados desde 2017.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Endereço</h4>
+        <p>Av. Portugal, 318 — Vila Seixas<br>Ribeirão Preto/SP</p>
+      </div>
+      <div class="foot-col">
+        <h4>Contato</h4>
+        <a class="foot-wa" data-wa-generic href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
+          (16) 99168-7977
+        </a>
+        <a href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Acessar Conexão Hair</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© <span id="yr">2026</span> HAIR Academia da Beleza. Todos os direitos reservados.</span>
+      <span>Conexão Barber · Conexão Beauty · Conexão Brow &amp; Lash</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ MODAL DE CURSO ══════════ -->
+<div class="modal" id="courseModal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="Fechar">×</button>
+    <div class="kicker" id="mKicker"></div>
+    <h3 id="mTitle"></h3>
+    <p class="m-intro" id="mIntro"></p>
+
+    <div class="m-block"><h4>Para quem é</h4><p id="mPara"></p></div>
+    <div class="m-block"><h4>Principais aprendizados</h4><ul id="mLearn"></ul></div>
+    <div class="m-block"><h4>Metodologia</h4><p id="mMethod"></p></div>
+    <div class="m-block"><h4>Possibilidades profissionais</h4><p id="mCareer"></p></div>
+
+    <div class="modal-actions">
+      <a class="btn primary" id="mWa" href="#" target="_blank" rel="noopener">
+        Horários e valores
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
+      </a>
+      <a class="btn ghost" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Conhecer o Conexão Hair</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODAL DE INSTALAÇÃO ══════════ -->
+<div class="modal" id="installModal" role="dialog" aria-modal="true" aria-labelledby="iTitle" aria-hidden="true">
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-install-close aria-label="Fechar">×</button>
+    <div class="kicker">Conexão Hair</div>
+    <h3 id="iTitle">Instale como aplicativo.</h3>
+    <p class="m-intro">O Conexão Hair é a extensão digital da sua formação — biblioteca, cronograma, portfólio, HARA IA e HARA Vision no seu bolso.</p>
+    <div class="m-block"><h4>Android / Chrome</h4><p>Abra o Conexão Hair, toque no menu ⋮ e escolha <b>Instalar aplicativo</b> ou <b>Adicionar à tela inicial</b>.</p></div>
+    <div class="m-block"><h4>iPhone / Safari</h4><p>Abra o Conexão Hair, toque em <b>Compartilhar</b> e escolha <b>Adicionar à Tela de Início</b>.</p></div>
+    <div class="m-block"><h4>Computador</h4><p>Abra no Chrome ou Edge e use o ícone de instalação na barra de endereço.</p></div>
+    <div class="modal-actions">
+      <a class="btn primary" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Abrir Conexão Hair</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ─── WhatsApp oficial ─── */
+  var WA = "5516991687977";
+  function waLink(msg){ return "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg); }
+
+  document.querySelectorAll("[data-wa-generic]").forEach(function(a){
+    a.href = waLink("Olá! Vim pelo site da HAIR Academia da Beleza e gostaria de receber informações sobre as formações, horários e valores.");
+  });
+
+  /* ─── Conteúdo dos cursos ─── */
+  var COURSES = {
+    barber: {
+      nome: "Conexão Barber",
+      kicker: "Conexão Barber",
+      titulo: "Formação profissional em barbearia",
+      intro: "Formação completa em cabelo masculino e barba, do fundamento técnico ao atendimento de mercado — com prática intensiva desde as primeiras aulas.",
+      para: "Para quem quer entrar na barbearia do zero, para o profissional que já atende e quer estruturar técnica e acabamento, e para quem pretende abrir a própria barbearia.",
+      aprende: [
+        "Máquina, tesoura, navalha e pente: fundamento e domínio.",
+        "Degradê, navalhado e transições limpas.",
+        "Barboterapia, desenho e acabamento.",
+        "Leitura de rosto, visagismo e proporção.",
+        "Atendimento, precificação e gestão da cadeira."
+      ],
+      metodologia: "Prática intensiva com modelos reais na barbearia escola, repetição assistida por professores especialistas e acompanhamento da evolução pelo Conexão Hair com apoio de HARA IA e HARA Vision.",
+      carreira: "Barbeiro profissional, barbeiro de cadeira em barbearia consolidada, empreendedor com barbearia própria, especialista em navalhado ou barboterapia e profissional de eventos."
+    },
+    beauty: {
+      nome: "Conexão Beauty",
+      kicker: "Conexão Beauty",
+      titulo: "Formação profissional em cabelo feminino",
+      intro: "Formação completa de cabeleireiro: corte, coloração, química, tratamento e finalização, com rotina real de salão desde o começo.",
+      para: "Para quem quer se tornar cabeleireiro profissional, para quem já trabalha com beleza e quer dominar coloração e química com segurança, e para quem busca atender com padrão de salão.",
+      aprende: [
+        "Corte feminino: estrutura, forma, textura e acabamento.",
+        "Coloração, colorimetria e correção de cor.",
+        "Química: alisamento, ondulação e reconstrução.",
+        "Tratamentos capilares e diagnóstico do fio.",
+        "Escova, finalização e penteado.",
+        "Atendimento, consulta e fidelização de cliente."
+      ],
+      metodologia: "Aulas técnicas estruturadas seguidas de prática intensiva com modelos reais no salão escola, com acompanhamento individual e registro da evolução no Conexão Hair.",
+      carreira: "Cabeleireiro profissional, colorista, especialista em química ou tratamento, profissional de salão de alto padrão e empreendedor com salão próprio."
+    },
+    brow: {
+      nome: "Conexão Brow & Lash",
+      kicker: "Conexão Brow & Lash",
+      titulo: "Formação profissional em design do olhar",
+      intro: "Formação em sobrancelhas e cílios com foco em precisão técnica, simetria e atendimento — a especialidade que mais cresce no mercado de beleza.",
+      para: "Para quem quer entrar na área da beleza com investimento inicial menor, para profissionais de estética que querem agregar um serviço de alta procura, e para quem busca atender com precisão.",
+      aprende: [
+        "Visagismo e leitura do olhar.",
+        "Design de sobrancelha: medição, simetria e correção.",
+        "Henna, coloração e brow lamination.",
+        "Extensão e lifting de cílios.",
+        "Biossegurança e protocolo de atendimento.",
+        "Portfólio, posicionamento e captação de clientes."
+      ],
+      metodologia: "Técnica passo a passo com prática supervisionada em modelos reais, correção individual de acabamento e construção de portfólio acompanhada pelo Conexão Hair.",
+      carreira: "Designer de sobrancelhas, lash designer, especialista em brow lamination, profissional de estúdio próprio e parceiro de salões e clínicas."
+    }
+  };
+
+  /* ─── Modal de curso ─── */
+  var modal   = document.getElementById("courseModal");
+  var mKicker = document.getElementById("mKicker");
+  var mTitle  = document.getElementById("mTitle");
+  var mIntro  = document.getElementById("mIntro");
+  var mPara   = document.getElementById("mPara");
+  var mLearn  = document.getElementById("mLearn");
+  var mMethod = document.getElementById("mMethod");
+  var mCareer = document.getElementById("mCareer");
+  var mWa     = document.getElementById("mWa");
+  var lastFocus = null;
+
+  function openCourse(key){
+    var c = COURSES[key];
+    if(!c) return;
+    lastFocus = document.activeElement;
+    mKicker.textContent = c.kicker;
+    mTitle.textContent  = c.titulo;
+    mIntro.textContent  = c.intro;
+    mPara.textContent   = c.para;
+    mMethod.textContent = c.metodologia;
+    mCareer.textContent = c.carreira;
+    mLearn.innerHTML    = "";
+    c.aprende.forEach(function(item){
+      var li = document.createElement("li");
+      li.textContent = item;
+      mLearn.appendChild(li);
+    });
+    mWa.href = waLink("Olá! Vi o curso " + c.nome + " no site da Hair Academia da Beleza e gostaria de receber informações sobre horários e valores.");
+    openModal(modal);
+  }
+
+  document.querySelectorAll("[data-course]").forEach(function(btn){
+    btn.addEventListener("click", function(){ openCourse(btn.getAttribute("data-course")); });
+  });
+
+  /* ─── Modal de instalação ─── */
+  var im = document.getElementById("installModal");
+  document.querySelectorAll("[data-install]").forEach(function(b){
+    b.addEventListener("click", function(){ lastFocus = document.activeElement; openModal(im); });
+  });
+
+  /* ─── Utilidades de modal ─── */
+  function openModal(el){
+    el.classList.add("open");
+    el.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+    var c = el.querySelector(".modal-close");
+    if(c) c.focus();
+  }
+  function closeModal(el){
+    el.classList.remove("open");
+    el.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll(".modal").forEach(function(el){
+    el.addEventListener("click", function(e){ if(e.target === el) closeModal(el); });
+    el.querySelectorAll("[data-close],[data-install-close]").forEach(function(b){
+      b.addEventListener("click", function(){ closeModal(el); });
+    });
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      document.querySelectorAll(".modal.open").forEach(closeModal);
+      closeMenu();
+    }
+  });
+
+  /* ─── Menu móvel ─── */
+  var menuBtn = document.getElementById("menuBtn");
+  var mobileNav = document.getElementById("mobileNav");
+  function closeMenu(){
+    mobileNav.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded","false");
+    menuBtn.setAttribute("aria-label","Abrir menu");
+    document.body.style.overflow = "";
+  }
+  menuBtn.addEventListener("click", function(){
+    var open = mobileNav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  mobileNav.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMenu); });
+
+  /* ─── Header ao rolar ─── */
+  var header = document.getElementById("header");
+  function onScroll(){ header.classList.toggle("stuck", window.scrollY > 24); }
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive:true });
+
+  /* ─── Reveal ─── */
+  var rv = document.querySelectorAll(".rv");
+  if("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    document.documentElement.classList.add("js-anim");
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin:"0px 0px -8% 0px", threshold:.06 });
+    rv.forEach(function(el, i){ el.style.transitionDelay = (i % 4) * 55 + "ms"; io.observe(el); });
+  }
+
+  /* ─── Ano ─── */
+  document.getElementById("yr").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
