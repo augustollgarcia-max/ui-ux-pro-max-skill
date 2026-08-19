@@ -25,7 +25,10 @@
   --green:#0A6F50;
   --green-2:#0C7C59;
   --green-ico:#17805F;
-  --purple:#3A1F4D;
+  /* paletas oficiais das formações */
+  --c-barber:#0F7A4F;      --c-barber-bg:#07120C;
+  --c-beauty:#D9C6A5;      --c-beauty-bg:#15110A;
+  --c-brow:#6B1F3A;        --c-brow-bg1:#4A1024;  --c-brow-bg2:#1B0A11;
   --text:#F6F3ED;
   --muted:#B9BCB7;
   --muted-2:#9DA19C;
@@ -125,10 +128,10 @@ p{margin:0}
   overflow:hidden;
   padding-top:104px;padding-bottom:54px;
 }
-.hero-photo{position:absolute;inset:0 0 0 22%;z-index:0;background:var(--bg)}
+.hero-photo{position:absolute;inset:0;z-index:0;background:var(--bg)}
 .hero-photo img{
   width:100%;height:100%;object-fit:cover;
-  object-position:center 36%;
+  object-position:64% 34%;
   filter:contrast(1.07) saturate(.92) brightness(.97);
 }
 .hero-photo::after{
@@ -136,12 +139,12 @@ p{margin:0}
   background:
     linear-gradient(90deg,
       var(--bg) 0%,
-      var(--bg) 14%,
-      rgba(5,7,5,.93) 26%,
-      rgba(5,7,5,.66) 36%,
-      rgba(5,7,5,.28) 46%,
-      rgba(5,7,5,.04) 58%,
-      rgba(0,0,0,.18) 100%),
+      var(--bg) 15%,
+      rgba(5,7,5,.94) 27%,
+      rgba(5,7,5,.70) 37%,
+      rgba(5,7,5,.30) 47%,
+      rgba(5,7,5,.05) 60%,
+      rgba(0,0,0,.20) 100%),
     linear-gradient(0deg,rgba(5,7,5,.72) 0%,rgba(5,7,5,.10) 24%,transparent 44%),
     linear-gradient(180deg,rgba(5,7,5,.60) 0%,rgba(5,7,5,.22) 11%,transparent 19%);
 }
@@ -208,9 +211,10 @@ p{margin:0}
   border:1px solid rgba(255,255,255,.14);
 }
 .badge svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.4}
-.badge.b-barber{background:var(--green)}
-.badge.b-beauty{background:var(--gold-deep)}
-.badge.b-brow{background:#4B2A63}
+.badge.b-barber{background:var(--c-barber)}
+.badge.b-beauty{background:var(--c-beauty)}
+.badge.b-beauty svg{stroke:#1A1710}
+.badge.b-brow{background:var(--c-brow)}
 .course-body{flex:1;display:flex;flex-direction:column;padding:52px 22px 22px}
 .course-body h3{font-size:clamp(1.4rem,1.95vw,1.78rem);margin-bottom:12px}
 .course-body p{font-size:.94rem;line-height:1.65;color:#CFD1CC;font-weight:300;flex:1}
@@ -224,7 +228,15 @@ p{margin:0}
   transition:border-color .25s var(--ease),background .25s var(--ease);
 }
 .course .saiba:hover{border-color:var(--gold);background:rgba(201,162,39,.09)}
-.course.c-brow .course-body{background:linear-gradient(160deg,var(--purple) 0%,#1B1024 62%,var(--bg-3) 100%)}
+.course.c-barber .course-body{background:linear-gradient(165deg,var(--c-barber-bg) 0%,var(--bg-3) 78%)}
+.course.c-beauty .course-body{background:linear-gradient(165deg,var(--c-beauty-bg) 0%,var(--bg-3) 78%)}
+.course.c-brow .course-body{background:linear-gradient(160deg,var(--c-brow-bg1) 0%,var(--c-brow-bg2) 64%,var(--bg-3) 100%)}
+.course.c-barber{border-color:rgba(15,122,79,.34)}
+.course.c-beauty{border-color:rgba(217,198,165,.28)}
+.course.c-brow{border-color:rgba(107,31,58,.44)}
+.course.c-barber:hover{border-color:rgba(15,122,79,.7)}
+.course.c-beauty:hover{border-color:rgba(217,198,165,.55)}
+.course.c-brow:hover{border-color:rgba(107,31,58,.85)}
 
 /* ═══════════════ AUTORIDADE ═══════════════ */
 .authority{background:linear-gradient(180deg,#071009 0%,#050B07 100%);border-block:1px solid rgba(201,162,39,.16)}
@@ -247,17 +259,52 @@ p{margin:0}
 .method-item b{display:block;font-size:.82rem;font-weight:600}
 .method-item span{display:block;margin-top:5px;font-size:.74rem;line-height:1.5;color:var(--muted-2);font-weight:300}
 .method-photo{position:relative;overflow:hidden;min-height:439px}
-.method-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%;filter:contrast(1.05) saturate(.92)}
+.method-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 46%;filter:contrast(1.05) saturate(.92)}
 .method-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,5,.9) 0%,rgba(5,7,5,.24) 16%,transparent 42%)}
 
 /* ═══════════════ AÇÃO SOCIAL ═══════════════ */
 .impact{display:grid;grid-template-columns:50% 1fr;gap:56px;align-items:center;padding:32px 60px 32px 24px;border-bottom:1px solid rgba(201,162,39,.14)}
 .impact-photo{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:2.4}
-.impact-photo img{width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:contrast(1.05) saturate(.95)}
+.impact-photo img{width:100%;height:100%;object-fit:cover;object-position:center 46%;filter:contrast(1.05) saturate(.95)}
 .impact-copy{max-width:560px}
 .impact-copy h2{font-size:clamp(1.55rem,2.25vw,2rem);line-height:1.14;margin:14px 0 16px;letter-spacing:-.01em}
 .impact-copy p{font-size:.88rem;line-height:1.62;color:var(--muted);font-weight:300}
 .impact-copy .btn{margin-top:26px}
+
+/* ═══════════════ ESTRUTURA · MATERIAIS ═══════════════ */
+.kit{padding:56px 0;border-bottom:1px solid rgba(201,162,39,.14);background:linear-gradient(180deg,var(--bg) 0%,#070906 100%)}
+.kit-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.kit-copy h2{font-size:clamp(1.55rem,2.25vw,2rem);line-height:1.14;margin:14px 0 16px;letter-spacing:-.01em}
+.kit-copy > p{font-size:.9rem;line-height:1.62;color:var(--muted);font-weight:300;max-width:46ch}
+.kit-list{margin-top:26px;display:grid;gap:18px}
+.kit-item{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start}
+.kit-item .ico{width:30px;height:30px;border-radius:8px;background:rgba(201,162,39,.13);border:1px solid rgba(201,162,39,.34);display:grid;place-items:center}
+.kit-item .ico svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:1.5}
+.kit-item b{display:block;font-size:.84rem;font-weight:600}
+.kit-item span{display:block;margin-top:5px;font-size:.78rem;line-height:1.55;color:var(--muted-2);font-weight:300}
+.kit-note{margin-top:26px;padding:16px 18px;border-left:2px solid var(--gold-deep);background:rgba(201,162,39,.05);font-size:.8rem;line-height:1.6;color:#CFD1CC;font-weight:300}
+.kit-media{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kit-media figure{margin:0;position:relative;border:1px solid rgba(201,162,39,.2);border-radius:7px;overflow:hidden;background:#080A08}
+.kit-media figure:first-child{grid-column:1/-1;aspect-ratio:1400/630}
+.kit-media figure:not(:first-child){aspect-ratio:4/5}
+.kit-media img{width:100%;height:100%;object-fit:cover}
+.kit-media figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 14px 11px;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);background:linear-gradient(0deg,rgba(3,5,3,.9),transparent)}
+
+/* ═══════════════ 10 ANOS · CARROSSEL ═══════════════ */
+.anos{padding:56px 0 60px;border-bottom:1px solid rgba(201,162,39,.14);overflow:hidden}
+.anos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}
+.anos-head h2{font-size:clamp(1.6rem,2.35vw,2.1rem);margin-top:12px;letter-spacing:-.01em}
+.anos-head p{margin-top:10px;font-size:.86rem;color:var(--muted);font-weight:300;max-width:52ch}
+.anos-nav{display:flex;gap:10px;flex:none}
+.anos-nav button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,162,39,.4);background:transparent;color:var(--text);display:grid;place-items:center;transition:border-color .25s var(--ease),background .25s var(--ease),opacity .25s}
+.anos-nav button:hover:not(:disabled){border-color:var(--gold);background:rgba(201,162,39,.1)}
+.anos-nav button:disabled{opacity:.3;cursor:default}
+.anos-nav svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7}
+.anos-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:12px;scrollbar-width:none}
+.anos-track::-webkit-scrollbar{display:none}
+.anos-track figure{margin:0;flex:none;width:300px;aspect-ratio:3/4;scroll-snap-align:start;border:1px solid rgba(201,162,39,.22);border-radius:7px;overflow:hidden;background:#080A08;position:relative}
+.anos-track img{width:100%;height:100%;object-fit:cover;filter:contrast(1.04) saturate(.94)}
+.anos-track figure::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,5,3,.5),transparent 46%);pointer-events:none}
 
 /* ═══════════════ CTA FINAL ═══════════════ */
 .final{padding:44px 0 46px;text-align:center;background:linear-gradient(180deg,#050705 0%,#071009 100%)}
@@ -396,6 +443,12 @@ html.js-anim .rv.in{opacity:1;transform:none}
   .impact{padding:38px var(--gutter) 44px;gap:26px}
   .impact-photo{aspect-ratio:4/3}
 
+  .kit{padding:44px 0}
+  .kit-grid{grid-template-columns:1fr;gap:32px}
+  .kit-media{gap:11px}
+  .anos{padding:44px 0 48px}
+  .anos-head{flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:24px}
+  .anos-track figure{width:76vw}
   .final{padding:44px 0 48px}
   .final-actions{display:grid;grid-template-columns:1fr;gap:12px}
   .final-actions .btn{width:100%}
@@ -426,13 +479,14 @@ html.js-anim .rv.in{opacity:1;transform:none}
 <header class="header" id="header">
   <div class="wrap nav">
     <a href="#inicio" class="logo" aria-label="HAIR Academia da Beleza — início">
-      <img src="assets/logo-wordmark.png" alt="HAIR Academia da Beleza" width="104" height="43">
+      <img src="assets/logo-hair.png" alt="HAIR Academia da Beleza" width="112" height="38">
     </a>
     <nav class="navlinks" aria-label="Navegação principal">
       <a href="#a-hair">A HAIR</a>
       <a href="#formacoes">Formações</a>
       <a href="#metodologia">Metodologia</a>
       <a href="#conexao-hair">Conexão Hair</a>
+      <a href="#dez-anos">10 Anos</a>
       <a href="#contato">Contato</a>
     </nav>
     <a class="nav-cta" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Acessar Conexão</a>
@@ -447,6 +501,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
   <a href="#formacoes">Formações</a>
   <a href="#metodologia">Metodologia</a>
   <a href="#conexao-hair">Conexão Hair</a>
+  <a href="#dez-anos">10 Anos</a>
   <a href="#contato">Contato</a>
   <a class="btn gold" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Acessar Conexão</a>
 </nav>
@@ -457,8 +512,8 @@ html.js-anim .rv.in{opacity:1;transform:none}
 <section class="hero" id="inicio">
   <div class="hero-photo">
     <picture>
-      <source type="image/webp" srcset="assets/hero-hair-480.webp 480w, assets/hero-hair-768.webp 768w, assets/hero-hair-1152.webp 1152w" sizes="(max-width:900px) 100vw, 72vw">
-      <img src="assets/female-class-3.jpg" alt="Professora da HAIR Academia conduzindo aula prática de corte em cabelo longo no salão escola" fetchpriority="high" width="1152" height="1536">
+      <source type="image/webp" srcset="assets/hero-hair-480.webp 480w, assets/hero-hair-768.webp 768w, assets/hero-hair-1152.webp 1152w, assets/hero-hair.webp 1319w" sizes="100vw">
+      <img src="assets/hero-hair.webp" alt="Professor da HAIR Academia conduzindo aula prática de corte com aluno no salão escola" fetchpriority="high" width="1319" height="1193">
     </picture>
   </div>
 
@@ -546,7 +601,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
       <article class="course c-barber rv">
         <div class="course-photo">
-          <img src="assets/card-barber.webp" loading="lazy" decoding="async" style="object-position:center 34%" alt="Barbeiro profissional executando corte com tesoura e pente em cliente">
+          <img src="assets/card-barber.webp" loading="lazy" decoding="async" style="object-position:center 30%" alt="Barbeiro profissional executando corte masculino em cliente">
           <div class="badge b-barber" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="6.2" cy="17.6" r="2.9"/><circle cx="17.8" cy="17.6" r="2.9"/><path d="M8.4 15.6 18.6 4.2M15.6 15.6 5.4 4.2"/></svg>
           </div>
@@ -560,7 +615,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
       <article class="course c-beauty rv">
         <div class="course-photo">
-          <img src="assets/card-beauty.webp" loading="lazy" decoding="async" style="object-position:center 42%" alt="Resultado de corte e finalização feminina executado por aluna da HAIR">
+          <img src="assets/card-beauty.webp" loading="lazy" decoding="async" style="object-position:center 42%" alt="Aluna e professora em atendimento de tratamento capilar no lavatório">
           <div class="badge b-beauty" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 3.2c-2.4 3.1-4.6 5.6-4.6 8.6a4.6 4.6 0 0 0 9.2 0c0-3-2.2-5.5-4.6-8.6Z"/><path d="M9.8 19.8h4.4"/></svg>
           </div>
@@ -574,7 +629,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
       <article class="course c-brow rv">
         <div class="course-photo">
-          <img src="assets/card-brow.webp" loading="lazy" decoding="async" style="object-position:58% 46%" alt="Profissional executando design de sobrancelha em atendimento">
+          <img src="assets/card-brow.webp" loading="lazy" decoding="async" style="object-position:center 50%" alt="Antes e depois de design de sobrancelha">
           <div class="badge b-brow" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M2.6 12S6.4 6.2 12 6.2 21.4 12 21.4 12 17.6 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.7"/></svg>
           </div>
@@ -645,13 +700,89 @@ html.js-anim .rv.in{opacity:1;transform:none}
 <!-- ══════════ AÇÃO SOCIAL ══════════ -->
 <section class="impact" id="conexao-hair">
   <div class="impact-photo rv">
-    <img src="assets/social-action.webp" loading="lazy" decoding="async" alt="Equipe da HAIR realizando cortes gratuitos em ação social ao ar livre">
+    <img src="assets/social-action.webp" loading="lazy" decoding="async" alt="Barbeiro da HAIR realizando cortes gratuitos durante ação social ao ar livre">
   </div>
   <div class="impact-copy">
     <div class="kicker rv">Ação social</div>
     <h2 class="rv">Beleza que transforma.<br>Dignidade em cada corte.</h2>
     <p class="rv">Acreditamos que a beleza transforma vidas. Nossas ações sociais levam autoestima, cuidado e esperança para quem mais precisa.</p>
     <a class="btn primary rv" href="#contato">Conhecer a HAIR</a>
+  </div>
+</section>
+
+<!-- ══════════ ESTRUTURA · MATERIAIS E LINHA DE PRODUTOS ══════════ -->
+<section class="kit" id="estrutura">
+  <div class="wrap kit-grid">
+    <div class="kit-copy">
+      <div class="kicker rv">Estrutura para o aluno</div>
+      <h2 class="rv">Você chega com vontade.<br>O material já está aqui.</h2>
+      <p class="rv">Máquinas, tesouras, navalhas, pentes e a linha de produtos ficam à disposição do aluno
+      durante as aulas e nas ações sociais. Você treina com equipamento profissional desde o começo,
+      sem precisar comprar nada antes de saber o que realmente vai usar.</p>
+
+      <div class="kit-list">
+        <div class="kit-item rv">
+          <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.2" cy="17.6" r="2.6"/><circle cx="17.8" cy="17.6" r="2.6"/><path d="M8.2 15.8 18.4 4.6M15.8 15.8 5.6 4.6"/></svg></div>
+          <div><b>Equipamento profissional em aula</b><span>Máquinas, tesouras, navalhas e pentes disponíveis durante toda a formação.</span></div>
+        </div>
+        <div class="kit-item rv">
+          <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.2h6v3.1l2.4 2.4v10a2 2 0 0 1-2 2H8.6a2 2 0 0 1-2-2v-10L9 6.3V3.2Z"/><path d="M6.6 12.4h10.8"/></svg></div>
+          <div><b>Linha de produtos à disposição</b><span>Produtos profissionais de barba e cabelo para uso nas aulas práticas e nas ações sociais.</span></div>
+        </div>
+        <div class="kit-item rv">
+          <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.4 8.2h15.2l-1.2 11a2 2 0 0 1-2 1.8H7.6a2 2 0 0 1-2-1.8l-1.2-11Z"/><path d="M8.8 8.2V6.4a3.2 3.2 0 0 1 6.4 0v1.8"/></svg></div>
+          <div><b>Seu kit, no seu tempo</b><span>Orientação para montar o material da sua barbearia com calma e critério, comprando o que faz sentido.</span></div>
+        </div>
+      </div>
+
+      <p class="kit-note rv">Nosso diferencial é esse: o aluno não trava por falta de material.
+      Começa usando o que a escola oferece e monta o próprio kit conforme evolui.</p>
+    </div>
+
+    <div class="kit-media rv">
+      <figure><img src="assets/produtos-linha.webp" loading="lazy" decoding="async" alt="Linha de produtos profissionais de barba e cabelo disponível para os alunos"><figcaption>Linha profissional em aula</figcaption></figure>
+      <figure><img src="assets/produto-cera.webp" loading="lazy" decoding="async" alt="Cera fixadora profissional usada nas aulas práticas"></figure>
+      <figure><img src="assets/card-barber.webp" loading="lazy" decoding="async" style="object-position:center 28%" alt="Aluno executando corte com equipamento profissional da escola"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 10 ANOS · CARROSSEL ══════════ -->
+<section class="anos" id="dez-anos">
+  <div class="wrap">
+    <div class="anos-head">
+      <div>
+        <div class="kicker rv">HAIR Academia</div>
+        <h2 class="rv">10 anos formando profissionais.</h2>
+        <p class="rv">Turmas, workshops, eventos e ações sociais que construíram a história da escola.</p>
+      </div>
+      <div class="anos-nav">
+        <button type="button" id="anosPrev" aria-label="Fotos anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+        <button type="button" id="anosNext" aria-label="Próximas fotos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="anos-track" id="anosTrack" tabindex="0" role="region" aria-label="Galeria de 10 anos da HAIR Academia">
+        <figure><img src="assets/anos/a01.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a02.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a03.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a05.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a06.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a07.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a08.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a09.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a10.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a11.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a13.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a14.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a15.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a17.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a19.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a20.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a21.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+        <figure><img src="assets/anos/a22.webp" loading="lazy" decoding="async" alt="Turma, workshop ou ação social da HAIR Academia da Beleza"></figure>
+    </div>
   </div>
 </section>
 
@@ -677,7 +808,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/logo-wordmark.png" alt="HAIR Academia da Beleza" width="118" height="49" loading="lazy">
+        <img src="assets/logo-hair.png" alt="HAIR Academia da Beleza" width="126" height="43" loading="lazy">
         <p>Formação profissional em beleza, tecnologia e carreira.<br>Mais de 4.000 profissionais formados desde 2017.</p>
       </div>
       <div class="foot-col">
@@ -907,6 +1038,34 @@ html.js-anim .rv.in{opacity:1;transform:none}
       });
     }, { rootMargin:"0px 0px -8% 0px", threshold:.06 });
     rv.forEach(function(el, i){ el.style.transitionDelay = (i % 4) * 55 + "ms"; io.observe(el); });
+  }
+
+  /* ─── Carrossel 10 anos ─── */
+  var track = document.getElementById("anosTrack");
+  var prevB = document.getElementById("anosPrev");
+  var nextB = document.getElementById("anosNext");
+  if (track && prevB && nextB) {
+    var stepBy = function(){
+      var f = track.querySelector("figure");
+      if (!f) return track.clientWidth;
+      var st = getComputedStyle(track);
+      var gap = parseFloat(st.columnGap || st.gap) || 14;
+      var per = Math.max(1, Math.floor(track.clientWidth / (f.offsetWidth + gap)));
+      return (f.offsetWidth + gap) * per;
+    };
+    var refresh = function(){
+      prevB.disabled = track.scrollLeft <= 2;
+      nextB.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    prevB.addEventListener("click", function(){ track.scrollBy({ left: -stepBy(), behavior: "smooth" }); });
+    nextB.addEventListener("click", function(){ track.scrollBy({ left:  stepBy(), behavior: "smooth" }); });
+    track.addEventListener("scroll", refresh, { passive: true });
+    track.addEventListener("keydown", function(e){
+      if (e.key === "ArrowRight"){ e.preventDefault(); track.scrollBy({ left:  stepBy(), behavior: "smooth" }); }
+      if (e.key === "ArrowLeft"){  e.preventDefault(); track.scrollBy({ left: -stepBy(), behavior: "smooth" }); }
+    });
+    window.addEventListener("resize", refresh);
+    refresh();
   }
 
   /* ─── Ano ─── */
