@@ -269,7 +269,26 @@ posição na lista.
 Se você preferir o contrário — aluno sempre primeiro —, é uma linha de `order
 by`. Mas aí o Clube precisa vender outra coisa que não seja aparecer.
 
-### 6.6 Como alguém vira ouro, por enquanto
+### 6.6 Preço do Clube (definido em 22/08)
+
+| Plano | Preço | Quem | O que dá |
+|---|---|---|---|
+| **Clube — profissional** | **R$ 29,90** | profissional avulso | áurea de ouro no perfil |
+| **Clube — salão** | **R$ 29,90** | um salão, um acesso | áurea de ouro |
+| **Equipe** | **R$ 99,00** | salão com colaboradores | **cada colaborador com login próprio**, todos com os benefícios |
+
+O Equipe é o que muda o desenho: ele não é uma conta com senha compartilhada, é
+**uma conta de salão que emite acessos individuais**. Cada colaborador entra com
+o dele. Isso pede uma tabela de vínculo (colaborador → empresa) que ainda não
+existe, e é o que separa o Equipe de "só cobrar mais caro".
+
+**Login em vários celulares.** Uma conta que roda em muitos aparelhos ao mesmo
+tempo é exatamente o que o Equipe existe para evitar — e é resolvido do lado do
+servidor, derrubando as sessões antigas quando uma nova entra. Não é a peça
+urgente agora, mas é a razão de o Equipe precisar de acesso individual em vez de
+senha passada de mão em mão.
+
+### 6.7 Como alguém vira ouro, por enquanto
 
 Não existe pagamento automático no projeto. Então, na largada, `plano_work` é um
 campo que a **coordenação vira na mão**, depois do PIX. É suficiente para começar
@@ -279,7 +298,7 @@ A coluna `origem`, que já existe, cobre os casos de graça:
 `cortesia` (liberado por acordo), `so_barbeiros` (grupo parceiro),
 `vendedor_equipamento` (entrou para anunciar equipamento).
 
-### 6.7 A áurea, visualmente
+### 6.8 A áurea, visualmente
 
 O app inteiro já é dourado. Então:
 
