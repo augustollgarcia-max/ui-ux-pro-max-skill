@@ -52,8 +52,11 @@ escola."* A meta de 400 salões existe no banco; a porta não existe.
 **3. O profissional avulso nasce invisível.**
 `empresa_listar_talentos` lê só `perfis_conexao`, ou seja, só aluno da HAIR. Quem
 se cadastrar como profissional avulso não aparece para empresa nenhuma. A própria
-migration da Fase 4 registra isso como decisão adiada para uma Fase 5. Anunciar
-"profissional avulso" no site antes disso é prometer o que não entrega.
+migration da Fase 4 registra isso como decisão adiada para uma Fase 5.
+
+**Resolvido em 22/08:** ele passa a aparecer, com áurea de prata — dados
+simples, sem histórico e sem foto de corte. Ouro só para aluno da HAIR ou para
+quem paga o Clube. O desenho completo está na seção 6.
 
 ---
 
@@ -157,19 +160,121 @@ o salão numa tela que manda ele "falar com a escola".
 | 4 | Domínio `work.…` apontado, com `noindex` | painel da Vercel + registro.br |
 | 5 | Seção `#conexao-work`, menu e modal do "Entrar" | repo do site |
 | 6 | Landing `/work` | repo do site |
-| 7 | **Fase 5** — juntar profissional avulso ao `empresa_listar_talentos` | banco + repo do app |
+| 7 | **Fase 5** — níveis prata/ouro e as duas fontes em `empresa_listar_talentos` (seção 6) | banco + repo do app |
 
-Sem o passo 7, o passo 3 entrega uma conta que ninguém vê.
+Sem o passo 7, o passo 3 entrega uma conta que ninguém vê. Ele pode andar em
+paralelo com 5 e 6, mas tem que estar no ar antes de o site convidar
+profissional avulso a se cadastrar.
 
 O passo 4 é o único que depende de acesso que eu não tenho.
 
 ---
 
-## 6. O que precisa da sua decisão
+## 6. Fase 5 — níveis de talento (decidido em 22/08)
 
-1. **O profissional avulso entra já na comunicação do site, ou só depois da
-   Fase 5?** Recomendo só depois — hoje ele se cadastra e fica invisível.
-2. **O cadastro do salão é livre ou passa por aprovação da coordenação?**
-   Hoje `empresa_cadastrar` cria conta ativa na hora, sem filtro.
-3. **Vai cobrar alguma coisa em algum momento?** Se sim, a landing nasce com
-   outro tom, e é mais barato acertar agora do que reescrever depois.
+O profissional avulso **passa a aparecer** para as empresas, mas num nível
+abaixo. Quem paga o Clube sobe.
+
+### 6.1 Três marcas diferentes, que nunca se misturam
+
+Esta é a parte que precisa ficar rígida, senão o produto perde o que vende.
+
+| Marca | O que significa | Como se consegue |
+|---|---|---|
+| **Áurea prata / ouro** | nível de exibição | prata é o padrão; ouro vem de ser aluno da HAIR **ou** de pagar o Clube |
+| **Selo "Formado na HAIR"** | de onde a pessoa veio | só matrícula na escola — **nunca** se compra |
+| **Selo de nota** | quanto a pessoa entrega | só quem tem nota lançada pelo professor **e** autorizou mostrar |
+
+Se a áurea de ouro puder ser comprada e vier junto com selo de nota, o salão
+deixa de conseguir distinguir "a escola avaliou" de "essa pessoa pagou". Aí o
+Conexão Work perde exatamente aquilo que ele tem de diferente de um grupo de
+WhatsApp. Por isso: **ouro compra visibilidade, não compra reputação.**
+
+### 6.2 O que cada nível mostra
+
+| | Prata (grátis) | Ouro (aluno HAIR ou Clube) |
+|---|---|---|
+| Nome, cidade | sim | sim |
+| Especialidades | sim | sim |
+| Foto de perfil | sim (campo `foto_url` já existe) | sim |
+| Uma linha de "sobre" | sim | sim |
+| Disponível para vaga | sim | sim |
+| **Histórico / experiências** | **não** | sim |
+| **Portfólio de fotos de corte** | **não** | sim |
+| Selo de nota | não | só se for aluno e tiver autorizado |
+| Selo "Formado na HAIR" | não | só se for aluno |
+| Posição na lista | depois | antes |
+
+Portfólio de foto de corte não entra agora nem no ouro do avulso: o `work.html`
+ainda não tem StorageService, então não há upload de arquivo. Fica registrado
+como pendência, não como esquecimento.
+
+### 6.3 O que muda no banco
+
+Em `profissionais_work`, duas colunas:
+
+```sql
+plano           text not null default 'prata'
+                check (plano in ('prata','ouro'))
+plano_expira_em timestamptz          -- null = não expira (cortesia)
+```
+
+E o nível efetivo sai de uma função, nunca da coluna crua:
+
+```
+ouro  ⇔  plano = 'ouro'  E  (plano_expira_em é null OU ainda não passou)
+```
+
+Assim o ouro **decai sozinho** quando o pagamento para. Não precisa de rotina
+agendada, não precisa de ninguém lembrar de rebaixar ninguém.
+
+`empresa_listar_talentos` deixa de ler só `perfis_conexao` e passa a devolver as
+duas fontes no mesmo formato, com dois campos novos: `fonte` (`aluno` | `avulso`)
+e `nivel` (`ouro` | `prata`). Os campos de ouro (`experiencias`, `portfolio`,
+`selo_nota`) vêm **nulos** para prata — cortados no banco, não escondidos na
+tela. Se o corte for só visual, qualquer um abre o navegador e lê o que não
+deveria.
+
+### 6.4 Ordenação
+
+Ouro primeiro, prata depois. **Dentro do ouro, aluno da HAIR e membro do Clube
+ficam misturados**, ordenados por destaque e nome.
+
+Motivo: se todo aluno da escola vier sempre na frente, o Clube não compra nada —
+com centenas de formados, o pagante nunca aparece, e ninguém renova. Quem
+protege a credibilidade da escola é o selo "Formado na HAIR" no cartão, não a
+posição na lista.
+
+Se você preferir o contrário — aluno sempre primeiro —, é uma linha de `order
+by`. Mas aí o Clube precisa vender outra coisa que não seja aparecer.
+
+### 6.5 Como alguém vira ouro, por enquanto
+
+Não existe pagamento automático no projeto. Então, na largada, `plano` é um campo
+que a **coordenação vira na mão**, depois do PIX. É o suficiente para começar a
+cobrar e não trava a Fase 5 esperando gateway.
+
+A coluna `origem`, que já existe, cobre os casos de graça:
+`cortesia` (liberado por acordo), `so_barbeiros` (grupo parceiro),
+`vendedor_equipamento` (entrou para anunciar equipamento).
+
+### 6.6 A áurea, visualmente
+
+O app inteiro já é dourado. Então:
+
+- **Ouro** — borda e brilho dourados, do jeito que os cartões da casa já são
+- **Prata** — a mesma forma, em cinza-prata sem brilho
+
+Prata não pode parecer defeito nem cartão quebrado. Tem que parecer o padrão da
+casa — e o ouro, o degrau acima. É a diferença entre "esse aqui está incompleto"
+e "aquele ali é destaque".
+
+---
+
+## 7. O que ainda precisa da sua decisão
+
+1. **O cadastro do salão é livre ou passa por aprovação da coordenação?**
+   Hoje `empresa_cadastrar` cria conta ativa na hora, sem filtro. Com 400 salões
+   como meta, entra qualquer um que souber o endereço.
+2. **Quanto custa o Clube, e é mensal ou anual?** Isso muda o texto da landing
+   `/work` e decide se `plano_expira_em` é mês a mês ou ano a ano.
