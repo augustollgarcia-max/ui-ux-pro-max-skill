@@ -1,7 +1,73 @@
 # HANDOFF — Site público HAIR Academia da Beleza
 
 Documento único para quem for continuar este trabalho.
-Última atualização: 19/08/2026.
+Última atualização: 22/08/2026.
+
+---
+
+## 0. Estado agora (22/08/2026, fim de sessão) — leia isto primeiro
+
+**O que está no ar, funcionando, testado:**
+- Site publicado em `hairacademiadabeleza.com.br`, branch `main` do repositório
+  `ui-ux-pro-max-skill`, pasta `site-hair/`.
+- SEO básico instalado hoje: `robots.txt`, `sitemap.xml` e JSON-LD
+  (`EducationalOrganization`) no `<head>` do `index.html`. Testado num
+  navegador: zero erro de console, JSON-LD válido, os dois arquivos
+  respondendo 200.
+- **Outra IA (ChatGPT, via GitHub Actions) subiu direto no `main`**, sem passar
+  por este chat, um botão simples "Conexão Work" (cor dourada) apontando pra
+  `app.hairacademiadabeleza.com.br/work.html`, em três lugares: nav, menu
+  mobile e rodapé. Já mesclado, testado, sem conflito com o que eu fiz.
+
+**O que foi desenhado mas NÃO entrou no site ainda** (fica pronto pra quem
+continuar decidir):
+- Um funil de entrada com 2 perguntas no máximo (aluno? / proprietário ou
+  colaborador?), verde pra Conexão Hair e roxo pra Conexão Work — cor roxa
+  puxada do que `work-cover-google.js` já usa, não inventei paleta nova.
+  Protótipo funcionando em
+  `/tmp/.../scratchpad/funil/preview-funil.html` (fora do repo — se sumir,
+  o código já foi mandado pro dono por mensagem, pedir pra ele reencaminhar
+  ou reconstruir a partir da descrição acima).
+  Cada resposta já registra um evento (`funil_entrada`), só falta plugar no
+  `dataLayer` de verdade.
+- **Decisão em aberto do dono:** manter o botão simples do ChatGPT (já no ar,
+  zero risco) ou trocar pelo funil com rastreio. Ele ainda não respondeu.
+
+**Bloqueador externo, não é bug do site:**
+- O dono queria subir uma campanha de Google Ads hoje. A conta
+  (`667-761-4549`) não tem forma de pagamento com problema (cartão Visa
+  válido, cobrança automática ativa) — mas está com **zero impressão desde
+  2023**, mesmo com campanha marcada como "ativada". Provável causa: revisão
+  de anúncio travada, ou conta dormente há anos que o Google exige
+  reconfirmação. Estava investigando pela tela de uma campanha específica
+  ("Ago1", tipo Pesquisa) quando a sessão foi interrompida — **retomar por
+  aí.** Não depende de nada no código do site.
+- O ID de conversão do Google Ads (`AW-XXXXXXXXX/rótulo`) ainda não foi
+  enviado pelo dono. Sem ele, não dá pra instalar o `gtag` de conversão.
+
+**Achado importante, não relacionado ao site:** o app do aluno
+(`conexao-hair-deploy`) tinha um bug real em produção — `flex:0 0:min(...)`
+(dois-pontos a mais) encolhia os cartões 4:5 de avisos e ações sociais pra
+uns 8-46px. Corrigido e já no `main` desse outro repositório (commit
+`d46bd13`). Ver `conexao-hair-deploy/CLAUDE.md` pra esse repositório.
+
+**Painel comercial / CRM — já existe, achado nesta sessão:**
+Existem hoje **dois** lugares que funcionam como CRM, ambos no repositório
+`conexao-hair-deploy`, nenhum neste site:
+1. `#admleads` dentro do app — "Comercial · CRM · Funil de Leads": KPIs,
+   pipeline por etapa, temperatura (quente/morno/frio), próximo passo
+   sugerido, WhatsApp que avança a etapa sozinho ao clicar. Roda em
+   `localStorage` + RPC best-effort (não é 100% servidor — checar se
+   sincroniza entre aparelhos de admin antes de confiar nele como fonte
+   única).
+2. `mapa-admin.html` — painel solto, login próprio, aparenta ler os mesmos
+   leads do Mapa de Futuro com cartões de KPI e link de WhatsApp. Pode ser
+   redundante com o `#admleads` — não confirmado, vale checar se são a
+   mesma fonte de dados ou duas.
+3. Só no papel, não construído: `docs/ARQUITETURA-WORK-BUSINESS-IMPORT.md`
+   (escrito por outra sessão) planeja um "CRM / estado do lead" pro lado do
+   Conexão Work (empresas importadas do Google Places), como etapa futura
+   depois do WhatsApp manual atual.
 
 ---
 
