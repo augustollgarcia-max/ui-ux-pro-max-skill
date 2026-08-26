@@ -8,6 +8,15 @@
 <meta name="description" content="Formação profissional em beleza, tecnologia e carreira. Conexão Barber, Conexão Beauty e Conexão Brow &amp; Lash em Ribeirão Preto/SP. Mais de 4.000 profissionais formados desde 2017.">
 <link rel="canonical" href="https://hairacademiadabeleza.com.br/">
 
+<!-- Google tag (gtag.js) — conta AW-799342935 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-799342935"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'AW-799342935');
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -841,6 +850,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
       <div class="foot-col">
         <h4>Endereço</h4>
         <p>Av. Portugal, 318 — Vila Seixas<br>Ribeirão Preto/SP</p>
+        <a data-maps-rota href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Portugal%2C+318+-+Vila+Seixas%2C+Ribeir%C3%A3o+Preto+-+SP" target="_blank" rel="noopener">Ver rota →</a>
       </div>
       <div class="foot-col">
         <h4>Contato</h4>
@@ -908,6 +918,23 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
   document.querySelectorAll("[data-wa-generic]").forEach(function(a){
     a.href = waLink("Olá! Vim pelo site da HAIR Academia da Beleza e gostaria de receber informações sobre as formações, horários e valores.");
+  });
+
+  /* ─── Conversões Google Ads (AW-799342935) ─── */
+  function gaConv(label){
+    if (typeof gtag === "function") gtag("event", "conversion", { send_to: "AW-799342935/" + label });
+  }
+  // Falar no WhatsApp (CTA final, rodapé, modal de curso) = "Solicitar orçamento"
+  document.querySelectorAll("[data-wa-generic], #mWa").forEach(function(a){
+    a.addEventListener("click", function(){ gaConv("outyCOe2teYcENeClP0C"); });
+  });
+  // Entrar no Conexão Hair/Work (app.hairacademiadabeleza.com.br) = "Inscrição"
+  document.querySelectorAll('a[href^="https://app.hairacademiadabeleza.com.br"]').forEach(function(a){
+    a.addEventListener("click", function(){ gaConv("kDr2COq2teYcENeClP0C"); });
+  });
+  // Ver rota até a escola = "Ver rota"
+  document.querySelectorAll("[data-maps-rota]").forEach(function(a){
+    a.addEventListener("click", function(){ gaConv("DEyiCO22teYcENeClP0C"); });
   });
 
   /* ─── Conteúdo dos cursos ─── */
