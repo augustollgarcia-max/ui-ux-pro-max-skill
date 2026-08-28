@@ -8,6 +8,15 @@
 <meta name="description" content="Formação profissional em beleza, tecnologia e carreira. Conexão Barber, Conexão Beauty e Conexão Brow &amp; Lash em Ribeirão Preto/SP. Mais de 4.000 profissionais formados desde 2017.">
 <link rel="canonical" href="https://hairacademiadabeleza.com.br/">
 
+<!-- Google tag (gtag.js) — Google Ads AW-799342935 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-799342935"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'AW-799342935');
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -841,6 +850,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
       <div class="foot-col">
         <h4>Endereço</h4>
         <p>Av. Portugal, 318 — Vila Seixas<br>Ribeirão Preto/SP</p>
+        <a data-route href="https://www.google.com/maps/search/?api=1&query=Av.%20Portugal%2C%20318%20-%20Vila%20Seixas%2C%20Ribeir%C3%A3o%20Preto%20-%20SP" target="_blank" rel="noopener">Ver rota no Google Maps</a>
       </div>
       <div class="foot-col">
         <h4>Contato</h4>
@@ -873,10 +883,11 @@ html.js-anim .rv.in{opacity:1;transform:none}
     <div class="m-block"><h4>Possibilidades profissionais</h4><p id="mCareer"></p></div>
 
     <div class="modal-actions">
-      <a class="btn primary" id="mWa" href="#" target="_blank" rel="noopener">
+      <a class="btn primary" id="mWa" data-budget href="#" target="_blank" rel="noopener">
         Horários e valores
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
       </a>
+      <a class="btn gold" id="mEnroll" data-enrollment href="#" target="_blank" rel="noopener">Quero me inscrever</a>
       <a class="btn ghost" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Conhecer o Conexão Hair</a>
     </div>
   </div>
@@ -906,9 +917,34 @@ html.js-anim .rv.in{opacity:1;transform:none}
   var WA = "5516991687977";
   function waLink(msg){ return "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg); }
 
+  /* ─── Conversões Google Ads ─── */
+  var ADS_CONVERSIONS = {
+    whatsapp: "AW-799342935/cwjnCKSEmekcENeClP0C",
+    budget: "AW-799342935/outyCOe2teYcENeClP0C",
+    enrollment: "AW-799342935/kDr2COq2teYcENeClP0C",
+    route: "AW-799342935/DEyiCO22teYcENeClP0C"
+  };
+  function trackAdsConversion(key){
+    if(typeof window.gtag !== "function" || !ADS_CONVERSIONS[key]) return;
+    window.gtag("event", "conversion", {
+      send_to: ADS_CONVERSIONS[key],
+      value: 1.0,
+      currency: "BRL"
+    });
+  }
+  function bindAdsConversion(selector, key){
+    document.querySelectorAll(selector).forEach(function(el){
+      el.addEventListener("click", function(){ trackAdsConversion(key); });
+    });
+  }
+
   document.querySelectorAll("[data-wa-generic]").forEach(function(a){
     a.href = waLink("Olá! Vim pelo site da HAIR Academia da Beleza e gostaria de receber informações sobre as formações, horários e valores.");
   });
+  bindAdsConversion("[data-wa-generic]", "whatsapp");
+  bindAdsConversion("[data-budget]", "budget");
+  bindAdsConversion("[data-enrollment]", "enrollment");
+  bindAdsConversion("[data-route]", "route");
 
   /* ─── Conteúdo dos cursos ─── */
   var COURSES = {
@@ -974,6 +1010,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
   var mMethod = document.getElementById("mMethod");
   var mCareer = document.getElementById("mCareer");
   var mWa     = document.getElementById("mWa");
+  var mEnroll = document.getElementById("mEnroll");
   var lastFocus = null;
 
   function openCourse(key){
@@ -993,6 +1030,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
       mLearn.appendChild(li);
     });
     mWa.href = waLink("Olá! Vi o curso " + c.nome + " no site da Hair Academia da Beleza e gostaria de receber informações sobre horários e valores.");
+    mEnroll.href = waLink("Olá! Vi o curso " + c.nome + " no site da Hair Academia da Beleza e quero fazer minha inscrição.");
     openModal(modal);
   }
 
