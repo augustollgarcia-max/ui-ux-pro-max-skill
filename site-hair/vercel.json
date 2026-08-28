@@ -54,7 +54,7 @@
   "rewrites": [
     {
       "source": "/barbearia/ribeirao",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }
