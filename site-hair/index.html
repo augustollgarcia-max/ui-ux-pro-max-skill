@@ -112,6 +112,27 @@ p{margin:0}
 .btn.ghost:hover{border-color:var(--gold);background:rgba(201,162,39,.07)}
 .btn.gold{background:var(--gold);color:#12100A;font-weight:700}
 .btn.gold:hover{background:#E0BE6E}
+.btn svg{width:16px;height:16px;flex:none}
+
+.btn.whatsapp{
+  background:#25D366;color:#0B3D1F;font-weight:800;
+  box-shadow:0 0 0 1px rgba(37,211,102,.4),0 0 16px 1px rgba(37,211,102,.28);
+}
+.btn.whatsapp:hover{background:#2FE374;transform:translateY(-1px);box-shadow:0 0 0 1px rgba(37,211,102,.6),0 0 24px 3px rgba(37,211,102,.4)}
+.btn.whatsapp:active{transform:scale(.97)}
+.btn.whatsapp svg{fill:#0B3D1F}
+
+.btn.ghost-gold{border-color:rgba(201,162,39,.5);color:var(--gold);background:rgba(201,162,39,.045)}
+.btn.ghost-gold:hover{border-color:var(--gold);background:rgba(201,162,39,.1);transform:translateY(-1px)}
+.btn.ghost-gold:active{transform:scale(.97)}
+
+.hero-access{margin-top:24px;max-width:780px}
+.hero-access-label{display:block;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
+.hero-access-row{display:flex;gap:14px;flex-wrap:wrap}
+.hero-access-row .btn{flex:1 1 200px}
+.hero-install-link{display:inline-block;margin-top:12px;background:none;border:0;padding:0;font:inherit;font-size:.72rem;color:var(--muted-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .2s var(--ease)}
+.hero-install-link:hover{color:var(--gold)}
+.hero-consult{margin-top:20px}
 
 /* ═══════════════ HEADER ═══════════════ */
 .header{
@@ -435,6 +456,10 @@ html.js-anim .rv.in{opacity:1;transform:none}
   .hero p.lead{max-width:38ch;font-size:1rem;margin-top:18px}
   .hero-actions{display:grid;grid-template-columns:1fr;gap:11px;margin-top:26px}
   .hero-actions .btn{width:100%}
+  .hero-access{margin-top:20px}
+  .hero-access-row{display:grid;grid-template-columns:1fr;gap:11px}
+  .hero-access-row .btn{width:100%}
+  .hero-consult{width:100%}
   .hero-proofs{display:grid;grid-template-columns:1fr;gap:15px;margin-top:30px}
   .hero-arc{display:none}
 
@@ -555,10 +580,22 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
       <div class="hero-actions">
         <a class="btn primary" href="#formacoes">Conhecer as formações</a>
-        <a class="btn ghost" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Já sou aluno</a>
-        <a class="btn gold" href="https://app.hairacademiadabeleza.com.br/work.html" target="_blank" rel="noopener">Acessar Conexão Work</a>
-        <button class="btn ghost" type="button" data-install>Instalar Conexão Hair</button>
+        <a class="btn whatsapp" data-wa-generic href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.3.4-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
+          Falar no WhatsApp
+        </a>
       </div>
+
+      <div class="hero-access">
+        <span class="hero-access-label">Acessar o aplicativo</span>
+        <div class="hero-access-row">
+          <a class="btn gold" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Sou aluno</a>
+          <a class="btn gold" href="https://app.hairacademiadabeleza.com.br/work.html" target="_blank" rel="noopener">Sou salão parceiro</a>
+        </div>
+        <button class="hero-install-link" type="button" data-install>Prefere instalar o Conexão Hair como aplicativo? →</button>
+      </div>
+
+      <a class="btn ghost-gold hero-consult" data-wa-consultoria href="#" target="_blank" rel="noopener">Quer fazer sua consultoria gratuita?</a>
 
       <div class="hero-proofs">
         <div class="proof">
@@ -908,6 +945,10 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
   document.querySelectorAll("[data-wa-generic]").forEach(function(a){
     a.href = waLink("Olá! Vim pelo site da HAIR Academia da Beleza e gostaria de receber informações sobre as formações, horários e valores.");
+  });
+
+  document.querySelectorAll("[data-wa-consultoria]").forEach(function(a){
+    a.href = waLink("Olá! Vim pelo site da HAIR Academia da Beleza e quero fazer minha consultoria gratuita, pra entender qual formação combina comigo.");
   });
 
   /* ─── Conteúdo dos cursos ─── */
