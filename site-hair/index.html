@@ -45,8 +45,6 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/Inter-var-latin.woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="assets/conexao-verde-roxo.png">
-<link rel="stylesheet" href="assets/conexao-gate.css">
 <link rel="preload" as="image" href="assets/hero-hair-1152.webp" fetchpriority="high">
 
 <style>
@@ -203,6 +201,9 @@ p{margin:0}
   max-width:clamp(300px,30vw,440px);
 }
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;max-width:780px}
+.btn.conexao-apps{gap:11px;background:linear-gradient(135deg,#087a4b 0%,#087a4b 46%,#7134d7 54%,#4a168e 100%);border-color:rgba(255,255,255,.38);color:#fff;box-shadow:0 10px 28px rgba(65,25,125,.28)}
+.btn.conexao-apps:hover{border-color:rgba(255,255,255,.7);box-shadow:0 14px 34px rgba(65,25,125,.38)}
+.btn.conexao-apps img{display:block;width:58px;height:29px;object-fit:contain;filter:drop-shadow(0 4px 7px rgba(0,0,0,.34))}
 .hero-proofs{display:flex;gap:40px;flex-wrap:wrap;margin-top:36px}
 .proof{display:flex;align-items:center;gap:11px;font-size:.79rem;color:#DCDAD4;font-weight:400}
 .proof svg{width:19px;height:19px;flex:none;stroke:var(--gold);fill:none;stroke-width:1.5}
@@ -511,12 +512,6 @@ html.js-anim .rv.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
-<aside class="conexao-gate" aria-label="Entrada do ecossistema Conexão">
-  <a class="conexao-gate__link" href="https://app.hairacademiadabeleza.com.br/conexao-opcoes.html" aria-label="Clique e descubra as opções do Conexão Hair e Conexão Work">
-    <img class="conexao-gate__logo" src="assets/conexao-verde-roxo.png" alt="Conexão Hair e Conexão Work">
-    <span class="conexao-gate__hint">Clique e descubra</span>
-  </a>
-</aside>
 
 <header class="header" id="header">
   <div class="wrap nav">
@@ -572,9 +567,10 @@ html.js-anim .rv.in{opacity:1;transform:none}
 
       <div class="hero-actions">
         <a class="btn primary" href="#formacoes">Conhecer as formações</a>
-        <a class="btn ghost" href="https://app.hairacademiadabeleza.com.br" target="_blank" rel="noopener">Já sou aluno</a>
-        <a class="btn gold" href="https://app.hairacademiadabeleza.com.br/work.html" target="_blank" rel="noopener">Acessar Conexão Work</a>
-        <button class="btn ghost" type="button" data-install>Instalar Conexão Hair</button>
+        <a class="btn conexao-apps" href="https://app.hairacademiadabeleza.com.br/conexao-opcoes.html" target="_blank" rel="noopener" aria-label="Abrir Conexão Aplicativos">
+          <img src="assets/conexao-infinito-verde-roxo-v2.png" alt="" width="58" height="29">
+          <span>Conexão Aplicativos</span>
+        </a>
       </div>
 
       <div class="hero-proofs">
