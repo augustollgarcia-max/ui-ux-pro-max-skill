@@ -986,6 +986,12 @@ html.js-anim .rv.in{opacity:1;transform:none}
   bindAdsConversion("[data-enrollment]", "enrollment");
   bindAdsConversion("[data-route]", "route");
 
+  /* ─── Consultoria gratuita (mesma conversão "whatsapp", mensagem própria) ─── */
+  document.querySelectorAll("[data-wa-consultoria]").forEach(function(a){
+    a.href = waLink("Olá! Vim pelo site da HAIR Academia da Beleza e quero fazer minha consultoria gratuita, pra entender qual formação combina comigo.");
+  });
+  bindAdsConversion("[data-wa-consultoria]", "whatsapp");
+
   /* ─── Conteúdo dos cursos ─── */
   var COURSES = {
     barber: {
