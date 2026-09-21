@@ -79,11 +79,11 @@
     },
     {
       "source": "/pagamento.html",
-      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/pagamento.html"
+      "destination": "/alisamento/pagamento.html"
     },
     {
       "source": "/pagamento",
-      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/pagamento.html"
+      "destination": "/alisamento/pagamento.html"
     },
     {
       "source": "/assets/favicon.svg",
