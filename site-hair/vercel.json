@@ -28,20 +28,305 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests" }
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/alisamento",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://metodo-ecare-liso-perfeito.floot.app https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/assets/favicon.svg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/hero-approved.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/og-alisamento.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/hair-video.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/renata-portrait.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/books.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/salon-result-1.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/salon-proof.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/salon-professional.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/salon-result-2.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/liss-care-white.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/weekend.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/services-750.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/learning.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/investment.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/title-mask.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     }
   ],
   "rewrites": [
     {
+      "source": "/alisamento",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/"
+    },
+    {
+      "source": "/alisamento/:path*",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/:path*"
+    },
+    {
+      "source": "/assets/favicon.svg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/favicon.svg"
+    },
+    {
+      "source": "/assets/hero-approved.webp",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/hero-approved.webp"
+    },
+    {
+      "source": "/assets/og-alisamento.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/og-alisamento.jpg"
+    },
+    {
+      "source": "/assets/hair-video.mp4",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/hair-video.mp4"
+    },
+    {
+      "source": "/assets/renata-portrait.webp",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/renata-portrait.webp"
+    },
+    {
+      "source": "/assets/books.webp",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/books.webp"
+    },
+    {
+      "source": "/assets/salon-result-1.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/salon-result-1.jpg"
+    },
+    {
+      "source": "/assets/salon-proof.mp4",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/salon-proof.mp4"
+    },
+    {
+      "source": "/assets/salon-professional.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/salon-professional.jpg"
+    },
+    {
+      "source": "/assets/salon-result-2.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/salon-result-2.jpg"
+    },
+    {
+      "source": "/assets/liss-care-white.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/liss-care-white.jpg"
+    },
+    {
+      "source": "/assets/weekend.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/weekend.jpg"
+    },
+    {
+      "source": "/assets/services-750.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/services-750.jpg"
+    },
+    {
+      "source": "/assets/learning.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/learning.jpg"
+    },
+    {
+      "source": "/assets/investment.jpg",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/investment.jpg"
+    },
+    {
+      "source": "/assets/title-mask.png",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/title-mask.png"
+    },
+    {
+      "source": "/enhancements.css",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/enhancements.css"
+    },
+    {
+      "source": "/offer.css",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/offer.css"
+    },
+    {
+      "source": "/refinements.css",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/refinements.css"
+    },
+    {
+      "source": "/premium.css",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/premium.css"
+    },
+    {
+      "source": "/enhancements.js",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/enhancements.js"
+    },
+    {
+      "source": "/offer.js",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/offer.js"
+    },
+    {
+      "source": "/payment.js",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/payment.js"
+    },
+    {
+      "source": "/refinements.js",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/refinements.js"
+    },
+    {
       "source": "/barbearia/ribeirao",
       "destination": "/"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/pagamento",
+      "destination": "/alisamento/pagamento.html",
+      "permanent": false
     }
   ]
 }
