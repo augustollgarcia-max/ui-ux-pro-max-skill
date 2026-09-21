@@ -166,6 +166,10 @@
       "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/offer.js"
     },
     {
+      "source": "/payment.js",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/payment.js"
+    },
+    {
       "source": "/refinements.js",
       "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/refinements.js"
     },
