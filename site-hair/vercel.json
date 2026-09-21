@@ -72,5 +72,12 @@
       "source": "/barbearia/ribeirao",
       "destination": "/"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/alisamento",
+      "destination": "/alisamento/",
+      "permanent": false
+    }
   ]
 }
