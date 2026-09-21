@@ -176,8 +176,8 @@
   ],
   "redirects": [
     {
-      "source": "/alisamento",
-      "destination": "/alisamento/",
+      "source": "/pagamento.html",
+      "destination": "/alisamento/pagamento.html",
       "permanent": false
     }
   ]
