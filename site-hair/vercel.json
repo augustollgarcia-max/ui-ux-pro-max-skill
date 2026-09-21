@@ -78,6 +78,14 @@
       "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/:path*"
     },
     {
+      "source": "/pagamento.html",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/pagamento.html"
+    },
+    {
+      "source": "/pagamento",
+      "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/pagamento.html"
+    },
+    {
       "source": "/assets/favicon.svg",
       "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/assets/favicon.svg"
     },
@@ -172,13 +180,6 @@
     {
       "source": "/barbearia/ribeirao",
       "destination": "/"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/pagamento.html",
-      "destination": "/alisamento/pagamento.html",
-      "permanent": false
     }
   ]
 }
