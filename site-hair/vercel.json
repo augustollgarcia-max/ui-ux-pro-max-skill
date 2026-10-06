@@ -215,7 +215,7 @@
   "rewrites": [
     {
       "source": "/alisamento",
-      "destination": "/ecare-conversion.html"
+      "destination": "/ecare-conversion"
     },
     {
       "source": "/alisamento/:path*",
