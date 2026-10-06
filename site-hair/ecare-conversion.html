@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<title>Método Liso Perfeito eCare | HAIR Academia da Beleza</title>
+<meta name="description" content="Curso de Especialização em Alisamento Profissional em Ribeirão Preto-SP. Conheça o Método Liso Perfeito eCare e transforme sua técnica com formação prática e direcionamento profissional."/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root{
+      --background:#f5efe7;
+      --foreground:#1d1512;
+      --surface:#fffaf4;
+      --muted:#756860;
+      --border:rgba(139,98,49,.28);
+      --wine:#72192a;
+      --wine-2:#9e2844;
+      --gold:#c69a51;
+      --gold-2:#efd39a;
+      --coffee:#1d1512;
+      --shadow:0 14px 35px rgba(72,47,28,.08);
+      --shadow-md:0 24px 60px rgba(62,40,22,.12);
+      --shadow-lg:0 34px 90px rgba(43,22,13,.25);
+      --radius:18px;
+      --radius-md:24px;
+      --radius-lg:30px;
+      --radius-full:999px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--background);color:var(--foreground);font:16px/1.6 'Manrope',system-ui,sans-serif;overflow-x:hidden}
+    img{display:block;width:100%;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    main{overflow-x:hidden}
+    .container{width:min(1180px,calc(100% - 32px));margin:auto}
+    .containerNarrow{width:min(820px,calc(100% - 32px));margin:auto;text-align:center}
+    .section{padding:88px 0}
+    .darkSection{padding:88px 0;background:linear-gradient(180deg,#21150f,#100b09);color:#fff}
+    .heroSection{background:#fffaf4}
+    .heroArt{position:relative;width:min(992px,100%);margin:0 auto;line-height:0}
+    .heroArt>img{aspect-ratio:992/1488;object-fit:cover}
+    .phoneScreen{position:absolute;left:59.10%;top:42.05%;width:24.70%;height:38.55%;overflow:hidden;border-radius:8.8%/4.3%;background:#050505;transform:rotate(-.15deg);transform-origin:center;isolation:isolate}
+    .phoneVideo{position:absolute;left:-2.0%;top:-2.4%;width:104%;height:105%;object-fit:cover;object-position:center center;background:#050505;transform:none;pointer-events:none}.phoneVideo::-webkit-media-controls{display:none!important}.phoneVideo::-webkit-media-controls-enclosure{display:none!important}.phoneVideo::-webkit-media-controls-panel{display:none!important}
+    .dynamicIsland{position:absolute;z-index:4;left:50%;top:1.8%;width:34%;height:4.6%;transform:translateX(-50%);border-radius:999px;background:#030303;box-shadow:0 1px 4px rgba(255,255,255,.14)}
+    .authorityGrid,.methodGrid,.workGrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .authorityImage,.methodImage{border-radius:32px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--border)}
+    .eyebrow,.eyebrowGold{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#9b7138}
+    .eyebrowGold{color:#d9b36f}
+    h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:-.025em;margin:0}
+    .authorityCopy h2,.sectionHead h2,.methodGrid h2,.workGrid h2,.finalSection h2,.offerHead h2{line-height:.94}
+    .authorityCopy h2{font-size:clamp(44px,5vw,72px);margin:12px 0 20px}
+    .authorityCopy p,.sectionHead p,.methodGrid p,.workGrid p,.finalSection p{color:var(--muted);font-size:17px;line-height:1.72}
+    .cta,.ctaLarge,.ctaDark,.ctaGold{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:18px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:transform .18s ease,filter .18s ease}
+    .cta:hover,.ctaLarge:hover,.ctaDark:hover,.ctaGold:hover{transform:translateY(-1px);filter:brightness(1.04)}
+    .ctaLarge{min-height:58px;padding:0 26px;background:linear-gradient(180deg,#a12c48,#7c1b30 55%,#5d111f);color:#fff!important;border:1px solid #d4ad65;box-shadow:inset 0 1px rgba(255,255,255,.35),0 4px 0 #3a0a12,0 12px 26px rgba(55,13,20,.14);margin-top:14px}
+    .sectionHead{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:34px}
+    .sectionHead h2{font-size:clamp(44px,5.5vw,76px);line-height:.92;margin:10px 0 0;max-width:780px}
+    .sectionHead p{max-width:400px;margin:0}
+    .carousel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,31%);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px}
+    .carousel::-webkit-scrollbar{height:6px}.carousel::-webkit-scrollbar-thumb{background:#b48a4a;border-radius:99px}
+    .visualCard{scroll-snap-align:start;border-radius:26px;overflow:hidden;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow)}
+    .visualCard img{aspect-ratio:3/4;object-fit:cover}
+    .offerHead{display:flex;justify-content:space-between;gap:30px;align-items:flex-end;margin-bottom:32px}
+    .offerHead h2{font-size:clamp(44px,5.4vw,76px);line-height:.92;margin:8px 0 0;max-width:780px}
+    .offerValue{font-family:'Lora',Georgia,serif;font-size:clamp(46px,5vw,68px);color:#efd39a;white-space:nowrap;text-align:right}
+    .offerValue small{display:block;font:700 11px/1 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#c8b198;margin-bottom:8px}
+    .benefitsGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+    .benefitCard{grid-column:span 2;overflow:hidden;border:1px solid rgba(212,173,101,.28);border-radius:26px;background:linear-gradient(180deg,#30241f,#201712)}
+    .benefitCard>img,.triptych{height:250px;object-fit:cover}
+    .benefitCard>img{width:100%;object-fit:cover}.triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;overflow:hidden}.triptych img{height:100%;object-fit:cover}
+    .benefitCard>div:last-child{padding:20px}.benefitCard b{display:grid;place-items:center;width:38px;height:38px;border:1px solid #d4ad65;border-radius:50%;color:#f4d89d;margin-bottom:12px}
+    .benefitCard h3{margin:0 0 9px;color:#f1d195;font-size:20px;line-height:1.18}.benefitCard p{margin:0;color:#d3c2b5;font-size:14px;line-height:1.62}.benefitWide{grid-column:span 3}
+    .productBand{display:grid;grid-template-columns:.8fr 1.2fr;margin-top:20px;background:#f8efe5;color:#2a1c16;border-radius:30px;overflow:hidden}
+    .productPair{display:grid;grid-template-columns:1fr 1fr}.productPair img{height:100%;min-height:330px;object-fit:cover}
+    .productCopy{padding:38px}.productCopy h3{font-size:clamp(38px,4vw,60px);line-height:.95;color:var(--wine);margin:0 0 16px}.productCopy p{font-size:17px;line-height:1.7;color:#6e6056}
+    .centerActions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:26px}
+    .ctaDark{min-height:58px;padding:0 26px;background:linear-gradient(#2e211c,#18110e);color:#fff!important;border:1px solid #d4ad65;box-shadow:0 4px 0 #0d0807}
+    .methodGrid{grid-template-columns:.9fr 1.1fr;gap:44px}.methodGrid h2{font-size:clamp(48px,5.5vw,78px);margin:10px 0 20px}
+    .lead{font-family:'Lora',Georgia,serif;font-size:28px!important;color:#3b2a20!important}.mathCard{margin-top:22px;padding:26px;border:1px solid var(--border);border-radius:24px;background:#fff}
+    .mathCard small{font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#9a6c2d}.mathCard strong{display:block;font-family:'Lora',Georgia,serif;font-size:clamp(38px,4vw,56px);color:var(--wine);margin:10px 0}.mathCard p{margin:0}.legal{font-size:12px!important;line-height:1.55!important;color:#7d7168!important}
+    .workSection{padding:88px 0;color:#fff;background-position:center;background-size:cover}.workGrid{gap:52px}.workGrid>img{border-radius:30px;border:1px solid rgba(212,173,101,.35);box-shadow:0 30px 80px rgba(0,0,0,.26)}.workGrid h2{font-size:clamp(44px,5vw,72px);margin:10px 0 18px}.workGrid p{color:#d7c7b8}
+    .pills{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}.pills span{padding:14px 16px;border:1px solid rgba(213,174,103,.24);border-radius:16px;background:rgba(255,255,255,.06);font-weight:700}
+    .ctaGold{min-height:58px;padding:0 26px;background:linear-gradient(180deg,#f1d59b,#c99a50);color:#351c12!important;border:1px solid #efd69e;box-shadow:0 4px 0 #8e6128}
+    .finalSection{padding:94px 0 120px;background:radial-gradient(circle at 50% 0,rgba(198,154,81,.18),transparent 36%),#fffaf4}.finalSection h2{font-size:clamp(52px,6vw,82px);line-height:.9;margin:12px 0 18px}.finalSection p{max-width:660px;margin:0 auto 20px}
+    .faq{margin-top:38px;text-align:left;border-top:1px solid var(--border)}.faq details{border-bottom:1px solid var(--border);padding:18px 0}.faq summary{cursor:pointer;font-weight:800;font-size:17px}.faq p{margin:10px 0 0;max-width:none;font-size:14px}
+    .mobileSticky{display:none}
+    .reveal{opacity:1;transform:none}
+    .videoTapHint{display:none}
+    .heroSection + .section{padding-top:28px}
+    .authorityImage img{aspect-ratio:1/1;object-fit:cover;object-position:center center}
+    @media(max-width:900px){.authorityGrid,.methodGrid,.workGrid,.productBand{grid-template-columns:1fr}.authorityCopy{padding-top:8px}.sectionHead,.offerHead{align-items:flex-start;flex-direction:column}.benefitCard{grid-column:span 3}.benefitWide{grid-column:span 3}.offerValue{text-align:left}.productPair img{min-height:260px}.carousel{grid-auto-columns:minmax(250px,70%)}}
+    @media(max-width:620px){.heroArt{width:100%}.phoneScreen{left:59.08%;top:42.03%;width:24.72%;height:38.58%;border-radius:8%/4%}.section,.darkSection,.workSection{padding:64px 0}.heroSection + .section{padding-top:20px}.container,.containerNarrow{width:min(100% - 24px,1180px)}.authorityGrid,.methodGrid,.workGrid{gap:26px}.authorityCopy h2,.sectionHead h2,.methodGrid h2,.workGrid h2,.finalSection h2,.offerHead h2{font-size:clamp(38px,12vw,56px)}.sectionHead{margin-bottom:22px}.carousel{grid-auto-columns:84%;gap:12px}.benefitsGrid{grid-template-columns:1fr}.benefitCard,.benefitWide{grid-column:1}.benefitCard>img,.triptych{height:220px}.productCopy{padding:24px}.productCopy h3{font-size:40px}.productPair img{min-height:220px}.pills{grid-template-columns:1fr}.centerActions{flex-direction:column}.centerActions a{width:100%}.finalSection{padding-bottom:108px}.mobileSticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:28;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,250,244,.94);backdrop-filter:blur(12px);border-top:1px solid rgba(94,58,34,.14)}.mobileSticky .ctaLarge{width:100%;min-height:54px;margin:0}}
+    /* Campanha Renata Salviato — referência final aprovada */
+    .campaignSequence{background:#f7f0e8;padding:0;margin:0;overflow:hidden}
+    .campaignReference{position:relative;width:min(100%,1024px);margin:0 auto;background:#f7f0e8;line-height:0}
+    .campaignReference img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain;margin:0}
+    .campaignClick{position:absolute;z-index:4;display:block;border-radius:18px;outline-offset:3px}
+    .campaignReference .ctaTop{display:none}
+    .campaignReference .ctaBottom{left:63.0%;top:75.1%;width:32.0%;height:4.1%}
+    .campaignAssistive{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+    @media(max-width:620px){.campaignReference{width:100%}}
+.campaignPotential .campaignClick{left:20%;top:60.5%;width:60%;height:29%}
+      .campaignProblem .campaignClick{left:72.5%;top:78.5%;width:24%;height:14%}
+</style>
+<link href="enhancements.css" rel="stylesheet"/>
+<link href="offer.css" rel="stylesheet"/><link rel="stylesheet" href="refinements.css"/><link rel="canonical" href="https://www.hairacademiadabeleza.com.br/alisamento"/><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/><link rel="preload" as="image" href="assets/hero-approved.webp" fetchpriority="high"/><meta property="og:title" content="Método Liso Perfeito eCare | HAIR Academia da Beleza"/><meta property="og:description" content="Curso de Especialização em Alisamento Profissional em Ribeirão Preto-SP. Conheça o Método Liso Perfeito eCare e transforme sua técnica com formação prática e direcionamento profissional."/><meta property="og:image" content="https://www.hairacademiadabeleza.com.br/assets/og-alisamento.jpg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="Método Liso Perfeito eCare, curso de alisamento profissional em Ribeirão Preto-SP, HAIR Academia da Beleza"/><meta property="og:url" content="https://www.hairacademiadabeleza.com.br/alisamento"/><meta property="og:type" content="website"/><meta property="og:site_name" content="HAIR Academia da Beleza"/><meta property="og:locale" content="pt_BR"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Método Liso Perfeito eCare | HAIR Academia da Beleza"/><meta name="twitter:description" content="Curso de Especialização em Alisamento Profissional em Ribeirão Preto-SP. Conheça o Método Liso Perfeito eCare e transforme sua técnica com formação prática e direcionamento profissional."/><meta name="twitter:image" content="https://www.hairacademiadabeleza.com.br/assets/og-alisamento.jpg"/><link rel="stylesheet" href="premium.css"/><style id="conversion-boost-v1">
+  .conversionHeroBar{width:min(864px,100%);margin:14px auto 30px;padding:0 16px;text-align:center;line-height:1.25}
+  .conversionPrimary{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:74px;padding:13px 18px;border-radius:16px;background:linear-gradient(135deg,#1f7a4d,#155b3b);color:#fff!important;border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 36px rgba(15,69,44,.28);text-decoration:none;transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}
+  .conversionPrimary:hover{transform:translateY(-1px);filter:brightness(1.04);box-shadow:0 18px 42px rgba(15,69,44,.34)}
+  .conversionPrimary:active{transform:translateY(0) scale(.995)}
+  .conversionKicker{font-size:10px;font-weight:800;letter-spacing:.18em;opacity:.84}
+  .conversionPrimary strong{font-size:15px;letter-spacing:.01em}
+  .conversionPrimary small{font-size:11px;opacity:.86;font-weight:600}
+  .waSticky{position:fixed;z-index:9998;right:18px;bottom:18px;display:flex;flex-direction:column;gap:1px;max-width:320px;padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,#1f7a4d,#155b3b);color:#fff!important;text-decoration:none;box-shadow:0 16px 44px rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.18);line-height:1.18}
+  .waSticky span{font-size:9px;font-weight:800;letter-spacing:.16em;opacity:.8}
+  .waSticky strong{font-size:13px}
+  .waTrust{display:block;text-align:center;font-size:11px;color:#6e625b;margin-top:8px}
+  @media(max-width:720px){
+    body{padding-bottom:78px}
+    .conversionHeroBar{margin-top:10px;margin-bottom:22px}
+    .conversionPrimary{min-height:70px;border-radius:14px;padding:12px 14px}
+    .conversionPrimary strong{font-size:14px}
+    .waSticky{left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));max-width:none;border-radius:14px;padding:11px 14px;text-align:center;align-items:center}
+    .waSticky strong{font-size:14px}
+  }
+  @media(prefers-reduced-motion:reduce){.conversionPrimary,.waSticky{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section aria-labelledby="ecare-title" class="approvedHero" id="topo">
+<h1 class="srOnly" id="ecare-title">Curso de Alisamento em Ribeirão Preto-SP — Método Liso Perfeito eCare.</h1>
+<div class="approvedArt">
+<img alt="HAIR Academia da Beleza. Curso de especialização em Alisamento Perfeito eCare. Não é só produto, é método. Seja uma especialista em alisamento." class="approvedImage" fetchpriority="high" height="1536" src="assets/hero-approved.webp" width="864"/>
+<span aria-hidden="true" class="titleLight"></span>
+<a class="approvedVip"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp"><span class="srOnly">VIP — acessar inscrição</span></a>
+<svg aria-hidden="true" class="clipDefinitions" height="0" width="0"><defs><clippath clippathunits="objectBoundingBox" id="phone-interior"><path d="M .14 0 L .76 0 Q .87 0 .88 .065 L .99 .92 Q 1 .985 .87 .99 L .18 1 Q .065 1 .06 .92 L 0 .085 Q 0 0 .14 0 Z"></path></clippath></defs></svg>
+<div class="approvedPhone">
+<video aria-label="Vídeo de cabelo do Método Liso Perfeito eCare" autoplay="" id="approved-video" webkit-playsinline="" loop="" muted="" playsinline="" preload="metadata" src="assets/hair-video.mp4"></video>
+<span aria-hidden="true" class="approvedIsland"></span>
+</div>
+<button aria-label="Reproduzir vídeo" class="videoToggle" title="Reproduzir vídeo" type="button">▶</button>
+</div>
+<div class="heroUtility"><aside class="eventCountdown" aria-label="Contagem regressiva para 26 de outubro de 2026, horário de São Paulo"><span>RIBEIRÃO PRETO-SP · 26/10</span><strong>Seu próximo passo começa aqui</strong><div class="mechanicalClock" role="timer" aria-live="off"><div class="clockCell"><b data-event-days>00</b><small>dias</small></div><div class="clockCell"><b data-event-hours>00</b><small>horas</small></div><div class="clockCell"><b data-event-minutes>00</b><small>min</small></div><div class="clockCell"><b data-event-seconds>00</b><small>seg</small></div></div></aside><div class="heroNavigation"><a class="discoverLink" href="#descobrir" aria-label="Deslize para descobrir e ativar o som"><span>DESLIZE PARA<br/>DESCOBRIR</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-7-7 7 7 7-7"/></svg></a><button class="soundToggle" type="button" aria-label="Ativar som" aria-pressed="false"></button></div></div><div class="conversionHeroBar" aria-label="Contato rápido pelo WhatsApp">
+  <a class="conversionPrimary" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="hero">
+    <span class="conversionKicker">WHATSAPP DIRETO</span>
+    <strong>Quero saber sobre o Método Liso Perfeito</strong>
+    <small>Valores, datas e como funciona • sem compromisso</small>
+  </a>
+</div></section><section id="descobrir" aria-labelledby="renata-title" class="renataSection">
+<div class="renataInner">
+<div class="renataHeader">
+
+<div class="renataMobile"><span class="eventDate">26/10 · Não perca</span><p class="eyebrow">Beleza que transforma</p><h2 id="renata-title">Curso de Alisamento em Ribeirão Preto-SP<br/>com Renata Salviato</h2><p>Embaixadora da eCare, apresentando o Alisamento Perfeito.</p><p>Se você é cabeleireira de Ribeirão Preto e região — ou sonha em se tornar uma profissional de muito sucesso — este curso foi feito para você.</p><div class="renataPortraitFrame"><img alt="Renata Salviato, embaixadora eCare" height="283" loading="lazy" src="assets/renata-portrait.webp" width="366"/><span class="renataSignature">Renata Salviato</span></div></div>
+</div>
+<div class="questionGrid">
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="questionCard" data-content="question-content-0" data-question="0" type="button"><span aria-hidden="true" class="questionIcon"><svg viewbox="0 0 40 40"><circle cx="16" cy="10" r="5"></circle><circle cx="29" cy="12" r="4"></circle><path d="M5 32v-7q0-9 11-9t11 9v7zM27 19q10-1 10 10v3h-6"></path></svg></span><strong>Pra quem é o curso?</strong><span>Para começar, conciliar com sua rotina ou renovar suas técnicas.</span><small>Saiba mais ↗</small></button>
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="questionCard" data-content="question-content-1" data-question="1" type="button"><span aria-hidden="true" class="questionIcon"><svg viewbox="0 0 40 40"><path d="m2 13 18-8 18 8-18 8zM9 17v12q11 8 22 0V17M37 14v14"></path></svg></span><strong>Mas eu consigo aprender rápido assim?</strong><span>Veja o vídeo e entenda o processo.</span><small>Saiba mais ↗</small></button>
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="questionCard" data-content="question-content-2" data-question="2" type="button"><span aria-hidden="true" class="questionIcon"><svg viewbox="0 0 40 40"><path d="M5 15h30v8H5zM8 23v14h24V23M20 15v22"></path><path d="M20 15C0 15 8-2 17 8l3 7c20 0 12-17 3-7z"></path></svg></span><strong>Mas eu ganho alguma coisa?</strong><span>Produtos de trabalho e R$ 1.200 em benefícios Conexão.</span><small>Saiba mais ↗</small></button>
+</div>
+<div class="campaignRevenue"><span>Neste curso, você pode chegar a ganhar até</span><p><strong>R$ 5 mil</strong> com o Alisamento Perfeito,</p><span>com a técnica que está chegando agora em Ribeirão Preto.</span></div>
+<p class="campaignNote">Resultado ilustrativo. O desempenho depende do tempo de prática, dedicação, atendimento e demanda da profissional.</p>
+<div class="campaignAction"><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber valores e datas <span aria-hidden="true">→</span></a></div>
+<div class="booksBand"><img alt="Cinco e-books exclusivos sobre alisamento" height="143" loading="lazy" src="assets/books.webp" width="332"/><div><h3>Quer ganhar 5 e-books exclusivos sobre alisamento agora?</h3><a class="booksCta"  rel="noopener noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber sobre o Método Liso Perfeito <span aria-hidden="true">→</span></a><p>Participe do <strong>Hands-on Training (Treinamento Prático)</strong> e ganhe <strong>Workshop de Alisamento (Oficina)</strong>.</p></div></div>
+<div class="beginnerNote"><h3>Nunca cortou cabelo?<br/>Nunca fez alisamento?</h3><p>Sem problema. Este curso também é para quem está começando e quer aprender do jeito certo, com orientação e confiança.</p></div>
+</div>
+</section>
+<dialog aria-labelledby="question-title" id="question-dialog"><button aria-label="Fechar explicação" class="dialogClose" type="button">×</button><h2 id="question-title"></h2><div id="question-answer"></div></dialog>
+<section class="section reveal">
+<div class="container">
+<div class="authorityGrid authorityTextOnly">
+<div class="authorityCopy">
+<span class="eyebrow">BELEZA QUE TRANSFORMA</span>
+<h2>Técnica, resultado e posicionamento em uma formação profissional.</h2>
+<p>O Método Liso Perfeito eCare combina produto profissional, prática orientada e direção de posicionamento para transformar uma técnica desejada em serviço de alto valor percebido.</p>
+<a class="ctaLarge"  rel="noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber sobre o Método Liso Perfeito <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</div>
+</section>
+<section class="section reveal">
+<div class="container">
+<div class="sectionHead">
+<div>
+<span class="eyebrow">PRODUTO + MÉTODO + POSICIONAMENTO</span>
+<h2>O profissional vê um produto. O empresário da beleza vê serviços.</h2>
+</div>
+<p>Conteúdo pensado para explicar, educar, gerar desejo e transformar atenção em oportunidade real de atendimento.</p>
+</div>
+<div class="carousel">
+<article class="visualCard"><img alt="Peça de campanha eCare 1" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/5b01b432-0163-4cc6-9e3c-cfe5f0b16310-instagram-1.png"/></article>
+<article class="visualCard"><img alt="Peça de campanha eCare 2" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/82676168-9532-480b-ba1c-65fbc6938afc-instagram-2.png"/></article>
+<article class="visualCard"><img alt="Peça de campanha eCare 3" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/221fbad6-916a-411b-9210-86e099e6d0fb-instagram-3.png"/></article>
+</div>
+</div>
+</section>
+<section class="socialProof" aria-labelledby="social-proof-title"><div class="container"><span class="eyebrowGold">DA PRÁTICA NO SALÃO PARA O SEU PRÓXIMO PASSO</span><h2 id="social-proof-title">SALÕES JÁ FATURAM ALTO E VOCÊ, VAI FICAR DE FORA?</h2><p class="socialIntro">Chegou a sua vez! Conheça os registros dos salões e os resultados compartilhados pela nossa equipe.</p><div class="proofVideoWrap"><video id="proof-video" muted autoplay loop playsinline preload="metadata" poster="assets/salon-result-1.jpg" aria-label="Demonstração em salão, sem som" src="assets/salon-proof.mp4"></video><button class="proofToggle" type="button" aria-label="Reproduzir demonstração">Reproduzir vídeo</button><span class="silentLabel">DEMONSTRAÇÃO • SEM SOM</span></div><div class="proofGallery"><figure><img src="assets/salon-professional.jpg" alt="Profissional no ambiente de um salão" width="864" height="1536" loading="lazy"/><figcaption>Conhecimento no ambiente profissional.</figcaption></figure><figure><img src="assets/salon-result-1.jpg" alt="Registro de cabelo longo e alinhado no salão" width="1152" height="1536" loading="lazy"/><figcaption>Alinhamento e acabamento em destaque.</figcaption></figure><figure><img src="assets/salon-result-2.jpg" alt="Outro registro do brilho e acabamento do cabelo no salão" width="1152" height="1536" loading="lazy"/><figcaption>Detalhes que valorizam o serviço.</figcaption></figure></div><p class="proofNote">Imagens de resultados em salão. Faturamento varia conforme demanda, preço, custos e execução; as imagens não comprovam renda individual.</p><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber valores e datas <span aria-hidden="true">→</span></a></div></section><section class="darkSection reveal">
+<div class="container">
+<div class="offerHead">
+<div>
+<span class="eyebrowGold">A ECARE INVESTE EM VOCÊ</span>
+<h2>Adquirindo a formação, você ganha R$ 1.200 em benefícios Conexão.</h2>
+</div>
+<div class="offerValue"><small>5 benefícios exclusivos incluídos</small>R$ 1.200</div>
+</div><p class="benefitsIntro">Veja abaixo os cinco benefícios que acompanham a sua formação. Toque em cada um para conhecer.</p>
+<div class="benefitsGrid">
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="benefitButton" data-content="benefit-content-0" data-title="Formação Método Liso Perfeito eCare" type="button"><span class="benefitNumber">01</span><span>Formação Método Liso Perfeito eCare</span><span aria-hidden="true">＋</span></button>
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="benefitButton" data-content="benefit-content-1" data-title="Pacote instagramável para vendas" type="button"><span class="benefitNumber">02</span><span>Pacote instagramável para vendas</span><span aria-hidden="true">＋</span></button>
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="benefitButton" data-content="benefit-content-2" data-title="Consultoria de perfil e projeção" type="button"><span class="benefitNumber">03</span><span>Consultoria de perfil e projeção</span><span aria-hidden="true">＋</span></button>
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="benefitButton" data-content="benefit-content-3" data-title="5 e-books para seu novo negócio" type="button"><span class="benefitNumber">04</span><span>5 e-books para seu novo negócio</span><span aria-hidden="true">＋</span></button>
+<button aria-controls="question-dialog" aria-haspopup="dialog" class="benefitButton" data-content="benefit-content-4" data-title="Acesso ao Conexão Work" type="button"><span class="benefitNumber">05</span><span>Acesso ao Conexão Work</span><span aria-hidden="true">＋</span></button>
+</div>
+<div class="productBand">
+<div class="productPair"><img alt="Liss Care" src="assets/liss-care-white.jpg"/><img alt="Vega Care" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/6d57f6fb-3059-4e37-931b-3c686aedb0fb-vega-care.jpg"/></div>
+<div class="productCopy">
+<h3>Produto para trabalhar. Método para dominar. Negócio para crescer.</h3>
+<p>A proposta é unir produto profissional, formação prática e inteligência de serviço para você aplicar, comunicar e vender com mais clareza.</p>
+<div class="purchaseDetails" id="comprar"><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></div></div>
+</div>
+<div class="centerActions">
+<a class="ctaLarge"  rel="noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber sobre o Método Liso Perfeito <span aria-hidden="true">→</span></a>
+<a class="ctaDark"  rel="noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero falar com a equipe <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</section>
+<section class="section reveal">
+<div class="container">
+<div class="methodGrid">
+<div class="methodImage"><img alt="Mais que produto, um método" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/bea51286-4b28-455d-a362-cdd0a104519c-produto-metodo.png"/></div>
+<div>
+<span class="eyebrow">TRANSFORME PRODUTO EM SERVIÇO</span>
+<h2>Quanto faturamento existe dentro de 1 litro?</h2>
+<p class="lead">Produto parado é custo. Produto aplicado com método é faturamento.</p>
+<div class="mathCard"><small>Cenário ilustrativo</small><strong>20 × R$ 250 = R$ 5.000</strong><p>Vinte atendimentos com ticket médio de R$250 representam R$5.000 em faturamento bruto de serviços.</p></div>
+<p class="legal">Projeção comercial ilustrativa, não promessa de renda. Resultados dependem de execução, agenda, preço, custos, região e demanda.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="workSection reveal" style="background-image:linear-gradient(90deg, rgba(15,9,7,.94), rgba(15,9,7,.80)), url('https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/14578a7a-e46c-40b9-aedd-6a49e94efa8e-conexao-cidade.png')">
+<div class="container">
+<div class="workGrid">
+<img alt="Aplicativo Conexão Work" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/d6bcfc69-cddc-484a-94bd-c249872161dd-conexao-work-real.png"/>
+<div>
+<span class="eyebrowGold">MAIS QUE UM CURSO. UMA CONEXÃO.</span>
+<h2>Conexão Work dentro do ecossistema profissional da beleza.</h2>
+<p>Formação, carreira, oportunidades e informação em um só lugar.</p>
+<div class="pills"><span>Vagas e contratação</span><span>Achados e oportunidades</span><span>Eventos de beleza</span><span>Conteúdo de negócio</span></div>
+<a class="ctaGold"  rel="noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber sobre o Método Liso Perfeito <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</div>
+</section>
+<section class="finalSection">
+<div class="containerNarrow">
+<span class="eyebrow">LISTA VIP LPC</span>
+<h2>Entre agora. Receba primeiro.</h2>
+<p>Condições da campanha, materiais, atualizações do Método Liso Perfeito e acesso ao ecossistema Conexão Work.</p>
+<a class="ctaLarge"  rel="noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber sobre o Método Liso Perfeito <span aria-hidden="true">→</span></a>
+<div class="faq">
+<details><summary>O que eu recebo entrando na Lista VIP?</summary><p>Condições da campanha, conteúdos, materiais e informações prioritárias sobre o Método Liso Perfeito eCare.</p></details>
+<details><summary>Os R$ 5 mil são garantidos?</summary><p>Não. O valor é uma projeção ilustrativa baseada em 20 atendimentos a R$250. O faturamento real depende de execução, agenda, demanda, preço e custos.</p></details>
+<details><summary>Posso falar direto com a equipe?</summary><p>Sim. O botão de WhatsApp abre uma conversa direta com a equipe HAIR.</p></details>
+</div>
+</div>
+</section>
+</main>
+<div class="mobileSticky"><a class="ctaLarge"  rel="noreferrer" target="_blank" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">Quero saber sobre o Método Liso Perfeito <span aria-hidden="true">→</span></a></div>
+<script defer="" src="enhancements.js"></script>
+<template id="question-content-0"><p>É para você, dona de casa, que deseja começar na beleza e buscar uma renda extra. Para você que trabalha durante a semana e ainda não tem tempo para um curso completo de cabeleireira. E também para quem já é cabeleireira e quer renovar seus conhecimentos e suas técnicas.</p><p><strong>Primeiro você aprende. Depois, pode transformar parte do seu tempo em atendimentos.</strong></p><div class="modalArt"><img alt="Sexta à noite, trabalho fixo. Sábado de manhã, ganhe extra. Aprenda uma técnica e transforme seus finais de semana em renda." loading="lazy" src="assets/weekend.jpg"/><a class="artVip"  style="left:16%;top:78%;width:68%;height:6%;bottom:auto" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp"></a></div><div class="modalArt"><img alt="Antes e depois. Cenário ilustrativo: três atendimentos a R$ 250 representam R$ 750 em serviços." loading="lazy" src="assets/services-750.jpg"/><a class="artVip"  style="left:14%;top:78.5%;width:72%;height:5.5%;bottom:auto" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp"></a></div><p class="modalNote">Valores ilustrativos de faturamento bruto. Resultados dependem de prática, demanda, agenda, preço e custos.</p><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="question-content-1"><p><strong>Dois passos e um processo orientado.</strong> Em vez de se perder entre tantos produtos e informações, conheça o método e acompanhe a aplicação no vídeo.</p><video aria-label="Vídeo demonstrativo do método eCare" class="lessonVideo" controls="" playsinline="" preload="metadata" src="assets/hair-video.mp4"></video><div class="modalArt"><img alt="Da dúvida sobre por onde começar à clareza de uma técnica, produtos profissionais e orientação passo a passo." loading="lazy" src="assets/learning.jpg"/></div><p>O vídeo apresenta o processo. A aprendizagem se desenvolve com orientação e prática.</p><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="question-content-2"><p><strong>Você recebe o que investe em produtos — e muito mais para começar.</strong></p><p>O investimento é revertido em produtos de trabalho, conforme as condições da formação e de retirada do kit. Além disso, você recebe <strong>R$ 1.200 em benefícios Conexão</strong>: formação técnica, materiais instagramáveis, consultoria de perfil, cinco e-books e acesso ao Conexão Work.</p><p>Imagine aprender a técnica e encontrar oportunidades em salões. O Conexão Work aproxima você de vagas, contatos e possibilidades no mercado da beleza.</p><p>Com os produtos e a técnica, o potencial ilustrativo é de <strong>R$ 5.000 em serviços</strong> — por exemplo, 20 atendimentos a R$ 250.</p><div class="modalArt"><img alt="Campanha eCare: produtos, formação e ferramentas; ilustração de potencial em serviços e proposta de investimento de 5%." loading="lazy" src="assets/investment.jpg"/><a class="artVip"  style="left:8%;top:87%;width:84%;height:6.5%;bottom:auto" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="curso" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp"></a></div><p class="modalNote">Os percentuais e valores da arte são referências da campanha, não garantia de retorno. Faturamento bruto não é lucro. A condição de contratação e entrega do kit é a apresentada na inscrição.</p><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="benefit-content-0"><article class="benefitCard">
+<img alt="Formação Método Liso Perfeito eCare" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/a454d0c6-c937-41ce-ac8d-5a60eb1c6f04-base-tecnica.png"/>
+<div><b>01</b><h3>Formação Método Liso Perfeito eCare</h3><p>Treinamento passo a passo para dominar o protocolo LPC e aplicar com mais segurança.</p></div>
+</article><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="benefit-content-1"><article class="benefitCard">
+<div class="triptych"><img alt="" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/5b01b432-0163-4cc6-9e3c-cfe5f0b16310-instagram-1.png"/><img alt="" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/82676168-9532-480b-ba1c-65fbc6938afc-instagram-2.png"/><img alt="" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/221fbad6-916a-411b-9210-86e099e6d0fb-instagram-3.png"/></div>
+<div><b>02</b><h3>Pacote instagramável para vendas</h3><p>Materiais e direção de comunicação para transformar conteúdo em oportunidade.</p></div>
+</article><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="benefit-content-2"><article class="benefitCard">
+<img alt="Consultoria de perfil" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/8a11565a-1fb6-4dd5-9ca4-7d8777ff968e-consultoria-perfil.png"/>
+<div><b>03</b><h3>Consultoria de perfil e projeção</h3><p>Direção de Reels, roteiro e carrosséis com estrutura comercial.</p></div>
+</article><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="benefit-content-3"><article class="benefitCard">
+<img alt="Cinco e-books para o novo negócio" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/8a77773d-6744-439f-bdd5-1797b69989e4-5-ebooks.jpg"/>
+<div><b>04</b><h3>5 e-books para seu novo negócio</h3><p>Organização, atendimento, vendas, precificação e crescimento na beleza.</p></div>
+</article><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><template id="benefit-content-4"><article class="benefitCard benefitWide">
+<img alt="Conexão Work" src="https://metodo-ecare-liso-perfeito.floot.app/_cdn/static/d6bcfc69-cddc-484a-94bd-c249872161dd-conexao-work-real.png"/>
+<div><b>05</b><h3>Acesso ao Conexão Work</h3><p>Vagas, oportunidades, rede profissional e informações do ecossistema da beleza.</p></div>
+</article><a class="ctaLarge"  href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20sobre%20a%20linha%20de%20alisamento." data-wa-cta="linha" aria-label="Quero saber sobre a linha de alisamento no WhatsApp">Quero saber sobre a linha de alisamento <span aria-hidden="true">→</span></a></template><script defer="" src="offer.js"></script><script defer src="refinements.js"></script><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4646f7dadecb1eb',t:'MTc5MTI4NzI5MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><a class="waSticky" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20valores%2C%20datas%20e%20como%20funciona%20o%20curso." data-wa-cta="sticky" aria-label="Quero saber sobre o Método Liso Perfeito no WhatsApp">
+  <span>WHATSAPP • EQUIPE HAIR</span><strong>Quero saber sobre o Método Liso Perfeito</strong>
+</a>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-799342935"></script>
+<script id="conversion-tracking-v1">
+(function(){
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=window.gtag||function(){dataLayer.push(arguments);};
+  gtag('js',new Date());
+  gtag('config','AW-799342935');
+
+  var qs=new URLSearchParams(location.search);
+  function campaignContext(){
+    return {
+      utm_source:qs.get('utm_source')||'',
+      utm_medium:qs.get('utm_medium')||'',
+      utm_campaign:qs.get('utm_campaign')||'',
+      utm_content:qs.get('utm_content')||'',
+      page_location:location.href
+    };
+  }
+  function track(name,extra){
+    var data=Object.assign(campaignContext(),extra||{});
+    window.dataLayer.push(Object.assign({event:name},data));
+    try{gtag('event',name,data);}catch(e){}
+    try{if(typeof fbq==='function' && name==='whatsapp_click') fbq('trackCustom','WhatsAppClick',data);}catch(e){}
+  }
+  track('landing_view',{landing:'alisamento'});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="wa.me/5516991687977"]');
+    if(!a)return;
+    track('whatsapp_click',{cta_position:a.getAttribute('data-wa-cta')||'other',link_text:(a.textContent||'').trim().slice(0,120)});
+  },{capture:true});
+})();
+</script>
+</body>
+</html>
