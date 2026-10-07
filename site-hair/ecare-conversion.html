@@ -139,7 +139,12 @@
   .centerActions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
   @media(prefers-reduced-motion:reduce){.ctaPulse::before{animation:none}}
 </style>
-<style id="hide-countdown">.eventCountdown,.offerClock{display:none!important}</style></head>
+<style id="last-spots-12h">
+.lastSpots{max-width:680px;margin:18px auto 8px;padding:13px 16px;border:1px solid #b48a4a80;border-radius:14px;background:#201a18;color:#f4eee6;text-align:center;box-shadow:0 8px 20px #201a1820}
+.lastSpots strong{display:block;font:700 11px/1.3 system-ui;letter-spacing:.14em;color:#d6bc86}
+.lastSpots p{margin:5px 0 8px;font:600 16px/1.3 Georgia,serif}
+.lastSpotsClock{font:700 18px/1 system-ui;font-variant-numeric:tabular-nums;color:#fff}
+</style><style id="hide-countdown">.eventCountdown,.offerClock{display:none!important}</style></head>
 <body>
 <main>
 <section aria-labelledby="ecare-title" class="approvedHero" id="topo">
@@ -172,7 +177,7 @@
       <h2 id="renata-title">Adquira 1 produto.<br/>Use 1 técnica.<br/>Ganhe até R$ 5 mil.</h2>
       <p>Experiência técnica presencial com <strong>Renata Salviato</strong>, embaixadora eCare. Produto profissional, protocolo, prática orientada e direção para transformar técnica em serviço.</p>
       <div class="renataPortraitFrame"><img width="366" height="283" decoding="async" alt="Renata Salviato, embaixadora eCare" loading="lazy" src="/assets/alisamento/renata.webp"/><span class="renataSignature">Renata Salviato</span></div>
-      <div class="campaignAction"><a class="ctaLarge ctaPulse ctaPulseGold" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20curso%20de%20alisamento%20(26%2F10)." data-wa-cta="renata-compacta" data-cta-type="info">Quero saber como participar <span aria-hidden="true">→</span></a></div>
+      <div class="lastSpots" role="status" aria-label="Últimas vagas"><strong>ÚLTIMAS VAGAS</strong><p>3 vagas ainda disponíveis</p><div class="lastSpotsClock" data-last-spots-clock>12:00:00</div></div><div class="campaignAction"><a class="ctaLarge ctaPulse ctaPulseGold" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20curso%20de%20alisamento%20(26%2F10)." data-wa-cta="renata-compacta" data-cta-type="info">Quero saber como participar <span aria-hidden="true">→</span></a></div>
     </div>
   </div>
 </section>
@@ -440,5 +445,13 @@
   motion.addEventListener('change', () => {if(motion.matches)video.pause();});sync();
 })();
 </script>
-</body>
+<script id="last-spots-timer">
+(function(){
+  var el=document.querySelector('[data-last-spots-clock]'); if(!el)return;
+  var key='ecare-last-spots-12h', now=Date.now(), end=Number(localStorage.getItem(key));
+  if(!end||end<=now){end=now+12*60*60*1000;localStorage.setItem(key,String(end));}
+  function tick(){var d=Math.max(0,end-Date.now()),h=Math.floor(d/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);el.textContent=[h,m,s].map(function(n){return String(n).padStart(2,'0')}).join(':');}
+  tick();setInterval(tick,1000);
+})();
+</script></body>
 </html>
