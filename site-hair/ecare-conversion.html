@@ -247,6 +247,33 @@
 </article><a class="ctaLarge ctaPulse ctaPulseGold" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20ver%20os%20valores%20do%20curso%20de%20alisamento%20(26%2F10)." data-wa-cta="modal" data-cta-type="valores">Quero ver valores <span aria-hidden="true">→</span></a></template><a class="waSticky ctaPulse" href="https://wa.me/5516991687977?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20M%C3%A9todo%20Liso%20Perfeito%20eCare%20e%20quero%20saber%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20curso%20de%20alisamento%20(26%2F10)." data-wa-cta="sticky" data-cta-type="info">
   <span>WHATSAPP · EQUIPE HAIR</span><strong>Saber mais informações</strong>
 </a>
+<script id="origem-whatsapp">
+/* Rastreio sem Pixel: o link do anúncio traz utm_* (Meta: "Parâmetros de URL");
+   a página põe um código curto na mensagem pronta do WhatsApp, ex.: (ref ALS-M-criativo3).
+   A RARA lê esse código na 1ª mensagem e guarda a origem do contato. Nada é enviado à Meta. */
+(function(){
+  var NUM='wa.me/5516991687977';
+  function limpa(v,max){return String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,max||16);}
+  var q=new URLSearchParams(location.search),o=null;
+  var src=(q.get('utm_source')||'').toLowerCase(),ad=q.get('utm_content')||q.get('utm_campaign')||'';
+  if(src||q.get('fbclid')||q.get('gclid')||q.get('gbraid')||q.get('wbraid')){
+    var canal=/^(meta|facebook|fb|instagram|ig)/.test(src)||(!src&&q.get('fbclid'))?'M':(/^(google|gads|adwords)/.test(src)||(!src&&(q.get('gclid')||q.get('gbraid')||q.get('wbraid'))))?'G':(src?'O':'D');
+    o={anuncio:true,ref:'ALS-'+canal+(limpa(ad)?'-'+limpa(ad):'')};
+    try{sessionStorage.setItem('als_origem',JSON.stringify(o));}catch(e){}
+  }else{try{o=JSON.parse(sessionStorage.getItem('als_origem')||'null');}catch(e){o=null;}}
+  if(!o)o={anuncio:false,ref:'ALS-D'};
+  window.__alsRef=o.ref;
+  function ajusta(a){
+    if(!a||!a.href||a.href.indexOf(NUM)<0||a.dataset.refOk)return;
+    try{var u=new URL(a.href),t=u.searchParams.get('text')||'';
+      if(o.anuncio)t=t.replace(/^Ol[aá]! Vim pela p[aá]gina do M[eé]todo Liso Perfeito eCare e/,'Olá! Vim pelo anúncio do alisamento e');
+      if(t.indexOf('(ref ')<0)t=(t?t+' ':'')+'(ref '+o.ref+')';
+      u.searchParams.set('text',t);a.href=u.toString();a.dataset.refOk='1';}catch(e){}
+  }
+  document.querySelectorAll('a[href*="'+NUM+'"]').forEach(ajusta);
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="'+NUM+'"]');if(a)ajusta(a);},true);
+})();
+</script>
 <script id="conversion-tracking-v2">
 (function(){
   /* Google Ads (conta 667-761-4549). Sem Meta de propósito: o 7977 é sessão não oficial (Baileys).
@@ -269,7 +296,7 @@
     var a=e.target.closest&&e.target.closest('a[href*="wa.me/5516991687977"],a[href*="chat.whatsapp.com/"]');
     if(!a)return;
     var vip=a.href.indexOf('chat.whatsapp.com')>-1;
-    var d={cta_position:a.getAttribute('data-wa-cta')||a.getAttribute('data-vip-cta')||'other',cta_type:a.getAttribute('data-cta-type')||(vip?'vip':'info')};
+    var d={cta_position:a.getAttribute('data-wa-cta')||a.getAttribute('data-vip-cta')||'other',cta_type:a.getAttribute('data-cta-type')||(vip?'vip':'info'),origem_ref:window.__alsRef||''};
     if(vip){track('vip_group_click',d);return;}
     track('whatsapp_click',d);
     if(GADS_WA_LABEL){try{gtag('event','conversion',{send_to:GADS_ID+'/'+GADS_WA_LABEL});}catch(e){}}
@@ -357,11 +384,11 @@
   video.playsInline = true;
   const start = () => { updateSound(); if (!motion.matches && !userPaused && !document.hidden) play(); };
   if (motion.matches) {video.autoplay=false;video.pause();updateSound();} else start();
-  video.addEventListener('canplay', () => {if(video.paused && !document.querySelector('#question-dialog').open) start();}, {once:true});
+  video.addEventListener('canplay', () => {if(video.paused && !document.querySelector('#question-dialog')?.open) start();}, {once:true});
   motion.addEventListener('change', () => {if(motion.matches) video.pause();});
   document.addEventListener('visibilitychange', () => {
     if(document.hidden) video.pause();
-    else if(!userPaused&&!motion.matches&&!document.querySelector('#question-dialog').open) play();
+    else if(!userPaused&&!motion.matches&&!document.querySelector('#question-dialog')?.open) play();
   });
   const sticky = document.querySelector('.mobileSticky');
   if ('IntersectionObserver' in window) {
@@ -371,6 +398,9 @@
     observer.observe(document.querySelector('.approvedHero'));
   }
   const dialog = document.querySelector('#question-dialog');
+  // A janela de 'Saiba mais' pode não existir em versões enxutas da página:
+  // sem esta guarda o erro derrubava os contadores e o vídeo de prova.
+  if (dialog) {
   let opener;
   document.querySelectorAll('[data-content]').forEach(button => {
     button.addEventListener('click', () => {
@@ -393,6 +423,7 @@
     if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) dialog.close();
   });
   dialog.addEventListener('close', () => {dialog.querySelectorAll('video').forEach(v=>v.pause());dialog.querySelector('#question-answer').replaceChildren();document.body.classList.remove('dialogOpen');opener?.focus();});
+  }
 })();
 
 (() => {
@@ -431,7 +462,8 @@
     if (!seconds) panel.querySelector('strong').textContent = 'O dia do evento chegou';
     return seconds;
   }
-  updateEvent(); const timer=setInterval(()=>{if(!updateEvent())clearInterval(timer);},1000);
+  // O contador do evento saiu da página enxuta; sem ele, não roda (e não derruba o vídeo de prova).
+  if (panel) { updateEvent(); const timer=setInterval(()=>{if(!updateEvent())clearInterval(timer);},1000); }
   const video = document.querySelector('#proof-video');
   const button = document.querySelector('.proofToggle');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
