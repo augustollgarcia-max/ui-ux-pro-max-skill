@@ -61,4 +61,31 @@ document.querySelectorAll('[data-wa]').forEach(link => {
 });
 
 </script>
+<script id="origem-whatsapp">
+/* Rastreio sem Pixel: o link do anúncio traz utm_* (Meta: "Parâmetros de URL");
+   a página põe um código curto na mensagem pronta do WhatsApp, ex.: (ref ALS-M-criativo3).
+   A RARA lê esse código na 1ª mensagem e guarda a origem do contato. Nada é enviado à Meta. */
+(function(){
+  var NUM='wa.me/5516991687977';
+  function limpa(v,max){return String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,max||16);}
+  var q=new URLSearchParams(location.search),o=null;
+  var src=(q.get('utm_source')||'').toLowerCase(),ad=q.get('utm_content')||q.get('utm_campaign')||'';
+  if(src||q.get('fbclid')||q.get('gclid')||q.get('gbraid')||q.get('wbraid')){
+    var canal=/^(meta|facebook|fb|instagram|ig)/.test(src)||(!src&&q.get('fbclid'))?'M':(/^(google|gads|adwords)/.test(src)||(!src&&(q.get('gclid')||q.get('gbraid')||q.get('wbraid'))))?'G':(src?'O':'D');
+    o={anuncio:true,ref:'AL2-'+canal+(limpa(ad)?'-'+limpa(ad):'')};
+    try{sessionStorage.setItem('al2_origem',JSON.stringify(o));}catch(e){}
+  }else{try{o=JSON.parse(sessionStorage.getItem('al2_origem')||'null');}catch(e){o=null;}}
+  if(!o)o={anuncio:false,ref:'AL2-D'};
+  window.__alsRef=o.ref;
+  function ajusta(a){
+    if(!a||!a.href||a.href.indexOf(NUM)<0||a.dataset.refOk)return;
+    try{var u=new URL(a.href),t=u.searchParams.get('text')||'';
+      if(o.anuncio)t=t.replace(/^Ol[aá]! Vim pela p[aá]gina do M[eé]todo Liso Perfeito eCare e/,'Olá! Vim pelo anúncio do alisamento e');
+      if(t.indexOf('(ref ')<0)t=(t?t+' ':'')+'(ref '+o.ref+')';
+      u.searchParams.set('text',t);a.href=u.toString();a.dataset.refOk='1';}catch(e){}
+  }
+  document.querySelectorAll('a[href*="'+NUM+'"]').forEach(ajusta);
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="'+NUM+'"]');if(a)ajusta(a);},true);
+})();
+</script>
 </body></html>
