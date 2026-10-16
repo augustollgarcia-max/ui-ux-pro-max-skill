@@ -588,3 +588,22 @@ body:not(:has(.sticky)) .prebadge{bottom:calc(26px + env(safe-area-inset-bottom,
 .cupom-codigo{display:block;font:700 clamp(22px,4vw,30px)/1 var(--serif);letter-spacing:.12em;color:var(--gold);padding:16px;border:1px dashed var(--gold);text-align:center;font-variant-numeric:lining-nums;opacity:.55}
 .cupom-box.ok .cupom-codigo{opacity:1;border-style:solid}
 .cupom-acoes{flex-wrap:wrap}
+
+/* 16/10 (Augusto): botão discreto da música de fundo, no canto do cabeçalho. Estados: pronto (alto-falante com ondas),
+   tocando (.on: equalizador pulsando), desligado pelo visitante (.mudo: alto-falante riscado). */
+.som-btn{position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid rgba(201,162,75,.4);background:transparent;color:#d9ba85;cursor:pointer;opacity:.72;transition:opacity .2s,border-color .2s;padding:0}
+.som-btn:hover,.som-btn.on{opacity:1;border-color:rgba(201,162,75,.75)}
+.som-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.som-btn .s-corpo{fill:currentColor;stroke:none}
+.som-btn .s-risco{display:none}
+.som-btn.mudo .s-risco{display:block}.som-btn.mudo .s-onda,.som-btn.mudo .s-onda2{display:none}.som-btn.mudo{opacity:.5}
+.som-btn.on .s-onda,.som-btn.on .s-onda2{display:none}
+.s-eq{display:none;position:absolute;right:7px;bottom:11px;gap:2px;align-items:flex-end;height:11px}
+.som-btn.on .s-eq{display:flex}
+.s-eq i{display:block;width:2px;height:11px;background:var(--gold);transform-origin:bottom;animation:eqbar .9s ease-in-out infinite alternate}
+.s-eq i:nth-child(1){animation-delay:0s}.s-eq i:nth-child(2){animation-delay:.25s}.s-eq i:nth-child(3){animation-delay:.5s}
+@keyframes eqbar{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.s-eq i{animation:none;transform:scaleY(.6)}}
+@media (min-width:960px){.som-btn{order:9;margin-left:4px}}
+@media (max-width:959px){.menu-btn{margin-left:auto}.som-btn{margin-left:-8px}}
+@media (max-width:360px){.top-inner{gap:10px 8px}.brand{font-size:17px}.menu-btn{padding:0 10px}.som-btn{width:32px;height:32px;margin-left:-4px}}

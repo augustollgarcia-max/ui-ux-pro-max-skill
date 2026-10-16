@@ -32,6 +32,7 @@ var iv=setInterval(go,120);setTimeout(function(){clearInterval(iv);stop()},2600)
 <header class="top"><div class="top-inner">
 <a class="brand" href="/business/business">HAIR <span class="gold">BUSINESS</span><small>Academia de direção de carreiras</small></a>
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="navp"><span></span>Menu</button>
+<button class="som-btn" type="button" aria-pressed="false" aria-label="Música de fundo: ligar" title="Música de fundo"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="s-corpo" d="M4 9.5v5h3.6L13 19V5L7.6 9.5H4z"/><path class="s-onda" d="M16 9a4.2 4.2 0 0 1 0 6"/><path class="s-onda2" d="M18.6 6.4a7.8 7.8 0 0 1 0 11.2"/><path class="s-risco" d="M4 4l16 16"/></svg><span class="s-eq" aria-hidden="true"><i></i><i></i><i></i></span></button>
 <details class="polo"><summary aria-label="Seu polo: Ribeirão Preto, Polo Central"><i aria-hidden="true">&#9679;</i><span><small>Seu polo</small>Ribeirão Preto · Polo Central</span></summary>
 <ul><li class="ativo"><span>Ribeirão Preto · Polo Central</span><small>Ativo</small></li><li class="construcao"><span>Sertãozinho</span><small>Em construção</small></li><li class="breve"><span>São Joaquim da Barra</span><small>Em breve</small></li><li class="nota">Outras cidades do DDD 16 e do estado de São Paulo: em breve. <a href="https://wa.me/5516991687977?text=Quero%20saber%20quando%20a%20HAIR%20Business%20chega%20na%20minha%20cidade." target="_blank" rel="noopener">Quero saber quando chega na minha</a></li></ul></details>
 <nav class="nav" id="navp" aria-label="Navegação principal"><a href="/business/business#business">4 Academias</a><a href="/business/business#hair">Metodologia</a><a href="/business/historia">A HAIR</a><a href="/business/assessoria">Assessoria</a><a href="/business/apps">Aplicativos</a><a href="/business/business#contato">Contato</a><a class="cta-nav" href="https://wa.me/5516991687977?text=Quero%20agendar%20uma%20visita%20comercial%20com%20a%20HAIR%20Business%20no%20Ribeir%C3%A3o%20Shopping." target="_blank" rel="noopener">Agendar visita</a></nav>
@@ -104,6 +105,7 @@ var iv=setInterval(go,120);setTimeout(function(){clearInterval(iv);stop()},2600)
 <a class="whats" href="https://wa.me/5516991687977?text=Ol%C3%A1%2C%20HAIR%20Business%21%20Quero%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" aria-label="Falar com a HAIR Business no WhatsApp">WhatsApp</a>
 <div class="prebadge" aria-hidden="true">Prévia · uso de imagem pendente</div>
 <button class="totop" type="button" aria-label="Voltar ao topo" hidden>&uarr;</button>
+<audio id="trilha" loop preload="none" src="/business/audio/trilha.mp3"></audio>
 <script>
 // 16/10 (Augusto): vídeo do Instagram toca sozinho quando entra na tela; vídeo da história mostra o botão quando termina.
 (function(){document.querySelectorAll(".cupom-box").forEach(b=>{const pre=b.dataset.prefixo,out=b.querySelector(".cupom-codigo"),ger=b.querySelector("[data-gerar]"),ac=b.querySelector(".cupom-acoes"),cp=b.querySelector("[data-copiar]"),zap=b.querySelector("[data-zap]");
@@ -112,6 +114,35 @@ ger.addEventListener("click",()=>{const c=gerar();out.textContent=c;b.classList.
 cp.addEventListener("click",()=>{const c=out.textContent;(navigator.clipboard?navigator.clipboard.writeText(c):Promise.reject()).then(()=>{cp.textContent="Copiado ✓";setTimeout(()=>cp.textContent="Copiar código",1800)}).catch(()=>{const r=document.createRange();r.selectNodeContents(out);const sel=getSelection();sel.removeAllRanges();sel.addRange(r)})})})})();
 (function(){const v=document.querySelector(".vid-insta video");if(v&&"IntersectionObserver"in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{threshold:.35}).observe(v)}
 const h=document.querySelector(".hist-video video"),c=document.querySelector(".hv-cta");if(h&&c){const show=()=>{c.hidden=false;c.scrollIntoView({behavior:"smooth",block:"nearest"})};h.addEventListener("ended",show);h.addEventListener("error",()=>{c.hidden=false})}})();
+// 16/10 (Augusto): trilha de fundo em todas as páginas. Começa baixa (14%) e sobe aos poucos até 55% em 45 s.
+// O navegador só libera som depois de um toque/clique no site; aqui: tenta 1 s depois de abrir (funciona onde o navegador
+// já confia no site, ex.: Chrome depois do 1º toque em qualquer página) e, se barrar, começa no PRIMEIRO toque, rolagem ou tecla.
+// De uma página para outra a música continua do ponto em que estava (sessionStorage). Desligar no botão vale para a visita toda.
+// Pausa sozinha quando um vídeo com som toca (capa com Som ligado, vídeo da história) e volta depois. No iPhone o volume é do aparelho.
+(function(){const a=document.getElementById("trilha"),b=document.querySelector(".som-btn");if(!a||!b)return;
+const K="hb_trilha",KOFF="hb_trilha_off",V0=.14,V1=.55,RAMPA=45000,ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+let quer=true,desligado=false,rampa=0,armado=false,cedido=false;try{desligado=localStorage.getItem(KOFF)==="1"}catch(e){}
+quer=!desligado;a.volume=ios?1:V0;
+function ui(){const tocando=!a.paused&&!a.ended;b.classList.toggle("on",tocando);b.classList.toggle("mudo",desligado);b.setAttribute("aria-pressed",String(tocando));b.setAttribute("aria-label",tocando?"Música de fundo: desligar":"Música de fundo: ligar")}
+function salvar(){try{sessionStorage.setItem(K,JSON.stringify({on:quer&&!desligado&&(!a.paused||document.hidden||cedido),t:a.currentTime||0,at:Date.now()}))}catch(e){}}
+function subir(){if(ios)return;cancelAnimationFrame(rampa);const t0=performance.now(),v0=a.volume;(function f(t){const k=Math.min(1,(t-t0)/RAMPA);a.volume=Math.min(V1,v0+(V1-v0)*(1-Math.pow(1-k,2)));if(k<1&&!a.paused)rampa=requestAnimationFrame(f)})(t0)}
+function tocar(){a.preload="auto";let p;try{p=a.play()}catch(e){p=Promise.reject(e)}if(!p||!p.then)p=Promise.resolve();return p.then(()=>{ui();salvar();subir();return true}).catch(()=>{ui();return false})}
+function parar(){cancelAnimationFrame(rampa);a.pause();ui();salvar()}
+function armar(){if(armado)return;armado=true;const evs=["pointerup","touchend","keydown","click"];const h=()=>{if(desligado||!quer||!a.paused||cedido)return;tocar().then(ok=>{if(ok)evs.forEach(n=>removeEventListener(n,h,true))})};evs.forEach(n=>addEventListener(n,h,{capture:true,passive:true}))}
+let sess=null;try{sess=JSON.parse(sessionStorage.getItem(K)||"null")}catch(e){}
+if(!desligado){if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
+let tent=0;const pos=()=>{if(tent>6)return;const t=alvo();if(t==null)return;if(Math.abs(a.currentTime-t)>2){tent++;try{a.currentTime=t}catch(e){}}};
+["loadedmetadata","loadeddata","canplay","playing","seeked"].forEach(n=>a.addEventListener(n,pos));a.preload="auto";a.load();tocar().then(ok=>{if(!ok)armar()})}
+else setTimeout(()=>{if(!desligado&&quer&&a.paused)tocar().then(ok=>{if(!ok)armar()})},1000)}
+ui();
+b.addEventListener("click",e=>{e.stopPropagation();if(!a.paused){desligado=true;quer=false;try{localStorage.setItem(KOFF,"1")}catch(e2){}parar()}else{desligado=false;quer=true;cedido=false;try{localStorage.removeItem(KOFF)}catch(e2){}tocar()}});
+a.addEventListener("play",ui);a.addEventListener("pause",ui);a.addEventListener("timeupdate",()=>{if(!a.paused&&a.currentTime>1&&(a.currentTime|0)%5===0)salvar()});
+addEventListener("pagehide",salvar);document.addEventListener("visibilitychange",()=>{if(document.hidden){if(!a.paused){a.pause();salvar()}}else if(quer&&!desligado&&!cedido&&a.paused)tocar()});
+// vídeos com som (capa com Som ligado, vídeo da história): a trilha dá lugar e volta depois
+document.querySelectorAll("video").forEach(v=>{const comSom=()=>!v.paused&&!v.ended&&!v.muted&&v.volume>0;
+const checa=()=>{if(comSom()){if(!a.paused){cedido=true;a.pause();ui()}}else if(cedido){cedido=false;if(quer&&!desligado)tocar()}};
+["play","playing","volumechange","pause","ended"].forEach(n=>v.addEventListener(n,checa))});
+if("mediaSession"in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:"HAIR Business",artist:"Trilha de fundo"})}catch(e){}}})();
 // 16/10 (Augusto): botão ↑ sempre volta ao topo. A animação é nossa (rAF) e termina com scrollTo instantâneo + conferência:
 // o smooth nativo do Safari para no meio em páginas longas. (O reset ao abrir a página está no TOPO_JS, no início do body.)
 (function(){const b=document.querySelector(".totop");if(!b)return;const r=matchMedia("(prefers-reduced-motion: reduce)").matches,d=document.documentElement;
