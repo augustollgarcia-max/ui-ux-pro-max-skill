@@ -49,3 +49,12 @@ Páginas: `/business` (HAIR Business + Beauty), `/business/business`, `/business
 `/business/assessoria`, `/business/apps`, `/business/mestre-0{1..4}-*` e `/business/beauty-0{5,6}-*`.
 O `vercel.json` tem uma CSP própria para `/business(.*)` (Google Fonts e a função `hara-vision-teste` do Supabase);
 a home e as demais páginas não foram alteradas.
+
+## Vértice Group (vertice/) — 16/10/2026
+Site da rede de escolas parceiras (`/vertice`): marcas do grupo, benefícios, apps, educadores e a **área do parceiro**
+(modelos de parceria, simulação de ganho, território, Conexão Work, piloto e FAQ), que fica **cifrada dentro do HTML** e só
+abre com um código de convite. Gerado pelo repositório `hair-business-` (`site/vertice.py`, códigos em
+`site/vertice_convites.py`, publicação por `site/publicar-www.sh`). Não editar `vertice/index.html` à mão: qualquer
+mudança (inclusive revogar um código) é gerar de novo lá e republicar. Cabeçalhos (CSP com Google Fonts, cache de
+`/vertice/img`) em `vercel.json`, mesmo padrão do `/business`.
+
