@@ -1,0 +1,227 @@
+/* Vértice Group — site da rede e área do parceiro. Paleta própria (azul-marinho + dourado), separada do site da escola.
+   Gerado por site/vertice.py junto com index.html. Celular primeiro; computador a partir de 900px. */
+:root{--navy:#0a1127;--navy2:#101c38;--navy3:#15213b;--gold:#d5b26e;--gold2:#9f7139;--gold3:#f1d49f;--white:#f9f5ed;--sub:#9babc5;--muted:#b6c2d6;--border:#ffffff21;--line:#c6a16a3b;--gut:clamp(16px,4vw,32px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--navy);color:var(--white);font:400 16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,select,a{font:inherit}a{text-decoration:none;color:inherit}button{cursor:pointer}img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.serif{font-family:"Playfair Display",Georgia,serif}
+.shell{max-width:1200px;margin:auto;padding:0 var(--gut)}
+.eyebrow{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:400;margin:0}
+h2{font-size:clamp(28px,4vw,46px);line-height:1.08;letter-spacing:-.01em}
+h2 em{color:var(--gold3);font-style:italic}
+.lead{color:var(--muted);max-width:640px;margin:14px 0 0}
+.cta{padding:13px 18px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;font-weight:700;font-size:12px;letter-spacing:.03em;text-transform:uppercase;border:1px solid transparent;transition:transform .15s,background .2s,border-color .2s}
+.cta.primary{background:linear-gradient(110deg,#e3bf7e,#c79c5c);color:#111629}
+.cta.outline{border-color:#c8a365;color:#e9d6b2;background:#0b172b80}
+.cta:hover{transform:translateY(-1px)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.micro{font-size:12px;color:var(--sub)}
+
+/* cabeçalho */
+.nav{position:sticky;top:0;z-index:30;background:#080e20eb;backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav .shell{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.mark{width:38px;height:38px;flex:none;display:grid;place-items:center;background:linear-gradient(130deg,#f7d790,#b7813c);color:#0d1422;clip-path:polygon(5% 12%,34% 12%,53% 65%,79% 12%,97% 12%,53% 94%,45% 94%);font:bold 22px "Playfair Display",Georgia,serif}
+.brand strong{display:block;font:500 19px/1 "Playfair Display",Georgia,serif;letter-spacing:.08em;white-space:nowrap}
+.brand strong em{color:var(--gold);font-style:normal}
+.brand small{display:block;letter-spacing:.2em;font-size:8px;color:#c4a777;margin-top:4px}
+.links{display:none;gap:18px;font-size:12px;color:#d5d9e2}
+.links a:hover{color:var(--gold)}
+.nav .cta.mini{min-height:40px;padding:0 14px;font-size:11px}
+.city-wrap{position:relative}
+.city-button{display:flex;align-items:center;gap:10px;padding:8px 12px;color:var(--white);background:#1e2a47;border:1px solid #d6bc865c;border-radius:12px;text-align:left}
+.city-button:hover,.city-button:focus-visible{border-color:var(--gold)}
+.city-button span{display:flex;flex-direction:column;line-height:1.2}
+.city-button strong{font-size:12px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.city-button small{color:var(--gold);letter-spacing:.14em;font-size:9px;margin-top:4px;white-space:nowrap}
+.city-button b{font-size:16px;color:var(--gold)}
+.menu{display:none;position:absolute;right:0;top:calc(100% + 9px);background:#15213b;border:1px solid #bba06f66;box-shadow:0 30px 90px #0008;border-radius:16px;width:min(355px,calc(100vw - 28px));overflow:hidden;z-index:40}
+.menu.open{display:block}
+.menu .intro{padding:18px 17px 5px;font:500 17px "Playfair Display",Georgia,serif}
+.menu .sub{color:var(--sub);font-size:11px;padding:0 17px 12px}
+.city-search{width:calc(100% - 30px);margin:0 15px 12px;background:#081127;border:1px solid #ffffff34;color:white;padding:13px 14px;border-radius:10px;outline:none}
+.city-search:focus{border-color:var(--gold)}
+.options{max-height:300px;overflow:auto;padding:0 8px 10px}
+.option{display:flex;align-items:center;gap:8px;width:100%;padding:10px;border:0;border-radius:8px;background:transparent;color:white;text-align:left}
+.option:hover,.option.sel{background:#d4ab5b20}
+.option span{flex:1;font-size:12px}.option small{color:#e4c78f;font-size:10px}
+
+/* capa */
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 75% 15%,#234a91 0,transparent 35%),radial-gradient(ellipse at 5% 100%,#312544 0,transparent 35%),linear-gradient(130deg,#09102b,#091327 63%,#141526);border-bottom:1px solid #a7884d3d}
+.hero:before{content:"";position:absolute;width:650px;height:650px;left:68%;top:-380px;border:1px solid #d9ad6461;border-radius:50%;box-shadow:0 0 0 65px #d7ae5715,0 0 0 140px #d7ae570a;transform:rotate(-25deg)}
+.hero .shell{padding-top:52px;padding-bottom:56px;display:grid;grid-template-columns:1fr;gap:28px;align-items:center;position:relative}
+.hero h1{font-size:clamp(38px,6vw,72px);line-height:1.06;margin:16px 0 18px;letter-spacing:-.02em}
+.hero h1 em{color:#eacb95;font-style:italic}
+.hero p{max-width:620px;color:#c0c9da;font-size:16px;margin:0}
+.sig{min-height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px solid #d0a45e5e;border-radius:28px;background:linear-gradient(135deg,#1d306c9c,#0a122ed8),radial-gradient(ellipse,#b68c5128,transparent 50%);box-shadow:0 20px 80px #02081160;text-align:center;padding:24px}
+.sig .v{font:italic 96px/0.92 "Playfair Display",Georgia,serif;color:#d3aa68}
+.sig .lettering{font:400 26px "Playfair Display",Georgia,serif;letter-spacing:.16em;margin-top:6px}
+.sig .mini{font-size:10px;color:#ddbf8b;letter-spacing:.28em;margin-top:8px}
+.crumb{background:#0f1930;padding:12px 0;border-bottom:1px solid #ffffff10;font-size:11px;color:#a7b3c8;letter-spacing:.14em}
+.crumb strong{color:#f1d49f}
+
+/* faixa de logos (mesma mecânica do site da escola) */
+.marquee{overflow:hidden;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#0b1530;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee-track{display:flex;align-items:center;width:max-content;animation:vmarquee 114s linear infinite}
+.marquee img{height:34px;width:auto;margin-inline-end:clamp(36px,5vw,72px);opacity:.9;filter:brightness(1.05)}
+@keyframes vmarquee{to{transform:translateX(-16.6667%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;gap:18px}.marquee img{margin:0}}
+
+/* seções */
+.section{padding:64px 0}
+.section.alt{background:#0d1730;border-top:1px solid #d1b07124;border-bottom:1px solid #d1b07124}
+.shead{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+.card{border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#14213d,#10192f);padding:20px;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:#d5ae73}
+.card .logo{height:44px;display:flex;align-items:center;margin-bottom:14px}
+.card .logo img{height:40px;width:auto;max-width:160px}
+.card small{color:#d1ab73;letter-spacing:.13em;font-size:9px;text-transform:uppercase}
+.card h3{font-size:21px;margin:6px 0 8px}
+.card p{font-size:14px;color:#b1bdd0;margin:0}
+.card .vlink{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#f0c984}
+
+/* apps */
+.apps{display:grid;grid-template-columns:1fr;gap:16px}
+.app{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;border:1px solid var(--line);border-radius:18px;background:#101a33;padding:14px;overflow:hidden}
+.app img{width:120px;height:150px;object-fit:cover;object-position:top;border-radius:12px;border:1px solid #ffffff14}
+.app h3{font-size:20px;margin:0 0 4px}
+.app .conceito{color:var(--gold);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.app p{font-size:13px;color:#b1bdd0;margin:8px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #ddbe7c66;color:#e8d2a7;background:#c7a36616;border-radius:100px;font-size:11px;padding:5px 10px}
+.telas{display:flex;gap:12px;overflow-x:auto;padding:22px 0 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.telas::-webkit-scrollbar{display:none}
+.telas img{flex:none;width:min(62vw,220px);aspect-ratio:9/19.5;object-fit:cover;object-position:top;border-radius:22px;border:1px solid #ffffff1f;scroll-snap-align:start;background:#000}
+
+/* como funciona */
+.duas{display:grid;grid-template-columns:1fr;gap:14px}
+.lista{border:1px solid var(--line);border-radius:16px;padding:20px;background:#0f1a33}
+.lista h3{font-size:20px;margin-bottom:10px}
+.lista ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.lista li{display:flex;gap:10px;font-size:14px;color:#c0c9da}
+.lista li:before{content:"◆";color:var(--gold);font-size:10px;margin-top:5px}
+.passos{counter-reset:p;display:grid;grid-template-columns:1fr;gap:10px;margin:22px 0 0;padding:0;list-style:none}
+.passos li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;border:1px solid #ffffff14;border-radius:12px;padding:14px;background:#0e1830}
+.passos li:before{content:counter(p,decimal-leading-zero);font:400 22px "Playfair Display",Georgia,serif;color:var(--gold)}
+.passos b{display:block;font-weight:600;margin-bottom:2px}
+.passos span{font-size:13px;color:#aeb9cc}
+
+/* área do parceiro */
+.gate{border:1px solid #d0a45e5e;border-radius:24px;padding:28px 22px;background:linear-gradient(135deg,#1a2a56a8,#0a122ed8),radial-gradient(ellipse at top right,#b68c5128,transparent 50%);box-shadow:0 20px 80px #02081160}
+.gate h2{font-size:clamp(26px,3.6vw,40px)}
+.gate form{display:grid;gap:10px;margin-top:18px}
+.gate label{font-size:12px;color:var(--muted)}
+.gate .campo{display:flex;gap:8px;flex-wrap:wrap}
+.gate input{flex:1;min-width:200px;background:#081127;border:1px solid #ffffff34;color:#fff;padding:14px;border-radius:10px;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+.gate input:focus{border-color:var(--gold);outline:none}
+.gate .erro{color:#ffb9b9;font-size:13px;min-height:18px;margin:0}
+.gate .erro.ok{color:#bfe7c2}
+.topicos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.topicos span{border:1px solid #ffffff18;border-radius:10px;padding:10px 12px;font-size:12px;color:#d6dde8;background:#0b162c;display:flex;gap:8px;align-items:center}
+.topicos span:before{content:"🔒";font-size:11px;opacity:.8}
+#privado{margin-top:36px;animation:vin .5s ease both}
+@keyframes vin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.aberto{display:flex;align-items:center;gap:10px;border:1px solid #6fb98a66;background:#13331f;color:#bfe7c2;border-radius:12px;padding:12px 14px;font-size:13px}
+.planos{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px}
+.plano{border:1px solid var(--line);border-radius:16px;padding:18px;background:#101a33;position:relative}
+.plano.dest{border-color:#d5ae73;background:linear-gradient(150deg,#1a2648,#121b33)}
+.plano .tag{position:absolute;top:-10px;right:14px;background:linear-gradient(110deg,#e3bf7e,#c79c5c);color:#111629;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 10px;border-radius:100px;text-transform:uppercase}
+.plano h3{font-size:22px}
+.plano .pct{font:400 44px/1 "Playfair Display",Georgia,serif;color:var(--gold3);margin:8px 0 2px}
+.plano .pct small{font:400 12px Inter,sans-serif;color:var(--muted);letter-spacing:0}
+.plano dl{margin:12px 0 0;display:grid;gap:6px;font-size:13px}
+.plano dl div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #ffffff12;padding-top:6px}
+.plano dt{color:#9babc5}.plano dd{margin:0;text-align:right;color:#e9e3d6}
+.sim{border:1px solid var(--line);border-radius:18px;background:#0f1a33;padding:20px;margin-top:26px;display:grid;gap:18px}
+.sim .f label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+.sim .chipsel{display:flex;flex-wrap:wrap;gap:6px}
+.sim .chipsel button{border:1px solid #ffffff21;background:transparent;color:#bdc8d8;padding:9px 14px;border-radius:100px;font-size:13px}
+.sim .chipsel button[aria-pressed="true"]{background:#e0ba74;color:#0a1225;border-color:transparent;font-weight:600}
+.sim input[type=range]{width:100%;accent-color:var(--gold)}
+.sim .num{background:#081127;border:1px solid #ffffff34;color:#fff;padding:10px 12px;border-radius:10px;width:140px}
+.res{border:1px solid #d0a45e5e;border-radius:16px;padding:18px;background:linear-gradient(135deg,#1a2a56a8,#0a122ed8)}
+.res .big{font:400 clamp(34px,6vw,52px)/1 "Playfair Display",Georgia,serif;color:#f1d49f;margin:6px 0}
+.res .big.neg{color:#ffb9b9}
+.res dl{margin:14px 0 0;display:grid;gap:6px;font-size:13px}
+.res dl div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #ffffff14;padding-top:6px}
+.res dt{color:#9babc5}.res dd{margin:0;color:#e9e3d6}
+.res .msg{font-size:13px;color:#c0c9da;margin:12px 0 0}
+details.avanc{border:1px solid #ffffff14;border-radius:12px;padding:10px 14px;background:#0b162c}
+details.avanc summary{cursor:pointer;font-size:13px;color:#e8d2a7}
+details.avanc .f{margin-top:12px}
+.terr{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
+.terr .t{border:1px solid #ffffff14;border-radius:12px;padding:14px;background:#0e1830}
+.terr .t.sel{border-color:#d5ae73;background:#17213f}
+.terr b{display:block;font-size:15px}
+.terr span{font-size:12px;color:#aeb9cc}
+.faq details{border-top:1px solid #ffffff14;padding:12px 0}
+.faq summary{cursor:pointer;font-weight:600;font-size:15px}
+.faq p{color:#b1bdd0;font-size:14px;margin:8px 0 0}
+
+/* educadores (herdado do site anterior) */
+.tabs{display:flex;gap:6px;margin:5px 0 22px;flex-wrap:wrap}
+.tab{border:1px solid #ffffff21;background:transparent;color:#bdc8d8;padding:9px 15px;border-radius:100px;font-size:12px}
+.tab.active,.tab:hover{background:#e0ba74;color:#0a1225;border-color:transparent}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pcard{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:linear-gradient(150deg,#14213d,#10192f);transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+.pcard:hover{transform:translateY(-4px);border-color:#d5ae73}
+.portrait{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 75% 30%,#bd905b32,transparent 50%),linear-gradient(125deg,#182851,#131627);position:relative;overflow:hidden}
+.pcard.beauty .portrait{background:radial-gradient(circle at 75% 30%,#a5546533,transparent 55%),linear-gradient(130deg,#442939,#1a192c)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;filter:saturate(.9)}
+.portrait span{font:400 56px "Playfair Display",Georgia,serif;color:#e5bf7e}
+.portrait small{position:absolute;bottom:9px;left:11px;font-size:9px;letter-spacing:.12em;color:#e4cd9e;background:#0a1127aa;padding:3px 7px;border-radius:6px}
+.pbody{padding:14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pbody small{color:#d1ab73;letter-spacing:.13em;font-size:9px;text-transform:uppercase}
+.pbody h3{font-size:19px}
+.pbody p{font-size:12px;color:#b1bdd0;margin:0 0 10px;flex:1}
+.pact{display:block;border-top:1px solid #ffffff22;padding-top:10px;font-size:12px;font-weight:700;color:#f0c984}
+.pact.pending{color:#aab3c1;font-weight:400}
+.empty{border:1px solid #c49f684d;border-radius:18px;padding:40px 20px;text-align:center;background:radial-gradient(ellipse at top,#1c33598a,#10192d 60%)}
+.empty h3{font-size:34px;margin:10px}
+.empty p{color:#b4bed0;max-width:530px;margin:0 auto 14px}
+.pill{padding:8px 13px;border:1px solid #ddbe7c8c;color:#e8d2a7;background:#c7a36616;border-radius:100px;font-size:11px;white-space:nowrap;display:inline-block}
+.profile{display:none;min-height:60vh;padding:56px 0}
+.back{border:0;background:transparent;color:#e6bc79;padding:0 0 24px;font-size:14px}
+.profile h1{font-size:clamp(36px,6vw,64px);margin:8px 0}
+.profile .layout{display:grid;grid-template-columns:1fr;gap:28px}
+.profile .foto{border:1px solid #d2ac684f;border-radius:21px;overflow:hidden;background:#111727;aspect-ratio:4/5;max-width:420px}
+.profile .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.profile .foto b{display:flex;align-items:center;justify-content:center;height:100%;font:400 100px "Playfair Display",Georgia,serif;color:#d9b57b}
+
+/* a rede, reunião, rodapé */
+.split{display:grid;grid-template-columns:1fr;gap:24px}
+.inv{border-top:1px solid #d1b07135;background:#0a152a;padding:44px 0}
+.inv h2{font-size:clamp(24px,3.4vw,34px)}
+.inv p{color:#b5bfcd;font-size:14px}
+.contato{border:1px solid #d0a45e5e;border-radius:24px;padding:26px 22px;background:linear-gradient(135deg,#1a2a56a8,#0a122ed8);text-align:center}
+.contato h2{font-size:clamp(26px,3.6vw,40px)}
+.contato .num{font:400 22px "Playfair Display",Georgia,serif;color:var(--gold3);margin:12px 0 0}
+.foot{border-top:1px solid #ffffff15;padding:26px 0 46px;color:#8293ac;font-size:11px}
+.foot strong{display:block;color:#e1c18b;font:400 18px "Playfair Display",Georgia,serif;letter-spacing:.16em;margin-bottom:6px}
+.foot a{color:#c9b58a}
+
+@media (min-width:700px){
+  .grid{grid-template-columns:1fr 1fr}.apps{grid-template-columns:1fr 1fr}.duas{grid-template-columns:1fr 1fr}.planos{grid-template-columns:1fr 1fr}.terr{grid-template-columns:repeat(3,1fr)}
+  .cards{grid-template-columns:repeat(3,1fr)}.split{grid-template-columns:1fr 1fr}.passos{grid-template-columns:1fr 1fr}
+  .shead{flex-direction:row;align-items:flex-end;justify-content:space-between}.shead .lead{margin:0;max-width:520px}
+  .topicos{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:900px){
+  .links{display:flex}.nav .shell{min-height:84px}
+  .hero .shell{grid-template-columns:1.4fr .8fr;padding-top:78px;padding-bottom:87px}
+  .grid{grid-template-columns:repeat(4,1fr)}.cards{grid-template-columns:repeat(4,1fr)}.planos{grid-template-columns:repeat(4,1fr)}
+  .profile .layout{grid-template-columns:1.2fr .8fr}.inv .split{grid-template-columns:1fr auto;align-items:center}
+  .section{padding:84px 0}
+}
+@media (max-width:420px){.brand small{display:none}.city-button{padding:7px 10px;gap:7px}.city-button strong{max-width:96px;font-size:11px}.city-button small{font-size:8px;letter-spacing:.08em}.nav .cta.mini{padding:0 10px;font-size:10px}}
+/* lista do Conexão Work (área do parceiro) e botão em forma de link */
+ul.work{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px}
+ul.work li{border:1px solid #ffffff14;border-radius:12px;padding:14px;background:#0e1830;display:grid;gap:4px}
+ul.work li b{font-size:15px}ul.work li span{font-size:13px;color:#aeb9cc}ul.work li em{justify-self:start;font-style:normal;margin-top:4px}
+button.link{background:none;border:0;color:#c9b58a;text-decoration:underline;padding:0;font-size:12px}
+@media (min-width:700px){ul.work{grid-template-columns:1fr 1fr}}
+@media (min-width:900px){ul.work{grid-template-columns:repeat(3,1fr)}}
