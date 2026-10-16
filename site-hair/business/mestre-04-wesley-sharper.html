@@ -120,7 +120,7 @@ const h=document.querySelector(".hist-video video"),c=document.querySelector(".h
 // O navegador só libera som depois de um toque/clique no site; aqui: tenta 1 s depois de abrir (funciona onde o navegador
 // já confia no site, ex.: Chrome depois do 1º toque em qualquer página) e, se barrar, começa no PRIMEIRO toque, rolagem ou tecla.
 // De uma página para outra a música continua do ponto em que estava (sessionStorage). Desligar no botão vale para a visita toda.
-// Pausa sozinha quando um vídeo com som toca (capa com Som ligado, vídeo da história) e volta depois. No iPhone o volume é do aparelho.
+// Começa 1 s depois de o vídeo da capa começar (páginas sem vídeo: 1 s depois de abrir). Pausa sozinha quando um vídeo com som toca (vídeo da história) e volta depois. No iPhone o volume é do aparelho.
 (function(){const a=document.getElementById("trilha"),b=document.querySelector(".som-btn");if(!a||!b)return;
 const K="hb_trilha",KOFF="hb_trilha_off",V0=.14,V1=.55,RAMPA=45000,ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 let quer=true,desligado=false,rampa=0,armado=false,cedido=false;try{desligado=localStorage.getItem(KOFF)==="1"}catch(e){}
@@ -135,12 +135,13 @@ let sess=null;try{sess=JSON.parse(sessionStorage.getItem(K)||"null")}catch(e){}
 if(!desligado){if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
 let tent=0;const pos=()=>{if(tent>6)return;const t=alvo();if(t==null)return;if(Math.abs(a.currentTime-t)>2){tent++;try{a.currentTime=t}catch(e){}}};
 ["loadedmetadata","loadeddata","canplay","playing","seeked"].forEach(n=>a.addEventListener(n,pos));a.preload="auto";a.load();tocar().then(ok=>{if(!ok)armar()})}
-else setTimeout(()=>{if(!desligado&&quer&&a.paused)tocar().then(ok=>{if(!ok)armar()})},1000)}
+else{const v=document.getElementById("capaVideo");let ini=false;const iniciar=ms=>{if(ini)return;ini=true;setTimeout(()=>{if(!desligado&&quer&&a.paused&&!cedido)tocar().then(ok=>{if(!ok)armar()})},ms)};
+if(v){v.addEventListener("playing",()=>iniciar(1000),{once:true});if(!v.paused&&v.currentTime>0)iniciar(1000);setTimeout(()=>iniciar(0),2500)}else iniciar(1000)}}
 ui();
 b.addEventListener("click",e=>{e.stopPropagation();if(!a.paused){desligado=true;quer=false;try{localStorage.setItem(KOFF,"1")}catch(e2){}parar()}else{desligado=false;quer=true;cedido=false;try{localStorage.removeItem(KOFF)}catch(e2){}tocar()}});
 a.addEventListener("play",ui);a.addEventListener("pause",ui);a.addEventListener("timeupdate",()=>{if(!a.paused&&a.currentTime>1&&(a.currentTime|0)%5===0)salvar()});
 addEventListener("pagehide",salvar);document.addEventListener("visibilitychange",()=>{if(document.hidden){if(!a.paused){a.pause();salvar()}}else if(quer&&!desligado&&!cedido&&a.paused)tocar()});
-// vídeos com som (capa com Som ligado, vídeo da história): a trilha dá lugar e volta depois
+// vídeos com som (vídeo da história, práticas): a trilha dá lugar e volta depois
 document.querySelectorAll("video").forEach(v=>{const comSom=()=>!v.paused&&!v.ended&&!v.muted&&v.volume>0;
 const checa=()=>{if(comSom()){if(!a.paused){cedido=true;a.pause();ui()}}else if(cedido){cedido=false;if(quer&&!desligado)tocar()}};
 ["play","playing","volumechange","pause","ended"].forEach(n=>v.addEventListener(n,checa))});
@@ -154,14 +155,13 @@ b.addEventListener("click",()=>{b.blur();const y0=window.pageYOffset||d.scrollTo
 d.style.scrollBehavior="auto";const dur=Math.min(700,Math.max(250,y0/6)),t0=performance.now();
 (function f(t){const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);scrollTo(0,Math.round(y0*(1-e)));if(k<1)requestAnimationFrame(f);else fim()})(t0)})})();
 // 16/10 (Augusto): vídeo da capa toca sozinho (mudo, loop). Se o aparelho bloquear (economia de bateria), tenta de novo no 1º toque.
-// Respeita "reduzir movimento" (fica o poster). Botão Som liga/desliga o áudio original do vídeo.
-(function(){const v=document.getElementById("capaVideo");if(!v)return;const btn=document.querySelector(".capa-som");
+// Respeita "reduzir movimento" (fica o poster). O arquivo não tem áudio: a música é a trilha separada (abaixo), 1 s depois de o vídeo começar.
+(function(){const v=document.getElementById("capaVideo");if(!v)return;
 if(matchMedia("(prefers-reduced-motion: reduce)").matches){v.removeAttribute("autoplay");v.pause();return}
 v.muted=true;v.defaultMuted=true;const tenta=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};tenta();
 ["touchstart","pointerdown","click","scroll"].forEach(n=>addEventListener(n,function f(){if(v.paused&&!document.hidden)tenta();removeEventListener(n,f,true)},{capture:true,passive:true}));
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&v.paused)tenta()});
-if("IntersectionObserver"in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(v.paused)tenta()}else v.pause()}),{threshold:.15}).observe(v)}
-if(btn){btn.hidden=false;btn.addEventListener("click",()=>{v.muted=!v.muted;btn.setAttribute("aria-pressed",String(!v.muted));btn.setAttribute("aria-label",v.muted?"Ativar o som do vídeo":"Silenciar o vídeo");btn.classList.toggle("on",!v.muted);if(v.paused)tenta()})}})();
+if("IntersectionObserver"in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(v.paused)tenta()}else v.pause()}),{threshold:.15}).observe(v)}})();
 (function(){const sec=document.querySelector('.conexao');if(!sec)return;const telas=[...sec.querySelectorAll('.tela')],passos=[...sec.querySelectorAll('.passo')];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let cur=-1;
 function nota(){const n=sec.querySelector('.nota b[data-to]');if(!n||n.dataset.done)return;n.dataset.done=1;if(reduce){n.textContent=n.dataset.to;return}
