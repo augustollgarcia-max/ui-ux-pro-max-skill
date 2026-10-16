@@ -225,9 +225,11 @@ Critérios de proporção medidos contra a referência aprovada estão em
 3. **Quatro fotos do carrossel falharam na conversão** (`a04`, `a12`, `a16`,
    `a18` não existem). O carrossel roda com 18 e não quebra. Se quiser as
    quatro de volta, reconverter os originais.
-4. **Seção "Histórias/Depoimentos" não existe.** Foi decisão sua tirar
-   HISTÓRIAS do menu porque não havia depoimentos reais e não se inventa
-   depoimento. Quando houver, o lugar natural é depois do carrossel dos 10 anos.
+4. **Seção "Depoimentos" (#depoimentos), depois do carrossel dos 10 anos.**
+   Só trechos fiéis de avaliações públicas 5★ do Google (coletadas via Apify
+   em 16/10/2026), nome abreviado (ex.: "Diego I.") por privacidade, sem foto
+   do avaliador. A nota "4,9" é do Google nessa data: se cair, atualizar.
+   Cases com foto/Instagram de aluno só com autorização de uso de imagem.
 5. **Nada de backend.** O site não tem formulário nem banco. Toda conversão
    passa pelo WhatsApp.
 
@@ -239,7 +241,9 @@ Critérios de proporção medidos contra a referência aprovada estão em
   (`conexao-hair-deploy`) e tem login, Supabase, Firebase e service worker.
   Este site é separado de propósito.
 - **Não inventar depoimento, número ou resultado.** Os números que estão no ar
-  (+4.000 formados, desde 2017) foram fornecidos pela escola.
+  (+4.000 formados, desde 2016) foram fornecidos pela escola.
+  Em 16/10/2026 o Augusto confirmou: a HAIR existe desde 2016 (10 anos em 2026),
+  por isso "Desde 2017" virou "Desde 2016".
 - **Não usar apelo promocional agressivo** ("100% GRÁTIS", "ÚLTIMAS VAGAS" em
   vermelho). A seção de materiais foi escrita de propósito em tom institucional.
 - **Não usar imagem com texto de campanha gravado** como foto de fundo — o texto
