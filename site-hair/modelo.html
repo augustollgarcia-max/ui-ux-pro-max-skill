@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#15120f"><title>Seja modelo de workshop | HAIR Business</title>
+<meta name="description" content="Inscreva-se para a seleção de modelos de cortes gratuitos demonstrativos nos workshops da HAIR Business.">
+<link rel="canonical" href="https://www.hairacademiadabeleza.com.br/modelo">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--ink:#f5efe5;--muted:#c5bcae;--gold:#d6bc86;--border:rgba(214,188,134,.35);--bg:#15120f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0%,#3c2a20 0%,#15120f 55%);font-family:system-ui,-apple-system,Arial,sans-serif;color:var(--ink);min-height:100vh}
+header,main,footer{width:min(700px,calc(100% - 32px));margin:auto}header{padding:28px 0}header a{color:var(--gold);text-decoration:none}header strong{font-size:1.1rem;letter-spacing:.09em}
+main{padding:28px 0 60px}.kicker{font-size:.75rem;letter-spacing:.2em;color:var(--gold);font-weight:750;text-transform:uppercase}h1{font:500 clamp(2.2rem,7vw,4rem)/1.08 Georgia,serif;margin:16px 0 24px}h1 span{color:var(--gold)}p{line-height:1.65;color:var(--muted)}.notice{background:#241c17;border:1px solid var(--border);padding:16px 20px;border-radius:14px;margin:22px 0 30px}
+form{border:1px solid var(--border);border-radius:22px;padding:24px;background:#1b1714;display:grid;gap:16px;box-shadow:0 16px 50px #0006}
+label{display:grid;gap:8px;font-weight:650;font-size:.9rem}input,select{border-radius:10px;border:1px solid #766555;background:#29231f;color:white;min-height:48px;padding:12px;font:inherit;width:100%}input:focus,select:focus{outline:2px solid var(--gold)}
+.check{display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-weight:400;font-size:.83rem;color:var(--muted)}.check input{width:19px;min-height:19px;flex:0 0 19px;margin-top:2px;accent-color:#bd9854}
+button{border:0;border-radius:10px;padding:16px;background:var(--gold);font:800 .86rem system-ui;letter-spacing:.04em;color:#211710;cursor:pointer}button:hover{background:#e7cc96}.help{font-size:.79rem;color:var(--muted)}footer{font-size:.77rem;padding:0 0 35px;color:var(--muted)}a{color:var(--gold)}.error{color:#ffb9ad;display:none}#confirmation{display:none;background:#223524;border-radius:14px;padding:15px;line-height:1.5}
+</style></head><body>
+<header><a href="/"><strong>HAIR</strong> <span>ACADEMIA DA BELEZA</span></a></header>
+<main><div class="kicker">HAIR Business • Experiência de formação</div>
+<h1>Quer ganhar um <span>corte gratuito</span> com um mestre especialista?</h1>
+<p>Estamos selecionando modelos voluntários para demonstrações de técnicas de barbearia realizadas em workshops e aulas. Escolha a academia e informe seus dados para manifestar interesse.</p>
+<div class="notice"><strong>Como funciona:</strong><p>A inscrição não garante um corte nem um horário. A equipe verificará seu perfil e disponibilidade. A participação ocorre em dias e horários selecionados, com cortes realizados em formato de workshop; confirme previamente quem executará o corte.</p></div>
+<form id="lead-form">
+<label for="academy">Educador de interesse<select required name="academy" id="academy"><option value="">Escolha o educador</option>
+<option value="lan">Allan Rich — LAN Barbershop</option><option value="sharper">Wesley Sharper — Studio Sharper</option><option value="kenny">Kenny Wolf — Wolf Barbearia</option><option value="gustavo">Gustavo Rossatti</option></select></label>
+<label for="name">Seu nome<input id="name" name="name" autocomplete="name" maxlength="90" required placeholder="Como podemos chamar você?"></label>
+<label for="phone">WhatsApp com DDD<input id="phone" name="phone" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="(16) 99999-9999"></label>
+<label for="availability">Disponibilidade<select id="availability" name="availability" required><option value="">Escolha o período</option><option>Manhã em dias úteis</option><option>Tarde em dias úteis</option><option>Noite em dias úteis</option><option>Fim de semana</option><option>A combinar</option></select></label>
+<label class="check"><input required type="checkbox" id="contact" name="contact"><span>Autorizo a equipe HAIR a entrar em contato pelo WhatsApp informado sobre esta inscrição e eventual agendamento do workshop.</span></label>
+<label class="check"><input type="checkbox" id="marketing" name="marketing"><span>Também quero receber novidades de cursos e eventos da HAIR pelo WhatsApp (opcional).</span></label>
+<p class="help">Ao continuar, seu aplicativo WhatsApp será aberto com a mensagem preparada. <strong>Seu cadastro só será enviado quando você confirmar o envio da mensagem no WhatsApp.</strong> Não há cadastro automático neste formulário. Para dúvidas ou exclusão de dados, contate a HAIR. A HAIR usará as informações enviadas pelo WhatsApp para responder sobre a seleção de modelos. O aceite opcional de novidades é independente da inscrição. Para solicitar exclusão, entre em contato pelo WhatsApp oficial.</p>
+<p class="error" role="alert" id="error">Confira o telefone e preencha os campos obrigatórios.</p><button type="submit">Continuar pelo WhatsApp →</button>
+<div id="confirmation" role="status">O WhatsApp foi aberto. Envie a mensagem para completar seu interesse. A participação será confirmada apenas após contato da equipe.</div>
+</form>
+</main><footer>HAIR Academia da Beleza • Ribeirão Preto/SP • Atendimento via WhatsApp <a href="https://wa.me/5516991687977"> (16) 99168-7977</a></footer>
+<script>
+(function(){
+const form=document.getElementById('lead-form'),select=document.getElementById('academy'),error=document.getElementById('error');
+const slug=new URLSearchParams(location.search).get('educador');if(['lan','sharper','kenny','gustavo'].includes(slug))select.value=slug;
+form.addEventListener('submit',function(event){event.preventDefault();if(!form.reportValidity())return;
+const digits=document.getElementById('phone').value.replace(/\D/g,'');if(digits.length!==10&&digits.length!==11){error.style.display='block';return;}error.style.display='none';
+const name=document.getElementById('name').value.trim(),edu=select.options[select.selectedIndex].text;
+if(name.length<2){error.style.display='block';return;}
+const origin=new URLSearchParams(location.search).get('utm_source')||'site';
+const msg=['Olá, HAIR! Quero participar da seleção de modelos para workshop.','Nome: '+name,'WhatsApp: +55'+digits,'Educador: '+edu,'Disponibilidade: '+document.getElementById('availability').value,'Origem: '+origin.slice(0,40),'Autorizo contato sobre esta inscrição.','Novidades de cursos: '+(document.getElementById('marketing').checked?'Sim':'Não')].join('\n');
+document.getElementById('confirmation').style.display='block';
+window.location.href='https://wa.me/5516991687977?text='+encodeURIComponent(msg);
+});
+})();
+</script></body></html>
