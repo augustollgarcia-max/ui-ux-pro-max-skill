@@ -39,3 +39,13 @@ Substitua o arquivo em `assets/` mantendo o nome. Os slots são:
 
 WhatsApp **(16) 99168-7977** (`5516991687977`), com mensagem pré-preenchida por curso.
 CTAs de aluno apontam para `https://app.hairacademiadabeleza.com.br`.
+
+## HAIR Business (`business/`) — 16/10/2026
+
+`site-hair/business/` é **gerado**, não se edita à mão. A fonte é o repositório
+`augustollgarcia-max/hair-business-` (`site/gerar.py` + `site/estilo.css`); de lá, `sh site/publicar-www.sh`
+copia o site para esta pasta já com links absolutos `/business/...` e sem `.html` (o `vercel.json` daqui usa `cleanUrls`).
+Páginas: `/business` (HAIR Business + Beauty), `/business/business`, `/business/beauty`, `/business/historia`,
+`/business/assessoria`, `/business/apps`, `/business/mestre-0{1..4}-*` e `/business/beauty-0{5,6}-*`.
+O `vercel.json` tem uma CSP própria para `/business(.*)` (Google Fonts e a função `hara-vision-teste` do Supabase);
+a home e as demais páginas não foram alteradas.
