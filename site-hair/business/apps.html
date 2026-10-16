@@ -131,7 +131,7 @@ function tocar(){a.preload="auto";let p;try{p=a.play()}catch(e){p=Promise.reject
 function parar(){cancelAnimationFrame(rampa);a.pause();ui();salvar()}
 function armar(){if(armado)return;armado=true;const evs=["pointerup","touchend","keydown","click"];const h=()=>{if(desligado||!quer||!a.paused||cedido)return;tocar().then(ok=>{if(ok)evs.forEach(n=>removeEventListener(n,h,true))})};evs.forEach(n=>addEventListener(n,h,{capture:true,passive:true}))}
 let sess=null;try{sess=JSON.parse(sessionStorage.getItem(K)||"null")}catch(e){}
-if(!desligado){if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
+if(!desligado){armar();if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
 let tent=0;const pos=()=>{if(tent>6)return;const t=alvo();if(t==null)return;if(Math.abs(a.currentTime-t)>2){tent++;try{a.currentTime=t}catch(e){}}};
 ["loadedmetadata","loadeddata","canplay","playing","seeked"].forEach(n=>a.addEventListener(n,pos));a.preload="auto";a.load();tocar().then(ok=>{if(!ok)armar()})}
 else{const v=document.getElementById("capaVideo");let ini=false;const iniciar=ms=>{if(ini)return;ini=true;setTimeout(()=>{if(!desligado&&quer&&a.paused&&!cedido)tocar().then(ok=>{if(!ok)armar()})},ms)};

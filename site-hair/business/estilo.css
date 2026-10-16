@@ -607,3 +607,7 @@ body:not(:has(.sticky)) .prebadge{bottom:calc(26px + env(safe-area-inset-bottom,
 .convite .topicos{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
 .convite .topicos li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45}
 .convite .topicos li:before{content:"\1F512";font-size:12px;margin-top:3px;opacity:.85}
+
+/* Faixa das marcas logo abaixo da capa (16/10) */
+.faixa-topo{background:#0a0c0a;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.faixa-topo .marquee{padding:16px 0 12px}
