@@ -89,3 +89,22 @@ rodapé completo, ausente do recorte da referência.
    "HISTÓRIAS" fora do menu, que ficou com 5 itens, todos apontando para seções existentes.
 4. **Fora de escopo, intocado:** o app Conexão Hair (`conexao-hair-deploy` e o projeto Android
    do segundo ZIP). Nenhum arquivo de Auth/OAuth/PWA/service worker foi alterado.
+
+---
+
+## Repaginação premium — 16/10/2026 (branch `redesign/premium-site-hair-20261016`)
+
+Pedido do dono: redesign visual completo sem mudar funcionamento.
+- Camada CSS nova no fim do `<style>` (bloco "REDESIGN PREMIUM 2026-10"): botões em pílula,
+  header em vidro flutuante, pilares/estatísticas/metodologia/CTA final em cartões arredondados,
+  modais com raio maior e "alça" no celular.
+- Seção nova `#ecossistema` com as 4 imagens enviadas (Conexão Hair, HARA Vision,
+  HARA Educadora, Conexão Work) em `assets/ecossistema/*-{640,1024,1600}.webp`. Links apenas
+  para destinos que já existiam no site (app, work.html, canal da HARA Educadora).
+- Barra fixa no celular (`#dock`): Formações + WhatsApp, usa o mesmo `data-wa-generic`
+  (mensagem e conversão do Google Ads idênticas às do resto da página).
+- Nenhum link, ID, `data-*`, script, conversão ou texto existente foi removido
+  (inventário automático: 40 → 46 elementos clicáveis, 0 removidos).
+- Testado: 0 rolagem horizontal em 320/360/390/412/430/768/1024/1280/1440/1920; 0 erro de
+  console; 0 resposta ≥400; 3 modais de curso com WhatsApp específico; menu móvel; modal de
+  instalação; âncoras válidas.
