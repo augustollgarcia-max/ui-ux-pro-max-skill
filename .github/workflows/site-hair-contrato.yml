@@ -1,0 +1,42 @@
+name: Site HAIR — contrato e navegador
+# Roda em toda mudança do site público (www.hairacademiadabeleza.com.br).
+# Reprova o PR se sumir link, botão, WhatsApp, conversão do Google Ads, curso,
+# âncora ou imagem, se um script quebrar, ou se a página rolar para o lado.
+on:
+  pull_request:
+    paths:
+      - 'site-hair/**'
+      - 'scripts/site-hair/**'
+      - '.github/workflows/site-hair-contrato.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'site-hair/**'
+      - 'scripts/site-hair/**'
+  workflow_dispatch:
+
+jobs:
+  contrato:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Contrato funcional (sem navegador)
+        run: python3 scripts/site-hair/checar-contrato.py
+
+  navegador:
+    runs-on: ubuntu-latest
+    needs: contrato
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Instalar Playwright + Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.47.2
+          npx playwright@1.47.2 install --with-deps chromium
+      - name: Teste no navegador (celular e computador)
+        run: node scripts/site-hair/smoke-navegador.cjs
