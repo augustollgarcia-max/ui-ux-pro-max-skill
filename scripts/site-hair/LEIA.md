@@ -26,7 +26,8 @@ um link/botão/ID: faça a mudança, rode `python3 scripts/site-hair/checar-cont
 e comite o `contrato.json` junto. O diff dele no PR mostra exatamente o que saiu.
 
 ## Onde mexer no visual
-- `site-hair/index.html`, um arquivo só (HTML + CSS + JS inline).
+- `site-hair/inicio.html`, um arquivo só (HTML + CSS + JS inline). É a landing completa, hoje em `/inicio`.
+- `site-hair/index.html` (a raiz) é a **página de seleção** gerada pelo repositório `hair-business-` — não editar aqui; o contrato só confere que ela leva a `/business`, `/beauty` e `/business/assessoria`.
 - CSS em duas camadas dentro do `<style>`:
   1. sistema original (tokens `--bg`, `--gold`, `--green`, `--serif`/`--sans`…);
   2. bloco **"REDESIGN PREMIUM 2026-10"** no fim, com os tokens `--r-sm 12` · `--r-md 18` ·

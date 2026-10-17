@@ -611,3 +611,63 @@ body:not(:has(.sticky)) .prebadge{bottom:calc(26px + env(safe-area-inset-bottom,
 /* Faixa das marcas logo abaixo da capa (16/10) */
 .faixa-topo{background:#0a0c0a;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
 .faixa-topo .marquee{padding:16px 0 12px}
+
+/* escolha.html: entrada com os dois emblemas (Business Barber / Business Beauty) como botões + botão pequeno "Assessoria".
+   Foto do salão desfocada atrás (já desfocada e clareada no arquivo, para o celular não pagar blur em CSS) + véu preto 70%.
+   Celular: título, emblemas empilhados; computador (≥760px): lado a lado. Hover: brilho dourado + zoom leve.
+   Revisão 17/10: o travessão só some no celular com seletor da MESMA especificidade da regra que põe os spans em bloco
+   (.esc-topo h1 .esc-sep) — antes aparecia como linha solta; o emblema Beauty NÃO usa a classe .beauty (é tema de página
+   e trocava os tokens dentro do botão); título inteiro dourado; alvos de toque ≥ 40px. */
+body.escolha{background:#050505;min-height:100vh;min-height:100svh}
+.esc-fundo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;transform:scale(1.03);pointer-events:none;user-select:none}
+.esc-veu{position:fixed;inset:0;z-index:1;background:rgba(0,0,0,.7);pointer-events:none}
+.esc{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;gap:clamp(10px,2.4vh,32px);
+  padding:calc(16px + env(safe-area-inset-top,0px)) var(--gut) calc(10px + env(safe-area-inset-bottom,0px));max-width:1200px;margin-inline:auto;width:100%}
+.esc-topo{text-align:center}
+.esc-olho{margin:0 auto 12px;max-width:none;text-wrap:balance}
+.nowrap{white-space:nowrap}
+.esc-topo h1{font-size:clamp(1.85rem,5.4vw,4rem);line-height:1.08;letter-spacing:.01em;margin-inline:auto}
+.esc-topo h1 .gold{display:block}
+.esc-topo h1 em{font-style:italic;font-weight:500;text-transform:none;font-size:.6em;margin-top:8px;letter-spacing:0}
+.esc-topo h1 .esc-sep{display:none;color:var(--gold);font-style:normal;font-weight:400}
+@media (min-width:900px){.esc-topo h1 .gold,.esc-topo h1 .esc-sep{display:inline}.esc-topo h1 em{font-size:.78em;margin:0}.esc-topo h1 .esc-sep{margin:0 .14em}}
+.esc-grade{display:grid;grid-template-columns:1fr;gap:clamp(16px,3.4vh,36px);justify-items:center;align-content:center;align-self:center;width:100%}
+@media (min-width:760px){.esc-grade{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,6vw,96px);max-width:980px;margin-inline:auto}}
+.emblema{display:grid;justify-items:center;gap:10px;width:min(100%,clamp(176px,52vw,270px));text-align:center;-webkit-tap-highlight-color:transparent;border-radius:12px;outline-offset:10px}
+@media (min-width:760px){.emblema{width:min(100%,clamp(260px,32vw,380px))}}
+.emblema img{width:100%;height:auto;aspect-ratio:1;border-radius:50%;
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,.6)) drop-shadow(0 0 0 rgba(211,173,108,0));
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease;will-change:transform}
+.esc-leg{display:grid;gap:3px;color:var(--cream)}
+.esc-leg b{font:600 12px/1.3 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);transition:color .3s}
+.esc-leg small{font-size:12px;color:var(--muted)}
+.emblema--beauty .esc-leg b{color:#e4b7a5}
+@media (hover:hover){
+  .emblema:hover img{transform:scale(1.05);filter:drop-shadow(0 22px 48px rgba(0,0,0,.65)) drop-shadow(0 0 34px rgba(211,173,108,.55)) brightness(1.06)}
+  .emblema--beauty:hover img{filter:drop-shadow(0 22px 48px rgba(0,0,0,.65)) drop-shadow(0 0 34px rgba(228,183,165,.55)) brightness(1.06)}
+  .emblema:hover .esc-leg b{color:var(--soft)}
+  .emblema--beauty:hover .esc-leg b{color:#f0c9bb}
+}
+.emblema:focus-visible{outline:2px solid var(--soft)}
+.emblema--beauty:focus-visible{outline-color:#f0c9bb}
+.emblema:focus-visible img{transform:scale(1.05);filter:drop-shadow(0 22px 48px rgba(0,0,0,.65)) drop-shadow(0 0 34px rgba(211,173,108,.6)) brightness(1.06)}
+.emblema:active img{transform:scale(.985);transition-duration:.12s}
+.esc-pe{display:grid;justify-items:center;gap:0;text-align:center}
+.esc-pe .esc-assessoria{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 20px;border:1px solid rgba(211,173,108,.38);border-radius:999px;
+  font:600 10px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#d8cfb8;background:rgba(0,0,0,.28);transition:border-color .25s,color .25s,background .25s}
+.esc-pe .esc-assessoria:hover,.esc-pe .esc-assessoria:focus-visible{border-color:var(--gold);color:var(--soft);background:rgba(211,173,108,.1)}
+.esc-nota{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0 18px;margin:0;max-width:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a6a99f}
+.esc-nota a{display:inline-flex;align-items:center;min-height:44px;padding:0 8px;color:var(--gold)}
+.esc-nota a:hover{color:var(--soft)}
+.esc-nota span{display:inline-flex;align-items:center;min-height:44px}
+/* celular deitado: título numa linha, emblemas menores, rodapé numa linha — a 1ª tela mostra tudo */
+@media (min-width:760px) and (max-height:480px){
+  .esc{gap:10px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+  .esc-olho{margin-bottom:6px}
+  .esc-topo h1 .gold,.esc-topo h1 .esc-sep{display:inline}.esc-topo h1{font-size:clamp(1.4rem,3.4vw,2.2rem)}.esc-topo h1 em{font-size:.78em;margin:0}.esc-topo h1 .esc-sep{margin:0 .14em}
+  .esc-grade{gap:clamp(24px,5vw,60px)}
+  .emblema{width:min(100%,clamp(140px,20vw,180px))}
+  .esc-pe{grid-auto-flow:column;gap:18px;align-items:center}
+  .esc-nota a,.esc-nota span{min-height:36px}
+}
+@media (prefers-reduced-motion:reduce){.emblema img,.esc-leg b,.esc-pe .esc-assessoria{transition:none}}
