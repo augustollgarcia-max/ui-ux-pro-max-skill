@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Contrato funcional do site público (site-hair/index.html).
+"""Contrato funcional do site público (site-hair/inicio.html = a landing completa; a raiz index.html é a
+página de seleção gerada pelo repositório hair-business-, conferida no passo 6).
 
 Garante que nenhuma mudança visual apague o que faz o site funcionar:
 links e botões, IDs usados pelo script, WhatsApp oficial, conversões do
@@ -19,7 +20,8 @@ from html.parser import HTMLParser
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, "..", ".."))
 SITE = os.environ.get("SITE_HAIR_DIR") or os.path.join(RAIZ, "site-hair")
-PAGINA = os.path.join(SITE, "index.html")
+PAGINA = os.path.join(SITE, "inicio.html")
+RAIZ_SELECAO = os.path.join(SITE, "index.html")
 CONTRATO = os.path.join(AQUI, "contrato.json")
 
 WHATSAPP = "5516991687977"
@@ -134,6 +136,16 @@ def main():
                 erros.append(f"script inline nº {n} com erro de sintaxe: {msg}")
     else:
         print("aviso: node ausente, sintaxe JS não conferida")
+
+    # 6. raiz do site = página de seleção (17/10/2026, decisão do dono): precisa levar a /business, /beauty e
+    #    /business/assessoria, carregar a tag do Ads e os destinos precisam existir (cleanUrls: /beauty = beauty.html).
+    raiz = open(RAIZ_SELECAO, encoding="utf-8").read()
+    for alvo in ('href="/business"', 'href="/beauty"', 'href="/business/assessoria"', f"gtag/js?id={ADS_ID}"):
+        if alvo not in raiz:
+            erros.append(f"raiz (index.html, seleção) sem {alvo}")
+    for u in ("business/index.html", "beauty.html", "business/assessoria.html", "inicio.html"):
+        if not os.path.exists(os.path.join(SITE, u)):
+            erros.append(f"destino da raiz não existe: {u}")
 
     if erros:
         print("CONTRATO QUEBRADO —", len(erros), "problema(s):")

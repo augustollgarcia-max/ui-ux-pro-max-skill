@@ -25,7 +25,9 @@ function servidor() {
     const s = http.createServer((req, res) => {
       let u = decodeURIComponent(req.url.split("?")[0]);
       if (u.endsWith("/")) u += "index.html";
-      const f = path.join(SITE, u);
+      let f = path.join(SITE, u);
+      if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, "index.html");       // /business → business/index.html
+      else if (!path.extname(f) && fs.existsSync(f + ".html")) f += ".html";                      // cleanUrls: /inicio → inicio.html
       if (!f.startsWith(SITE) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
       res.writeHead(200, { "content-type": TIPOS[path.extname(f)] || "application/octet-stream" });
       fs.createReadStream(f).pipe(res);
@@ -42,12 +44,12 @@ function servidor() {
   const ok = (cond, nome) => { console.log((cond ? "  ✓ " : "  ✗ ") + nome); if (!cond) falhas.push(nome); };
   const rolar = (p, y) => p.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), y);
 
-  // 1. sem rolagem lateral em nenhuma largura
+  // 1. sem rolagem lateral em nenhuma largura — na landing completa (/inicio) e na raiz (seleção)
   console.log("Larguras:");
-  for (const w of [320, 360, 390, 412, 430, 768, 1024, 1280, 1440, 1920]) {
+  for (const rota of ["/inicio", "/"]) for (const w of [320, 360, 390, 412, 430, 768, 1024, 1280, 1440, 1920]) {
     const p = await browser.newPage({ viewport: { width: w, height: 860 } });
-    await p.goto(base + "/", { waitUntil: "load" });
-    ok(!(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)), `${w}px sem rolagem lateral`);
+    await p.goto(base + rota, { waitUntil: "load" });
+    ok(!(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)), `${rota} ${w}px sem rolagem lateral`);
     await p.close();
   }
 
@@ -58,7 +60,7 @@ function servidor() {
     p.on("pageerror", (e) => erros.push(e.message));
     p.on("console", (m) => { if (m.type() === "error" && !/googletagmanager|net::ERR|Failed to load resource/.test(m.text())) erros.push(m.text()); });
     p.on("response", (r) => { if (r.url().startsWith(base) && r.status() >= 400) ruins.push(r.status() + " " + r.url().slice(base.length)); });
-    await p.goto(base + "/", { waitUntil: "load" });
+    await p.goto(base + "/inicio", { waitUntil: "load" });
 
     // carrega todas as imagens preguiçosas rolando a página
     const altura = await p.evaluate(() => document.body.scrollHeight);
@@ -100,6 +102,32 @@ function servidor() {
       ok(!(await dock()), "barra some no rodapé");
     }
     ok(erros.length === 0, "zero erro de JavaScript" + (erros.length ? ": " + erros.join(" | ") : ""));
+    await p.close();
+  }
+
+  // 3. raiz = página de seleção (gerada pelo repositório hair-business-, 17/10/2026): os dois emblemas levam a
+  //    /business e /beauty, o botão pequeno a /business/assessoria, e os três destinos abrem.
+  console.log("\nraiz (seleção):");
+  for (const [nome, vp] of [["celular", { width: 390, height: 844 }], ["computador", { width: 1440, height: 900 }]]) {
+    const p = await browser.newPage({ viewport: vp });
+    const erros = [], ruins = [];
+    p.on("pageerror", (e) => erros.push(e.message));
+    p.on("console", (m) => { if (m.type() === "error" && !/googletagmanager|net::ERR|Failed to load resource/.test(m.text())) erros.push(m.text()); });
+    p.on("response", (r) => { if (r.url().startsWith(base) && r.status() >= 400) ruins.push(r.status() + " " + r.url().slice(base.length)); });
+    await p.goto(base + "/", { waitUntil: "load" });
+    await p.waitForTimeout(400);
+    const links = await p.evaluate(() => [...document.querySelectorAll("a.emblema, a.esc-assessoria")].map((a) => a.getAttribute("href")).join(" "));
+    ok(links === "/business /beauty /business/assessoria", `${nome}: raiz leva a /business, /beauty e /business/assessoria (${links})`);
+    const lado = await p.evaluate(() => { const [a, b] = document.querySelectorAll("a.emblema"); const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect(); return rb.left >= ra.right - 1 && Math.abs(ra.top - rb.top) < 4 ? "lado" : rb.top >= ra.bottom - 1 ? "pilha" : "?"; });
+    ok(lado === (vp.width >= 760 ? "lado" : "pilha"), `${nome}: emblemas ${vp.width >= 760 ? "lado a lado" : "empilhados"} (${lado})`);
+    const quebradas = await p.evaluate(() => [...document.images].filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.getAttribute("src")));
+    ok(quebradas.length === 0, `${nome}: emblemas e fundo carregam` + (quebradas.length ? ": " + quebradas.join(", ") : ""));
+    ok(ruins.length === 0, `${nome}: nenhum arquivo local com erro na raiz` + (ruins.length ? ": " + ruins.join(", ") : ""));
+    for (const rota of ["/business", "/beauty", "/business/assessoria"]) {
+      const r = await p.goto(base + rota, { waitUntil: "load" });
+      ok(!!r && r.status() === 200 && (await p.title()).length > 0, `${nome}: ${rota} abre (${r && r.status()})`);
+    }
+    ok(erros.length === 0, `${nome}: zero erro de JavaScript na raiz` + (erros.length ? ": " + erros.join(" | ") : ""));
     await p.close();
   }
 

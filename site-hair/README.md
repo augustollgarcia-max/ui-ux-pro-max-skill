@@ -14,7 +14,9 @@ Precisa ser servido por HTTP: as fontes auto-hospedadas são bloqueadas por CORS
 
 ## Estrutura
 
-- `index.html` — página completa (HTML + CSS + JS inline, sem dependências externas)
+- `index.html` — **raiz do site = página de seleção** (dois emblemas: Business Barber → `/business`, Business Beauty → `/beauty`; botão pequeno Assessoria). **Gerada** pelo repositório `hair-business-` (`site/escolha.html` via `site/publicar-www.sh`): não editar à mão. Decisão do dono em 17/10/2026.
+- `inicio.html` — a landing completa da HAIR Academia (HTML + CSS + JS inline, sem dependências externas), hoje em `/inicio`; é ela que o contrato (`scripts/site-hair/`) protege. `/barbearia/ribeirao` continua caindo nela.
+- `beauty.html` — `/beauty` (HAIR Business Beauty), também gerada pelo `hair-business-`
 - `assets/fonts/` — Inter e Playfair Display auto-hospedadas (subsets latin)
 - `assets/*.webp` — imagens em uso, derivadas das fotos reais da HAIR
 - `assets/galeria/` — acervo fotográfico real da escola
@@ -45,7 +47,7 @@ CTAs de aluno apontam para `https://app.hairacademiadabeleza.com.br`.
 `site-hair/business/` é **gerado**, não se edita à mão. A fonte é o repositório
 `augustollgarcia-max/hair-business-` (`site/gerar.py` + `site/estilo.css`); de lá, `sh site/publicar-www.sh`
 copia o site para esta pasta já com links absolutos `/business/...` e sem `.html` (o `vercel.json` daqui usa `cleanUrls`).
-Páginas: `/business` (HAIR Business + Beauty), `/business/business`, `/business/beauty`, `/business/historia`,
+Páginas: `/business` (página Barber; `/business/business` redireciona para ela), `/beauty` (Beauty; `/business/beauty` redireciona), `/business/completo` (o antigo hub Business + Beauty, sem link), `/business/historia`,
 `/business/assessoria`, `/business/apps`, `/business/mestre-0{1..4}-*` e `/business/beauty-0{5,6}-*`.
 O `vercel.json` tem uma CSP própria para `/business(.*)` (Google Fonts e a função `hara-vision-teste` do Supabase);
 a home e as demais páginas não foram alteradas.
