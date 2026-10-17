@@ -217,6 +217,11 @@ details.avanc .f{margin-top:12px}
   .profile .layout{grid-template-columns:1.2fr .8fr}.inv .split{grid-template-columns:1fr auto;align-items:center}
   .section{padding:84px 0}
 }
+/* 17/10 (print do Augusto, celular 412px): o botão do polo cobria as letras de "VÉRTICE GROUP". Em telas estreitas o
+   cabeçalho vira duas linhas: marca + Área do parceiro em cima, botão do polo embaixo. */
+@media (max-width:620px){.nav .shell{flex-wrap:wrap;row-gap:8px;padding-top:10px;padding-bottom:10px;min-height:0}.brand{order:1;flex:1 1 auto;min-width:0}.brand small{display:none}.brand strong{font-size:17px}.nav .cta.mini{order:2;flex:none}.city-wrap{order:3;flex:1 1 100%}.city-button{width:auto;max-width:100%}.city-button strong{max-width:none}}
+/* celular estreito (≤400px): marca sozinha em cima; polo + Área do parceiro na 2ª linha */
+@media (max-width:400px){.brand{flex:1 1 100%}.city-wrap{order:2;flex:1 1 auto}.nav .cta.mini{order:3}.city-button small{display:none}.city-button{padding:7px 10px}.city-button strong{max-width:110px}}
 @media (max-width:420px){.brand small{display:none}.city-button{padding:7px 10px;gap:7px}.city-button strong{max-width:96px;font-size:11px}.city-button small{font-size:8px;letter-spacing:.08em}.nav .cta.mini{padding:0 10px;font-size:10px}}
 /* lista do Conexão Work (área do parceiro) e botão em forma de link */
 ul.work{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px}
