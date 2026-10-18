@@ -192,7 +192,8 @@ function servidor() {
     ok(await pg.locator("#hair-consent").isVisible(), "aviso de cookies aparece na primeira visita");
     ok(meta.length === 0 && capi.length === 0, "nada vai para a Meta antes do aceite");
     await pg.click('#hair-consent [data-c="1"]');
-    await pg.waitForTimeout(400);
+    // O envio ao servidor espera o cookie _fbp por até ~1,5 s (aqui o fbevents.js é falso e nunca o cria).
+    await pg.waitForTimeout(1900);
     ok(meta.some((u) => u.includes("fbevents.js")), "aceitar carrega o Meta Pixel");
     ok(capi.some((e) => e.event_name === "PageView" && e.event_id), "PageView vai ao /api/meta-capi com event_id");
     ok(!capi.some((e) => e.event_name === "Lead"), "nenhum Lead só por abrir a página");
