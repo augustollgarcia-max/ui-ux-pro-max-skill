@@ -13,7 +13,8 @@ form{border:1px solid var(--border);border-radius:22px;padding:24px;background:#
 label{display:grid;gap:8px;font-weight:650;font-size:.9rem}input,select{border-radius:10px;border:1px solid #766555;background:#29231f;color:white;min-height:48px;padding:12px;font:inherit;width:100%}input:focus,select:focus{outline:2px solid var(--gold)}
 .check{display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-weight:400;font-size:.83rem;color:var(--muted)}.check input{width:19px;min-height:19px;flex:0 0 19px;margin-top:2px;accent-color:#bd9854}
 button{border:0;border-radius:10px;padding:16px;background:var(--gold);font:800 .86rem system-ui;letter-spacing:.04em;color:#211710;cursor:pointer}button:hover{background:#e7cc96}.help{font-size:.79rem;color:var(--muted)}footer{font-size:.77rem;padding:0 0 35px;color:var(--muted)}a{color:var(--gold)}.error{color:#ffb9ad;display:none}#confirmation{display:none;background:#223524;border-radius:14px;padding:15px;line-height:1.5}
-</style></head><body>
+</style><script src="/business/rastreio.js" defer></script>
+</head><body>
 <header><a href="/"><strong>HAIR</strong> <span>ACADEMIA DA BELEZA</span></a></header>
 <main><div class="kicker">HAIR Business • Experiência de formação</div>
 <h1>Quer ganhar um <span>corte gratuito</span> com um mestre especialista?</h1>
@@ -31,7 +32,7 @@ button{border:0;border-radius:10px;padding:16px;background:var(--gold);font:800 
 <p class="error" role="alert" id="error">Confira o telefone e preencha os campos obrigatórios.</p><button type="submit">Continuar pelo WhatsApp →</button>
 <div id="confirmation" role="status">O WhatsApp foi aberto. Envie a mensagem para completar seu interesse. A participação será confirmada apenas após contato da equipe.</div>
 </form>
-</main><footer>HAIR Academia da Beleza • Ribeirão Preto/SP • Atendimento via WhatsApp <a href="https://wa.me/5516991687977"> (16) 99168-7977</a></footer>
+</main><footer>HAIR Academia da Beleza • Ribeirão Preto/SP • Atendimento via WhatsApp <a href="https://wa.me/5516992558810"> (16) 99255-8810</a></footer>
 <script>
 (function(){
 const form=document.getElementById('lead-form'),select=document.getElementById('academy'),error=document.getElementById('error');
@@ -43,7 +44,7 @@ if(name.length<2){error.style.display='block';return;}
 const origin=new URLSearchParams(location.search).get('utm_source')||'site';
 const msg=['Olá, HAIR! Quero participar da seleção de modelos para workshop.','Nome: '+name,'WhatsApp: +55'+digits,'Educador: '+edu,'Disponibilidade: '+document.getElementById('availability').value,'Origem: '+origin.slice(0,40),'Autorizo contato sobre esta inscrição.','Novidades de cursos: '+(document.getElementById('marketing').checked?'Sim':'Não')].join('\n');
 document.getElementById('confirmation').style.display='block';
-window.location.href='https://wa.me/5516991687977?text='+encodeURIComponent(msg);
+window.location.href='https://wa.me/5516992558810?text='+encodeURIComponent(msg);
 });
 })();
 </script></body></html>

@@ -7,7 +7,7 @@ Os apps (Conexão Hair / Work) são outro repositório e **não** passam por aqu
 ## Regras
 1. Sempre em branch + PR. Nunca direto na `main`.
 2. O PR só passa se os dois testes ficarem verdes (workflow `site-hair-contrato.yml`).
-3. WhatsApp público é só `5516991687977`. Conversões do Google Ads (`AW-799342935/...`)
+3. WhatsApp público é só `5516992558810` (18/10/2026; o 7977 do robô RARA é proibido no site pela guarda `checar-whatsapp-landings.sh`). Conversões do Google Ads (`AW-799342935/...`)
    ficam nos mesmos botões: `data-wa-generic`, `data-wa-consultoria`, `data-budget`,
    `data-enrollment`, `data-route`.
 
