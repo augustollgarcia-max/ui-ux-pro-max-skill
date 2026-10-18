@@ -23,6 +23,7 @@ module.exports = async function handler(req, res) {
   if (typeof b.fbp === 'string' && /^fb\.\d\.\d+\.\d+$/.test(b.fbp)) user.fbp = b.fbp;
   if (typeof b.fbc === 'string' && /^fb\.\d\.\d+\.[\w-]+$/.test(b.fbc)) user.fbc = b.fbc.slice(0, 300);
   if (typeof b.ph === 'string' && /^[a-f0-9]{64}$/.test(b.ph)) user.ph = [b.ph];
+  if (typeof b.external_id === 'string' && /^[a-f0-9]{64}$/.test(b.external_id)) user.external_id = [b.external_id];
 
   const custom = {};
   if (b.custom_data && typeof b.custom_data === 'object') {

@@ -40,6 +40,9 @@
       var v = q.get(k);
       if (v && (k !== 'fbclid' || ls(CHAVE) === 'granted')) { o[k] = v.slice(0, 120); tem = true; }
     });
+    // Anúncio da Meta sem UTM: o clique chega só com fbclid. Marca a origem (não o identificador)
+    // para o CRM separar lead de anúncio de lead orgânico.
+    if (q.get('fbclid') && !q.get('utm_source')) { o.utm_source = 'meta'; o.utm_medium = 'paid'; tem = true; }
     if (tem) { o.t = Date.now(); ls(UTMK, JSON.stringify(o)); }
   }
   guardarOrigem();
@@ -64,17 +67,48 @@
       fetch(CAPI, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: s, keepalive: true }).catch(function () {});
     } catch (e) {}
   }
+  // _fbc vem do clique no anúncio (fbclid). O fbevents.js grava o cookie de forma assíncrona,
+  // então na 1ª página ele ainda não existe: montamos no formato oficial a partir do fbclid.
+  function fbcAtual() {
+    var c = cookie('_fbc'); if (c) return c;
+    var f = new URLSearchParams(location.search).get('fbclid'), o = origem(), t = Date.now();
+    if (!f && o && o.fbclid) { f = o.fbclid; t = o.t || t; }
+    return f ? 'fb.1.' + t + '.' + f : '';
+  }
+  // _fbp também nasce do fbevents.js: espera até ~1,5 s antes de mandar ao servidor.
+  // Se a pessoa sai da página antes (ex.: clique que abre o WhatsApp), manda na hora,
+  // sem _fbp, para o evento não se perder.
+  var esperando = [];
+  function comCookies(cb) {
+    if (cookie('_fbp')) return cb();
+    var item = { cb: cb, n: 0 };
+    esperando.push(item);
+    (function tenta() {
+      if (esperando.indexOf(item) < 0) return;
+      if (cookie('_fbp') || item.n++ >= 10) { esperando.splice(esperando.indexOf(item), 1); return cb(); }
+      setTimeout(tenta, 150);
+    })();
+  }
+  function soltarEsperando() {
+    var lista = esperando.splice(0);
+    lista.forEach(function (item) { item.cb(); });
+  }
+  w.addEventListener('pagehide', soltarEsperando);
+  d.addEventListener('visibilitychange', function () { if (d.visibilityState === 'hidden') soltarEsperando(); });
   function entregar(ev) {
     if (!w.hairConsentGranted()) return;
     try { w.fbq('track', ev.nome, ev.dados, { eventID: ev.id }); } catch (e) {}
-    var corpo = { event_name: ev.nome, event_id: ev.id, event_source_url: ev.url,
-      custom_data: ev.dados, fbp: cookie('_fbp'), fbc: cookie('_fbc') };
-    if (ev.telefone) {
-      sha256('55' + String(ev.telefone).replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '')).then(function (h) {
-        if (h) corpo.ph = h;
-        enviar(corpo);
-      });
-    } else enviar(corpo);
+    // Contact costuma vir junto com a saída para o WhatsApp: vai na hora, sem esperar o cookie.
+    (ev.nome === 'Contact' ? function (cb) { cb(); } : comCookies)(function () {
+      var corpo = { event_name: ev.nome, event_id: ev.id, event_source_url: ev.url,
+        custom_data: ev.dados, fbp: cookie('_fbp'), fbc: fbcAtual() };
+      if (ev.telefone) {
+        sha256('55' + String(ev.telefone).replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '')).then(function (h) {
+          if (h) { corpo.ph = h; corpo.external_id = h; }
+          enviar(corpo);
+        });
+      } else enviar(corpo);
+    });
     if (ev.nome === 'Contact' && !ev.skipGoogle) {
       w.gtag('event', 'conversion', { send_to: WHATSAPP, transport_type: 'beacon' });
     } else if (ev.nome === 'Lead') {
