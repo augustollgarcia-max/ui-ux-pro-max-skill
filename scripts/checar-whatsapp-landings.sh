@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 # Guarda das landings publicadas (site-hair/ = www.hairacademiadabeleza.com.br).
-# Decisão do Augusto em 06/10/2026:
-#  - destino de WhatsApp das landings é só o 5516991687977 (7977);
-#  - 5516994612453 (2453) é o contato humano da RARA (existe, fica no robô),
-#    mas NÃO é destino de landing; 5516996240005 não é usado. Nenhum dos dois
-#    pode aparecer em página publicada;
-#  - nada de Meta (Pixel/fbq/Conversions API): o 7977 roda em sessão não
-#    oficial e não pode ficar associado a rastreio da Meta.
+# Decisão do Augusto em 18/10/2026 (substitui a de 06/10/2026):
+#  - o WhatsApp do site é só o 5516992558810 ((16) 99255-8810), número comercial;
+#  - o 5516991687977 (7977) é o robô RARA em sessão não oficial (Baileys) e NÃO
+#    pode aparecer em página publicada — por isso o site pode ter Meta Pixel e
+#    Conversions API (o rastreio nunca fica associado ao 7977);
+#  - 5516994612453 (2453, contato humano da RARA) e 5516996240005 também não
+#    são destino de landing.
 set -eu
 DIR="${1:-site-hair}"
 FALHOU=0
@@ -15,7 +15,7 @@ check() {
     echo "PROIBIDO ($2):"; cat /tmp/guarda.$$; FALHOU=1
   fi
 }
-check '994612453|99461[ .-]?2453|996240005|99624[ .-]?0005' 'numero que nao e destino de landing (so 7977)'
-check 'fbq\(|connect\.facebook\.net|fbevents\.js|facebook-domain-verification|graph\.facebook\.com' 'rastreio da Meta'
+check '991687977|99168[ .-]?7977' 'numero do robo RARA (7977) em pagina publicada'
+check '994612453|99461[ .-]?2453|996240005|99624[ .-]?0005' 'numero que nao e destino de landing (so 8810)'
 rm -f /tmp/guarda.$$
-[ "$FALHOU" = 0 ] && echo "OK: landings sem numero desativado e sem Meta." || exit 1
+[ "$FALHOU" = 0 ] && echo "OK: landings sem 7977 e sem numero desativado." || exit 1

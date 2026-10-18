@@ -39,7 +39,7 @@ Substitua o arquivo em `assets/` mantendo o nome. Os slots são:
 
 ## Contato configurado
 
-WhatsApp **(16) 99168-7977** (`5516991687977`), com mensagem pré-preenchida por curso.
+WhatsApp **(16) 99255-8810** (`5516992558810`), com mensagem pré-preenchida por curso. Desde 18/10/2026 (decisão do Augusto) o 7977 — robô RARA, sessão não oficial — não aparece mais no site, e o site tem Meta Pixel + Conversions API (`/business/rastreio.js` + `api/meta-capi.js`), só depois do aceite de cookies e com eventos só em ação real (PageView, ViewContent, Contact no toque do WhatsApp, Lead na HARA Vision concluída). A CAPI fica inerte até existir `META_CAPI_TOKEN` nas variáveis do Vercel.
 CTAs de aluno apontam para `https://app.hairacademiadabeleza.com.br`.
 
 ## HAIR Business (`business/`) — 16/10/2026

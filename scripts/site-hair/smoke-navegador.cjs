@@ -18,7 +18,7 @@ const SITE = process.env.SITE_HAIR_DIR || path.join(__dirname, "..", "..", "site
 const TIPOS = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript",
   ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp",
   ".woff2": "font/woff2", ".json": "application/json", ".mp3": "audio/mpeg" };
-const WA = "https://wa.me/5516991687977";
+const WA = "https://wa.me/5516992558810";
 
 function servidor() {
   return new Promise((ok) => {
@@ -42,6 +42,10 @@ function servidor() {
   const browser = await chromium.launch(process.env.CHROMIUM_BIN ? { executablePath: process.env.CHROMIUM_BIN } : {});
   const falhas = [];
   const ok = (cond, nome) => { console.log((cond ? "  ✓ " : "  ✗ ") + nome); if (!cond) falhas.push(nome); };
+  // O aviso de cookies (rastreio.js) fica preso no rodapé: os testes abaixo entram já com "Recusar" escolhido,
+  // e a seção "Cookies" no fim confere o aviso e o aceite separadamente.
+  const novaPagina = browser.newPage.bind(browser);
+  browser.newPage = async (o) => { const pg = await novaPagina(o); await pg.addInitScript(() => { try { localStorage.setItem("hair_consent_v1", "denied"); } catch (e) {} }); return pg; };
   const rolar = (p, y) => p.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), y);
 
   // 1. sem rolagem lateral em nenhuma largura — na landing completa (/inicio) e na raiz (seleção)
@@ -70,7 +74,7 @@ function servidor() {
     ok(quebradas.length === 0, "nenhuma imagem quebrada" + (quebradas.length ? ": " + quebradas.join(", ") : ""));
     ok(ruins.length === 0, "nenhum arquivo local com erro" + (ruins.length ? ": " + ruins.join(", ") : ""));
 
-    ok(await p.evaluate((wa) => [...document.querySelectorAll("[data-wa-generic],[data-wa-consultoria]")].every((a) => a.href.startsWith(wa)), WA), "todos os botões de WhatsApp apontam para o 7977");
+    ok(await p.evaluate((wa) => [...document.querySelectorAll("[data-wa-generic],[data-wa-consultoria]")].every((a) => a.href.startsWith(wa)), WA), "todos os botões de WhatsApp apontam para o 8810");
     ok(await p.evaluate(() => typeof window.gtag === "function"), "gtag do Google Ads carregado");
 
     await rolar(p, 0);
@@ -171,6 +175,23 @@ function servidor() {
     await p.close();
   }
 
+  // Cookies: nada da Meta antes do aceite; aceitar liga o Pixel e manda o evento ao /api/meta-capi
+  console.log("Cookies:");
+  {
+    const pg = await novaPagina({ viewport: { width: 390, height: 844 } });
+    const meta = [], capi = [];
+    await pg.route("https://connect.facebook.net/**", (r) => { meta.push(r.request().url()); r.fulfill({ status: 200, contentType: "text/javascript", body: "" }); });
+    await pg.route("**/api/meta-capi", (r) => { capi.push(JSON.parse(r.request().postData() || "{}")); r.fulfill({ status: 204, body: "" }); });
+    await pg.goto(base + "/business", { waitUntil: "load" });
+    ok(await pg.locator("#hair-consent").isVisible(), "aviso de cookies aparece na primeira visita");
+    ok(meta.length === 0 && capi.length === 0, "nada vai para a Meta antes do aceite");
+    await pg.click('#hair-consent [data-c="1"]');
+    await pg.waitForTimeout(400);
+    ok(meta.some((u) => u.includes("fbevents.js")), "aceitar carrega o Meta Pixel");
+    ok(capi.some((e) => e.event_name === "PageView" && e.event_id), "PageView vai ao /api/meta-capi com event_id");
+    ok(!capi.some((e) => e.event_name === "Lead"), "nenhum Lead só por abrir a página");
+    await pg.close();
+  }
   await browser.close();
   srv.close();
   console.log(falhas.length ? `\nFALHOU: ${falhas.length} verificação(ões).` : "\nOK: site íntegro no navegador.");

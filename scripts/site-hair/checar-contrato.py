@@ -24,7 +24,7 @@ PAGINA = os.path.join(SITE, "inicio.html")
 RAIZ_SELECAO = os.path.join(SITE, "index.html")
 CONTRATO = os.path.join(AQUI, "contrato.json")
 
-WHATSAPP = "5516991687977"
+WHATSAPP = "5516992558810"
 ADS_ID = "AW-799342935"
 
 class Leitor(HTMLParser):
