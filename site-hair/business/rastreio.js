@@ -40,6 +40,9 @@
       var v = q.get(k);
       if (v && (k !== 'fbclid' || ls(CHAVE) === 'granted')) { o[k] = v.slice(0, 120); tem = true; }
     });
+    // Anúncio da Meta sem UTM: o clique chega só com fbclid. Marca a origem (não o identificador)
+    // para o CRM separar lead de anúncio de lead orgânico.
+    if (q.get('fbclid') && !q.get('utm_source')) { o.utm_source = 'meta'; o.utm_medium = 'paid'; tem = true; }
     if (tem) { o.t = Date.now(); ls(UTMK, JSON.stringify(o)); }
   }
   guardarOrigem();
