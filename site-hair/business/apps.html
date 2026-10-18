@@ -159,19 +159,23 @@ quer=!desligado;a.volume=ios?1:V0;
 function ui(){const tocando=!a.paused&&!a.ended;b.classList.toggle("on",tocando);b.classList.toggle("mudo",desligado);b.setAttribute("aria-pressed",String(tocando));b.setAttribute("aria-label",tocando?"Música de fundo: desligar":"Música de fundo: ligar")}
 function salvar(){try{sessionStorage.setItem(K,JSON.stringify({on:quer&&!desligado&&(!a.paused||document.hidden||cedido),t:a.currentTime||0,at:Date.now()}))}catch(e){}}
 function subir(){if(ios)return;cancelAnimationFrame(rampa);const t0=performance.now(),v0=a.volume;(function f(t){const k=Math.min(1,(t-t0)/RAMPA);a.volume=Math.min(V1,v0+(V1-v0)*(1-Math.pow(1-k,2)));if(k<1&&!a.paused)rampa=requestAnimationFrame(f)})(t0)}
-function tocar(){a.preload="auto";let p;try{p=a.play()}catch(e){p=Promise.reject(e)}if(!p||!p.then)p=Promise.resolve();ui();return p.then(()=>{ui();salvar();subir();return true}).catch(()=>{ui();return false})}
+const SIL=(a.getAttribute("src")||"").replace(/trilha\.mp3$/,"silencio.wav");  // arquivo do próprio site: a CSP do www bloqueia data: em media-src
+// Sonda: um WAV de silêncio de 60 ms. Se o navegador deixa tocar sem toque, carrega a música; se barra, NADA é baixado até o 1º toque
+// (antes, play() barrado já puxava os 3,8 MB da trilha e as fotos ficavam esperando na fila do celular).
+function pode(){return new Promise(r=>{let t;try{t=new Audio(SIL);t.volume=.5;const p=t.play();if(!p||!p.then){r(true);return}p.then(()=>{try{t.pause()}catch(e){}r(true)}).catch(()=>r(false))}catch(e){r(false)}})}
+function tocar(){a.preload="auto";let p;try{p=a.play();ui()}catch(e){p=Promise.reject(e)}if(!p||!p.then)p=Promise.resolve();return p.then(()=>{ui();salvar();subir();return true}).catch(()=>{ui();return false})}
 function parar(){cancelAnimationFrame(rampa);a.pause();ui();salvar()}
 function armar(){if(armado)return;armado=true;const evs=["pointerup","touchend","keydown","click"];const h=ev=>{if(ev.target.closest&&ev.target.closest('.som-btn'))return;if(desligado||!quer||!a.paused||cedido)return;tocar().then(ok=>{if(ok)evs.forEach(n=>removeEventListener(n,h,true))})};evs.forEach(n=>addEventListener(n,h,{capture:true,passive:true}))}
 let sess=null;try{sess=JSON.parse(sessionStorage.getItem(K)||"null")}catch(e){}
 if(!desligado){armar();if(escolha){tocar()}else if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
 let tent=0;const pos=()=>{if(tent>6)return;const t=alvo();if(t==null)return;if(Math.abs(a.currentTime-t)>2){tent++;try{a.currentTime=t}catch(e){}}};
-["loadedmetadata","loadeddata","canplay","playing","seeked"].forEach(n=>a.addEventListener(n,pos));a.preload="auto";a.load();tocar().then(ok=>{if(!ok)armar()})}
-else{const v=document.getElementById("capaVideo");let ini=false;const iniciar=ms=>{if(ini)return;ini=true;setTimeout(()=>{if(!desligado&&quer&&a.paused&&!cedido)tocar().then(ok=>{if(!ok)armar()})},ms)};
+["loadedmetadata","loadeddata","canplay","playing","seeked"].forEach(n=>a.addEventListener(n,pos));pode().then(ok=>{if(!ok)return;a.preload="auto";a.load();tocar()})}
+else{const v=document.getElementById("capaVideo");let ini=false;const iniciar=ms=>{if(ini)return;ini=true;setTimeout(()=>{if(!(!desligado&&quer&&a.paused&&!cedido))return;pode().then(ok=>{if(ok)tocar()})},ms)};
 if(v){v.addEventListener("playing",()=>iniciar(1000),{once:true});if(!v.paused&&v.currentTime>0)iniciar(1000);setTimeout(()=>iniciar(0),2500)}else iniciar(1000)}}
 ui();
 b.addEventListener("click",e=>{e.stopPropagation();if(!a.paused){desligado=true;quer=false;try{sessionStorage.setItem(KOFF,"1")}catch(e2){}parar()}else{desligado=false;quer=true;cedido=false;try{sessionStorage.removeItem(KOFF)}catch(e2){}tocar()}});
 a.addEventListener("play",ui);a.addEventListener("pause",ui);a.addEventListener("timeupdate",()=>{if(!a.paused&&a.currentTime>1&&(a.currentTime|0)%5===0)salvar()});
-addEventListener("pagehide",salvar);document.addEventListener("visibilitychange",()=>{if(document.hidden){if(!a.paused){a.pause();salvar()}}else if(quer&&!desligado&&!cedido&&a.paused)tocar()});
+addEventListener("pagehide",salvar);document.addEventListener("visibilitychange",()=>{if(document.hidden){if(!a.paused){a.pause();salvar()}}else if(quer&&!desligado&&!cedido&&a.paused)pode().then(ok=>{if(ok)tocar()})});
 // vídeos com som (vídeo da história, práticas): a trilha dá lugar e volta depois
 document.querySelectorAll("video").forEach(v=>{const comSom=()=>!v.paused&&!v.ended&&!v.muted&&v.volume>0;
 const checa=()=>{if(comSom()){if(!a.paused){cedido=true;a.pause();ui()}}else if(cedido){cedido=false;if(quer&&!desligado)tocar()}};

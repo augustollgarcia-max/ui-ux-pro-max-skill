@@ -811,6 +811,13 @@ body.escolha{background:#050505;min-height:100vh;min-height:100svh;--rose:#e4b7a
   .esc-pe .esc-assessoria,.esc-nota a,.esc-nota span{min-height:36px}
 }
 @media (prefers-reduced-motion:reduce){.emblema img,.esc-pe .esc-assessoria{transition:none}}
+/* Celular: fundos em foto usam a versão de 800 px (img/m/), gerada por gerar.py (16/10, mais leve) */
+@media (max-width:700px){[style*="--img-m:"]{--img:var(--img-m)!important}[style*="--bg-m:"]{--bg:var(--bg-m)!important}}
+
+/* Área de toque mínima de 24 px (WCAG 2.2, 2.5.8) nos links soltos pequenos, sem mudar o desenho: só a área clicável cresce (18/10, auditoria) */
+.footer a,.brand,.nav a,.crumbs a{position:relative}
+.footer a::after,.brand::after,.crumbs a::after{content:"";position:absolute;inset:-8px -4px}
+@media (max-width:959px){.nav a::after{content:"";position:absolute;inset:-6px -2px}}
 
 /* Janela "Libere os perfis dos Mestres" (gate-mestres.js, 18/10/2026) */
 .gate{position:fixed;inset:0;z-index:2147483100;background:rgba(4,5,4,.82);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
@@ -837,3 +844,16 @@ body.escolha{background:#050505;min-height:100vh;min-height:100svh;--rose:#e4b7a
 .railnav button:focus-visible,.postrail:focus-visible,.gal:focus-visible{outline:2px solid var(--soft);outline-offset:3px}
 /* Links dentro de texto corrido mantêm o metal da marca e uma indicação além da cor. */
 p a:not(.btn){text-decoration:underline;text-underline-offset:3px}
+
+/* Beauty, 18/10: número mais sutil nas faixas de rosto, "Em construção" e seções novas */
+.rose .tira .cap b{font:500 10px/1 var(--sans);letter-spacing:.2em;color:var(--soft);opacity:.75}
+.tira.em-construcao .monogram{font-size:clamp(22px,4vw,40px);opacity:.28}
+.pcard.construction .monogram{opacity:.18}
+.bgal{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.bgal figure{margin:0}.bgal img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;display:block;background:#0d0f0c}
+.bgal figcaption{font-size:13px;line-height:1.45;color:var(--muted);margin-top:8px}
+@media (min-width:900px){.bgal{grid-template-columns:repeat(4,1fr);gap:18px}}
+.blogos{display:flex;gap:14px;align-items:center;margin-top:18px}.blogos img{height:64px;width:auto;border-radius:6px;background:#fff;object-fit:contain}
+.blogos img+img{background:none}
+.bprods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.bprods figure{margin:0}.bprods img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;border-radius:4px}
+.bwork .arte img{width:100%;height:auto;display:block}
