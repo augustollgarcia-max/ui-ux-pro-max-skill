@@ -14,19 +14,33 @@
   var w = window, d = document;
   if (w.__hairGate) return; w.__hairGate = 1;
   var OK = 'hair_mestres_ok_v1', PEND = 'hair_mestres_pend_v1';
-  var RPC = 'https://zoyyfvfvnxrpojhypsjh.supabase.co/rest/v1/rpc/registrar_lead_site';
+  var BASE = 'https://zoyyfvfvnxrpojhypsjh.supabase.co/rest/v1/rpc/';
+  // v2 (migration 20261018090000) guarda UTMs/academia e devolve o id do lead; enquanto não estiver aplicada,
+  // o banco responde 404 e cai na v1, que já está no ar. Nada se perde nos dois casos.
+  var RPC2 = BASE + 'registrar_lead_site_v2', RPC1 = BASE + 'registrar_lead_site';
   var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpveXlmdmZ2bnhycG9qaHlwc2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwMTEwMzEsImV4cCI6MjA5NzU4NzAzMX0.gM5qLWnbKMeaHQ5fvBXM8FOHpB2rMrBmZOwfFUqK7D8';
   function ls(k, v){ try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch(e){ return null; } }
   function liberado(){ return ls(OK) === '1' || /(?:^|; )hair_mestres_ok=1/.test(d.cookie); }
   function marcar(){ ls(OK, '1'); try { d.cookie = 'hair_mestres_ok=1; max-age=31536000; path=/; SameSite=Lax; Secure'; } catch(e){} }
   var paginaMestre = /\/mestre-0\d/.test(location.pathname);
 
+  // Academia da página (para o CRM e para os eventos da Meta)
+  var ACADEMIA = /\/mestre-01-/.test(location.pathname) ? 'LAN' : /\/mestre-02-/.test(location.pathname) ? 'WOLF'
+               : /\/mestre-03-/.test(location.pathname) ? 'ROSATTI' : /\/mestre-04-/.test(location.pathname) ? 'SHARPER' : '';
+  function post(url, corpo){ return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: ANON, Authorization: 'Bearer ' + ANON }, body: JSON.stringify(corpo), keepalive: true }); }
+  // Resolve com o id do lead (v2), true (v1) ou rejeita. O lead só conta depois que o banco confirma.
   function enviar(dados){
-    return fetch(RPC, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: ANON, Authorization: 'Bearer ' + ANON }, body: JSON.stringify(dados), keepalive: true })
-      .then(function(r){ if (!r.ok) throw new Error(r.status); ls(PEND, null); })
-      .catch(function(){ ls(PEND, JSON.stringify(dados)); });
+    var v1 = { p_nome: dados.p_nome, p_whatsapp: dados.p_whatsapp, p_origem: dados.p_origem, p_pagina: dados.p_pagina };
+    return post(RPC2, dados)
+      .then(function(r){ if (r.status === 404) return post(RPC1, v1); return r; })
+      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(res){ if (res === false || res === null) throw new Error('recusado'); ls(PEND, null); return res; })
+      .catch(function(e){ ls(PEND, JSON.stringify(dados)); throw e; });
   }
-  var pend = ls(PEND); if (pend){ try { enviar(JSON.parse(pend)); } catch(e){ ls(PEND, null); } }
+  function lead(dados, res){ // evento Lead da Meta só com o lead gravado; event_id = id do lead quando a v2 devolve
+    if (w.hairTrack) w.hairTrack('Lead', { content_name: 'Perfis dos Mestres', content_category: 'barbearia', academy: ACADEMIA || 'site', _telefone: dados.p_whatsapp, _event_id: typeof res === 'string' ? res : undefined });
+  }
+  var pend = ls(PEND); if (pend){ try { var dp = JSON.parse(pend); enviar(dp).then(function(res){ lead(dp, res); }, function(){}); } catch(e){ ls(PEND, null); } }
 
   var janela, alvo = null;
   function montar(){
@@ -54,8 +68,10 @@
       if (dig.length < 10 || dig.length > 11 || /^0/.test(dig)){ erro.textContent = 'Confira o WhatsApp: DDD + número, como (16) 99999-9999.'; erro.hidden = false; zap.focus(); return; }
       erro.hidden = true;
       var tel = '55' + dig;
-      enviar({ p_nome: nome, p_whatsapp: tel, p_origem: 'Site · Mestres HAIR Business', p_pagina: location.pathname });
-      if (w.hairTrack) w.hairTrack('Lead', { content_name: 'Perfis dos Mestres', content_category: 'barbearia', _telefone: tel });
+      var o = (w.hairOrigem && w.hairOrigem()) || {}, utm = { academy: ACADEMIA };
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){ if (o[k]) utm[k] = String(o[k]).slice(0, 120); });
+      var dados = { p_nome: nome, p_whatsapp: tel, p_origem: 'Site · Mestres HAIR Business', p_pagina: location.pathname, p_utm: utm };
+      enviar(dados).then(function(res){ lead(dados, res); }, function(){});
       marcar(); fechar(true);
     });
   }

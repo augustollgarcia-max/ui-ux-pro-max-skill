@@ -17,8 +17,11 @@
   var q; try { q = new URLSearchParams(location.search); } catch(e){ q = null; }
   if (q){ var u = {}, tem = false;
     ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){ var v = q.get(k); if (v){ u[k] = v.slice(0,120); tem = true; } });
-    if (tem){ u.t = Date.now(); ls(UTMK, JSON.stringify(u)); } }
+    // fbclid é identificador da Meta: só fica guardado se a pessoa já aceitou os cookies
+    if (u.fbclid && ls(CHAVE) !== 'granted') delete u.fbclid;
+    if (tem && Object.keys(u).length){ u.t = Date.now(); ls(UTMK, JSON.stringify(u)); } }
   function origem(){ try { var o = JSON.parse(ls(UTMK) || 'null'); if (o && Date.now() - o.t < 30*864e5) return o; } catch(e){} return null; }
+  w.hairOrigem = origem; // a janela dos Mestres manda as UTMs junto com o lead para o CRM
 
   // 2. o que é esta página
   var p = location.pathname.replace(/\/+$/, '') || '/';
@@ -26,6 +29,8 @@
           : p === '/beauty' || /^\/business\/beauty-0/.test(p) ? 'beauty'
           : p === '/inicio' || p === '/alisamento' ? 'cursos'
           : p.indexOf('/vertice') === 0 ? 'parceria' : null;
+  // academia LAN/WOLF (anúncios 18/10/2026): vai em todos os eventos das páginas desses Mestres
+  var ACAD = /\/mestre-01-/.test(p) ? 'LAN' : /\/mestre-02-/.test(p) ? 'WOLF' : /\/mestre-03-/.test(p) ? 'ROSATTI' : /\/mestre-04-/.test(p) ? 'SHARPER' : null;
 
   // 3. eventos
   var ativo = false, fila = [];
@@ -37,9 +42,10 @@
     fetch(CAPI, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: s, keepalive: true }).catch(function(){}); } catch(e){} }
   function track(nome, dados){
     if (!ativo){ fila.push([nome, dados]); return; }
-    dados = dados || {}; var tel = dados._telefone; delete dados._telefone;
+    dados = dados || {}; var tel = dados._telefone, eid = dados._event_id; delete dados._telefone; delete dados._event_id;
+    if (ACAD && !dados.academy) dados.academy = ACAD;
     var o = origem(); if (o && o.utm_campaign) dados.utm_campaign = o.utm_campaign;
-    var ev = id();
+    var ev = eid || id();
     try { w.fbq('track', nome, dados, { eventID: ev }); } catch(e){}
     var corpo = { event_name: nome, event_id: ev, event_source_url: location.href, custom_data: dados, fbp: cookie('_fbp'), fbc: cookie('_fbc') };
     if (tel){ sha256('55' + String(tel).replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '')).then(function(h){ if (h) corpo.ph = h; enviar(corpo); }); }
@@ -52,7 +58,7 @@
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(w,d,'script','https://connect.facebook.net/en_US/fbevents.js');
     w.fbq('init', PIXEL);
     track('PageView');
-    if (CAT) track('ViewContent', { content_name: d.title.slice(0, 100), content_category: CAT });
+    if (CAT || ACAD) track('ViewContent', { content_name: d.title.slice(0, 100), content_category: CAT || 'barbearia' });
     var f = fila; fila = []; f.forEach(function(x){ track(x[0], x[1]); });
   }
 

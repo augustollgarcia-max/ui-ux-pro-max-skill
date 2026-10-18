@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /anuncios/
 
 Sitemap: https://www.hairacademiadabeleza.com.br/sitemap.xml
