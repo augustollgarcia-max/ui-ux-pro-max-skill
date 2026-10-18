@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/business/estilo.css">
+<script src="/business/rastreio.js" defer></script>
 <!-- Google tag (gtag.js) — Google Ads AW-799342935 (mesma tag da home anterior, hoje em /inicio) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-799342935"></script>
 <script>
@@ -85,7 +86,7 @@ if(typeof gtag==='function')gtag('event','page_view',{page_location:location.hre
 // 16/10 (Augusto): vídeo do Instagram toca sozinho quando entra na tela; vídeo da história mostra o botão quando termina.
 (function(){document.querySelectorAll(".cupom-box").forEach(b=>{const pre=b.dataset.prefixo,out=b.querySelector(".cupom-codigo"),ger=b.querySelector("[data-gerar]"),ac=b.querySelector(".cupom-acoes"),cp=b.querySelector("[data-copiar]"),zap=b.querySelector("[data-zap]");
 const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";function gerar(){let s="";const r=new Uint32Array(4);(crypto.getRandomValues?crypto.getRandomValues(r):r.forEach((_,i)=>r[i]=Math.random()*1e9|0));for(let i=0;i<4;i++)s+=A[r[i]%A.length];return pre+"-"+s}
-ger.addEventListener("click",()=>{const c=gerar();out.textContent=c;b.classList.add("ok");ac.hidden=false;ger.textContent="Gerar outro";zap.href="https://wa.me/5516991687977?text="+encodeURIComponent("Olá! Quero o catálogo de produtos e utensílios com o cupom "+c+".")});
+ger.addEventListener("click",()=>{const c=gerar();out.textContent=c;b.classList.add("ok");ac.hidden=false;ger.textContent="Gerar outro";zap.href="https://wa.me/5516992558810?text="+encodeURIComponent("Olá! Quero o catálogo de produtos e utensílios com o cupom "+c+".")});
 cp.addEventListener("click",()=>{const c=out.textContent;(navigator.clipboard?navigator.clipboard.writeText(c):Promise.reject()).then(()=>{cp.textContent="Copiado ✓";setTimeout(()=>cp.textContent="Copiar código",1800)}).catch(()=>{const r=document.createRange();r.selectNodeContents(out);const sel=getSelection();sel.removeAllRanges();sel.addRange(r)})})})})();
 (function(){const v=document.querySelector(".vid-insta video");if(v&&"IntersectionObserver"in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{threshold:.35}).observe(v)}
 const h=document.querySelector(".hist-video video"),c=document.querySelector(".hv-cta");if(h&&c){const show=()=>{c.hidden=false;c.scrollIntoView({behavior:"smooth",block:"nearest"})};h.addEventListener("ended",show);h.addEventListener("error",()=>{c.hidden=false})}})();
@@ -187,7 +188,7 @@ if(!r.ok){st.textContent=j.error||'Não consegui analisar agora. Tente de novo e
 const q=(j.laudo||{}).image_quality||{};
 if(q.status==='insuficiente'){st.textContent=q.recommendation||'Não deu para analisar esta foto. Refaça com boa luz, fundo limpo e o perfil do corte.';return}
 try{localStorage.setItem(KEY,'1')}catch(e){}
-res.innerHTML=laudoHTML(j,d);res.hidden=false;st.textContent='Análise concluída.';res.scrollIntoView({behavior:'smooth',block:'nearest'});
+res.innerHTML=laudoHTML(j,d);res.hidden=false;if(window.hairTrack)window.hairTrack('Lead',{content_name:'Teste HARA Vision',content_category:'barbearia',_telefone:d});st.textContent='Análise concluída.';res.scrollIntoView({behavior:'smooth',block:'nearest'});
 }catch(e){// sem rede ou função fora: o lead não se perde, vai pro WhatsApp da HAIR
 const msg='Quero minha análise gratuita da HARA Vision.\nMeu WhatsApp: '+zap.value+'\n(Envio a foto do corte nesta conversa.)';
 window.open('https://wa.me/'+f.dataset.wa+'?text='+encodeURIComponent(msg),'_blank','noopener');
