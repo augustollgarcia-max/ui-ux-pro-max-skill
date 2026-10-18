@@ -1,0 +1,4 @@
+# Arquivos de trabalho que não são páginas do site: não publicar (auditoria 18/10/2026).
+# Antes eles eram servidos em www.hairacademiadabeleza.com.br/<nome>.md e /ref/...
+*.md
+ref/
