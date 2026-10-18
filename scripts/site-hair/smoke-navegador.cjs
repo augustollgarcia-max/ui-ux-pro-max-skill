@@ -17,7 +17,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_LIB || "playwright");
 const SITE = process.env.SITE_HAIR_DIR || path.join(__dirname, "..", "..", "site-hair");
 const TIPOS = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript",
   ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp",
-  ".woff2": "font/woff2", ".json": "application/json" };
+  ".woff2": "font/woff2", ".json": "application/json", ".mp3": "audio/mpeg" };
 const WA = "https://wa.me/5516991687977";
 
 function servidor() {
@@ -128,6 +128,46 @@ function servidor() {
       ok(!!r && r.status() === 200 && (await p.title()).length > 0, `${nome}: ${rota} abre (${r && r.status()})`);
     }
     ok(erros.length === 0, `${nome}: zero erro de JavaScript na raiz` + (erros.length ? ": " + erros.join(" | ") : ""));
+    await p.close();
+  }
+
+
+  // Regressão: o toque na escolha deve liberar áudio real, sem trocar o documento.
+  console.log("\\nÁudio na escolha:");
+  for (const rota of ["/business", "/beauty"]) {
+    const p = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    const erros = [];
+    p.on("pageerror", e => erros.push(e.message));
+    await p.addInitScript(() => {
+      localStorage.setItem("hb_trilha_off", "1"); // silêncio de uma visita antiga
+      const play = HTMLMediaElement.prototype.play;
+      window.__gestosAudio = [];
+      HTMLMediaElement.prototype.play = function () {
+        if (this.id === "trilha") window.__gestosAudio.push(navigator.userActivation.isActive);
+        return play.call(this);
+      };
+    });
+    await p.goto(base + "/", { waitUntil: "load" });
+    await p.evaluate(() => { window.__docEscolha = document; window.__audioEscolha = document.getElementById("trilha"); });
+    ok(await p.evaluate(() => window.__audioEscolha.paused), rota + ": entrada permanece silenciosa antes da escolha");
+    await p.click('a.emblema[href="' + rota + '"]');
+    await p.waitForURL(base + rota);
+    await p.waitForSelector(".som-btn");
+    await p.waitForFunction(() => { const a = document.getElementById("trilha"); return a && !a.paused && a.currentTime > 0; }, { timeout: 15000 });
+    ok(await p.evaluate(() => document === window.__docEscolha && document.getElementById("trilha") === window.__audioEscolha), rota + ": documento e áudio preservados");
+    ok(await p.evaluate(() => window.__gestosAudio[0] === true), rota + ": primeiro play dentro do gesto do visitante");
+    ok(await p.locator(".som-btn").getAttribute("aria-pressed") === "true", rota + ": botão confirma música ativa");
+    await p.click(".som-btn");
+    ok(await p.evaluate(() => document.getElementById("trilha").paused), rota + ": botão desliga no primeiro toque");
+    await p.click(".som-btn");
+    await p.waitForFunction(() => !document.getElementById("trilha").paused);
+    ok(await p.locator(".som-btn").getAttribute("aria-pressed") === "true", rota + ": botão religa no primeiro toque");
+    await p.click(".menu-btn");
+    ok(await p.locator(".menu-btn").getAttribute("aria-expanded") === "true", rota + ": menu funciona após a escolha");
+    await p.goBack({ waitUntil: "load" });
+    await p.waitForSelector(".esc-grade");
+    ok(new URL(p.url()).pathname === "/", rota + ": Voltar recupera a escolha");
+    ok(erros.length === 0, rota + ": sem erro JavaScript na transição" + (erros.length ? ": " + erros.join(" | ") : ""));
     await p.close();
   }
 
