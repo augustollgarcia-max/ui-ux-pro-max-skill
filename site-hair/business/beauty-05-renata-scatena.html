@@ -82,6 +82,33 @@ var iv=setInterval(go,120);setTimeout(function(){clearInterval(iv);stop()},2600)
 <button class="totop" type="button" aria-label="Voltar ao topo" hidden>&uarr;</button>
 <audio id="trilha" loop preload="none" src="/business/audio/trilha.mp3"></audio>
 <script>
+// A escolha inicia a trilha DENTRO do clique e mantém o mesmo elemento de áudio.
+// Trocar de documento descartaria a autorização de reprodução no Instagram/Safari.
+(function(){const grade=document.querySelector('.esc-grade');if(!grade||!window.fetch||!window.DOMParser||!history.pushState)return;
+const links=[...grade.querySelectorAll('a.emblema')],cache=new Map();let entrando=false;
+function carregar(url){if(!cache.has(url)){cache.set(url,fetch(url,{credentials:'same-origin',signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw Error('Página indisponível');return r.text()}).catch(()=>null))}return cache.get(url)}
+if(!window.AbortSignal||!AbortSignal.timeout)return;
+links.forEach(l=>carregar(l.href));
+const audio=document.createElement('audio');audio.id='trilha';audio.loop=true;audio.preload='auto';audio.src=new URL('audio/trilha.mp3',document.querySelector('link[href$="estilo.css"]').href).href;audio.volume=.14;document.body.append(audio);
+grade.addEventListener('click',async ev=>{const link=ev.target.closest('a.emblema');if(!link||ev.defaultPrevented||ev.button>0||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey||link.target==='_blank')return;
+ev.preventDefault();if(entrando)return;entrando=true;const url=link.href;link.setAttribute('aria-busy','true');
+// Escolher uma experiência é uma nova solicitação de som, mesmo após uma visita silenciada.
+try{localStorage.removeItem('hb_trilha_off');sessionStorage.removeItem('hb_trilha_off');sessionStorage.removeItem('hb_trilha')}catch(e){}
+audio.dataset.escolha='1';try{const p=audio.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}
+try{const html=await carregar(url);if(!html)throw Error('Falha no carregamento');const doc=new DOMParser().parseFromString(html,'text/html');
+if(!doc.querySelector('.som-btn')||!doc.getElementById('trilha'))throw Error('Página incompatível');
+const scripts=[...doc.body.querySelectorAll('script')].filter(s=>!s.src).map(s=>s.textContent);doc.body.querySelectorAll('script,#trilha').forEach(n=>n.remove());
+history.pushState({hairEscolha:true},'',url);document.title=doc.title;
+document.head.querySelectorAll('meta[name="description"],meta[property^="og:"],meta[name^="twitter:"],link[rel="canonical"]').forEach(n=>n.remove());
+doc.head.querySelectorAll('meta[name="description"],meta[property^="og:"],meta[name^="twitter:"],link[rel="canonical"]').forEach(n=>document.head.append(document.importNode(n,true)));
+document.body.className=doc.body.className;
+[...document.body.childNodes].forEach(n=>{if(n!==audio)n.remove()});
+document.body.append(...[...doc.body.childNodes].map(n=>document.importNode(n,true)));
+scrollTo(0,0);scripts.forEach(code=>{const s=document.createElement('script');s.textContent=code;document.body.append(s)});
+addEventListener('popstate',()=>location.reload(),{once:true});
+if(typeof gtag==='function')gtag('event','page_view',{page_location:location.href,page_title:document.title});
+}catch(e){audio.pause();location.assign(url)}});
+})();
 // 16/10 (Augusto): vídeo do Instagram toca sozinho quando entra na tela; vídeo da história mostra o botão quando termina.
 (function(){document.querySelectorAll(".cupom-box").forEach(b=>{const pre=b.dataset.prefixo,out=b.querySelector(".cupom-codigo"),ger=b.querySelector("[data-gerar]"),ac=b.querySelector(".cupom-acoes"),cp=b.querySelector("[data-copiar]"),zap=b.querySelector("[data-zap]");
 const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";function gerar(){let s="";const r=new Uint32Array(4);(crypto.getRandomValues?crypto.getRandomValues(r):r.forEach((_,i)=>r[i]=Math.random()*1e9|0));for(let i=0;i<4;i++)s+=A[r[i]%A.length];return pre+"-"+s}
@@ -96,22 +123,22 @@ const h=document.querySelector(".hist-video video"),c=document.querySelector(".h
 // Começa 1 s depois de o vídeo da capa começar (páginas sem vídeo: 1 s depois de abrir). Pausa sozinha quando um vídeo com som toca (vídeo da história) e volta depois. No iPhone o volume é do aparelho.
 (function(){const a=document.getElementById("trilha"),b=document.querySelector(".som-btn");if(!a||!b)return;
 const K="hb_trilha",KOFF="hb_trilha_off",V0=.14,V1=.55,RAMPA=45000,ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-let quer=true,desligado=false,rampa=0,armado=false,cedido=false;try{desligado=localStorage.getItem(KOFF)==="1"}catch(e){}
+let quer=true,desligado=false,rampa=0,armado=false,cedido=false;const escolha=a.dataset.escolha==="1";try{desligado=sessionStorage.getItem(KOFF)==="1"}catch(e){}
 quer=!desligado;a.volume=ios?1:V0;
 function ui(){const tocando=!a.paused&&!a.ended;b.classList.toggle("on",tocando);b.classList.toggle("mudo",desligado);b.setAttribute("aria-pressed",String(tocando));b.setAttribute("aria-label",tocando?"Música de fundo: desligar":"Música de fundo: ligar")}
 function salvar(){try{sessionStorage.setItem(K,JSON.stringify({on:quer&&!desligado&&(!a.paused||document.hidden||cedido),t:a.currentTime||0,at:Date.now()}))}catch(e){}}
 function subir(){if(ios)return;cancelAnimationFrame(rampa);const t0=performance.now(),v0=a.volume;(function f(t){const k=Math.min(1,(t-t0)/RAMPA);a.volume=Math.min(V1,v0+(V1-v0)*(1-Math.pow(1-k,2)));if(k<1&&!a.paused)rampa=requestAnimationFrame(f)})(t0)}
 function tocar(){a.preload="auto";let p;try{p=a.play()}catch(e){p=Promise.reject(e)}if(!p||!p.then)p=Promise.resolve();return p.then(()=>{ui();salvar();subir();return true}).catch(()=>{ui();return false})}
 function parar(){cancelAnimationFrame(rampa);a.pause();ui();salvar()}
-function armar(){if(armado)return;armado=true;const evs=["pointerup","touchend","keydown","click"];const h=()=>{if(desligado||!quer||!a.paused||cedido)return;tocar().then(ok=>{if(ok)evs.forEach(n=>removeEventListener(n,h,true))})};evs.forEach(n=>addEventListener(n,h,{capture:true,passive:true}))}
+function armar(){if(armado)return;armado=true;const evs=["pointerup","touchend","keydown","click"];const h=ev=>{if(ev.target.closest&&ev.target.closest('.som-btn'))return;if(desligado||!quer||!a.paused||cedido)return;tocar().then(ok=>{if(ok)evs.forEach(n=>removeEventListener(n,h,true))})};evs.forEach(n=>addEventListener(n,h,{capture:true,passive:true}))}
 let sess=null;try{sess=JSON.parse(sessionStorage.getItem(K)||"null")}catch(e){}
-if(!desligado){armar();if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
+if(!desligado){armar();if(escolha){tocar()}else if(sess&&sess.on){const alvo=()=>{const d=a.duration;return(d&&isFinite(d))?(Number(sess.t||0)+(Date.now()-Number(sess.at||Date.now()))/1000)%d:null};
 let tent=0;const pos=()=>{if(tent>6)return;const t=alvo();if(t==null)return;if(Math.abs(a.currentTime-t)>2){tent++;try{a.currentTime=t}catch(e){}}};
 ["loadedmetadata","loadeddata","canplay","playing","seeked"].forEach(n=>a.addEventListener(n,pos));a.preload="auto";a.load();tocar().then(ok=>{if(!ok)armar()})}
 else{const v=document.getElementById("capaVideo");let ini=false;const iniciar=ms=>{if(ini)return;ini=true;setTimeout(()=>{if(!desligado&&quer&&a.paused&&!cedido)tocar().then(ok=>{if(!ok)armar()})},ms)};
 if(v){v.addEventListener("playing",()=>iniciar(1000),{once:true});if(!v.paused&&v.currentTime>0)iniciar(1000);setTimeout(()=>iniciar(0),2500)}else iniciar(1000)}}
 ui();
-b.addEventListener("click",e=>{e.stopPropagation();if(!a.paused){desligado=true;quer=false;try{localStorage.setItem(KOFF,"1")}catch(e2){}parar()}else{desligado=false;quer=true;cedido=false;try{localStorage.removeItem(KOFF)}catch(e2){}tocar()}});
+b.addEventListener("click",e=>{e.stopPropagation();if(!a.paused){desligado=true;quer=false;try{sessionStorage.setItem(KOFF,"1")}catch(e2){}parar()}else{desligado=false;quer=true;cedido=false;try{sessionStorage.removeItem(KOFF)}catch(e2){}tocar()}});
 a.addEventListener("play",ui);a.addEventListener("pause",ui);a.addEventListener("timeupdate",()=>{if(!a.paused&&a.currentTime>1&&(a.currentTime|0)%5===0)salvar()});
 addEventListener("pagehide",salvar);document.addEventListener("visibilitychange",()=>{if(document.hidden){if(!a.paused){a.pause();salvar()}}else if(quer&&!desligado&&!cedido&&a.paused)tocar()});
 // vídeos com som (vídeo da história, práticas): a trilha dá lugar e volta depois
