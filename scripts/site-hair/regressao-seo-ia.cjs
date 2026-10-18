@@ -9,6 +9,8 @@ const prod='https://www.hairacademiadabeleza.com.br';
 const routes=['/','/business','/beauty','/business/apps','/business/assessoria','/business/historia',
  '/business/mestre-01-allan-rich','/business/mestre-02-kenny-wolf','/business/mestre-03-gustavo-rosatti','/business/mestre-04-wesley-sharper',
  '/business/beauty-05-renata-scatena','/business/beauty-06-estefania-oliveira','/vertice'];
+// o envio ao servidor (CAPI) espera o cookie _fbp do Pixel por até ~1,5 s: espere o evento, não um tempo fixo
+const ateEm=async(p,f,ms=2500)=>{for(let t=0;t<ms&&!f();t+=100)await p.waitForTimeout(100);return f();};
 let checks=0;function ok(test,msg){if(!test)throw Error(msg);checks++;console.log('✓ '+msg);}
 const types={'.html':'text/html','.js':'application/javascript','.css':'text/css','.webp':'image/webp','.jpg':'image/jpeg','.mp3':'audio/mpeg','.mp4':'video/mp4','.svg':'image/svg+xml','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{
@@ -65,12 +67,12 @@ const server=http.createServer((req,res)=>{
   ok(network.some(x=>x.includes('googletagmanager'))&&network.some(x=>x.includes('fbevents.js')),'aceite carrega Google e Meta');
   await p.locator('.emblema--barber').click();await p.waitForURL(base+'/business');await p.waitForTimeout(150);
   const graph=await p.locator('script[type="application/ld+json"]').evaluate(x=>JSON.parse(x.textContent));ok(graph['@graph'].some(x=>x['@type']==='ItemList'),'SPA copia o grafo da página Barber');
-  ok(events.some(x=>x.event_name==='ViewContent'&&x.custom_data.content_category==='barbearia'),'SPA registra ViewContent da rota atual');
-  await p.locator('.whats').evaluate(x=>x.addEventListener('click',e=>e.preventDefault()));await p.locator('.whats').click();await p.waitForTimeout(100);
-  ok(events.filter(x=>x.event_name==='Contact').length===1,'WhatsApp registra um Contact');
+  ok(await ateEm(p,()=>events.some(x=>x.event_name==='ViewContent'&&x.custom_data.content_category==='barbearia')),'SPA registra ViewContent da rota atual');
+  await p.locator('.whats').evaluate(x=>x.addEventListener('click',e=>e.preventDefault()));await p.locator('.whats').click();
+  ok(await ateEm(p,()=>events.some(x=>x.event_name==='Contact'))&&events.filter(x=>x.event_name==='Contact').length===1,'WhatsApp registra um Contact');
   ok(await p.evaluate(()=>dataLayer.filter(x=>x[0]==='event'&&x[1]==='conversion').length===1),'Google usa um único rótulo WhatsApp existente');
   await p.locator('[data-hair-cookies]').click();await p.locator('#hair-consent [data-c="0"]').click();
-  await p.locator('.whats').click();await p.waitForTimeout(100);ok(events.filter(x=>x.event_name==='Contact').length===1,'revogação bloqueia novos eventos');await c.close();
+  await p.locator('.whats').click();await p.waitForTimeout(1900);ok(events.filter(x=>x.event_name==='Contact').length===1,'revogação bloqueia novos eventos');await c.close();
  }
  {
   const mode={fail:true,fallback:false},{c,events}=await context('granted',mode),p=await c.newPage();
@@ -83,12 +85,14 @@ const server=http.createServer((req,res)=>{
   await p.locator('#hair-gate input[name=nome]').fill('Teste isolado');await p.locator('#hair-gate input[name=zap]').fill('16900000000');await p.locator('#hair-gate button[type=submit]').click();await p.waitForTimeout(250);
   ok(!events.some(x=>x.event_name==='Lead'),'CRM com falha não conta Lead');await p.waitForFunction(()=>!!localStorage.getItem('hair_mestres_pend_v1'),{},{timeout:5000}).catch(async e=>{console.error('Gate state',await p.evaluate(()=>({open:!!document.querySelector('#hair-gate:not([hidden])'),message:document.querySelector('.gate-erro').textContent,nameLength:document.querySelector('[name=nome]').value.length,phoneLength:document.querySelector('[name=zap]').value.replace(/\D/g,'').length,unlocked:localStorage.getItem('hair_mestres_ok_v1')})));throw e;});ok(await p.evaluate(()=>!!localStorage.getItem('hair_mestres_pend_v1')),'falha mantém fila offline');
   mode.fail=false;await p.reload({waitUntil:'load'});await p.waitForTimeout(200);
+  await ateEm(p,()=>events.some(x=>x.event_name==='Lead'));
   ok(events.filter(x=>x.event_name==='Lead').length===1,'retomada conta Lead depois da confirmação');ok(!await p.evaluate(()=>localStorage.getItem('hair_mestres_pend_v1')),'retomada limpa a pendência');
   ok(events.find(x=>x.event_name==='Lead').event_id==='audit-lead-id','Lead mantém identificador confirmado para deduplicação');await c.close();
  }
  {
   const {c,events,network}=await context('granted'),p=await c.newPage();await p.goto(base+'/modelo',{waitUntil:'load'});
   await p.locator('#academy').selectOption('kenny');await p.locator('#name').fill('Teste isolado');await p.locator('#phone').fill('16900000000');await p.locator('#availability').selectOption({index:1});await p.locator('#contact').check();await p.locator('button[type=submit]').click();await p.waitForTimeout(150);
+  await ateEm(p,()=>events.filter(x=>x.event_name==='Contact').length>=1);await p.waitForTimeout(300);
   ok(network.includes('whatsapp-blocked'),'modelo prepara WhatsApp, sem enviar mensagem');ok(events.filter(x=>x.event_name==='Contact').length===1&&!events.some(x=>x.event_name==='Lead'),'modelo conta intenção, sem inventar Lead salvo');await c.close();
  }
  {
@@ -99,6 +103,7 @@ const server=http.createServer((req,res)=>{
   ok(await p.locator('#hair-consent').isVisible(),'transição preserva a possibilidade de escolher cookies');
   ok(!events.length,'transição antes da escolha não mede visitas');
   await p.locator('#hair-consent [data-c="1"]').click();await p.waitForTimeout(150);
+  await ateEm(p,()=>events.some(x=>x.event_name==='ViewContent'));await p.waitForTimeout(300);
   ok(events.filter(x=>x.event_name==='ViewContent'&&x.custom_data.content_category==='beauty').length===1,'aceite depois da transição mede a página atual uma vez');await c.close();
  }
  console.log(`OK: ${checks} verificações; zero escrita/contato/conversão enviada a serviços reais.`);

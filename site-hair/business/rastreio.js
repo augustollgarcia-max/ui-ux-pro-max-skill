@@ -73,15 +73,30 @@
     return f ? 'fb.1.' + t + '.' + f : '';
   }
   // _fbp também nasce do fbevents.js: espera até ~1,5 s antes de mandar ao servidor.
-  function comCookies(cb, n) {
-    n = n || 0;
-    if (cookie('_fbp') || n >= 10) return cb();
-    setTimeout(function () { comCookies(cb, n + 1); }, 150);
+  // Se a pessoa sai da página antes (ex.: clique que abre o WhatsApp), manda na hora,
+  // sem _fbp, para o evento não se perder.
+  var esperando = [];
+  function comCookies(cb) {
+    if (cookie('_fbp')) return cb();
+    var item = { cb: cb, n: 0 };
+    esperando.push(item);
+    (function tenta() {
+      if (esperando.indexOf(item) < 0) return;
+      if (cookie('_fbp') || item.n++ >= 10) { esperando.splice(esperando.indexOf(item), 1); return cb(); }
+      setTimeout(tenta, 150);
+    })();
   }
+  function soltarEsperando() {
+    var lista = esperando.splice(0);
+    lista.forEach(function (item) { item.cb(); });
+  }
+  w.addEventListener('pagehide', soltarEsperando);
+  d.addEventListener('visibilitychange', function () { if (d.visibilityState === 'hidden') soltarEsperando(); });
   function entregar(ev) {
     if (!w.hairConsentGranted()) return;
     try { w.fbq('track', ev.nome, ev.dados, { eventID: ev.id }); } catch (e) {}
-    comCookies(function () {
+    // Contact costuma vir junto com a saída para o WhatsApp: vai na hora, sem esperar o cookie.
+    (ev.nome === 'Contact' ? function (cb) { cb(); } : comCookies)(function () {
       var corpo = { event_name: ev.nome, event_id: ev.id, event_source_url: ev.url,
         custom_data: ev.dados, fbp: cookie('_fbp'), fbc: fbcAtual() };
       if (ev.telefone) {
