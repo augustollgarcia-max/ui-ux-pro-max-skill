@@ -22,7 +22,7 @@ button{border:0;border-radius:10px;padding:16px;background:var(--gold);font:800 
 <div class="notice"><strong>Como funciona:</strong><p>A inscrição não garante um corte nem um horário. A equipe verificará seu perfil e disponibilidade. A participação ocorre em dias e horários selecionados, com cortes realizados em formato de workshop; confirme previamente quem executará o corte.</p></div>
 <form id="lead-form">
 <label for="academy">Educador de interesse<select required name="academy" id="academy"><option value="">Escolha o educador</option>
-<option value="lan">Allan Rich — LAN Barbershop</option><option value="sharper">Wesley Sharper — Studio Sharper</option><option value="kenny">Kenny Wolf — Wolf Barbearia</option><option value="gustavo">Gustavo Rossatti</option></select></label>
+<option value="lan">Allan Rich — LAN Barbershop</option><option value="sharper">Wesley Sharper — Studio Sharper</option><option value="kenny">Kenny Wolf — Wolf Barbearia</option><option value="gustavo">Gustavo Rosattí</option></select></label>
 <label for="name">Seu nome<input id="name" name="name" autocomplete="name" maxlength="90" required placeholder="Como podemos chamar você?"></label>
 <label for="phone">WhatsApp com DDD<input id="phone" name="phone" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="(16) 99999-9999"></label>
 <label for="availability">Disponibilidade<select id="availability" name="availability" required><option value="">Escolha o período</option><option>Manhã em dias úteis</option><option>Tarde em dias úteis</option><option>Noite em dias úteis</option><option>Fim de semana</option><option>A combinar</option></select></label>
@@ -44,6 +44,7 @@ if(name.length<2){error.style.display='block';return;}
 const origin=new URLSearchParams(location.search).get('utm_source')||'site';
 const msg=['Olá, HAIR! Quero participar da seleção de modelos para workshop.','Nome: '+name,'WhatsApp: +55'+digits,'Educador: '+edu,'Disponibilidade: '+document.getElementById('availability').value,'Origem: '+origin.slice(0,40),'Autorizo contato sobre esta inscrição.','Novidades de cursos: '+(document.getElementById('marketing').checked?'Sim':'Não')].join('\n');
 document.getElementById('confirmation').style.display='block';
+if(window.hairContact)window.hairContact({content_name:'Formulário de modelos',content_category:'barbearia',academy:({lan:'LAN',kenny:'WOLF',gustavo:'ROSATTI',sharper:'SHARPER'})[select.value]||''});
 window.location.href='https://wa.me/5516992558810?text='+encodeURIComponent(msg);
 });
 })();

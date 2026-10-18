@@ -36,7 +36,10 @@ jobs:
           node-version: '20'
       - name: Instalar Playwright + Chromium
         run: |
-          npm install --no-save --no-package-lock playwright@1.47.2
+          npm install --no-save --no-package-lock playwright@1.47.2 axe-core@4.11.0
           npx playwright@1.47.2 install --with-deps chromium
       - name: Teste no navegador (celular e computador)
         run: node scripts/site-hair/smoke-navegador.cjs
+
+      - name: Regressão SEO, consentimento, captação e acessibilidade
+        run: node scripts/site-hair/regressao-seo-ia.cjs
