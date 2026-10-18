@@ -8,14 +8,7 @@
 <meta name="description" content="Formação profissional em beleza, tecnologia e carreira. Conexão Barber, Conexão Beauty e Conexão Brow &amp; Lash em Ribeirão Preto/SP. Mais de 4.000 profissionais formados desde 2016.">
 <link rel="canonical" href="https://www.hairacademiadabeleza.com.br/inicio">
 
-<!-- Google tag (gtag.js) — Google Ads AW-799342935 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-799342935"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'AW-799342935');
-</script>
+<!-- Google Ads: interface e consentimento em /business/rastreio.js; nenhuma tag externa antes do aceite. -->
 
 <script type="application/ld+json">
 {
@@ -1360,7 +1353,7 @@ body{background:radial-gradient(120% 60% at 50% -10%,#0B1510 0%,var(--bg) 46%) v
     route: "AW-799342935/DEyiCO22teYcENeClP0C"
   };
   function trackAdsConversion(key){
-    if(typeof window.gtag !== "function" || !ADS_CONVERSIONS[key]) return;
+    if(!window.hairConsentGranted || !window.hairConsentGranted() || typeof window.gtag !== "function" || !ADS_CONVERSIONS[key]) return;
     window.gtag("event", "conversion", {
       send_to: ADS_CONVERSIONS[key],
       value: 1.0,

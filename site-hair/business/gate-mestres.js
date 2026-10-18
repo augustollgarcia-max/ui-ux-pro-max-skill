@@ -22,7 +22,7 @@
   function ls(k, v){ try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch(e){ return null; } }
   function liberado(){ return ls(OK) === '1' || /(?:^|; )hair_mestres_ok=1/.test(d.cookie); }
   function marcar(){ ls(OK, '1'); try { d.cookie = 'hair_mestres_ok=1; max-age=31536000; path=/; SameSite=Lax; Secure'; } catch(e){} }
-  var paginaMestre = /\/mestre-0\d/.test(location.pathname);
+  function paginaMestre(){ return /\/mestre-0\d/.test(location.pathname); }
 
   // Academia da página (para o CRM e para os eventos da Meta)
   var ACADEMIA = /\/mestre-01-/.test(location.pathname) ? 'LAN' : /\/mestre-02-/.test(location.pathname) ? 'WOLF'
@@ -38,11 +38,19 @@
       .catch(function(e){ ls(PEND, JSON.stringify(dados)); throw e; });
   }
   function lead(dados, res){ // evento Lead da Meta só com o lead gravado; event_id = id do lead quando a v2 devolve
-    if (w.hairTrack) w.hairTrack('Lead', { content_name: 'Perfis dos Mestres', content_category: 'barbearia', academy: ACADEMIA || 'site', _telefone: dados.p_whatsapp, _event_id: typeof res === 'string' ? res : undefined });
+    if (w.hairTrack) w.hairTrack('Lead', { content_name: 'Perfis dos Mestres', content_category: 'barbearia', academy: (dados.p_utm && dados.p_utm.academy) || ACADEMIA || 'site', _event_source_url: new URL(dados.p_pagina || location.pathname, location.origin).href, _telefone: dados.p_whatsapp, _event_id: typeof res === 'string' ? res : undefined });
   }
   var pend = ls(PEND); if (pend){ try { var dp = JSON.parse(pend); enviar(dp).then(function(res){ lead(dp, res); }, function(){}); } catch(e){ ls(PEND, null); } }
 
-  var janela, alvo = null;
+  var janela, alvo = null, focoAnterior = null, inertes = [];
+  function focaveis(){ return Array.prototype.filter.call(janela.querySelectorAll('a[href],button,input,select,textarea,[tabindex]'), function(el){
+    return !el.disabled && el.tabIndex >= 0 && !!el.getClientRects().length;
+  }); }
+  function isolar(ativar){
+    if(ativar){ inertes = Array.prototype.filter.call(d.body.children,function(el){return el !== janela && el.id !== 'hair-consent' && el.tagName !== 'SCRIPT';}).map(function(el){
+      var antes = el.inert; el.inert = true; return [el,antes];
+    }); } else { inertes.forEach(function(par){par[0].inert=par[1];}); inertes=[]; }
+  }
   function montar(){
     janela = d.createElement('div'); janela.id = 'hair-gate'; janela.className = 'gate'; janela.hidden = true;
     janela.innerHTML = '<div class="gate-box" role="dialog" aria-modal="true" aria-labelledby="gate-t">'
@@ -57,7 +65,15 @@
       + '<p class="micro">Ao liberar, você aceita receber contato da HAIR Academia da Beleza pelo WhatsApp sobre cursos e turmas. Seus dados não são vendidos. <a href="/privacidade">Privacidade</a></p></div>';
     (d.body || d.documentElement).appendChild(janela);
     janela.addEventListener('click', function(e){ if (e.target === janela || (e.target.closest && e.target.closest('[data-fechar]'))) fechar(); });
-    d.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !janela.hidden) fechar(); });
+    d.addEventListener('keydown', function(e){
+      if (janela.hidden) return;
+      if (e.key === 'Escape'){e.preventDefault(); fechar(); return;}
+      if (e.key !== 'Tab') return;
+      var els=focaveis(), primeiro=els[0], ultimo=els[els.length-1];
+      if (!primeiro) return;
+      if (e.shiftKey && (d.activeElement===primeiro || !janela.contains(d.activeElement))){e.preventDefault();ultimo.focus();}
+      else if (!e.shiftKey && (d.activeElement===ultimo || !janela.contains(d.activeElement))){e.preventDefault();primeiro.focus();}
+    });
     var f = janela.querySelector('form'), zap = f.elements.zap, erro = janela.querySelector('.gate-erro');
     zap.addEventListener('input', function(){ var x = zap.value.replace(/\D/g, '').slice(0, 11);
       zap.value = x.length > 6 ? '(' + x.slice(0,2) + ') ' + x.slice(2, x.length - 4) + '-' + x.slice(-4) : x.length > 2 ? '(' + x.slice(0,2) + ') ' + x.slice(2) : x; });
@@ -75,9 +91,10 @@
       marcar(); fechar(true);
     });
   }
-  function abrir(el){ if (!janela) montar(); alvo = el; janela.hidden = false; d.documentElement.classList.add('gate-on');
+  function abrir(el){ if (!janela || !janela.isConnected) montar(); alvo = el; focoAnterior = el || d.activeElement; janela.hidden = false; isolar(true); d.documentElement.classList.add('gate-on');
     setTimeout(function(){ var i = janela.querySelector('input[name=nome]'); if (i) i.focus(); }, 60); }
-  function fechar(continuar){ janela.hidden = true; d.documentElement.classList.remove('gate-on');
+  function fechar(continuar){ janela.hidden = true; isolar(false); d.documentElement.classList.remove('gate-on');
+    if(focoAnterior && focoAnterior.isConnected && focoAnterior.focus) focoAnterior.focus(); focoAnterior=null;
     var el = alvo; alvo = null;
     if (continuar && el){ // segue para o que a pessoa tinha tocado
       if (el.tagName === 'A' && el.getAttribute('href')){ if (el.target === '_blank') w.open(el.href, '_blank', 'noopener'); else location.href = el.href; }
@@ -86,8 +103,8 @@
 
   d.addEventListener('click', function(e){
     if (liberado() || !e.target || !e.target.closest) return;
-    if (e.target.closest('#hair-gate, #hair-consent, a[href*="wa.me/"], .skip')) return;
-    var el = paginaMestre ? e.target.closest('a[href], button, summary, .gal figure, [role=button]')
+    if (e.target.closest('#hair-gate, #hair-consent, [data-hair-cookies], a[href*="wa.me/"], .skip')) return;
+    var el = paginaMestre() ? e.target.closest('a[href], button, summary, .gal figure, [role=button]')
                           : e.target.closest('a[href*="mestre-0"]');
     if (!el) return;
     e.preventDefault(); e.stopPropagation(); abrir(el);

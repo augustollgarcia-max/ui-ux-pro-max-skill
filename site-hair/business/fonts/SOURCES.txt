@@ -1,0 +1,7 @@
+Google Fonts, CSS obtido em 18/10/2026. DM Sans e Playfair Display, SIL Open Font License 1.1.
+dm-sans-normal-latin-ext.woff2 https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2
+dm-sans-normal-latin.woff2 https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2
+playfair-italic-latin-ext.woff2 https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_pqTXt_A-W2r.woff2
+playfair-italic-latin.woff2 https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_pqTXtHA-Q.woff2
+playfair-normal-latin-ext.woff2 https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2
+playfair-normal-latin.woff2 https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2

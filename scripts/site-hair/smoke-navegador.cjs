@@ -44,7 +44,13 @@ function servidor() {
   const ok = (cond, nome) => { console.log((cond ? "  ✓ " : "  ✗ ") + nome); if (!cond) falhas.push(nome); };
   // O aviso de cookies (rastreio.js) fica preso no rodapé: os testes abaixo entram já com "Recusar" escolhido,
   // e a seção "Cookies" no fim confere o aviso e o aceite separadamente.
-  const novaPagina = browser.newPage.bind(browser);
+  const criarPagina = browser.newPage.bind(browser);
+  const novaPagina = async (o) => {
+    const pg = await criarPagina(o);
+    // A suíte nunca envia pageviews/conversões aos fornecedores reais.
+    await pg.route(/googletagmanager|google-analytics|doubleclick|googleadservices|connect\.facebook/, r => r.fulfill({ status: 200, contentType: "application/javascript", body: "/* teste isolado */" }));
+    return pg;
+  };
   browser.newPage = async (o) => { const pg = await novaPagina(o); await pg.addInitScript(() => { try { localStorage.setItem("hair_consent_v1", "denied"); } catch (e) {} }); return pg; };
   const rolar = (p, y) => p.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), y);
 

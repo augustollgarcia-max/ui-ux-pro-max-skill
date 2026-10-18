@@ -108,8 +108,13 @@ def main():
     # 2. WhatsApp oficial e tag do Ads
     if f'var WA = "{WHATSAPP}"' not in html:
         erros.append("WhatsApp oficial (var WA) não é mais " + WHATSAPP)
-    if f"gtag/js?id={ADS_ID}" not in html:
-        erros.append("tag do Google Ads " + ADS_ID + " não carrega mais")
+    rastreio = open(os.path.join(SITE, "business", "rastreio.js"), encoding="utf-8").read()
+    if '/business/rastreio.js' not in html or ADS_ID not in rastreio or 'googletagmanager.com/gtag/js?id=' not in rastreio:
+        erros.append("carregador compartilhado do Google Ads ausente")
+    if 'hairConsentGranted' not in html or 'hair_consent_v1' not in rastreio:
+        erros.append("conversões Ads sem guarda de consentimento")
+    if '<script async src="https://www.googletagmanager.com/' in html:
+        erros.append("tag Google não pode carregar antes do consentimento")
 
     # 3. âncoras apontam para algo que existe
     for alvo in sorted(set(re.findall(r'href="#([^"]+)"', html))):
@@ -140,7 +145,7 @@ def main():
     # 6. raiz do site = página de seleção (17/10/2026, decisão do dono): precisa levar a /business, /beauty e
     #    /business/assessoria, carregar a tag do Ads e os destinos precisam existir (cleanUrls: /beauty = beauty.html).
     raiz = open(RAIZ_SELECAO, encoding="utf-8").read()
-    for alvo in ('href="/business"', 'href="/beauty"', 'href="/business/assessoria"', f"gtag/js?id={ADS_ID}"):
+    for alvo in ('href="/business"', 'href="/beauty"', 'href="/business/assessoria"', 'src="/business/rastreio.js"'):
         if alvo not in raiz:
             erros.append(f"raiz (index.html, seleção) sem {alvo}")
     for u in ("business/index.html", "beauty.html", "business/assessoria.html", "inicio.html"):

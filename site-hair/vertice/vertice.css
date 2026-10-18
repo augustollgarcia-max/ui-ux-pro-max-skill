@@ -230,3 +230,7 @@ ul.work li b{font-size:15px}ul.work li span{font-size:13px;color:#aeb9cc}ul.work
 button.link{background:none;border:0;color:#c9b58a;text-decoration:underline;padding:0;font-size:12px}
 @media (min-width:700px){ul.work{grid-template-columns:1fr 1fr}}
 @media (min-width:900px){ul.work{grid-template-columns:repeat(3,1fr)}}
+
+/* Links em texto precisam de uma distinção além da cor. */
+p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
+[hidden]{display:none!important}
