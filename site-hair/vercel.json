@@ -379,10 +379,6 @@
     {
       "source": "/refinements.js",
       "destination": "https://metodo-liso-perfeito-ecare.financeiro-hairacade.chatgpt.site/refinements.js"
-    },
-    {
-      "source": "/barbearia/ribeirao",
-      "destination": "/inicio"
     }
   ],
   "redirects": [
@@ -399,6 +395,11 @@
     {
       "source": "/business/beauty",
       "destination": "/beauty",
+      "permanent": false
+    },
+    {
+      "source": "/barbearia/ribeirao",
+      "destination": "/inicio",
       "permanent": false
     }
   ],
