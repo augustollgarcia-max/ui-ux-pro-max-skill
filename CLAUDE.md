@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ REGRA PERMANENTE — LOGOS DA VÉRTICE E DA HAIR NUNCA MUDAM (Augusto, 22/10/2026)
+Pedido do dono: "A logo da Vértice e da Hair jamais pode mudar."
+- Nenhuma sessão, skill, agente ou redesign troca, redesenha, recolore, recorta, comprime, renomeia ou substitui as logos da **Vértice Group** (inclui Vértice Cosméticos e a marca "V" do cabeçalho do site) e da **HAIR Academia da Beleza** (inclui HAIR Business, Business Beauty e o infinito do Conexão Hair).
+- Usar a logo como está. Não gerar logo nova por IA, nem "versão melhorada", nem versão em outra cor.
+- `scripts/checar-logos.sh` (workflow `guarda-logos`) confere byte a byte cada arquivo listado em `scripts/logos-protegidos.sha256`: qualquer alteração deixa o CI vermelho.
+- Só o dono autoriza trocar uma logo. Nesse caso o manifesto é atualizado no mesmo PR, citando o pedido dele.
+
 ## Project Overview
 
 UI UX Pro Max is an AI-powered design intelligence toolkit providing searchable databases of UI styles, color palettes, font pairings, chart types, and UX guidelines. It works as a skill/workflow for AI coding assistants (Claude Code, Windsurf, Cursor, etc.).
