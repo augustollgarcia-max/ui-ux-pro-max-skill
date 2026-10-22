@@ -247,3 +247,7 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 .nav .cta.mini{min-height:40px;padding:0 16px}
 .cta.primary,.cta.outline{font-size:14px}
 .nav .cta.mini{font-size:12px}
+
+/* Logo oficial do Vértice (arquivos do dono, 22/10/2026): nunca redesenhar */
+.mark-oficial{width:38px;height:auto;flex:none;display:block}
+.sig-logo{width:min(260px,70%);height:auto;display:block}
