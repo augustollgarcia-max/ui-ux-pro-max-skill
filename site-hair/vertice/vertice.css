@@ -271,3 +271,7 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 .sol-cta{margin-top:auto;display:grid;gap:10px;justify-items:start}
 .sol-cta .cta{width:100%;justify-content:center;min-height:50px}
 .sol .vlink{font-size:13px;font-weight:700;color:#f0c984}
+/* 22/10 (Augusto): logos redondas oficiais da HAIR Business Barber e Business Beauty, maiores para a leitura. */
+.marquee img.bola{height:58px}
+.card .logo.logo-bola{height:96px}.card .logo.logo-bola img{height:92px;max-width:none}
+.sol-bolas{display:flex;gap:12px;margin:0 0 16px}.sol-bolas img{width:88px;height:88px}
