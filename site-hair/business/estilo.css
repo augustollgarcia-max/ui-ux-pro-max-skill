@@ -857,3 +857,6 @@ p a:not(.btn){text-decoration:underline;text-underline-offset:3px}
 .blogos img+img{background:none}
 .bprods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.bprods figure{margin:0}.bprods img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;border-radius:4px}
 .bwork .arte img{width:100%;height:auto;display:block}
+/* 22/10 (Augusto): logos redondas oficiais (HAIR Business Barber/Beauty, Conexão Hair/Work) inteiras, sem recorte. */
+.eco-logo img.bola{width:84px;height:84px;object-fit:contain;border:0;border-radius:50%}
+.marquee img.lg-bola{height:clamp(52px,5.8vw,68px)}
