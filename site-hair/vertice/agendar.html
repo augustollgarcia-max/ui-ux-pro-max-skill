@@ -18,6 +18,12 @@
 /* Página de agendamento dos cursos (22/10, pedido do Augusto). Usa o vertice.css; aqui só o que é desta página. */
 .ag-top{padding:20px 0;border-bottom:1px solid var(--border)}
 .ag-top .shell{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ag-top{padding-top:calc(20px + env(safe-area-inset-top))}
+.ag-voltar{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-size:15px;font-weight:600;color:var(--gold3);-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.ag-voltar:active{opacity:.6}
+.ag-marca{flex:1;display:flex;justify-content:center;min-width:0}
+.ag-marca img{height:34px;width:auto;max-width:100%}
+
 .ag-hero{padding:56px 0 28px;background:radial-gradient(80% 60% at 85% 0%,#1d3a7a55,transparent)}
 .ag-hero h1{font-size:clamp(36px,7vw,64px);line-height:1.04;letter-spacing:-.015em;margin-top:14px}
 .ag-hero h1 em{color:var(--gold3);font-style:italic}
@@ -43,13 +49,14 @@
 .ag-passos div{border:1px solid var(--border);border-radius:18px;padding:18px;background:#ffffff06;font-size:14px;color:var(--muted)}
 .ag-passos div:before{counter-increment:p;content:"0" counter(p);display:block;font:italic 400 22px "Playfair Display",Georgia,serif;color:var(--gold);margin-bottom:6px}
 .ag-passos b{display:block;color:var(--white);font-size:15px;margin-bottom:2px}
-.ag-foot{border-top:1px solid var(--border);padding:28px 0 40px;font-size:13px;color:var(--sub)}
+.ag-foot{border-top:1px solid var(--border);padding:28px 0 calc(40px + env(safe-area-inset-bottom));font-size:13px;color:var(--sub)}
 .ag-foot a{color:var(--gold3)}
 </style>
 </head>
 <body>
 <header class="ag-top"><div class="shell">
-  <a href="/inicio" aria-label="Vértice Beauty Group, início"><img class="logo-oficial" src="/vertice/img/oficial/vertice-beauty-group-horizontal.webp" alt="Vértice Beauty Group" width="640" height="146"></a>
+  <a class="ag-voltar" href="/inicio" onclick="if(history.length>1&&document.referrer.indexOf(location.host)>-1){history.back();return false}" aria-label="Voltar">‹ Voltar</a>
+  <a class="ag-marca" href="/inicio" aria-label="Vértice Beauty Group, início"><img class="logo-oficial" src="/vertice/img/oficial/vertice-beauty-group-horizontal.webp" alt="Vértice Beauty Group" width="640" height="146"></a>
   <a class="cta outline mini" href="https://wa.me/5516992558810" target="_blank" rel="noopener">WhatsApp</a>
 </div></header>
 

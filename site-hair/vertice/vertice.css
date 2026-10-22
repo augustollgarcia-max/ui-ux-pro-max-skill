@@ -280,3 +280,17 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 .app img.app-bola{display:block;width:72px;height:72px;min-width:0;max-width:none;aspect-ratio:1;object-fit:contain;border:0;border-radius:50%;background:none;padding:0;margin:0 0 10px;box-shadow:none}
 /* 22/10 (Augusto): card dos profissionais com 5 logos redondas (Olenka, Ecare, Conexão Work, Catálogo Barber e Beauty). */
 .sol-bolas-5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:340px}.sol-bolas-5 img{width:100%;height:auto;aspect-ratio:1}
+/* 22/10 (Augusto): logos clicáveis no padrão Apple (toque com escala) e detalhes de iPhone/Android:
+   área segura do notch/barra de gestos e alvo de toque mínimo de 44px. */
+.bola-link{display:block;border-radius:50%;-webkit-tap-highlight-color:transparent;transition:transform .18s cubic-bezier(.2,.8,.2,1),filter .18s}
+.bola-link:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.bola-link:active{transform:scale(.94)}
+.bola-link:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.bola-link img{display:block;width:100%;height:auto;aspect-ratio:1}
+.sol-bolas .bola-link{width:88px;min-width:44px}
+.sol-bolas-5 .bola-link,.sol-bolas-3 .bola-link{width:auto}
+.sol-bolas-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:300px}
+@media (prefers-reduced-motion:reduce){.bola-link{transition:none}.bola-link:hover,.bola-link:active{transform:none}}
+.nav .shell,.shell{padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}
+.nav{padding-top:env(safe-area-inset-top)}
+html{scroll-padding-top:96px}
