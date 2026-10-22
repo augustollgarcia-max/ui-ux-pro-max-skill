@@ -109,6 +109,9 @@ h2 em{color:var(--gold3);font-style:italic}
 .passos li:before{content:counter(p,decimal-leading-zero);font:400 22px "Playfair Display",Georgia,serif;color:var(--gold)}
 .passos b{display:block;font-weight:600;margin-bottom:2px}
 .passos span{font-size:13px;color:#aeb9cc}
+/* número na 1ª coluna ocupando as 2 linhas; título e texto sempre na 2ª (sem isso o texto caía na coluna de 34px, uma palavra por linha) */
+.passos li:before{grid-column:1;grid-row:1 / span 2}
+.passos b,.passos span{grid-column:2}
 
 /* área do parceiro */
 .gate{border:1px solid #d0a45e5e;border-radius:24px;padding:28px 22px;background:linear-gradient(135deg,#1a2a56a8,#0a122ed8),radial-gradient(ellipse at top right,#b68c5128,transparent 50%);box-shadow:0 20px 80px #02081160}
