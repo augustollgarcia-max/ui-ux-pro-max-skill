@@ -251,3 +251,9 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 /* Logo oficial do Vértice (arquivos do dono, 22/10/2026): nunca redesenhar */
 .mark-oficial{width:38px;height:auto;flex:none;display:block}
 .sig-logo{width:min(260px,70%);height:auto;display:block}
+
+/* 22/10 (Augusto: "A logo jamais muda"): o cabeçalho usa a logo oficial horizontal (arquivo enviado pelo dono, sem redesenho).
+   Fundo transparente tirado do próprio arquivo oficial; desenho, cor e proporção intactos. */
+.logo-oficial{display:block;height:40px;width:auto;max-width:100%}
+@media (max-width:400px){.logo-oficial{height:36px}}
+.logo-rodape{height:52px;margin-bottom:10px}
