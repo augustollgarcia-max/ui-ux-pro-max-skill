@@ -6,6 +6,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_LIB||'playwright');
 const AXE=process.env.AXE_LIB||require.resolve('axe-core/axe.min.js');
 const SITE=path.resolve(process.env.SITE_HAIR_DIR||path.join(__dirname,'../../site-hair'));
 const prod='https://www.hairacademiadabeleza.com.br';
+// /vertice é espelhada em verticebeautygroup.com.br, o domínio oficial da marca mãe: a canônica aponta para lá.
 const routes=['/','/business','/beauty','/business/apps','/business/assessoria','/business/historia',
  '/business/mestre-01-allan-rich','/business/mestre-02-kenny-wolf','/business/mestre-03-gustavo-rosatti','/business/mestre-04-wesley-sharper',
  '/business/beauty-05-renata-scatena','/business/beauty-06-estefania-oliveira','/vertice'];
@@ -51,7 +52,7 @@ const server=http.createServer((req,res)=>{
   const {c}=await context(),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   const r=await p.goto(base+route,{waitUntil:'domcontentloaded'});await p.waitForTimeout(150);
   ok(r.status()===200,route+' HTTP 200');
-  const canon=await p.locator('link[rel=canonical]').getAttribute('href');ok(canon===prod+(route==='/'?'/':route),route+' canônica preservada');
+  const canon=await p.locator('link[rel=canonical]').getAttribute('href');const esperada=route==='/vertice'?'https://verticebeautygroup.com.br/':prod+(route==='/'?'/':route);ok(canon===esperada,route+' canônica preservada');
   await p.addScriptTag({path:AXE});const violations=await p.evaluate(async()=>{
    const a=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']}});
    return a.violations.filter(x=>['serious','critical'].includes(x.impact)).map(x=>({id:x.id,nodes:x.nodes.map(n=>n.target)}));
