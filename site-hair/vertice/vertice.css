@@ -278,3 +278,5 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 /* 22/10 (Augusto): logos redondas Conexão Hair, Conexão Work e HAIR Academia Business. */
 .card .logo.logo-dupla{gap:10px}
 .app img.app-bola{display:block;width:72px;height:72px;min-width:0;max-width:none;aspect-ratio:1;object-fit:contain;border:0;border-radius:50%;background:none;padding:0;margin:0 0 10px;box-shadow:none}
+/* 22/10 (Augusto): card dos profissionais com 5 logos redondas (Olenka, Ecare, Conexão Work, Catálogo Barber e Beauty). */
+.sol-bolas-5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:340px}.sol-bolas-5 img{width:100%;height:auto;aspect-ratio:1}
