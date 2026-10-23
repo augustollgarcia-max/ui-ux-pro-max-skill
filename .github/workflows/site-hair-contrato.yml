@@ -43,3 +43,6 @@ jobs:
 
       - name: Regressão SEO, consentimento, captação e acessibilidade
         run: node scripts/site-hair/regressao-seo-ia.cjs
+
+      - name: LGPD do Pixel (nada antes do aceite, mesmo event_id no Pixel e na CAPI, recusa persiste)
+        run: node scripts/site-hair/regressao-lgpd-pixel.cjs
