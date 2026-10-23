@@ -292,6 +292,7 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 .bola-link img{display:block;width:100%;height:auto;aspect-ratio:1}
 .sol-bolas .bola-link{width:88px;min-width:44px}
 .sol-bolas-5 .bola-link,.sol-bolas-3 .bola-link{width:auto}
+.sol-bolas-4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:300px}.sol-bolas-4 .bola-link{width:auto}.sol-bolas-4 img{width:100%;height:auto;aspect-ratio:1}
 .sol-bolas-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:300px}
 @media (prefers-reduced-motion:reduce){.bola-link{transition:none}.bola-link:hover,.bola-link:active{transform:none}}
 .nav .shell,.shell{padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}
