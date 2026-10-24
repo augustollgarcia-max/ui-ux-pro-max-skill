@@ -144,7 +144,7 @@ Mais de 4.000 profissionais formados desde 2017. Formação prática, com modelo
 tecnologia de acompanhamento e conexão direta com o mercado da beleza.
 
 HAIR Academia da Beleza
-Av. Portugal, 318 — Vila Seixas — Ribeirão Preto/SP
+Av. Presidente Vargas, 1265, 16º andar — Jardim São Luiz — Ribeirão Preto/SP — CEP 14020-273
 ```
 
 **Categoria:** Educação
