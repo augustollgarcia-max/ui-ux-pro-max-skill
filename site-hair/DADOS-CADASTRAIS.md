@@ -20,6 +20,17 @@ Se um dado mudar, muda aqui primeiro e depois nos cadastros.
 O endereço legal fica em Sertãozinho porque o contrato do Trio Office não permite
 usá-lo como sede do CNPJ.
 
+## Domínio e e-mail da empresa
+
+| Campo | Valor |
+|---|---|
+| Domínio da empresa | verticebeautygroup.com.br (registrado em 21/10/2026 no CNPJ 69.697.364/0001-79) |
+| E-mail principal (Google) | financeiro@verticebeautygroup.com.br — dono das contas Google da HAIR |
+| Domínio do site da HAIR | hairacademiadabeleza.com.br (registrado no CPF do Augusto) |
+
+O e-mail principal ainda precisa ser criado: em 24/10/2026 o domínio não tinha
+nenhum serviço de e-mail configurado.
+
 ## Endereço de atendimento (clientes e alunos)
 
 Av. Presidente Vargas, 1265, 16º andar (Trio Office) — Jardim São Luiz —
