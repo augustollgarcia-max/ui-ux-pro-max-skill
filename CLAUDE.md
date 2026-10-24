@@ -2,6 +2,17 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ REGRA PERMANENTE — DETALHES DE iPHONE (iOS) E ANDROID EM TODO APP E SITE (Augusto, 22/10/2026)
+Pedido do dono: "grave na memória central, para todo aplicativo que a gente fizer, tem que ter esses detalhes do iPhone, iOS para Android."
+Vale para todo app, site, landing, painel e artifact, em qualquer sessão. Antes de dizer "pronto":
+1. **Voltar sempre funciona.** Toda tela, página ou janela tem saída visível ("‹ Voltar" ou "×", alvo ≥ 44px) **e** o gesto/botão voltar do iPhone e do Android fecha a janela aberta em vez de sair do site (`history.pushState` ao abrir + `popstate` fecha). Nunca deixar a pessoa presa sem caminho de volta.
+2. **Área segura.** `viewport-fit=cover` + `env(safe-area-inset-*)` em cabeçalho fixo, barras e botões de rodapé, janelas e banners (notch, ilha dinâmica, barra de gestos). Nada colado embaixo da barra de gestos.
+3. **Altura de tela:** usar `100dvh` com reserva `100vh`; janela com `overscroll-behavior:contain` e a página não rola por trás enquanto ela está aberta.
+4. **Toque:** alvo mínimo de 44×44px, `-webkit-tap-highlight-color:transparent`, resposta visual ao toque (escala ~0,96, padrão Apple) e `prefers-reduced-motion` respeitado.
+5. **Campos:** fonte ≥ 16px (o iPhone dá zoom sozinho abaixo disso), `inputmode`/`autocomplete` certos.
+6. **Links:** externo abre em nova aba com `rel="noopener"`; interno não perde o lugar da pessoa; tudo que parece clicável (logo, card, selo) é clicável.
+7. **Teste obrigatório** no emulador de iPhone (Playwright `devices['iPhone 13']`) e em 320/360/390/430 px: abrir, voltar pelo gesto, fechar pelo ×, sem rolagem lateral. Dizer no relatório o que foi testado.
+
 ## ⚠️ REGRA PERMANENTE — LOGOS DA VÉRTICE E DA HAIR NUNCA MUDAM (Augusto, 22/10/2026)
 Pedido do dono: "A logo da Vértice e da Hair jamais pode mudar."
 - Nenhuma sessão, skill, agente ou redesign troca, redesenha, recolore, recorta, comprime, renomeia ou substitui as logos da **Vértice Group** (inclui Vértice Cosméticos e a marca "V" do cabeçalho do site) e da **HAIR Academia da Beleza** (inclui HAIR Business, Business Beauty e o infinito do Conexão Hair).

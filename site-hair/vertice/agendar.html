@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1127">
+<title>Agende sua visita · Vértice Beauty Group</title>
+<meta name="description" content="Agende o atendimento comercial dos cursos Brow Lamination, Sobrancelha e Cílios e Barber, do iniciante ao avançado. Segunda a sábado, das 9h às 21h.">
+<link rel="canonical" href="https://verticebeautygroup.com.br/agendar">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Vértice Beauty Group"><meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Agende sua visita · Vértice Beauty Group"><meta property="og:description" content="Cursos Brow Lamination, Sobrancelha e Cílios e Barber, do iniciante ao avançado. Escolha o dia e o horário."><meta property="og:url" content="https://verticebeautygroup.com.br/agendar">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/vertice/vertice.css">
+<script src="/business/rastreio.js" defer></script>
+<script src="/vertice/agendar.js" defer></script>
+<style>
+/* Página de agendamento dos cursos (22/10, pedido do Augusto). Usa o vertice.css; aqui só o que é desta página. */
+.ag-top{padding:20px 0;border-bottom:1px solid var(--border)}
+.ag-top .shell{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ag-top{padding-top:calc(20px + env(safe-area-inset-top))}
+.ag-voltar{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-size:15px;font-weight:600;color:var(--gold3);-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.ag-voltar:active{opacity:.6}
+.ag-marca{flex:1;display:flex;justify-content:center;min-width:0}
+.ag-marca img{height:34px;width:auto;max-width:100%}
+
+.ag-hero{padding:56px 0 28px;background:radial-gradient(80% 60% at 85% 0%,#1d3a7a55,transparent)}
+.ag-hero h1{font-size:clamp(36px,7vw,64px);line-height:1.04;letter-spacing:-.015em;margin-top:14px}
+.ag-hero h1 em{color:var(--gold3);font-style:italic}
+.ag-hora{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.ag-hora span{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:#e9d6b2}
+.ag-cursos{display:grid;gap:18px;padding:18px 0 64px}
+@media(min-width:900px){.ag-cursos{grid-template-columns:1fr 1fr;gap:24px}}
+.ag-card{position:relative;border:1px solid var(--line);border-radius:24px;padding:28px 22px;background:linear-gradient(160deg,#15213bcc,#0c1530 60%);overflow:hidden;display:flex;flex-direction:column}
+.ag-card:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
+.ag-num{font:italic 400 15px "Playfair Display",Georgia,serif;color:var(--gold)}
+.ag-card h2{font-size:clamp(26px,3.4vw,36px);margin:8px 0 6px}
+.ag-card .tag{color:var(--sub);font-size:14px;margin:0 0 18px}
+.ag-niveis{display:flex;gap:8px;margin-bottom:20px}
+.ag-niveis span{flex:1;text-align:center;border:1px solid var(--border);border-radius:12px;padding:10px 6px;font-size:13px;font-weight:600;color:var(--white);background:#ffffff08}
+.ag-lista{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:12px}
+.ag-lista li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15px;color:#dfe5f1;line-height:1.45}
+.ag-lista li:before{content:"";width:8px;height:8px;margin:8px 0 0 6px;transform:rotate(45deg);background:var(--gold)}
+.ag-lista b{color:var(--gold3);font-weight:600}
+.ag-card .cta{margin-top:auto;width:100%;justify-content:center;min-height:54px;font-size:15px}
+.ag-como{border-top:1px solid var(--border);padding:40px 0 56px}
+.ag-passos{display:grid;gap:14px;margin-top:20px;counter-reset:p}
+@media(min-width:900px){.ag-passos{grid-template-columns:repeat(3,1fr)}}
+.ag-passos div{border:1px solid var(--border);border-radius:18px;padding:18px;background:#ffffff06;font-size:14px;color:var(--muted)}
+.ag-passos div:before{counter-increment:p;content:"0" counter(p);display:block;font:italic 400 22px "Playfair Display",Georgia,serif;color:var(--gold);margin-bottom:6px}
+.ag-passos b{display:block;color:var(--white);font-size:15px;margin-bottom:2px}
+.ag-foot{border-top:1px solid var(--border);padding:28px 0 calc(40px + env(safe-area-inset-bottom));font-size:13px;color:var(--sub)}
+.ag-foot a{color:var(--gold3)}
+</style>
+</head>
+<body>
+<header class="ag-top"><div class="shell">
+  <a class="ag-voltar" href="/inicio" onclick="if(history.length>1&&document.referrer.indexOf(location.host)>-1){history.back();return false}" aria-label="Voltar">‹ Voltar</a>
+  <a class="ag-marca" href="/inicio" aria-label="Vértice Beauty Group, início"><img class="logo-oficial" src="/vertice/img/oficial/vertice-beauty-group-horizontal.webp" alt="Vértice Beauty Group" width="640" height="146"></a>
+  <a class="cta outline mini" href="https://wa.me/5516992558810" target="_blank" rel="noopener">WhatsApp</a>
+</div></header>
+
+<main>
+<section class="ag-hero"><div class="shell">
+  <div class="eyebrow">Agenda · Cursos</div>
+  <h1>Agende sua visita.<br><em>Do primeiro passo ao avançado.</em></h1>
+  <p class="lead">Escolha o curso, o nível e o horário. No atendimento comercial você conhece o curso, tira dúvidas e sai sabendo o próximo passo.</p>
+  <div class="ag-hora"><span>Segunda a sábado</span><span>9h às 21h</span><span>A partir de 24h do pedido</span></div>
+</div></section>
+
+<section class="ag-cursos shell" aria-label="Cursos">
+  <article class="ag-card" id="brow">
+    <div class="ag-num">01 · Beauty</div>
+    <h2>Brow Lamination, Sobrancelha e Cílios</h2>
+    <p class="tag">Formação para quem quer trabalhar com olhar e sobrancelha.</p>
+    <div class="ag-niveis" aria-label="Níveis"><span>Iniciante</span><span>Avançado</span></div>
+    <ul class="ag-lista">
+      <li><span><b>Tudo no mesmo local:</b> atendimento comercial, aulas teóricas e aulas práticas.</span></li>
+      <li><span><b>Atendimento comercial</b> para entender o curso e escolher o nível certo.</span></li>
+      <li><span><b>Teoria e prática</b> no mesmo espaço, do básico ao avançado.</span></li>
+    </ul>
+    <button class="cta primary" type="button" data-agendar="brow">Agendar · Brow e Cílios</button>
+  </article>
+
+  <article class="ag-card" id="barber">
+    <div class="ag-num">02 · Barber</div>
+    <h2>Curso Barber</h2>
+    <p class="tag">Formação em barbearia, do primeiro corte ao nível profissional.</p>
+    <div class="ag-niveis" aria-label="Níveis"><span>Iniciante</span><span>Avançado</span></div>
+    <ul class="ag-lista">
+      <li><span><b>Atendimento comercial</b> aqui, para conhecer o curso e escolher o nível.</span></li>
+      <li><span><b>Prática nas 5 academias parceiras:</b> você treina com cliente real, perto de você.</span></li>
+      <li><span><b>Do iniciante ao avançado</b>, com a direção da HAIR Business.</span></li>
+    </ul>
+    <button class="cta primary" type="button" data-agendar="barbercurso">Agendar · Barber</button>
+  </article>
+</section>
+
+<section class="ag-como"><div class="shell">
+  <div class="eyebrow">Como funciona</div>
+  <h2>Três passos, <em>sem fila.</em></h2>
+  <div class="ag-passos">
+    <div><b>Escolha o curso e o nível</b>Iniciante, avançado ou, se tiver dúvida, peça orientação.</div>
+    <div><b>Escolha o dia e o horário</b>Segunda a sábado, das 9h às 21h, a partir de 24h do pedido.</div>
+    <div><b>Receba a confirmação</b>A equipe confirma pelo WhatsApp (16) 99255-8810.</div>
+  </div>
+</div></section>
+</main>
+
+<footer class="ag-foot"><div class="shell">
+  Vértice Beauty Group · HAIR Academia da Beleza · Ribeirão Preto/SP · <a href="/inicio">Conheça o grupo</a> · <a href="/privacidade">Privacidade</a>
+</div></footer>
+</body>
+</html>

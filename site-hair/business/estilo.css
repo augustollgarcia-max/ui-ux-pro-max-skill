@@ -674,7 +674,6 @@ body:not(:has(.sticky)) .prebadge{bottom:calc(26px + env(safe-area-inset-bottom,
 .marquee-track{display:flex;align-items:center;width:max-content;animation:marquee 114s linear infinite}
 .marquee:hover .marquee-track,.marquee:active .marquee-track{animation-play-state:paused}
 .marquee img{height:clamp(46px,5.4vw,64px);width:auto;flex:0 0 auto;display:block;margin-inline-end:clamp(36px,5vw,72px)}
-.marquee img.lg-olenka{height:clamp(32px,3.8vw,44px)}
 .marquee img.lg-hair-business,.marquee img.lg-hair-beauty{height:clamp(40px,4.6vw,56px)}
 @keyframes marquee{to{transform:translateX(-16.6667%)}}
 @media (prefers-reduced-motion:reduce){.marquee{-webkit-mask-image:none;mask-image:none}.marquee-track{animation:none;flex-wrap:wrap;justify-content:center;gap:18px 0;width:auto;padding-inline:var(--gut)}.marquee-track img[aria-hidden]{display:none}}
@@ -857,3 +856,6 @@ p a:not(.btn){text-decoration:underline;text-underline-offset:3px}
 .blogos img+img{background:none}
 .bprods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.bprods figure{margin:0}.bprods img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;border-radius:4px}
 .bwork .arte img{width:100%;height:auto;display:block}
+/* 22/10 (Augusto): logos redondas oficiais (HAIR Business Barber/Beauty, Conexão Hair/Work) inteiras, sem recorte. */
+.eco-logo img.bola{width:84px;height:84px;object-fit:contain;border:0;border-radius:50%}
+.marquee img.lg-bola{height:clamp(52px,5.8vw,68px)}

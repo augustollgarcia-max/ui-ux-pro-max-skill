@@ -109,6 +109,9 @@ h2 em{color:var(--gold3);font-style:italic}
 .passos li:before{content:counter(p,decimal-leading-zero);font:400 22px "Playfair Display",Georgia,serif;color:var(--gold)}
 .passos b{display:block;font-weight:600;margin-bottom:2px}
 .passos span{font-size:13px;color:#aeb9cc}
+/* número na 1ª coluna ocupando as 2 linhas; título e texto sempre na 2ª (sem isso o texto caía na coluna de 34px, uma palavra por linha) */
+.passos li:before{grid-column:1;grid-row:1 / span 2}
+.passos b,.passos span{grid-column:2}
 
 /* área do parceiro */
 .gate{border:1px solid #d0a45e5e;border-radius:24px;padding:28px 22px;background:linear-gradient(135deg,#1a2a56a8,#0a122ed8),radial-gradient(ellipse at top right,#b68c5128,transparent 50%);box-shadow:0 20px 80px #02081160}
@@ -251,3 +254,47 @@ p a:not(.cta){text-decoration:underline;text-underline-offset:3px}
 /* Logo oficial do Vértice (arquivos do dono, 22/10/2026): nunca redesenhar */
 .mark-oficial{width:38px;height:auto;flex:none;display:block}
 .sig-logo{width:min(260px,70%);height:auto;display:block}
+
+/* 22/10 (Augusto: "A logo jamais muda"): o cabeçalho usa a logo oficial horizontal (arquivo enviado pelo dono, sem redesenho).
+   Fundo transparente tirado do próprio arquivo oficial; desenho, cor e proporção intactos. */
+.logo-oficial{display:block;height:40px;width:auto;max-width:100%}
+@media (max-width:400px){.logo-oficial{height:36px}}
+.logo-rodape{height:52px;margin-bottom:10px}
+/* 22/10 (Augusto): a Vértice fala com três públicos, não "sua escola". Seção de soluções logo depois da capa. */
+.sol-grid{display:grid;gap:16px}
+@media(min-width:900px){.sol-grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+.sol{position:relative;border:1px solid var(--line);border-radius:22px;padding:26px 22px;background:linear-gradient(160deg,#15213b,#0d1630 65%);display:flex;flex-direction:column;overflow:hidden}
+.sol:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
+.sol-n{font:italic 400 28px "Playfair Display",Georgia,serif;color:var(--gold);line-height:1}
+.sol small{display:block;margin-top:12px;color:#d1ab73;letter-spacing:.14em;font-size:10px;font-weight:700;text-transform:uppercase}
+.sol h3{font-size:24px;line-height:1.15;margin:8px 0 14px}
+.sol ul{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
+.sol li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:14px;color:#cfd7e6;line-height:1.45}
+.sol li:before{content:"";width:7px;height:7px;margin:7px 0 0 4px;transform:rotate(45deg);background:var(--gold)}
+.sol-cta{margin-top:auto;display:grid;gap:10px;justify-items:start}
+.sol-cta .cta{width:100%;justify-content:center;min-height:50px}
+.sol .vlink{font-size:13px;font-weight:700;color:#f0c984}
+/* 22/10 (Augusto): logos redondas oficiais da HAIR Business Barber e Business Beauty, maiores para a leitura. */
+.marquee img.bola{height:58px}
+.card .logo.logo-bola{height:96px}.card .logo.logo-bola img{height:92px;max-width:none}
+.sol-bolas{display:flex;gap:12px;margin:0 0 16px}.sol-bolas img{width:88px;height:88px}
+/* 22/10 (Augusto): logos redondas Conexão Hair, Conexão Work e HAIR Academia Business. */
+.card .logo.logo-dupla{gap:10px}
+.app img.app-bola{display:block;width:72px;height:72px;min-width:0;max-width:none;aspect-ratio:1;object-fit:contain;border:0;border-radius:50%;background:none;padding:0;margin:0 0 10px;box-shadow:none}
+/* 22/10 (Augusto): card dos profissionais com 5 logos redondas (Olenka, Ecare, Conexão Work, Catálogo Barber e Beauty). */
+.sol-bolas-5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:340px}.sol-bolas-5 img{width:100%;height:auto;aspect-ratio:1}
+/* 22/10 (Augusto): logos clicáveis no padrão Apple (toque com escala) e detalhes de iPhone/Android:
+   área segura do notch/barra de gestos e alvo de toque mínimo de 44px. */
+.bola-link{display:block;border-radius:50%;-webkit-tap-highlight-color:transparent;transition:transform .18s cubic-bezier(.2,.8,.2,1),filter .18s}
+.bola-link:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.bola-link:active{transform:scale(.94)}
+.bola-link:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.bola-link img{display:block;width:100%;height:auto;aspect-ratio:1}
+.sol-bolas .bola-link{width:88px;min-width:44px}
+.sol-bolas-5 .bola-link,.sol-bolas-3 .bola-link{width:auto}
+.sol-bolas-4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:300px}.sol-bolas-4 .bola-link{width:auto}.sol-bolas-4 img{width:100%;height:auto;aspect-ratio:1}
+.sol-bolas-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:300px}
+@media (prefers-reduced-motion:reduce){.bola-link{transition:none}.bola-link:hover,.bola-link:active{transform:none}}
+.nav .shell,.shell{padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}
+.nav{padding-top:env(safe-area-inset-top)}
+html{scroll-padding-top:96px}
