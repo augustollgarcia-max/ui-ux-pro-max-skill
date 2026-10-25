@@ -27,6 +27,14 @@ await p.goto(U+'?corte=mullet-taper',{waitUntil:'load'});await p.waitForTimeout(
 await p.click('.lb-x');
 const fs=await p.$eval('#q',e=>getComputedStyle(e).fontSize);ok(parseFloat(fs)>=16,'campo de busca com fonte '+fs+' (sem zoom no iPhone)');
 const alvo=await p.$eval('.fav',e=>{const r=e.getBoundingClientRect();return Math.min(r.width,r.height)});ok(alvo>=44,'botão favorito com '+alvo+'px');
+await p.goto(U,{waitUntil:'load'});await p.waitForTimeout(400);
+const gi=await p.$$eval('.gi',l=>[l.length,l.filter(e=>e.dataset.corte).length,l.filter(e=>e.tagName==='A'&&/wa\.me\/5516992558810/.test(e.href)).length]);
+ok(gi[0]>=30&&gi[1]>=12&&gi[0]===gi[1]+gi[2],'guia de estilos: '+gi[0]+' estilos, '+gi[1]+' com foto HAIR, '+gi[2]+' pedem foto no WhatsApp comercial');
+ok(await p.$$eval('#guia img',l=>l.length)===0,'guia sem nenhuma imagem de terceiros');
+await p.click('#q');await p.keyboard.type('zzz');await p.waitForTimeout(250);await p.click('.gi[data-corte="mullet-taper"]');await p.waitForTimeout(300);
+ok(await aberta()&&(await p.textContent('#lbTitulo'))==='Mullet com taper','tocar no estilo abre a foto certa mesmo com busca ativa');
+await p.goBack();await p.waitForTimeout(400);ok(!(await aberta()),'voltar fecha a foto aberta pelo guia');
+const ga=await p.$eval('.gi',e=>e.getBoundingClientRect().height);ok(ga>=44,'item do guia com '+Math.round(ga)+'px de altura');
 ok(errs.length===0,'0 erro de JS '+errs.join('|'));await c.close();
 for(const [nm,dv] of [['320',{viewport:{width:320,height:700}}],['360',{viewport:{width:360,height:780}}],['android',devices['Pixel 7']],['430',{viewport:{width:430,height:900}}],['1440',{viewport:{width:1440,height:900}}]]){
  const cx=await b.newContext(dv);const q=await cx.newPage();await q.goto(U,{waitUntil:'load'});await q.waitForTimeout(500);
