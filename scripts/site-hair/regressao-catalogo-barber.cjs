@@ -1,0 +1,37 @@
+const {chromium,devices}=require(process.env.PLAYWRIGHT_LIB||'playwright');
+const U=(process.env.BASE_URL||'http://localhost:8765')+'/business/catalogo.html';let falhas=0;const ok=(c,m)=>{console.log((c?'✓ ':'✗ ')+m);if(!c)falhas++};
+(async()=>{const b=await chromium.launch();
+const c=await b.newContext({...devices['iPhone 13']});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.goto('http://localhost:8765/business/index.html');await p.goto(U,{waitUntil:'load'});await p.waitForTimeout(800);
+await p.evaluate(()=>{const c=[...document.querySelectorAll('button')].find(x=>/Recusar/.test(x.textContent));c&&c.click()});
+const n=()=>p.$$eval('.card',a=>a.length);
+ok(await n()===13,'13 cortes na grade');
+await p.click('#cats .chip[data-v="degrade"]');ok(await n()===4,'filtro Degradê: '+await n());
+await p.click('#tecs .chip[data-v="navalha"]');ok(await n()===1,'Degradê + Navalha: '+await n());
+await p.click('#cats .chip[data-v="todos"]');await p.click('#tecs .chip[data-v=""]');
+await p.fill('#q','mullet');await p.waitForTimeout(250);ok(await n()===2,'busca "mullet": '+await n());
+await p.fill('#q','pompadour degrade');await p.waitForTimeout(250);ok(await n()===2,'busca sem acento "pompadour degrade": '+await n());
+await p.click('#limpar');await p.waitForTimeout(200);ok(await n()===13,'limpar busca volta 13');
+await p.click('.card:nth-child(2) .fav');await p.click('.card:nth-child(5) .fav');
+await p.click('#cats .chip[data-v="favoritos"]');ok(await n()===2,'favoritos: '+await n());
+await p.reload({waitUntil:'load'});await p.click('#cats .chip[data-v="favoritos"]');ok(await n()===2,'favoritos continuam depois de recarregar');
+await p.click('#cats .chip[data-v="todos"]');
+const aberta=()=>p.evaluate(()=>!document.getElementById('lb').hidden);
+await p.click('.card:nth-child(3) .abrir');ok(await aberta(),'janela do corte abre');
+const t1=await p.textContent('#lbTitulo');const href=await p.getAttribute('#lbQuero','href');ok(href.startsWith('https://wa.me/5516992558810')&&decodeURIComponent(href).includes(t1),'WhatsApp com o nome do corte: '+t1);
+await p.click('#lbProx');ok((await p.textContent('#lbTitulo'))!==t1,'próximo corte');
+await p.screenshot({path:(process.env.SHOTS||'/tmp')+'/cat-janela.png'});
+await p.goBack();await p.waitForTimeout(400);ok(!(await aberta())&&p.url().includes('catalogo'),'voltar (gesto) fecha a janela e fica no catálogo');
+await p.click('.card:nth-child(1) .abrir');await p.click('.lb-x');await p.waitForTimeout(300);ok(!(await aberta())&&p.url().includes('catalogo'),'× fecha sem sair');
+await p.goto(U+'?corte=mullet-taper',{waitUntil:'load'});await p.waitForTimeout(500);ok(await aberta()&&(await p.textContent('#lbTitulo'))==='Mullet com taper','link direto ?corte= abre o corte certo');
+await p.click('.lb-x');
+const fs=await p.$eval('#q',e=>getComputedStyle(e).fontSize);ok(parseFloat(fs)>=16,'campo de busca com fonte '+fs+' (sem zoom no iPhone)');
+const alvo=await p.$eval('.fav',e=>{const r=e.getBoundingClientRect();return Math.min(r.width,r.height)});ok(alvo>=44,'botão favorito com '+alvo+'px');
+ok(errs.length===0,'0 erro de JS '+errs.join('|'));await c.close();
+for(const [nm,dv] of [['320',{viewport:{width:320,height:700}}],['360',{viewport:{width:360,height:780}}],['android',devices['Pixel 7']],['430',{viewport:{width:430,height:900}}],['1440',{viewport:{width:1440,height:900}}]]){
+ const cx=await b.newContext(dv);const q=await cx.newPage();await q.goto(U,{waitUntil:'load'});await q.waitForTimeout(500);
+ const r=await q.evaluate(()=>[innerWidth,document.documentElement.scrollWidth]);ok(r[0]===r[1],nm+': sem rolagem lateral ('+r.join('/')+')');
+ if(nm==='android'||nm==='1440'){await q.evaluate(()=>{const c=[...document.querySelectorAll('button')].find(x=>/Recusar/.test(x.textContent));c&&c.click()});await q.screenshot({path:(process.env.SHOTS||'/tmp')+'/cat-'+nm+'.png',fullPage:nm==='android'});}
+ await cx.close();}
+console.log(falhas?'FALHAS: '+falhas:'TUDO OK');await b.close();})();
+process.exitCode=falhas?1:0;
