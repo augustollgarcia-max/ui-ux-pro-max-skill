@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ REGRA PERMANENTE: CÓDIGO PARA COPIAR + LINK PARA CLICAR (Augusto, 30/10/2026)
+Pedido do dono, para toda sessão, todo chat e todo agente na conta do Luiz Augusto: "Toda vez que você me manda em código, você vai me mandar o link também. É código para mim copiar e link para mim clicar."
+- Todo link vai **duas vezes**: em bloco de código (para copiar e mandar para alguém) **e** como link clicável fora do bloco (para abrir na hora).
+- Vale também para mensagens de WhatsApp e textos com link dentro: o bloco de código com o texto inteiro, e logo abaixo o link sozinho, clicável.
+- Formato no fim da resposta, em "🔗 PARA COPIAR": para cada item, uma linha com o link clicável `[nome](url)` e em seguida o bloco de código com a mesma url (ou o texto).
+
 ## ⚠️ REGRA PERMANENTE — DETALHES DE iPHONE (iOS) E ANDROID EM TODO APP E SITE (Augusto, 22/10/2026)
 Pedido do dono: "grave na memória central, para todo aplicativo que a gente fizer, tem que ter esses detalhes do iPhone, iOS para Android."
 Vale para todo app, site, landing, painel e artifact, em qualquer sessão. Antes de dizer "pronto":
