@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="canonical" href="https://www.hairacademiadabeleza.com.br/catalogo-beauty/renata-salviato">
+<meta property="og:title" content="Catálogo Beauty · Renata Salviato"><meta property="og:type" content="website"><meta property="og:url" content="https://www.hairacademiadabeleza.com.br/catalogo-beauty/renata-salviato">
+<meta property="og:image" content="https://www.hairacademiadabeleza.com.br/catalogo-beauty/renata-salviato/img/renata.webp">
+<meta property="og:description" content="Escolha a técnica pela foto, veja o valor e leve os produtos que a Renata usa em você.">
+<link rel="icon" href="img/selos/catalogo-beauty-redonda.webp">
+<title>Catálogo Beauty · Renata Salviato</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Técnicas, valores e produtos da Renata Salviato: loiros, morena iluminada, Liso Perfeito eCare e penteados. Escolha pela foto e envie no WhatsApp.">
+<meta name="theme-color" content="#f6e7e7">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: revista de beleza no iPad: capa com o nome em Bodoni, índice de técnicas em grade, folha de detalhe que sobe de baixo */
+:root{
+  --porcelana:#fbf4f3; --cetim:#f4e1e1; --rosa:#e9c3c6; --vinho:#6d1a36; --ouro:#a67c3d; --tinta:#2a161c; --suave:#7b5c63;
+  --superficie:#fffafa; --linha:rgba(109,26,54,.16); --sombra:rgba(64,18,34,.14); --vinho-txt:#fff6f7;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif; --texto:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif; --script:"Pinyon Script","Snell Roundhand",cursive;
+  --gutter:max(16px,env(safe-area-inset-left,0px)); --gutter-d:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--porcelana:#170c10;--cetim:#22131a;--rosa:#4a2731;--vinho:#efa9bd;--ouro:#d8b47a;--tinta:#f7e8ea;--suave:#c7a8af;--superficie:#1f1117;--linha:rgba(239,169,189,.2);--sombra:rgba(0,0,0,.5);--vinho-txt:#2a0e18;color-scheme:dark}}
+:root[data-theme="dark"]{--porcelana:#170c10;--cetim:#22131a;--rosa:#4a2731;--vinho:#efa9bd;--ouro:#d8b47a;--tinta:#f7e8ea;--suave:#c7a8af;--superficie:#1f1117;--linha:rgba(239,169,189,.2);--sombra:rgba(0,0,0,.5);--vinho-txt:#2a0e18;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--porcelana);color:var(--tinta);font:400 17px/1.6 var(--texto);font-variant-numeric:lining-nums;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--porcelana)}
+body.trava{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;margin:0;text-wrap:balance;line-height:1.05}
+h2{font-size:clamp(34px,5.2vw,60px);letter-spacing:-.01em}
+h2 em,h1 em{font-style:italic;color:var(--vinho)}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-d)}
+.sobre{font:600 12px/1.3 var(--texto);letter-spacing:.24em;text-transform:uppercase;color:var(--ouro)}
+.mini{font-size:13px;color:var(--suave)}
+:focus-visible{outline:2px solid var(--ouro);outline-offset:3px}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:999px;border:1px solid var(--vinho);background:var(--vinho);color:var(--vinho-txt);font:600 14px/1.2 var(--texto);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;text-align:center;transition:transform .15s ease,background .2s}
+.btn.ghost{background:transparent;color:var(--vinho)}
+.btn:active,.add:active,.filtro:active,.btn-sel:active,.btn-ico:active,.look-btn:active,.fechar:active{transform:scale(.96)}
+
+/* abertura */
+.intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(120% 90% at 50% 40%,#fbe9ea 0%,#f0cfd3 55%,#d9a3ad 100%);transition:opacity .7s ease,visibility .7s;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.intro.fora{opacity:0;visibility:hidden}
+.intro-in{display:grid;justify-items:center;gap:18px;text-align:center;padding:0 24px}
+.intro-selo{width:min(46vw,220px);height:auto;filter:drop-shadow(0 18px 40px rgba(109,26,54,.35));animation:selo 1.4s cubic-bezier(.2,.8,.2,1) both}
+.intro-linha{display:block;height:1px;width:min(60vw,320px);background:#a67c3d;transform-origin:center;animation:linha 1s .7s ease both}
+.intro-nome{font:italic 500 clamp(40px,9vw,88px)/1 var(--display);color:#5a1430}
+.intro-nome span{display:inline-block;animation:letra .7s calc(1s + var(--i)*.05s) cubic-bezier(.2,.8,.2,1) both}
+.intro-sub{font:600 12px/1 var(--texto);letter-spacing:.32em;text-transform:uppercase;color:#7d4a2f;animation:letra .8s 1.9s ease both}
+.intro-pular{position:absolute;right:calc(16px + env(safe-area-inset-right,0px));top:calc(16px + env(safe-area-inset-top,0px));min-width:44px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(90,20,48,.3);background:rgba(255,255,255,.4);color:#5a1430;font-size:14px}
+@keyframes selo{from{opacity:0;transform:scale(.7) rotate(-12deg)}to{opacity:1;transform:none}}
+@keyframes linha{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes letra{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+
+/* barra */
+.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--porcelana) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--linha)}
+.barra-in{max-width:1180px;margin:0 auto;padding:8px var(--gutter-d) 8px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.marca-topo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px;min-width:0}
+.marca-topo img{width:40px;height:40px;flex:none}
+.marca-topo span{font:italic 500 19px/1.1 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.marca-topo small{display:block;font:600 10px/1.3 var(--texto);letter-spacing:.22em;text-transform:uppercase;color:var(--ouro);font-style:normal}
+.barra-acoes{display:flex;gap:8px;flex:none}
+.btn-ico{width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:var(--superficie);display:grid;place-items:center}
+.btn-ico svg{width:20px;height:20px;fill:none;stroke:var(--vinho);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn-sel{min-height:44px;padding:0 8px 0 16px;border-radius:999px;border:1px solid var(--vinho);background:var(--vinho);color:var(--vinho-txt);font:600 13px/1 var(--texto);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.btn-sel svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.btn-sel b{min-width:28px;height:28px;border-radius:50%;background:var(--vinho-txt);color:var(--vinho);display:grid;place-items:center;font-size:13px}
+.btn-sel.pulsa{animation:pulsa .5s ease}
+@keyframes pulsa{50%{transform:scale(1.08)}}
+
+/* capa */
+.capa{background:linear-gradient(180deg,var(--cetim),var(--porcelana));padding-block:clamp(28px,5vw,64px)}
+.capa-in{max-width:1180px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-d);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center}
+.capa-txt{display:grid;gap:20px;min-width:0}
+.capa-nome{display:grid;font-size:clamp(64px,11vw,150px);line-height:.86;letter-spacing:-.03em;font-weight:400}
+.capa-nome span:last-child{font-style:italic;color:var(--vinho);padding-left:.5em}
+.capa-lead{font-size:clamp(17px,1.8vw,20px);max-width:34em;color:var(--suave)}
+.selos-txt{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.selos-txt li{border:1px solid var(--ouro);color:var(--tinta);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500}
+.capa-cta{display:flex;flex-wrap:wrap;gap:12px}
+.capa-foto{margin:0;position:relative;border-radius:200px 200px 24px 24px;overflow:hidden;box-shadow:0 30px 60px var(--sombra);aspect-ratio:4/5;max-width:100%}
+.capa-foto img{width:100%;height:100%;object-fit:cover;object-position:46% 30%}
+.capa-foto figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:grid;gap:2px;padding:16px 18px;border-radius:16px;background:rgba(42,10,22,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.capa-foto figcaption span{font:600 11px/1.4 var(--texto);letter-spacing:.24em;text-transform:uppercase;color:#f1d29c}
+.capa-foto figcaption b{font:italic 500 21px/1.25 var(--display)}
+
+/* seções */
+.secao{padding-block:clamp(56px,8vw,104px)}
+.sec-cab{display:grid;gap:14px;max-width:640px;margin-bottom:28px}
+.sec-cab p:last-child{color:var(--suave)}
+.filtros{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;margin:0 0 20px;scrollbar-width:none;position:sticky;top:calc(env(safe-area-inset-top,0px) + 61px);z-index:20;background:var(--porcelana)}
+.filtros::-webkit-scrollbar{display:none}
+.filtro{flex:none;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--linha);background:var(--superficie);font-size:14px;font-weight:500}
+.filtro.on{background:var(--tinta);color:var(--porcelana);border-color:var(--tinta)}
+.looks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.2vw,28px)}
+.look{display:grid;grid-template-rows:auto auto 1fr;gap:10px;min-width:0}
+.look[hidden]{display:none}
+.look-btn{position:relative;display:block;padding:0;border:0;background:none;text-align:left;border-radius:22px;overflow:hidden;box-shadow:0 14px 34px var(--sombra);transition:transform .2s}
+.look-foto{display:block;aspect-ratio:4/5;background:var(--cetim)}
+.look-foto img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.look-btn:hover .look-foto img{transform:scale(1.04)}
+.look-ref{position:absolute;top:12px;left:12px;font:600 11px/1 var(--texto);letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(42,10,22,.45);padding:8px 10px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.look-txt{position:absolute;inset:auto 0 0 0;padding:56px 18px 16px;background:linear-gradient(transparent,rgba(30,6,15,.82));color:#fff;display:grid;gap:2px}
+.look-tec{font:600 11px/1.3 var(--texto);letter-spacing:.2em;text-transform:uppercase;color:#f1d29c}
+.look-nome{font:500 clamp(22px,2.4vw,28px)/1.1 var(--display)}
+.look-pe{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px}
+.preco{font:600 19px/1 var(--texto);font-variant-numeric:lining-nums tabular-nums}
+.look-pe .tempo{font-size:13px;opacity:.85}
+.look-print{display:none}
+.sua-ref{grid-column:span 2;align-content:center;justify-items:start;gap:14px;padding:clamp(24px,4vw,48px);border-radius:22px;background:var(--vinho);color:var(--vinho-txt)}
+.sua-ref h3{font-size:clamp(30px,3.6vw,44px)}.sua-ref h3 em{font-style:italic}
+.sua-ref .sobre{color:inherit;opacity:.8}.sua-ref p:not(.sobre){max-width:30em;opacity:.9}
+.sua-ref .btn{background:var(--vinho-txt);color:var(--vinho);border-color:var(--vinho-txt)}
+.look-chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--cetim);color:var(--suave);border:1px solid var(--linha)}
+.add{min-height:44px;border-radius:999px;border:1px solid var(--vinho);background:transparent;color:var(--vinho);font:600 13px/1 var(--texto);letter-spacing:.08em;text-transform:uppercase;align-self:end;transition:transform .15s,background .2s}
+.add.ok{background:var(--vinho);color:var(--vinho-txt)}
+.add.sm{min-height:44px;padding:0 16px;justify-self:start}
+
+/* antes e depois */
+.antes{background:var(--tinta);color:var(--porcelana)}
+.antes h2 em{color:var(--rosa)}
+.antes-in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.antes figure{margin:0;border-radius:24px;overflow:hidden}
+.antes-in>div{display:grid;gap:18px;justify-items:start;min-width:0}
+.antes-in>div>p:not(.sobre){color:color-mix(in srgb,var(--porcelana) 78%,transparent);max-width:30em}
+.antes .btn{background:var(--porcelana);color:var(--tinta);border-color:var(--porcelana)}
+
+/* produtos */
+.marca{padding-block:28px;border-top:1px solid var(--linha)}
+.marca-cab{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;margin-bottom:22px}
+.marca-cab>div{display:grid;gap:6px;min-width:0}
+.marca-cab h3{font-size:clamp(26px,3vw,36px)}
+.marca-cab p{color:var(--suave);max-width:40em}
+.selo-m{width:88px;height:88px}
+.wm-verutti{width:88px;height:88px;border-radius:50%;background:#f3eee6;border:1px solid #c9b48c;display:grid;place-content:center;text-align:center;color:#3a3330}
+.wm-verutti b{font:500 15px/1 var(--display);letter-spacing:.24em;padding-left:.24em}
+.wm-verutti span{font:600 6.5px/1.6 var(--texto);letter-spacing:.32em;padding-left:.32em}
+.prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.prod.destaque{grid-column:1/-1;grid-template-rows:none;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+.prod.destaque .prod-foto{aspect-ratio:auto;min-height:100%}
+.prod.destaque .prod-txt{align-content:center;padding:24px}
+.prod{display:grid;grid-template-rows:auto 1fr;background:var(--superficie);border:1px solid var(--linha);border-radius:20px;overflow:hidden;min-width:0}
+.prod-foto{aspect-ratio:4/5;background:var(--cetim)}
+.prod-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.prod-txt{display:grid;gap:6px;padding:16px;align-content:start}
+.prod-txt small{font-size:12px;color:var(--ouro);font-weight:600;letter-spacing:.04em}
+.prod-txt h4{font-size:22px}
+.prod-txt p{font-size:14px;color:var(--suave);line-height:1.5}
+.prod-pe{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px}
+.medida{font-size:13px;color:var(--suave)}
+.uso{font-size:12px;color:var(--suave);padding-top:10px;border-top:1px dashed var(--linha);margin-top:6px}
+
+/* autoridade */
+.autoridade{background:var(--cetim)}
+.auto-in{display:grid;grid-template-columns:1.2fr 1fr;grid-template-areas:"a t" "b t";gap:20px clamp(24px,4vw,56px);align-items:start}
+.auto-a{grid-area:a}.auto-b{grid-area:b}.auto-txt{grid-area:t;display:grid;gap:18px;align-self:center;min-width:0}
+.autoridade figure{margin:0}
+.autoridade figure img{border-radius:20px;width:100%}
+.autoridade figcaption{font-size:13px;color:var(--suave);margin-top:8px}
+.auto-txt>p:not(.sobre){color:var(--suave)}
+.studio-logo{border-radius:14px;max-width:340px;width:100%}
+.end{font-weight:500;color:var(--tinta)!important}
+
+/* levar */
+.leve-in{display:grid;grid-template-columns:1fr auto;gap:clamp(24px,5vw,72px);align-items:center}
+.leve-in>div{display:grid;gap:18px;min-width:0}
+.leve-in>div>p{color:var(--suave)}
+.leve-acoes{display:flex;flex-wrap:wrap;gap:10px}
+.link-txt{font-size:13px;word-break:break-all;user-select:all}
+.qr{margin:0;display:grid;gap:12px;justify-items:center;text-align:center;font:italic 500 18px/1.3 var(--display)}
+.qr-box{width:220px;padding:18px;background:#fff;border-radius:22px;box-shadow:0 18px 40px var(--sombra)}
+.qr-box svg{display:block;width:100%;height:auto}
+.qr-box path{fill:#2a161c}
+
+/* assinatura */
+.assinatura{padding-block:clamp(48px,7vw,88px);background:radial-gradient(90% 120% at 50% 0%,var(--rosa),var(--porcelana) 70%)}
+.ass-in{display:flex;align-items:center;justify-content:center;gap:clamp(20px,4vw,48px);text-align:left;flex-wrap:wrap}
+.ass-in>div{display:grid;gap:4px}
+.selo-g{width:clamp(110px,16vw,160px);height:auto;filter:drop-shadow(0 12px 28px var(--sombra))}
+.script{font:400 clamp(52px,8vw,92px)/1 var(--script);color:var(--vinho)}
+.ass-sub{font:600 12px/1.4 var(--texto);letter-spacing:.24em;text-transform:uppercase;color:var(--suave)}
+
+/* rodapé */
+.rodape{padding-block:40px calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--linha)}
+.rod-in{display:grid;gap:12px;justify-items:center;text-align:center}
+.rod-selos{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.rod-selos img{width:72px;height:72px}
+
+/* folhas (detalhe e seleção) */
+.fundo{position:fixed;inset:0;z-index:50;background:rgba(30,6,15,.5);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.folha{position:fixed;z-index:60;left:0;right:0;bottom:0;max-height:92vh;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain;background:var(--porcelana);border-radius:28px 28px 0 0;box-shadow:0 -20px 60px var(--sombra);animation:sobe .35s cubic-bezier(.2,.8,.2,1)}
+@media (min-width:900px){.folha{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);width:min(980px,92vw);border-radius:28px;animation:surge .3s ease}}
+@keyframes sobe{from{transform:translateY(40%);opacity:.4}}
+@keyframes surge{from{opacity:0}}
+.folha-in{padding:28px var(--gutter-d) calc(28px + env(safe-area-inset-bottom,0px)) var(--gutter);display:grid;gap:16px}
+.fechar{position:sticky;top:12px;float:right;margin:12px 12px 0 0;margin-right:max(12px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:var(--superficie);font-size:26px;line-height:1;z-index:2}
+.galeria{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*var(--gutter-d)) 0 calc(-1*var(--gutter));padding:0 var(--gutter-d) 6px var(--gutter);overscroll-behavior-x:contain}
+.galeria img{height:min(52vh,460px);width:auto;max-width:none;border-radius:18px;scroll-snap-align:start;flex:none;background:var(--cetim)}
+.det-cab{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap}
+.det-cab h2{font-size:clamp(34px,5vw,52px)}
+.det-preco{display:grid;justify-items:end}
+.det-preco .preco{font-size:28px;color:var(--vinho)}
+.det-preco small{color:var(--suave)}
+.det-txt{color:var(--suave);max-width:40em}
+.inclui{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.inclui li{padding:7px 12px;border-radius:999px;background:var(--cetim);font-size:14px}
+.det-prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.det-prod{display:grid;text-decoration:none;color:inherit;grid-template-columns:56px 1fr;gap:10px;align-items:center;padding:8px;border:1px solid var(--linha);border-radius:14px;background:var(--superficie);font-size:13px;line-height:1.3;min-width:0}
+.det-prod img{width:56px;height:56px;object-fit:cover;border-radius:10px}
+.det-prod b{display:block;font-size:14px}
+.det-acoes{display:flex;flex-wrap:wrap;gap:10px}
+.sel-lista{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.sel-lista li{display:grid;grid-template-columns:52px 1fr auto auto;gap:12px;align-items:center;padding:8px;border-radius:14px;background:var(--superficie);border:1px solid var(--linha)}
+.sel-lista img{width:52px;height:52px;border-radius:10px;object-fit:cover}
+.sel-lista small{display:block;color:var(--suave);font-size:12px}
+.sel-lista button{width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:none;font-size:20px}
+.sel-total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 4px;border-top:1px solid var(--linha);font-size:15px}
+.sel-total b{font-size:24px;color:var(--vinho)}
+.campo{display:grid;gap:6px;font-size:14px;font-weight:500}
+.campo input{font:16px/1.4 var(--texto);min-height:48px;padding:10px 14px;border-radius:12px;border:1px solid var(--linha);background:var(--superficie);color:var(--tinta)}
+.aviso{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;z-index:90;background:var(--tinta);color:var(--porcelana);padding:12px 20px;border-radius:999px;font-size:14px;transition:.3s;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
+.aviso.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1000px){.looks{grid-template-columns:repeat(2,minmax(0,1fr))}.sua-ref{grid-column:span 1}}
+@media (max-width:760px){
+  .capa-in,.antes-in,.leve-in{grid-template-columns:1fr}
+  .capa-foto{order:-1;border-radius:160px 160px 20px 20px}
+  .auto-in{grid-template-columns:1fr;grid-template-areas:"t" "a" "b"}
+  .marca-cab{grid-template-columns:64px 1fr}.selo-m,.wm-verutti{width:64px;height:64px}
+  .wm-verutti b{font-size:11px}.wm-verutti span{font-size:5px}
+  .qr{justify-self:center}
+  .prods{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*var(--gutter-d)) 0 calc(-1*var(--gutter));padding:0 var(--gutter-d) 8px var(--gutter);scroll-padding-left:var(--gutter);overscroll-behavior-x:contain}
+  .prod,.prod.destaque{flex:0 0 72%;scroll-snap-align:start;grid-template-columns:none;grid-template-rows:auto 1fr}
+  .prod.destaque .prod-foto{aspect-ratio:4/5}
+  .ass-in{text-align:center;flex-direction:column}
+}
+@media (max-width:440px){.looks{gap:12px}.look-txt{padding:40px 12px 12px}.look-nome{font-size:20px}.preco{font-size:16px}.look-ref{font-size:10px}.sua-ref{padding:18px 14px}.sua-ref h3{font-size:24px}.sua-ref p:not(.sobre){font-size:14px}.sua-ref .btn{font-size:11px;padding:10px 12px;letter-spacing:.02em}.btn-sel{font-size:0;padding:0 8px}.btn-sel svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.btn-sel b{font-size:13px}.add{font-size:11px;letter-spacing:.04em}.chip{font-size:11px}.capa-nome{font-size:clamp(56px,17vw,80px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.intro{display:none}}
+
+/* impressão: catálogo de balcão em A4 */
+@media print{
+  @page{size:A4;margin:12mm}
+  :root{--porcelana:#fff;--cetim:#f7eded;--tinta:#2a161c;--suave:#5f464c;--vinho:#6d1a36;--superficie:#fff;--linha:#e3cfd2;--sombra:transparent;--vinho-txt:#fff}
+  body{font-size:11pt;background:#fff}
+  body::before,.intro,.barra,.filtros,.add,.capa-cta,.leve-acoes,.fundo,.folha,.aviso,.btn,.link-txt,.sua-ref{display:none!important}
+  .look[hidden]{display:grid!important}
+  .capa{page-break-after:always;background:#fff}
+  .capa-foto{box-shadow:none}
+  .looks{grid-template-columns:repeat(3,1fr);gap:8mm}
+  .look,.prod,.marca-cab,figure{break-inside:avoid}
+  .look-btn{box-shadow:none}
+  .look-print{display:block;font-size:9pt;color:var(--suave)}
+  .antes{background:#fff;color:var(--tinta)}
+  .antes-in>div>p:not(.sobre){color:var(--suave)}
+  .secao{padding-block:10mm}
+  .bancada,.autoridade{page-break-before:always}
+  .prods{display:grid!important;grid-template-columns:repeat(4,1fr)!important;overflow:visible!important;margin:0!important;padding:0!important}
+  .prod,.prod.destaque{grid-column:auto;grid-template-columns:none;grid-template-rows:auto 1fr}
+  .prod.destaque .prod-foto{aspect-ratio:4/5}
+  .looks{grid-template-columns:repeat(3,1fr)!important}
+  .qr-box{box-shadow:none;border:1px solid #ddd}
+}
+</style></head><body>
+<div class="intro" id="intro" aria-hidden="true"><div class="intro-in">
+<img class="intro-selo" src="img/selos/catalogo-beauty-redonda.webp" alt="" width="400" height="400">
+<span class="intro-linha"></span><p class="intro-nome"><span style="--i:0">R</span><span style="--i:1">e</span><span style="--i:2">n</span><span style="--i:3">a</span><span style="--i:4">t</span><span style="--i:5">a</span><span style="--i:6">&nbsp;</span><span style="--i:7">S</span><span style="--i:8">a</span><span style="--i:9">l</span><span style="--i:10">v</span><span style="--i:11">i</span><span style="--i:12">a</span><span style="--i:13">t</span><span style="--i:14">o</span></p>
+<p class="intro-sub">Catálogo Beauty · Edição 2026</p></div>
+<button class="intro-pular" type="button" data-pular>Pular</button></div>
+
+<header class="barra"><div class="barra-in">
+<a class="marca-topo" href="#capa" aria-label="Início do catálogo"><img src="img/selos/catalogo-beauty-redonda.webp" alt="" width="400" height="400"><span>Renata Salviato<small>Catálogo Beauty</small></span></a>
+<div class="barra-acoes"><button class="btn-ico" type="button" data-compartilhar aria-label="Enviar o catálogo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M7 8l5-5 5 5"/></svg></button>
+<button class="btn-sel" type="button" data-selecao aria-label="Minha seleção"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zM9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Minha seleção</span> <b id="qtd">0</b></button></div></div></header>
+
+<main>
+<section class="capa" id="capa"><div class="capa-in">
+<div class="capa-txt">
+<p class="sobre">Studio Renata Salviato · Beleza · Estética · Cabelo</p>
+<h1 class="capa-nome"><span>Renata</span><span>Salviato</span></h1>
+<p class="capa-lead">Cabeleireira, colorista e especialista em alisamento, loiros e morena iluminada. Escolha a técnica pela foto, veja o valor e leve os produtos que ela usa em você.</p>
+<ul class="selos-txt"><li>Embaixadora oficial eCare</li><li>Embaixadora Verutti</li><li>Formada em Cosmetologia · Barão de Mauá</li></ul>
+<div class="capa-cta"><a class="btn" href="#tecnicas">Ver as técnicas</a><a class="btn ghost" href="https://maapp.com.br/studiorenatasalviato" target="_blank" rel="noopener">Agendar online</a></div>
+</div>
+<figure class="capa-foto"><img src="img/renata.webp" alt="Renata Salviato" width="900" height="754" fetchpriority="high">
+<figcaption><span>Nesta edição</span><b>Loiro Vanilla</b><b>Morena iluminada free hands</b><b>Liso Perfeito eCare</b></figcaption></figure>
+</div></section>
+
+<section class="secao" id="tecnicas"><div class="wrap">
+<div class="sec-cab"><p class="sobre">As assinaturas</p><h2>Escolha pela foto.<br><em>Leve a técnica.</em></h2>
+<p>Cada foto é um trabalho real do studio. Toque para ver mais fotos, o que está incluso e os produtos usados.</p></div>
+<nav class="filtros" aria-label="Filtrar técnicas"><button class="filtro on" type="button" data-filtro="todas" aria-pressed="true">Todas</button><button class="filtro" type="button" data-filtro="loiros" aria-pressed="false">Loiros</button><button class="filtro" type="button" data-filtro="morenas" aria-pressed="false">Morenas</button><button class="filtro" type="button" data-filtro="cor" aria-pressed="false">Cor</button><button class="filtro" type="button" data-filtro="lisos" aria-pressed="false">Lisos e tratamentos</button><button class="filtro" type="button" data-filtro="penteados" aria-pressed="false">Penteados</button></nav>
+<div class="looks"><article class="look" data-cat="morenas" id="t-morena-free-hands">
+<button class="look-btn" type="button" data-abrir="morena-free-hands" aria-label="Ver Morena Iluminada">
+<span class="look-foto"><img src="img/morena-free-hands.webp" alt="Morena Iluminada: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 01</span>
+<span class="look-txt"><span class="look-tec">Free hands</span><span class="look-nome">Morena Iluminada</span>
+<span class="look-pe"><span class="preco">R$ 400</span><span class="tempo">4 h</span></span></span></button>
+<p class="look-print">Iluminação à mão livre, sem papel, que acompanha o movimento natural do fio. Base preservada, pontos de luz quentes e transição sem marca.</p><div class="look-chips"><span class="chip m-verutti">White Luxury Premium</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-olenka">SelfCare+ Intense Hydration</span><span class="chip m-olenka">Hair Brushing</span></div>
+<button class="add" type="button" data-add="s:morena-free-hands">Quero esta técnica</button></article><article class="look" data-cat="loiros" id="t-loiro-vanilla">
+<button class="look-btn" type="button" data-abrir="loiro-vanilla" aria-label="Ver Loiro Vanilla">
+<span class="look-foto"><img src="img/loiro-vanilla.webp" alt="Loiro Vanilla: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 02</span>
+<span class="look-txt"><span class="look-tec">Assinatura do studio</span><span class="look-nome">Loiro Vanilla</span>
+<span class="look-pe"><span class="preco">R$ 550</span><span class="tempo">5 h</span></span></span></button>
+<p class="look-print">O loiro creme da casa: claro, luminoso e macio ao toque, com raiz esfumada para crescer bonito.</p><div class="look-chips"><span class="chip m-verutti">Blond Luxury</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-olenka">Royal Blond</span><span class="chip m-olenka">SelfCare+ Intense Hydration</span></div>
+<button class="add" type="button" data-add="s:loiro-vanilla">Quero esta técnica</button></article><article class="look" data-cat="loiros" id="t-loiro-milhoes">
+<button class="look-btn" type="button" data-abrir="loiro-milhoes" aria-label="Ver Loiro de Milhões">
+<span class="look-foto"><img src="img/loiro-milhoes.webp" alt="Loiro de Milhões: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 03</span>
+<span class="look-txt"><span class="look-tec">Platinado liso</span><span class="look-nome">Loiro de Milhões</span>
+<span class="look-pe"><span class="preco">R$ 650</span><span class="tempo">6 h</span></span></span></button>
+<p class="look-print">Loiro claro, uniforme e frio, com acabamento liso espelhado. Para quem quer o máximo de luz com o fio íntegro.</p><div class="look-chips"><span class="chip m-verutti">Blond Luxury</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-ecare">Blindagem Premium</span><span class="chip m-olenka">Royal Blond</span></div>
+<button class="add" type="button" data-add="s:loiro-milhoes">Quero esta técnica</button></article><article class="look" data-cat="loiros" id="t-blond-luxury">
+<button class="look-btn" type="button" data-abrir="blond-luxury" aria-label="Ver Iluminado Dourado">
+<span class="look-foto"><img src="img/blond-luxury.webp" alt="Iluminado Dourado: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 04</span>
+<span class="look-txt"><span class="look-tec">Blond Luxury Verutti</span><span class="look-nome">Iluminado Dourado</span>
+<span class="look-pe"><span class="preco">R$ 520</span><span class="tempo">5 h</span></span></span></button>
+<p class="look-print">Dourado ensolarado do meio às pontas, com profundidade na raiz. Cabelos beijados pelo sol, o ano inteiro.</p><div class="look-chips"><span class="chip m-verutti">Blond Luxury</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-olenka">Hair Brushing</span><span class="chip m-ecare">Macadâmia Elixir Claire</span></div>
+<button class="add" type="button" data-add="s:blond-luxury">Quero esta técnica</button></article><article class="look" data-cat="cor" id="t-correcao-loiro">
+<button class="look-btn" type="button" data-abrir="correcao-loiro" aria-label="Ver Correção de Loiro">
+<span class="look-foto"><img src="img/correcao-loiro.webp" alt="Correção de Loiro: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 05</span>
+<span class="look-txt"><span class="look-tec">Antes e depois</span><span class="look-nome">Correção de Loiro</span>
+<span class="look-pe"><span class="preco">R$ 690</span><span class="tempo">7 h</span></span></span></button>
+<p class="look-print">Para o loiro manchado, amarelado ou com faixas. Reorganização da cor, raiz esfumada e matização do zero.</p><div class="look-chips"><span class="chip m-verutti">Blond Luxury</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-ecare">VegaCare Máscara</span><span class="chip m-olenka">Royal Blond</span></div>
+<button class="add" type="button" data-add="s:correcao-loiro">Quero esta técnica</button></article><article class="look" data-cat="morenas" id="t-chocolate">
+<button class="look-btn" type="button" data-abrir="chocolate" aria-label="Ver Morena Chocolate">
+<span class="look-foto"><img src="img/chocolate.webp" alt="Morena Chocolate: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 06</span>
+<span class="look-txt"><span class="look-tec">White Luxury · caramelo</span><span class="look-nome">Morena Chocolate</span>
+<span class="look-pe"><span class="preco">R$ 450</span><span class="tempo">4 h</span></span></span></button>
+<p class="look-print">Morena profunda com reflexos caramelo e chocolate. Brilho de cabelo saudável sem perder a base escura.</p><div class="look-chips"><span class="chip m-verutti">White Luxury Premium</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-ecare">Macadâmia Elixir Claire</span></div>
+<button class="add" type="button" data-add="s:chocolate">Quero esta técnica</button></article><article class="look" data-cat="morenas" id="t-mel">
+<button class="look-btn" type="button" data-abrir="mel" aria-label="Ver Iluminado Mel">
+<span class="look-foto"><img src="img/mel.webp" alt="Iluminado Mel: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 07</span>
+<span class="look-txt"><span class="look-tec">Proposta sob medida</span><span class="look-nome">Iluminado Mel</span>
+<span class="look-pe"><span class="preco">R$ 480</span><span class="tempo">4 h 30</span></span></span></button>
+<p class="look-print">Degradê mel do meio às pontas, desenhado para o seu tom de pele. A cliente traz a referência e a Renata adapta.</p><div class="look-chips"><span class="chip m-verutti">White Luxury Premium</span><span class="chip m-verutti">OX Action 20 vol.</span><span class="chip m-olenka">Hair Brushing</span></div>
+<button class="add" type="button" data-add="s:mel">Quero esta técnica</button></article><article class="look" data-cat="cor" id="t-ruivo">
+<button class="look-btn" type="button" data-abrir="ruivo" aria-label="Ver Ruivo Divo">
+<span class="look-foto"><img src="img/ruivo.webp" alt="Ruivo Divo: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 08</span>
+<span class="look-txt"><span class="look-tec">Coloração cobre</span><span class="look-nome">Ruivo Divo</span>
+<span class="look-pe"><span class="preco">R$ 380</span><span class="tempo">3 h</span></span></span></button>
+<p class="look-print">Cobre intenso, uniforme da raiz às pontas, com corte em camadas para dar movimento à cor.</p><div class="look-chips"><span class="chip m-olenka">SelfCare+ Intense Hydration</span><span class="chip m-ecare">Macadâmia Elixir Claire</span></div>
+<button class="add" type="button" data-add="s:ruivo">Quero esta técnica</button></article><article class="look" data-cat="lisos" id="t-liso-perfeito">
+<button class="look-btn" type="button" data-abrir="liso-perfeito" aria-label="Ver Liso Perfeito eCare">
+<span class="look-foto"><img src="img/liso-perfeito.webp" alt="Liso Perfeito eCare: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 09</span>
+<span class="look-txt"><span class="look-tec">Progressiva orgânica LissCare</span><span class="look-nome">Liso Perfeito eCare</span>
+<span class="look-pe"><span class="preco">R$ 280</span><span class="tempo">3 h 30</span></span></span></button>
+<p class="look-print">O método de alisamento da eCare que a Renata ensina a outros salões. Liso alinhado, com movimento e brilho, sem aspecto de cabelo duro.</p><div class="look-chips"><span class="chip m-ecare">LissCare</span><span class="chip m-ecare">Blindagem Premium</span><span class="chip m-ecare">VegaCare Máscara</span></div>
+<button class="add" type="button" data-add="s:liso-perfeito">Quero esta técnica</button></article><article class="look" data-cat="lisos" id="t-blindagem">
+<button class="look-btn" type="button" data-abrir="blindagem" aria-label="Ver Blindagem Capilar">
+<span class="look-foto"><img src="img/blindagem.webp" alt="Blindagem Capilar: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 10</span>
+<span class="look-txt"><span class="look-tec">Antifrizz</span><span class="look-nome">Blindagem Capilar</span>
+<span class="look-pe"><span class="preco">R$ 220</span><span class="tempo">2 h 30</span></span></span></button>
+<p class="look-print">A solução para o frizz: reduz volume, sela a cutícula e deixa o fio pesado de brilho por semanas.</p><div class="look-chips"><span class="chip m-verutti">Blindagem Capilar</span><span class="chip m-ecare">Blindagem Premium</span><span class="chip m-olenka">Hair Brushing</span></div>
+<button class="add" type="button" data-add="s:blindagem">Quero esta técnica</button></article><article class="look" data-cat="lisos" id="t-btx">
+<button class="look-btn" type="button" data-abrir="btx" aria-label="Ver BTX Orgânico">
+<span class="look-foto"><img src="img/btx.webp" alt="BTX Orgânico: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 11</span>
+<span class="look-txt"><span class="look-tec">Redução de volume</span><span class="look-nome">BTX Orgânico</span>
+<span class="look-pe"><span class="preco">R$ 240</span><span class="tempo">3 h</span></span></span></button>
+<p class="look-print">Controle absoluto do volume para cabelos cheios, com reposição de massa e sem formol.</p><div class="look-chips"><span class="chip m-verutti">B.T.X Orgânico</span><span class="chip m-ecare">VegaCare Máscara</span></div>
+<button class="add" type="button" data-add="s:btx">Quero esta técnica</button></article><article class="look" data-cat="penteados" id="t-semipreso">
+<button class="look-btn" type="button" data-abrir="semipreso" aria-label="Ver Semipreso Romântico">
+<span class="look-foto"><img src="img/semipreso.webp" alt="Semipreso Romântico: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 12</span>
+<span class="look-txt"><span class="look-tec">Penteado para festa</span><span class="look-nome">Semipreso Romântico</span>
+<span class="look-pe"><span class="preco">R$ 220</span><span class="tempo">1 h 30</span></span></span></button>
+<p class="look-print">Ondas abertas com frente presa: romântico, leve e firme a noite toda.</p><div class="look-chips"><span class="chip m-olenka">Hair Brushing</span></div>
+<button class="add" type="button" data-add="s:semipreso">Quero esta técnica</button></article><article class="look" data-cat="penteados" id="t-coque">
+<button class="look-btn" type="button" data-abrir="coque" aria-label="Ver Coque Despojado">
+<span class="look-foto"><img src="img/rabo.webp" alt="Coque Despojado: trabalho da Renata Salviato" loading="lazy" decoding="async"></span>
+<span class="look-ref">Ref. 13</span>
+<span class="look-txt"><span class="look-tec">Noivas e madrinhas</span><span class="look-nome">Coque Despojado</span>
+<span class="look-pe"><span class="preco">R$ 280</span><span class="tempo">2 h</span></span></span></button>
+<p class="look-print">Coque baixo ou alto com textura e mechas soltas, pensado para casamento de dia ou de noite.</p><div class="look-chips"><span class="chip m-olenka">Hair Brushing</span></div>
+<button class="add" type="button" data-add="s:coque">Quero esta técnica</button></article>
+<article class="look sua-ref" data-cat="todas"><p class="sobre">Não achou a sua?</p><h3>Mande a sua<br><em>referência.</em></h3>
+<p>Envie a foto do cabelo que você quer. A Renata avalia o seu fio e responde com a técnica e o valor.</p>
+<a class="btn" href="https://wa.me/5516997695193?text=Ol%C3%A1%2C%20Renata%21%20Vi%20o%20seu%20Cat%C3%A1logo%20Beauty.%20Vou%20te%20mandar%20a%20foto%20do%20cabelo%20que%20eu%20quero." target="_blank" rel="noopener">Enviar referência no WhatsApp</a></article></div></div></section>
+
+<section class="secao antes" id="antes-depois"><div class="wrap antes-in">
+<figure><img src="img/correcao-loiro.webp" alt="Antes e depois: correção de loiro com Verutti Blond Luxury" loading="lazy"></figure>
+<div><p class="sobre">Antes e depois</p><h2>Do loiro manchado<br><em>ao loiro de revista.</em></h2>
+<p>Correção feita em uma sessão com Blond Luxury e OX Action Verutti: raiz esfumada, faixas apagadas e matização fria.</p>
+<button class="btn" type="button" data-abrir="correcao-loiro">Ver a técnica · R$ 690</button></div></div></section>
+
+<section class="secao bancada" id="produtos"><div class="wrap">
+<div class="sec-cab"><p class="sobre">A bancada da Renata</p><h2>Os produtos<br><em>de cada resultado.</em></h2>
+<p>O que ela aplica no studio e o que você leva para manter a cor e o liso em casa.</p></div>
+<section class="marca m-verutti" aria-label="Verutti Profissional"><header class="marca-cab"><div class="wm-verutti" aria-label="Verutti Profissional"><b>VERUTTI</b><span>PROFISSIONAL</span></div>
+<div><small>Embaixadora Verutti</small><h3>Verutti Profissional</h3><p>Pós descolorantes, oxidantes e tratamentos que a Renata usa nas cores e nos lisos.</p></div></header>
+<div class="prods"><article class="prod" id="p-blond-luxury"><div class="prod-foto"><img src="img/p-verutti-blond-luxury.webp" alt="Blond Luxury Verutti Profissional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Pó descolorante azul · 9 tons</small><h4>Blond Luxury</h4><p>Colágeno, elastina e tecnologia Plex. Clareamento rápido e seguro.</p>
+<div class="prod-pe"><span class="preco">R$ 189</span><span class="medida">500 g</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-white-luxury"><div class="prod-foto"><img src="img/p-verutti-white-luxury.webp" alt="White Luxury Premium Verutti Profissional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Pó descolorante branco · 9 tons</small><h4>White Luxury Premium</h4><p>Blend de 6 óleos, aminoácidos e tecnologia Plex. Alta performance.</p>
+<div class="prod-pe"><span class="preco">R$ 199</span><span class="medida">500 g</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-ox-action"><div class="prod-foto"><img src="img/p-verutti-ox.webp" alt="OX Action 20 vol. Verutti Profissional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Emulsão reveladora</small><h4>OX Action 20 vol.</h4><p>Fórmula estabilizada com colágeno, elastina e sérum de conchinha.</p>
+<div class="prod-pe"><span class="preco">R$ 69</span><span class="medida">900 ml</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-blindagem-verutti"><div class="prod-foto"><img src="img/p-verutti-blindagem.webp" alt="Blindagem Capilar Verutti Profissional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Sistema de blindagem</small><h4>Blindagem Capilar</h4><p>Antifrizz e redução de volume com brilho de espelho.</p>
+<div class="prod-pe"><span class="preco">R$ 229</span><span class="medida">1 L</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-btx-organico"><div class="prod-foto"><img src="img/p-verutti-btx.webp" alt="B.T.X Orgânico Verutti Profissional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Reposição de massa · redução de volume</small><h4>B.T.X Orgânico</h4><p>Sem formol. Fios realinhados e com balanço renovado.</p>
+<div class="prod-pe"><span class="preco">R$ 249</span><span class="medida">1 kg</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-vegamour"><div class="prod-foto"><img src="img/p-verutti-vegamour.webp" alt="Vegamour Verutti Profissional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Alinhamento vegano</small><h4>Vegamour</h4><p>Liso intenso com ácido hialurônico, óleo de aveia e colágeno.</p>
+<div class="prod-pe"><span class="preco">R$ 279</span><span class="medida">1 L</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article></div></section><section class="marca m-ecare" aria-label="eCare Cosmetic"><header class="marca-cab"><img class="selo-m" src="img/selos/ecare-redonda.webp" alt="eCare Cosmetic" width="400" height="400" loading="lazy">
+<div><small>Embaixadora oficial eCare</small><h3>eCare Cosmetic</h3><p>Linha do Método Liso Perfeito: alinhamento, blindagem e home care.</p></div></header>
+<div class="prods"><article class="prod" id="p-lisscare"><div class="prod-foto"><img src="img/p-ecare-lisscare.webp" alt="LissCare eCare Cosmetic" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Alinhamento capilar · Método Liso Perfeito</small><h4>LissCare</h4><p>Ácido hialurônico, manteiga de karité, óleo de oliva e biotina.</p>
+<div class="prod-pe"><span class="preco">R$ 289</span><span class="medida">1 L</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-blindagem-ecare"><div class="prod-foto"><img src="img/p-ecare-blindagem.webp" alt="Blindagem Premium eCare Cosmetic" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Proteção de alta performance</small><h4>Blindagem Premium</h4><p>Vitamina E e ácido hialurônico para o liso durar com brilho.</p>
+<div class="prod-pe"><span class="preco">R$ 239</span><span class="medida">1 L</span></div><span class="uso">Uso profissional · aplicado no studio</span></div></article><article class="prod" id="p-vegacare"><div class="prod-foto"><img src="img/p-ecare-vegacare.webp" alt="VegaCare Máscara eCare Cosmetic" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Polímero umectante</small><h4>VegaCare Máscara</h4><p>Fecha cutículas, reconstrói as fibras e combate a quebra.</p>
+<div class="prod-pe"><span class="preco">R$ 219</span><span class="medida">1 L</span></div><button class="add sm" type="button" data-add="p:vegacare">Levar para casa</button></div></article><article class="prod destaque" id="p-macadamia"><div class="prod-foto"><img src="img/p-ecare-macadamia.webp" alt="Macadâmia Elixir Claire eCare Cosmetic" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Óleo capilar nutritivo cristalizado</small><h4>Macadâmia Elixir Claire</h4><p>Lançamento. Nutrição intensa, toque seco e brilho sem pesar.</p>
+<div class="prod-pe"><span class="preco">R$ 89</span><span class="medida">30 ml</span></div><button class="add sm" type="button" data-add="p:macadamia">Levar para casa</button></div></article></div></section><section class="marca m-olenka" aria-label="Olenka Professional"><header class="marca-cab"><img class="selo-m" src="img/selos/olenka-redonda.webp" alt="Olenka Professional" width="400" height="400" loading="lazy">
+<div><small>Home care</small><h3>Olenka Professional</h3><p>Para manter em casa a cor e a hidratação feitas no studio.</p></div></header>
+<div class="prods"><article class="prod" id="p-selfcare"><div class="prod-foto"><img src="img/p-olenka-selfcare.webp" alt="SelfCare+ Intense Hydration Olenka Professional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Shampoo + Dual Mask</small><h4>SelfCare+ Intense Hydration</h4><p>Para fios desidratados e sem vida. Hidratação, emoliência e sedosidade.</p>
+<div class="prod-pe"><span class="preco">R$ 139</span><span class="medida">2 × 250 ml</span></div><button class="add sm" type="button" data-add="p:selfcare">Levar para casa</button></div></article><article class="prod" id="p-royal-blond"><div class="prod-foto"><img src="img/p-olenka-royal-blond.webp" alt="Royal Blond Olenka Professional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Spray de correção da cor · loiros intensos</small><h4>Royal Blond</h4><p>Neutraliza o amarelado e mantém o loiro frio entre uma visita e outra.</p>
+<div class="prod-pe"><span class="preco">R$ 79</span><span class="medida">250 ml</span></div><button class="add sm" type="button" data-add="p:royal-blond">Levar para casa</button></div></article><article class="prod" id="p-hair-brushing"><div class="prod-foto"><img src="img/p-olenka-hair-brushing.webp" alt="Hair Brushing Olenka Professional" loading="lazy" decoding="async"></div>
+<div class="prod-txt"><small>Fluido pré-escova</small><h4>Hair Brushing</h4><p>Queratina e óleo de cálamo. Proteção térmica e escova mais rápida.</p>
+<div class="prod-pe"><span class="preco">R$ 69</span><span class="medida">215 ml</span></div><button class="add sm" type="button" data-add="p:hair-brushing">Levar para casa</button></div></article></div></section></div></section>
+
+<section class="secao autoridade" id="renata"><div class="wrap auto-in">
+<figure class="auto-a"><img src="img/embaixadora-ecare.webp" alt="eCare Cosmetic apresenta Renata Salviato, embaixadora" loading="lazy"><figcaption>Embaixadora oficial eCare Cosmetic</figcaption></figure>
+<figure class="auto-b"><img src="img/treinamento-lan.webp" alt="Time da Lan Barbershop com certificados após o treinamento com a Renata" loading="lazy"><figcaption>Treinamento de alisamento eCare para o time da Lan Barbershop</figcaption></figure>
+<div class="auto-txt"><p class="sobre">Quem assina</p><h2>Quem ensina<br><em>também atende você.</em></h2>
+<p>A Renata leva o Método Liso Perfeito eCare para outros salões e barbearias da região. No studio, é ela quem faz o seu diagnóstico, a sua cor e o seu liso.</p>
+<img class="studio-logo" src="img/studio-logo.webp" alt="Studio Renata Salviato" loading="lazy">
+<p class="end">Rua Major João Garcia Duarte, 573 · Ribeirão Preto</p></div></div></section>
+
+<section class="secao leve" id="enviar"><div class="wrap leve-in">
+<div><p class="sobre">Leve este catálogo</p><h2>No celular, no WhatsApp<br><em>ou impresso no balcão.</em></h2>
+<p>Aponte a câmera para o código ou envie o link para uma amiga.</p>
+<div class="leve-acoes"><a class="btn" href="https://wa.me/?text=Olha%20o%20Cat%C3%A1logo%20Beauty%20da%20Renata%20Salviato%3A%20https%3A%2F%2Fwww.hairacademiadabeleza.com.br%2Fcatalogo-beauty%2Frenata-salviato" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+<button class="btn ghost" type="button" data-copiar>Copiar link</button><button class="btn ghost" type="button" data-imprimir>Imprimir ou salvar em PDF</button>
+<a class="btn ghost" href="https://www.instagram.com/studiorenatasalviato/" target="_blank" rel="noopener">Ver o Instagram</a></div>
+<p class="link-txt" id="link-txt">https://www.hairacademiadabeleza.com.br/catalogo-beauty/renata-salviato</p></div>
+<figure class="qr"><div class="qr-box"><svg viewBox="0 0 37 37" role="img" aria-label="QR Code do catálogo" shape-rendering="crispEdges"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM9 0h1v1h-1zM12 0h1v1h-1zM16 0h1v1h-1zM18 0h1v1h-1zM20 0h1v1h-1zM21 0h1v1h-1zM23 0h1v1h-1zM28 0h1v1h-1zM30 0h1v1h-1zM31 0h1v1h-1zM32 0h1v1h-1zM33 0h1v1h-1zM34 0h1v1h-1zM35 0h1v1h-1zM36 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM13 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM17 1h1v1h-1zM18 1h1v1h-1zM19 1h1v1h-1zM21 1h1v1h-1zM22 1h1v1h-1zM24 1h1v1h-1zM25 1h1v1h-1zM27 1h1v1h-1zM28 1h1v1h-1zM30 1h1v1h-1zM36 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM19 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM23 2h1v1h-1zM27 2h1v1h-1zM28 2h1v1h-1zM30 2h1v1h-1zM32 2h1v1h-1zM33 2h1v1h-1zM34 2h1v1h-1zM36 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM17 3h1v1h-1zM19 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM27 3h1v1h-1zM28 3h1v1h-1zM30 3h1v1h-1zM32 3h1v1h-1zM33 3h1v1h-1zM34 3h1v1h-1zM36 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM23 4h1v1h-1zM25 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM33 4h1v1h-1zM34 4h1v1h-1zM36 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM18 5h1v1h-1zM21 5h1v1h-1zM25 5h1v1h-1zM26 5h1v1h-1zM27 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM36 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM33 6h1v1h-1zM34 6h1v1h-1zM35 6h1v1h-1zM36 6h1v1h-1zM8 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM11 7h1v1h-1zM14 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM22 7h1v1h-1zM24 7h1v1h-1zM27 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM9 8h1v1h-1zM12 8h1v1h-1zM18 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM30 8h1v1h-1zM31 8h1v1h-1zM32 8h1v1h-1zM33 8h1v1h-1zM34 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM28 9h1v1h-1zM31 9h1v1h-1zM34 9h1v1h-1zM35 9h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM17 10h1v1h-1zM20 10h1v1h-1zM21 10h1v1h-1zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM33 10h1v1h-1zM35 10h1v1h-1zM36 10h1v1h-1zM0 11h1v1h-1zM1 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM14 11h1v1h-1zM16 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM26 11h1v1h-1zM29 11h1v1h-1zM31 11h1v1h-1zM36 11h1v1h-1zM0 12h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM10 12h1v1h-1zM17 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM24 12h1v1h-1zM25 12h1v1h-1zM26 12h1v1h-1zM27 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM31 12h1v1h-1zM32 12h1v1h-1zM33 12h1v1h-1zM34 12h1v1h-1zM35 12h1v1h-1zM36 12h1v1h-1zM1 13h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM10 13h1v1h-1zM11 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM21 13h1v1h-1zM23 13h1v1h-1zM28 13h1v1h-1zM29 13h1v1h-1zM31 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM32 14h1v1h-1zM33 14h1v1h-1zM35 14h1v1h-1zM36 14h1v1h-1zM0 15h1v1h-1zM3 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM11 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM31 15h1v1h-1zM32 15h1v1h-1zM35 15h1v1h-1zM36 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM13 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM25 16h1v1h-1zM26 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM32 16h1v1h-1zM34 16h1v1h-1zM36 16h1v1h-1zM1 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM13 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM26 17h1v1h-1zM28 17h1v1h-1zM29 17h1v1h-1zM31 17h1v1h-1zM34 17h1v1h-1zM35 17h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM19 18h1v1h-1zM25 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM29 18h1v1h-1zM30 18h1v1h-1zM32 18h1v1h-1zM34 18h1v1h-1zM35 18h1v1h-1zM36 18h1v1h-1zM0 19h1v1h-1zM1 19h1v1h-1zM2 19h1v1h-1zM5 19h1v1h-1zM8 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM19 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM24 19h1v1h-1zM26 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM36 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM3 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM12 20h1v1h-1zM15 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM22 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM26 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM34 20h1v1h-1zM3 21h1v1h-1zM9 21h1v1h-1zM10 21h1v1h-1zM12 21h1v1h-1zM14 21h1v1h-1zM16 21h1v1h-1zM18 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM21 21h1v1h-1zM23 21h1v1h-1zM28 21h1v1h-1zM29 21h1v1h-1zM33 21h1v1h-1zM1 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM18 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM26 22h1v1h-1zM27 22h1v1h-1zM29 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM32 22h1v1h-1zM33 22h1v1h-1zM35 22h1v1h-1zM36 22h1v1h-1zM4 23h1v1h-1zM8 23h1v1h-1zM9 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM14 23h1v1h-1zM16 23h1v1h-1zM19 23h1v1h-1zM21 23h1v1h-1zM27 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM31 23h1v1h-1zM32 23h1v1h-1zM36 23h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM29 24h1v1h-1zM30 24h1v1h-1zM32 24h1v1h-1zM34 24h1v1h-1zM35 24h1v1h-1zM36 24h1v1h-1zM0 25h1v1h-1zM3 25h1v1h-1zM4 25h1v1h-1zM5 25h1v1h-1zM8 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM21 25h1v1h-1zM23 25h1v1h-1zM29 25h1v1h-1zM31 25h1v1h-1zM0 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM27 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM31 26h1v1h-1zM34 26h1v1h-1zM35 26h1v1h-1zM36 26h1v1h-1zM0 27h1v1h-1zM2 27h1v1h-1zM3 27h1v1h-1zM4 27h1v1h-1zM5 27h1v1h-1zM7 27h1v1h-1zM11 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM29 27h1v1h-1zM31 27h1v1h-1zM32 27h1v1h-1zM35 27h1v1h-1zM0 28h1v1h-1zM2 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM17 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM30 28h1v1h-1zM31 28h1v1h-1zM32 28h1v1h-1zM33 28h1v1h-1zM34 28h1v1h-1zM35 28h1v1h-1zM36 28h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM17 29h1v1h-1zM18 29h1v1h-1zM19 29h1v1h-1zM20 29h1v1h-1zM23 29h1v1h-1zM27 29h1v1h-1zM28 29h1v1h-1zM32 29h1v1h-1zM33 29h1v1h-1zM35 29h1v1h-1zM0 30h1v1h-1zM1 30h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM9 30h1v1h-1zM10 30h1v1h-1zM11 30h1v1h-1zM12 30h1v1h-1zM13 30h1v1h-1zM14 30h1v1h-1zM15 30h1v1h-1zM17 30h1v1h-1zM20 30h1v1h-1zM22 30h1v1h-1zM28 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM34 30h1v1h-1zM35 30h1v1h-1zM36 30h1v1h-1zM0 31h1v1h-1zM6 31h1v1h-1zM8 31h1v1h-1zM9 31h1v1h-1zM10 31h1v1h-1zM11 31h1v1h-1zM14 31h1v1h-1zM17 31h1v1h-1zM18 31h1v1h-1zM20 31h1v1h-1zM21 31h1v1h-1zM22 31h1v1h-1zM26 31h1v1h-1zM28 31h1v1h-1zM32 31h1v1h-1zM33 31h1v1h-1zM35 31h1v1h-1zM36 31h1v1h-1zM0 32h1v1h-1zM2 32h1v1h-1zM3 32h1v1h-1zM4 32h1v1h-1zM6 32h1v1h-1zM8 32h1v1h-1zM10 32h1v1h-1zM11 32h1v1h-1zM14 32h1v1h-1zM15 32h1v1h-1zM16 32h1v1h-1zM21 32h1v1h-1zM25 32h1v1h-1zM27 32h1v1h-1zM28 32h1v1h-1zM29 32h1v1h-1zM30 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM34 32h1v1h-1zM36 32h1v1h-1zM0 33h1v1h-1zM2 33h1v1h-1zM3 33h1v1h-1zM4 33h1v1h-1zM6 33h1v1h-1zM8 33h1v1h-1zM9 33h1v1h-1zM11 33h1v1h-1zM12 33h1v1h-1zM13 33h1v1h-1zM15 33h1v1h-1zM18 33h1v1h-1zM20 33h1v1h-1zM23 33h1v1h-1zM27 33h1v1h-1zM28 33h1v1h-1zM30 33h1v1h-1zM32 33h1v1h-1zM34 33h1v1h-1zM36 33h1v1h-1zM0 34h1v1h-1zM2 34h1v1h-1zM3 34h1v1h-1zM4 34h1v1h-1zM6 34h1v1h-1zM8 34h1v1h-1zM9 34h1v1h-1zM13 34h1v1h-1zM14 34h1v1h-1zM15 34h1v1h-1zM16 34h1v1h-1zM17 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM21 34h1v1h-1zM22 34h1v1h-1zM26 34h1v1h-1zM28 34h1v1h-1zM34 34h1v1h-1zM35 34h1v1h-1zM36 34h1v1h-1zM0 35h1v1h-1zM6 35h1v1h-1zM9 35h1v1h-1zM10 35h1v1h-1zM11 35h1v1h-1zM12 35h1v1h-1zM13 35h1v1h-1zM14 35h1v1h-1zM15 35h1v1h-1zM18 35h1v1h-1zM19 35h1v1h-1zM20 35h1v1h-1zM21 35h1v1h-1zM28 35h1v1h-1zM29 35h1v1h-1zM30 35h1v1h-1zM32 35h1v1h-1zM33 35h1v1h-1zM36 35h1v1h-1zM0 36h1v1h-1zM1 36h1v1h-1zM2 36h1v1h-1zM3 36h1v1h-1zM4 36h1v1h-1zM5 36h1v1h-1zM6 36h1v1h-1zM8 36h1v1h-1zM11 36h1v1h-1zM13 36h1v1h-1zM15 36h1v1h-1zM16 36h1v1h-1zM17 36h1v1h-1zM19 36h1v1h-1zM22 36h1v1h-1zM23 36h1v1h-1zM24 36h1v1h-1zM25 36h1v1h-1zM26 36h1v1h-1zM30 36h1v1h-1zM32 36h1v1h-1zM33 36h1v1h-1zM34 36h1v1h-1zM35 36h1v1h-1zM36 36h1v1h-1z"/></svg></div><figcaption>Catálogo Beauty<br>Renata Salviato</figcaption></figure></div></section>
+
+<section class="assinatura" id="assinatura"><div class="wrap ass-in">
+<img class="selo-g" src="img/selos/ecare-redonda.webp" alt="eCare Cosmetic" width="400" height="400" loading="lazy">
+<div><p class="sobre">Assinatura</p><p class="script">Rodrigo Cintra</p><p class="ass-sub">eCare Cosmetic · Método Liso Perfeito</p></div>
+</div></section>
+</main>
+
+<footer class="rodape"><div class="wrap rod-in">
+<div class="rod-selos"><img src="img/selos/catalogo-beauty-redonda.webp" alt="Catálogo Beauty" width="400" height="400" loading="lazy"><img src="img/selos/hair-business-beauty-redonda-480.webp" alt="HAIR Academia Business Beauty" width="480" height="480" loading="lazy"><img src="img/selos/olenka-redonda.webp" alt="Olenka Professional" width="400" height="400" loading="lazy"></div>
+<p>Catálogo Beauty: tecnologia HAIR Business Beauty, gratuita para os salões parceiros.</p>
+<p class="mini">Valores de demonstração. Confirme valor e horário com o studio no WhatsApp. Fotos: trabalhos de @studiorenatasalviato.</p></div></footer>
+
+<div class="fundo" id="fundo" hidden></div>
+<section class="folha" id="folha" role="dialog" aria-modal="true" aria-labelledby="f-nome" hidden>
+<button class="fechar" type="button" data-fechar aria-label="Fechar">×</button><div class="folha-in" id="folha-in"></div></section>
+<section class="folha sel" id="sel" role="dialog" aria-modal="true" aria-labelledby="sel-tit" hidden>
+<button class="fechar" type="button" data-fechar aria-label="Fechar">×</button><div class="folha-in">
+<p class="sobre">Para enviar à Renata</p><h2 id="sel-tit">Minha seleção</h2>
+<ul class="sel-lista" id="sel-lista"></ul><p class="sel-vazio" id="sel-vazio">Toque em "Quero esta técnica" ou "Levar para casa" para montar o seu pedido.</p>
+<div class="sel-total"><span>Total estimado</span><b id="sel-total">R$ 0</b></div>
+<label class="campo" for="sel-nome">Seu nome<input id="sel-nome" name="nome" autocomplete="given-name" placeholder="Como a Renata te chama?"></label>
+<label class="campo" for="sel-dia">Melhor dia e horário<input id="sel-dia" name="dia" autocomplete="off" placeholder="Ex.: sábado de manhã"></label>
+<a class="btn" id="sel-enviar" href="#" target="_blank" rel="noopener">Enviar no WhatsApp da Renata</a>
+<a class="btn ghost" href="https://maapp.com.br/studiorenatasalviato" target="_blank" rel="noopener">Agendar online</a>
+<p class="mini">Valores de demonstração. A Renata confirma valor e horário na conversa.</p></div></section>
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<script type="application/json" id="dados">{"cfg": {"nome": "Renata Salviato", "url": "https://www.hairacademiadabeleza.com.br/catalogo-beauty/renata-salviato", "whatsapp": "5516997695193", "agenda": "https://maapp.com.br/studiorenatasalviato", "instagram": "https://www.instagram.com/studiorenatasalviato/", "endereco": "Rua Major João Garcia Duarte, 573 · Ribeirão Preto"}, "s": {"morena-free-hands": {"nome": "Morena Iluminada", "tec": "Free hands", "preco": 400, "tempo": "4 h", "texto": "Iluminação à mão livre, sem papel, que acompanha o movimento natural do fio. Base preservada, pontos de luz quentes e transição sem marca.", "inclui": ["Diagnóstico de cor", "Clareamento à mão livre", "Tonalização", "Escova modelada"], "fotos": ["morena-free-hands", "morena-free-hands-2", "morena-free-hands-3", "mudanca"], "produtos": ["white-luxury", "ox-action", "selfcare", "hair-brushing"]}, "loiro-vanilla": {"nome": "Loiro Vanilla", "tec": "Assinatura do studio", "preco": 550, "tempo": "5 h", "texto": "O loiro creme da casa: claro, luminoso e macio ao toque, com raiz esfumada para crescer bonito.", "inclui": ["Mechas finas", "Raiz esfumada", "Matização baunilha", "Tratamento pós-química"], "fotos": ["loiro-vanilla", "loiro-vanilla-2", "loiro-vanilla-3"], "produtos": ["blond-luxury", "ox-action", "royal-blond", "selfcare"]}, "loiro-milhoes": {"nome": "Loiro de Milhões", "tec": "Platinado liso", "preco": 650, "tempo": "6 h", "texto": "Loiro claro, uniforme e frio, com acabamento liso espelhado. Para quem quer o máximo de luz com o fio íntegro.", "inclui": ["Clareamento global com Plex", "Matização fria", "Blindagem de acabamento"], "fotos": ["loiro-milhoes"], "produtos": ["blond-luxury", "ox-action", "blindagem-ecare", "royal-blond"]}, "blond-luxury": {"nome": "Iluminado Dourado", "tec": "Blond Luxury Verutti", "preco": 520, "tempo": "5 h", "texto": "Dourado ensolarado do meio às pontas, com profundidade na raiz. Cabelos beijados pelo sol, o ano inteiro.", "inclui": ["Mechas Blond Luxury", "Tonalização dourada", "Finalização em ondas"], "fotos": ["blond-luxury", "blond-luxury-2"], "produtos": ["blond-luxury", "ox-action", "hair-brushing", "macadamia"]}, "correcao-loiro": {"nome": "Correção de Loiro", "tec": "Antes e depois", "preco": 690, "tempo": "7 h", "texto": "Para o loiro manchado, amarelado ou com faixas. Reorganização da cor, raiz esfumada e matização do zero.", "inclui": ["Avaliação em consulta", "Correção por etapas", "Matização", "Reconstrução"], "fotos": ["correcao-loiro", "correcao-loiro-2"], "produtos": ["blond-luxury", "ox-action", "vegacare", "royal-blond"]}, "chocolate": {"nome": "Morena Chocolate", "tec": "White Luxury · caramelo", "preco": 450, "tempo": "4 h", "texto": "Morena profunda com reflexos caramelo e chocolate. Brilho de cabelo saudável sem perder a base escura.", "inclui": ["Contorno iluminado", "Mechas caramelo", "Gloss de brilho"], "fotos": ["chocolate", "chocolate-2"], "produtos": ["white-luxury", "ox-action", "macadamia"]}, "mel": {"nome": "Iluminado Mel", "tec": "Proposta sob medida", "preco": 480, "tempo": "4 h 30", "texto": "Degradê mel do meio às pontas, desenhado para o seu tom de pele. A cliente traz a referência e a Renata adapta.", "inclui": ["Consulta de referência", "Degradê iluminado", "Tonalização mel", "Ondas de finalização"], "fotos": ["mel", "mel-2"], "produtos": ["white-luxury", "ox-action", "hair-brushing"]}, "ruivo": {"nome": "Ruivo Divo", "tec": "Coloração cobre", "preco": 380, "tempo": "3 h", "texto": "Cobre intenso, uniforme da raiz às pontas, com corte em camadas para dar movimento à cor.", "inclui": ["Coloração cobre", "Selagem de cor", "Escova"], "fotos": ["ruivo"], "produtos": ["selfcare", "macadamia"]}, "liso-perfeito": {"nome": "Liso Perfeito eCare", "tec": "Progressiva orgânica LissCare", "preco": 280, "tempo": "3 h 30", "texto": "O método de alisamento da eCare que a Renata ensina a outros salões. Liso alinhado, com movimento e brilho, sem aspecto de cabelo duro.", "inclui": ["Lavagem antirresíduo", "Alinhamento LissCare", "Selagem", "Máscara VegaCare"], "fotos": ["liso-perfeito", "liso-perfeito-2"], "produtos": ["lisscare", "blindagem-ecare", "vegacare"]}, "blindagem": {"nome": "Blindagem Capilar", "tec": "Antifrizz", "preco": 220, "tempo": "2 h 30", "texto": "A solução para o frizz: reduz volume, sela a cutícula e deixa o fio pesado de brilho por semanas.", "inclui": ["Diagnóstico de porosidade", "Blindagem", "Escova"], "fotos": ["blindagem"], "produtos": ["blindagem-verutti", "blindagem-ecare", "hair-brushing"]}, "btx": {"nome": "BTX Orgânico", "tec": "Redução de volume", "preco": 240, "tempo": "3 h", "texto": "Controle absoluto do volume para cabelos cheios, com reposição de massa e sem formol.", "inclui": ["Reposição de massa", "Redução de volume", "Escova"], "fotos": ["btx", "btx-2"], "produtos": ["btx-organico", "vegacare"]}, "semipreso": {"nome": "Semipreso Romântico", "tec": "Penteado para festa", "preco": 220, "tempo": "1 h 30", "texto": "Ondas abertas com frente presa: romântico, leve e firme a noite toda.", "inclui": ["Preparo com fluido", "Ondas", "Fixação"], "fotos": ["semipreso", "semipreso-2"], "produtos": ["hair-brushing"]}, "coque": {"nome": "Coque Despojado", "tec": "Noivas e madrinhas", "preco": 280, "tempo": "2 h", "texto": "Coque baixo ou alto com textura e mechas soltas, pensado para casamento de dia ou de noite.", "inclui": ["Teste opcional", "Penteado", "Acessório incluso no valor"], "fotos": ["rabo", "coque"], "produtos": ["hair-brushing"]}}, "p": {"blond-luxury": {"nome": "Blond Luxury", "marca": "Verutti Profissional", "preco": 189, "casa": false, "img": "p-verutti-blond-luxury", "medida": "500 g"}, "white-luxury": {"nome": "White Luxury Premium", "marca": "Verutti Profissional", "preco": 199, "casa": false, "img": "p-verutti-white-luxury", "medida": "500 g"}, "ox-action": {"nome": "OX Action 20 vol.", "marca": "Verutti Profissional", "preco": 69, "casa": false, "img": "p-verutti-ox", "medida": "900 ml"}, "blindagem-verutti": {"nome": "Blindagem Capilar", "marca": "Verutti Profissional", "preco": 229, "casa": false, "img": "p-verutti-blindagem", "medida": "1 L"}, "btx-organico": {"nome": "B.T.X Orgânico", "marca": "Verutti Profissional", "preco": 249, "casa": false, "img": "p-verutti-btx", "medida": "1 kg"}, "vegamour": {"nome": "Vegamour", "marca": "Verutti Profissional", "preco": 279, "casa": false, "img": "p-verutti-vegamour", "medida": "1 L"}, "lisscare": {"nome": "LissCare", "marca": "eCare Cosmetic", "preco": 289, "casa": false, "img": "p-ecare-lisscare", "medida": "1 L"}, "blindagem-ecare": {"nome": "Blindagem Premium", "marca": "eCare Cosmetic", "preco": 239, "casa": false, "img": "p-ecare-blindagem", "medida": "1 L"}, "vegacare": {"nome": "VegaCare Máscara", "marca": "eCare Cosmetic", "preco": 219, "casa": true, "img": "p-ecare-vegacare", "medida": "1 L"}, "macadamia": {"nome": "Macadâmia Elixir Claire", "marca": "eCare Cosmetic", "preco": 89, "casa": true, "img": "p-ecare-macadamia", "medida": "30 ml"}, "selfcare": {"nome": "SelfCare+ Intense Hydration", "marca": "Olenka Professional", "preco": 139, "casa": true, "img": "p-olenka-selfcare", "medida": "2 × 250 ml"}, "royal-blond": {"nome": "Royal Blond", "marca": "Olenka Professional", "preco": 79, "casa": true, "img": "p-olenka-royal-blond", "medida": "250 ml"}, "hair-brushing": {"nome": "Hair Brushing", "marca": "Olenka Professional", "preco": 69, "casa": true, "img": "p-olenka-hair-brushing", "medida": "215 ml"}}}</script>
+<script>
+(()=>{const D=JSON.parse(document.getElementById('dados').textContent),C=D.cfg,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const IM=(()=>{const e=document.getElementById('imgs');return e?JSON.parse(e.textContent):null})(),U=n=>IM?IM[n]:'img/'+n+'.webp';
+if(IM)$$('img[data-i]').forEach(i=>{i.src=IM[i.dataset.i]});
+const brl=v=>'R$ '+v.toLocaleString('pt-BR');
+let sel=[];try{sel=JSON.parse(localStorage.getItem('cb-renata')||'[]').filter(k=>item(k))}catch(e){}
+function item(k){const[t,id]=k.split(':');return t==='s'?D.s[id]:D.p[id]}
+function salvar(){try{localStorage.setItem('cb-renata',JSON.stringify(sel))}catch(e){}}
+function aviso(t){const a=$('#aviso');a.textContent=t;a.classList.add('on');clearTimeout(aviso.t);aviso.t=setTimeout(()=>a.classList.remove('on'),2200)}
+/* abertura: uma vez por sessão; toque ou Pular encerra */
+const intro=$('#intro');let viu=false;try{viu=sessionStorage.getItem('cb-intro')==='1'}catch(e){}
+const fecharIntro=()=>{intro.classList.add('fora');setTimeout(()=>intro.remove(),800);try{sessionStorage.setItem('cb-intro','1')}catch(e){}};
+if(viu||matchMedia('(prefers-reduced-motion: reduce)').matches)intro.remove();else{intro.addEventListener('click',fecharIntro);setTimeout(()=>intro.isConnected&&fecharIntro(),3600)}
+/* filtros */
+$$('[data-filtro]').forEach(b=>b.addEventListener('click',()=>{const f=b.dataset.filtro;$$('[data-filtro]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$$('.look').forEach(l=>l.hidden=!(f==='todas'||l.dataset.cat===f||l.classList.contains('sua-ref')))}));
+/* seleção */
+function marcar(){$('#qtd').textContent=sel.length;$$('[data-add]').forEach(b=>{const on=sel.includes(b.dataset.add);b.classList.toggle('ok',on);b.textContent=on?'Na seleção ✓':(b.dataset.add[0]==='s'?'Quero esta técnica':'Levar para casa')})}
+function alternar(k){const i=sel.indexOf(k);if(i>=0){sel.splice(i,1);aviso('Removido da seleção')}else{sel.push(k);aviso(item(k).nome+' na sua seleção');const b=$('.btn-sel');b.classList.remove('pulsa');void b.offsetWidth;b.classList.add('pulsa')}salvar();marcar();if(!$('#sel').hidden)lista()}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-add]');if(a){e.preventDefault();alternar(a.dataset.add)}});
+function msg(){const n=$('#sel-nome').value.trim(),d=$('#sel-dia').value.trim();let t='Olá, Renata! Vi o seu Catálogo Beauty'+(n?' e aqui é '+n:'')+'. Quero:\n';sel.forEach(k=>{const x=item(k);t+='• '+x.nome+(k[0]==='p'?' ('+x.medida+')':'')+' · '+brl(x.preco)+'\n'});t+='Total estimado: '+brl(total())+(d?'\nMelhor horário: '+d:'')+'\nPode confirmar valor e horário?';return t}
+const total=()=>sel.reduce((s,k)=>s+item(k).preco,0);
+function lista(){const ul=$('#sel-lista');ul.innerHTML='';sel.forEach(k=>{const x=item(k),li=document.createElement('li'),im=document.createElement('img');im.src=U(k[0]==='s'?x.fotos[0]:x.img);im.alt='';const d=document.createElement('div');d.innerHTML='<b></b><small></small>';d.querySelector('b').textContent=x.nome;d.querySelector('small').textContent=k[0]==='s'?'Técnica · '+x.tempo:x.marca+' · '+x.medida;const p=document.createElement('span');p.className='preco';p.textContent=brl(x.preco);const r=document.createElement('button');r.type='button';r.textContent='×';r.setAttribute('aria-label','Remover '+x.nome);r.onclick=()=>alternar(k);li.append(im,d,p,r);ul.append(li)});$('#sel-vazio').hidden=sel.length>0;$('#sel-total').textContent=brl(total());atualizarEnvio()}
+function atualizarEnvio(){$('#sel-enviar').href='https://wa.me/'+C.whatsapp+'?text='+encodeURIComponent(sel.length?msg():'Olá, Renata! Vi o seu Catálogo Beauty e quero agendar.')}
+['#sel-nome','#sel-dia'].forEach(s=>$(s).addEventListener('input',atualizarEnvio));
+/* folhas: abrir empilha no histórico; voltar do iPhone/Android fecha */
+let aberta=null;
+function abrir(el){if(aberta)aberta.hidden=true;else history.pushState({folha:1},'');aberta=el;el.hidden=false;$('#fundo').hidden=false;document.body.classList.add('trava');el.scrollTop=0;el.querySelector('.fechar').focus({preventScroll:true})}
+function fechar(){if(!aberta)return;aberta.hidden=true;aberta=null;$('#fundo').hidden=true;document.body.classList.remove('trava')}
+const voltar=()=>{if(aberta)history.back()};
+addEventListener('popstate',fechar);
+$('#fundo').addEventListener('click',voltar);$$('[data-fechar]').forEach(b=>b.addEventListener('click',voltar));
+addEventListener('keydown',e=>{if(e.key==='Escape')voltar()});
+$('[data-selecao]').addEventListener('click',()=>{lista();abrir($('#sel'))});
+function detalhe(id){const s=D.s[id],k='s:'+id,box=$('#folha-in');box.innerHTML='';
+ const g=document.createElement('div');g.className='galeria';s.fotos.forEach(f=>{const i=document.createElement('img');i.src=U(f);i.alt=s.nome+': trabalho da Renata Salviato';i.loading='lazy';g.append(i)});
+ const cab=document.createElement('div');cab.className='det-cab';cab.innerHTML='<div><p class="sobre"></p><h2 id="f-nome"></h2></div><div class="det-preco"><span class="preco"></span><small></small></div>';cab.querySelector('.sobre').textContent=s.tec;cab.querySelector('h2').textContent=s.nome;cab.querySelector('.preco').textContent=brl(s.preco);cab.querySelector('small').textContent='Duração média '+s.tempo;
+ const t=document.createElement('p');t.className='det-txt';t.textContent=s.texto;
+ const inc=document.createElement('ul');inc.className='inclui';s.inclui.forEach(x=>{const li=document.createElement('li');li.textContent=x;inc.append(li)});
+ const pt=document.createElement('p');pt.className='sobre';pt.textContent='Produtos desta técnica';
+ const pr=document.createElement('div');pr.className='det-prods';s.produtos.forEach(pid=>{const p=D.p[pid],a=document.createElement('a');a.className='det-prod';a.href='#p-'+pid;a.innerHTML='<img alt=""><span><b></b></span>';a.querySelector('img').src=U(p.img);a.querySelector('b').textContent=p.nome;a.querySelector('span').append(p.marca+' · '+(p.casa?brl(p.preco):'uso no studio'));a.addEventListener('click',e=>{e.preventDefault();history.back();setTimeout(()=>document.getElementById('p-'+pid).scrollIntoView({behavior:'smooth',block:'center'}),80)});pr.append(a)});
+ const ac=document.createElement('div');ac.className='det-acoes';const b=document.createElement('button');b.type='button';b.className='btn';b.dataset.add=k;const w=document.createElement('a');w.className='btn ghost';w.target='_blank';w.rel='noopener';w.textContent='Agendar no WhatsApp';w.href='https://wa.me/'+C.whatsapp+'?text='+encodeURIComponent('Olá, Renata! Vi no Catálogo Beauty e quero agendar: '+s.nome+' ('+brl(s.preco)+'). Qual o próximo horário?');ac.append(b,w);
+ box.append(g,cab,t,inc,pt,pr,ac);marcar();b.textContent=sel.includes(k)?'Na seleção ✓':'Quero esta técnica';abrir($('#folha'))}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-abrir]');if(a){e.preventDefault();detalhe(a.dataset.abrir)}});
+/* compartilhar o catálogo */
+async function copiar(){try{await navigator.clipboard.writeText(C.url);aviso('Link copiado')}catch(e){const r=document.createRange();r.selectNodeContents($('#link-txt'));const s=getSelection();s.removeAllRanges();s.addRange(r);aviso('Link selecionado: copie com o menu')}}
+$('[data-copiar]').addEventListener('click',copiar);
+$('[data-compartilhar]').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:'Catálogo Beauty · Renata Salviato',url:C.url});return}catch(e){if(e.name==='AbortError')return}}document.getElementById('enviar').scrollIntoView({behavior:'smooth'})});
+const preparar=()=>{$$('.look').forEach(l=>l.hidden=false);$$('img[loading="lazy"]').forEach(i=>i.loading='eager')};addEventListener('beforeprint',preparar);
+const imp=$('[data-imprimir]');if(imp)imp.addEventListener('click',()=>{preparar();setTimeout(()=>window.print(),400)});
+marcar();atualizarEnvio();
+})();
+</script></body></html>
