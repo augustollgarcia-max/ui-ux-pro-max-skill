@@ -1,0 +1,730 @@
+<title>Projeto Estefania 20K</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: plano editorial de leitura vertical, com um "celular" mostrando o perfil reformado como peça central */
+:root{
+  --bg:#FBF7F6; --surface:#FFFFFF; --sunk:#F3ECEA;
+  --ink:#24191B; --muted:#6F6064; --line:#E7DCD9;
+  --wine:#6E1D30; --wine-ink:#FFFFFF; --nude:#D9BFAE; --brow:#7A5A46; --gold:#A8803F;
+  --ok:#2F7A4F; --warn:#9A6A00; --risk:#B3261E;
+  --ok-bg:#E6F2EA; --warn-bg:#FBF0D9; --risk-bg:#FBE7E5; --info-bg:#E7EEF8; --info:#2C5A9A;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161012; --surface:#211A1C; --sunk:#1B1517;
+  --ink:#F3EAE8; --muted:#B8A8AB; --line:#3A2E31;
+  --wine:#C9576F; --wine-ink:#1A0D11; --nude:#6B5246; --brow:#C9A58E; --gold:#D6B072;
+  --ok:#7BC896; --warn:#E5B85A; --risk:#F08A80;
+  --ok-bg:#1C2D22; --warn-bg:#33280F; --risk-bg:#3A1A18; --info-bg:#18243A; --info:#93B5E8;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161012; --surface:#211A1C; --sunk:#1B1517;
+  --ink:#F3EAE8; --muted:#B8A8AB; --line:#3A2E31;
+  --wine:#C9576F; --wine-ink:#1A0D11; --nude:#6B5246; --brow:#C9A58E; --gold:#D6B072;
+  --ok:#7BC896; --warn:#E5B85A; --risk:#F08A80;
+  --ok-bg:#1C2D22; --warn-bg:#33280F; --risk-bg:#3A1A18; --info-bg:#18243A; --info:#93B5E8;
+  color-scheme:dark}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:clamp(1.7rem,4.5vw,2.4rem)}
+h3{font-size:1.25rem}
+p{margin:0}
+.eyebrow{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brow);font-weight:600}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+a{color:var(--wine)}
+
+/* nav */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;gap:8px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.top .wrap::-webkit-scrollbar{display:none}
+nav.top a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.9rem;font-weight:500;background:var(--surface);transition:transform .12s}
+nav.top a:active,.btn:active,.copy:active{transform:scale(.96)}
+
+/* hero */
+header.hero{padding-block:40px 28px}
+.hero h1{font-size:clamp(2.4rem,8vw,4.4rem);letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--wine)}
+.hero .lead{max-width:62ch;margin-top:14px;font-size:1.08rem;color:var(--muted)}
+.meter{margin-top:26px;display:grid;gap:8px}
+.meter .bar{height:10px;border-radius:99px;background:var(--sunk);overflow:hidden;border:1px solid var(--line)}
+.meter .bar i{display:block;height:100%;width:12.9%;background:var(--wine);border-radius:99px}
+.meter .row{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums;font-size:.9rem}
+.meter .row b{font-weight:700}
+
+section{padding-block:40px;border-top:1px solid var(--line)}
+section > .wrap > header{display:grid;gap:8px;margin-bottom:22px}
+section > .wrap > header p{max-width:64ch;color:var(--muted)}
+
+/* status legend */
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.build{background:var(--warn-bg);color:var(--warn)}
+.chip.you{background:var(--info-bg);color:var(--info)}
+.chip.risk{background:var(--risk-bg);color:var(--risk)}
+
+/* entregas board */
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.board{grid-template-columns:1fr}}
+.col{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.col h3{font-family:var(--body);font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.col ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.col li{font-size:.94rem}
+
+/* diagnóstico */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--surface);padding:16px;display:grid;gap:2px}
+.stat b{font-family:var(--display);font-size:1.9rem;font-weight:500;font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--muted)}
+.findings{margin-top:18px;display:grid;gap:10px}
+.finding{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.finding p{min-width:0}
+.finding .fix{display:block;margin-top:4px;color:var(--muted);font-size:.92rem}
+
+/* phone */
+.layout-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:820px){.layout-grid{grid-template-columns:1fr}}
+.phone{width:100%;max-width:380px;margin:0 auto;border-radius:38px;padding:12px;background:#0d0a0b;box-shadow:0 30px 60px -30px rgba(40,10,20,.45)}
+.screen{border-radius:28px;overflow:hidden;background:#000;color:#f5f5f5;font-family:var(--body);font-size:12px}
+.ig-top{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 8px;font-weight:700;font-size:15px}
+.ig-head{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center;padding:4px 14px}
+.avatar{width:76px;height:76px;border-radius:50%;padding:3px;background:conic-gradient(#c9a35c,#6e1d30,#c9a35c)}
+.avatar div{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 50% 35%,#e9cbb7 0 30%,#b07a5a 31% 45%,#f4f1ee 46%);border:3px solid #000}
+.ig-nums{display:grid;grid-template-columns:repeat(3,1fr);text-align:left;gap:4px}
+.ig-nums b{display:block;font-size:15px}
+.ig-nums span{font-size:11.5px;color:#ddd}
+.ig-bio{padding:10px 14px 4px;line-height:1.45;font-size:12.5px}
+.ig-bio .nm{font-weight:700}
+.ig-bio .cat{color:#a8a8a8}
+.ig-bio .lnk{color:#e0f1ff}
+.ig-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 14px}
+.ig-btns span{background:#262626;border-radius:8px;text-align:center;padding:7px 0;font-weight:600;font-size:12px}
+.hl{display:flex;gap:12px;padding:6px 14px 12px;overflow:hidden}
+.hl div{flex:0 0 auto;width:58px;text-align:center;font-size:10.5px;color:#eee}
+.hl i{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;border:2px solid #3a3a3a;margin-bottom:4px;font-style:normal;font-family:var(--display);font-size:13px;color:#f0e2d6;background:radial-gradient(circle,#6e1d30 0 64%,#000 66%)}
+.ig-tabs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #222}
+.ig-tabs span{height:34px;display:grid;place-items:center;color:#777}
+.ig-tabs span:first-child{color:#fff;box-shadow:inset 0 -2px 0 #fff}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tile{position:relative;aspect-ratio:3/4;max-width:100%;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:7px;font-family:var(--display);line-height:1.05;cursor:pointer;border:0;text-align:left;color:inherit}
+.tile:focus-visible{outline:2px solid #fff;outline-offset:-3px}
+.tile .tt{font-size:12.5px}
+.tile .tt em{font-style:italic}
+.tile .k{position:absolute;top:6px;left:7px;font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.06em}
+.tile .ic{position:absolute;top:6px;right:6px;width:14px;height:14px}
+.tile.pin .pinmark{position:absolute;top:24px;right:5px;font-family:var(--body);font-size:9px;background:rgba(0,0,0,.55);padding:1px 4px;border-radius:4px}
+.t-wine{background:linear-gradient(160deg,#7a2236,#3d0f1a);color:#f6e7dc}
+.t-nude{background:linear-gradient(160deg,#ecd9cc,#c9a48d);color:#3a2219}
+.t-photo{background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.65)),radial-gradient(ellipse at 50% 35%,#e8c9b5 0 22%,#a9775b 23% 30%,#e9e2dc 31%);color:#fff}
+.t-split{background:linear-gradient(90deg,#c7a08a 0 50%,#e4cdbd 50%);color:#2a1a14}
+.t-black{background:#0f0b0c;color:#d9b77a;border:1px solid #2a2224}
+.screen-foot{padding:10px 14px 14px;text-align:center;color:#888;font-size:11px}
+.tile-detail{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;min-width:0}
+.tile-detail .k{font-size:.78rem;font-weight:700;color:var(--wine);letter-spacing:.08em;text-transform:uppercase}
+.order{margin:0;padding-left:20px;display:grid;gap:6px;font-size:.94rem}
+
+/* copy blocks */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.card h3{font-size:1.15rem}
+pre.copytext{margin:0;white-space:pre-wrap;word-break:break-word;font-family:var(--body);font-size:.93rem;line-height:1.55;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:12px;max-height:340px;overflow:auto}
+.copy,.btn{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--wine);background:var(--wine);color:var(--wine-ink);font:600 .9rem var(--body);cursor:pointer;transition:transform .12s}
+.copy.done{background:var(--ok);border-color:var(--ok)}
+.copy:focus-visible,.btn:focus-visible,nav.top a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:.93rem}
+.kv dt{font-weight:700;color:var(--brow)}
+.kv dd{margin:0;min-width:0}
+
+/* script */
+.script ol{margin:0;padding-left:20px;display:grid;gap:5px;font-size:.93rem}
+.hook{font-family:var(--display);font-style:italic;font-size:1.15rem;color:var(--wine)}
+
+/* persona */
+.persona{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.persona{grid-template-columns:1fr}}
+
+/* pillars */
+.pillars{display:grid;gap:10px}
+.pill{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.pill:last-child{border-bottom:0}
+.pill b{display:block}
+.pill .pct{display:grid;gap:4px;font-variant-numeric:tabular-nums;font-size:.85rem;text-align:right}
+.pill .pct i{display:block;height:6px;border-radius:9px;background:var(--wine)}
+
+/* table */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:.88rem}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+td b{display:block;color:var(--wine);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+
+/* growth curve */
+.curve{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.curve svg{width:100%;height:auto;display:block}
+.curve text{fill:var(--muted);font:12px var(--body)}
+.curve .lbl{fill:var(--ink);font-weight:700}
+
+.callout{border-radius:14px;padding:16px;display:grid;gap:6px}
+.callout.risk{background:var(--risk-bg);border:1px solid color-mix(in srgb,var(--risk) 35%,transparent)}
+.callout.info{background:var(--info-bg);border:1px solid color-mix(in srgb,var(--info) 35%,transparent)}
+.callout.warn{background:var(--warn-bg);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent)}
+.callout b.t{font-size:.95rem}
+.stack{display:grid;gap:14px}
+.engine{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.engine{grid-template-columns:1fr}}
+footer{padding-block:32px 48px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+</style>
+
+<nav class="top" aria-label="Seções">
+  <div class="wrap">
+    <a href="#entregas">Entregas</a>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#layout">Layout</a>
+    <a href="#perfil">Bio pronta</a>
+    <a href="#persona">Persona</a>
+    <a href="#legendas">Legendas</a>
+    <a href="#reels">Roteiros</a>
+    <a href="#calendario">30 dias</a>
+    <a href="#motor">Motor 20K</a>
+    <a href="#fotos">Fotos</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">@steoliveira92 · Plano de crescimento</p>
+    <h1>De 2.579 para <em>20 mil</em> seguidoras</h1>
+    <p class="lead">Estefania Oliveira tem 18 anos de sobrancelha, domina Brow Lamination, Reconstrução e Reflectocil, e forma profissionais. O perfil ainda não mostra isso. Este plano conserta o perfil, define o que postar todo dia e liga os motores que trazem seguidora nova.</p>
+    <div class="meter" aria-label="Progresso até 20 mil">
+      <div class="row"><span>Hoje <b>2.579</b></span><span>Meta <b>20.000</b> em 6 meses</span></div>
+      <div class="bar"><i></i></div>
+      <div class="row muted small"><span>12,9% do caminho</span><span>faltam 17.421</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="entregas">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Status</p>
+      <h2>O que já dá pra colocar e o que falta</h2>
+      <div class="legend"><span class="chip ok">● Pronto, é só colar</span><span class="chip build">● Eu construo com as fotos</span><span class="chip you">● Depende de você</span></div>
+    </header>
+    <div class="board">
+      <div class="col">
+        <h3><span class="chip ok">Pronto</span></h3>
+        <ul>
+          <li>Nome pesquisável e bio nova</li>
+          <li>7 destaques com nome e ordem</li>
+          <li>3 posts fixados definidos</li>
+          <li>Layout dos próximos 9 posts</li>
+          <li>9 legendas completas com hashtags</li>
+          <li>6 roteiros de Reels cena a cena</li>
+          <li>Calendário de 30 dias</li>
+          <li>Rotina diária de Stories</li>
+          <li>Plano de anúncio e collabs</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3><span class="chip build">Construo</span></h3>
+        <ul>
+          <li>Capas dos 7 destaques na identidade dela</li>
+          <li>Artes dos 3 carrosséis (slides prontos)</li>
+          <li>Material isca "5 serviços extras de 15 min" (PDF para o direct)</li>
+          <li>Página de link da bio: Agendar · Cursos · Antes e depois</li>
+          <li>Respostas automáticas do direct (palavras BROW e LAMINATION)</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3><span class="chip you">Você</span></h3>
+        <ul>
+          <li>Mandar as fotos da lista <a href="#fotos">Fotos</a></li>
+          <li>Confirmar: 18 anos ou desde 2010? (ver alerta)</li>
+          <li>WhatsApp de agendamento e @ oficial da HAIR</li>
+          <li>Datas e valores da próxima turma</li>
+          <li>Cartão para anúncio: R$ 20 a 30 por dia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diagnostico">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Diagnóstico do print de hoje</p>
+      <h2>O conteúdo é bom. O perfil não converte.</h2>
+      <p>Quem chega pelo Reel olha o perfil por 3 segundos e decide se segue. Hoje esses 3 segundos não dizem quem ela é nem por que seguir.</p>
+    </header>
+    <div class="stats">
+      <div class="stat"><b>2.579</b><span>seguidores</span></div>
+      <div class="stat"><b>3.116</b><span>seguindo</span></div>
+      <div class="stat"><b>14</b><span>posts</span></div>
+      <div class="stat"><b>10,3 mil</b><span>visualizações / 30 dias</span></div>
+    </div>
+    <div class="findings">
+      <div class="finding"><span class="chip risk">Alto</span><p><b>Só 14 posts.</b> Pouco volume para o algoritmo testar e pouca prova para quem visita.<span class="fix">Correção: 7 posts por semana nos primeiros 90 dias (5 Reels + 2 carrosséis).</span></p></div>
+      <div class="finding"><span class="chip risk">Alto</span><p><b>Segue mais gente do que tem seguidores (3.116 × 2.579).</b> Passa imagem de perfil que troca follow, não de referência.<span class="fix">Correção: deixar de seguir perfis inativos e aleatórios até ficar abaixo de 800, aos poucos (no máximo 100 por dia, para o Instagram não bloquear).</span></p></div>
+      <div class="finding"><span class="chip risk">Alto</span><p><b>Bio genérica:</b> "Esteticista · Cursos e Mentorias · Iniciante e Avançado". Não fala sobrancelha, cidade, técnica, 18 anos nem para onde clicar.<span class="fix">Correção: bio pronta na seção <a href="#perfil">Bio pronta</a>.</span></p></div>
+      <div class="finding"><span class="chip build">Médio</span><p><b>Nome do perfil sem palavra-chave.</b> O campo "nome" entra na busca do Instagram. "Estefania Oliveira" só aparece para quem já conhece.<span class="fix">Correção: "Estefania • Sobrancelhas RP".</span></p></div>
+      <div class="finding"><span class="chip build">Médio</span><p><b>Um destaque só ("Work") e sem link.</b> Quem quer agendar ou fazer curso não tem caminho.<span class="fix">Correção: 7 destaques e página de link com Agendar e Cursos.</span></p></div>
+      <div class="finding"><span class="chip ok">Ponto forte</span><p><b>Os melhores posts já mostram o caminho.</b> Retratos dela de jaleco (2.791 e 1.798 views) e a sala de aula (1.236) vencem. Antes e depois sem rosto dela fica abaixo de 600.<span class="fix">Lição: o rosto dela e a autoridade de educadora puxam alcance. Todo antes e depois passa a ter ela no vídeo.</span></p></div>
+    </div>
+    <div class="callout risk" style="margin-top:14px">
+      <b class="t">🔴 Atenção: número de anos de carreira</b>
+      <p class="small">O post fixado da HAIR diz "SINCE 2010" (16 anos). Você falou 18 anos. Número divergente em bio e post derruba credibilidade com aluna. Escrevi "18 anos" em tudo; se o certo for outro, troco em 1 minuto.</p>
+    </div>
+  </div>
+</section>
+
+<section id="layout">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Layout</p>
+      <h2>Como o perfil vai ficar</h2>
+      <p>Próximos 9 posts. Os 3 fixados ficam na primeira linha; abaixo, do mais novo ao mais antigo. Toque num quadrado para ver o que é cada post. A grade alterna três cores fixas, vinho, nude e foto, para o perfil ter cara de marca sem depender de arte toda vez.</p>
+    </header>
+    <div class="layout-grid">
+      <div class="phone" role="img" aria-label="Simulação do perfil reformado no Instagram">
+        <div class="screen">
+          <div class="ig-top"><span>steoliveira92 ⌄</span><span>☰</span></div>
+          <div class="ig-head">
+            <div class="avatar"><div></div></div>
+            <div class="ig-nums">
+              <div><b>23</b><span>posts</span></div>
+              <div><b>20 mil</b><span>seguidores</span></div>
+              <div><b>612</b><span>seguindo</span></div>
+            </div>
+          </div>
+          <div class="ig-bio">
+            <div class="nm">Estefania • Sobrancelhas RP</div>
+            <div class="cat">Educador(a)</div>
+            <div>18 anos esculpindo sobrancelhas ✦<br>Brow Lamination · Reconstrução · Reflectocil<br>Educadora Master na HAIR Academia<br>Agende ou seja minha aluna ↓</div>
+            <div class="lnk">🔗 link da bio · Agendar | Cursos</div>
+          </div>
+          <div class="ig-btns"><span>Seguir</span><span>Mensagem</span></div>
+          <div class="hl" aria-hidden="true">
+            <div><i>A|D</i>Antes/Depois</div>
+            <div><i>BL</i>Brow Lam</div>
+            <div><i>R</i>Reconstrução</div>
+            <div><i>C</i>Cursos</div>
+            <div><i>★</i>Alunas</div>
+          </div>
+          <div class="ig-tabs" aria-hidden="true"><span>▦</span><span>▷</span><span>⟳</span><span>◎</span></div>
+          <div class="grid9" id="grid9"></div>
+          <div class="screen-foot">abaixo seguem os 14 posts atuais</div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="tile-detail" id="tileDetail" aria-live="polite"></div>
+        <div class="tile-detail">
+          <span class="k">Ordem de publicação</span>
+          <ol class="order" id="orderList"></ol>
+          <p class="small muted">Publique do 9 ao 1. Depois fixe, nesta ordem, o 9, o 8 e o 1: o Instagram mostra os fixados na primeira linha.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="perfil">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow"><span class="chip ok">Pronto</span></p>
+      <h2>Perfil pronto para colar</h2>
+      <p>Editar perfil → cada campo abaixo. Leva 5 minutos.</p>
+    </header>
+    <div class="cards">
+      <div class="card">
+        <div class="head"><h3>Nome (aparece na busca)</h3><button class="copy" data-copy="c-nome">Copiar</button></div>
+        <pre class="copytext" id="c-nome">Estefania • Sobrancelhas RP</pre>
+        <p class="small muted">27 de 30 caracteres. Quem buscar "sobrancelhas" em Ribeirão Preto passa a encontrar.</p>
+      </div>
+      <div class="card">
+        <div class="head"><h3>Bio</h3><button class="copy" data-copy="c-bio">Copiar</button></div>
+        <pre class="copytext" id="c-bio">18 anos esculpindo sobrancelhas ✦
+Brow Lamination · Reconstrução · Reflectocil
+Educadora Master na HAIR Academia
+Agende ou seja minha aluna ↓</pre>
+        <p class="small muted">Dentro do limite de 150. Categoria do perfil: "Educador(a)" ou "Salão de beleza".</p>
+      </div>
+      <div class="card">
+        <div class="head"><h3>Destaques, nesta ordem</h3><button class="copy" data-copy="c-dest">Copiar</button></div>
+        <pre class="copytext" id="c-dest">1. Antes/Depois – só resultado, 1 por story
+2. Brow Lam – o que é, quanto dura, cuidados
+3. Reconstrução – casos de falha e evolução
+4. Reflectocil – coloração de cílios e sobrancelhas
+5. Cursos – turmas, conteúdo, como se inscrever
+6. Alunas – depoimentos e trabalhos das alunas
+7. Quem sou – 18 anos de história, HAIR, certificações</pre>
+      </div>
+      <div class="card">
+        <div class="head"><h3>Link da bio (versão simples já)</h3><button class="copy" data-copy="c-link">Copiar</button></div>
+        <pre class="copytext" id="c-link">Mensagem do WhatsApp para o botão:
+Oi, Estefania! Vim pelo Instagram e quero saber sobre: ( ) agendar sobrancelha ( ) cursos</pre>
+        <p class="small muted">Hoje: link direto do WhatsApp. Depois: página com 3 botões que eu construo (Agendar · Cursos · Antes e depois).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="persona">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Persona</p>
+      <h2>Duas mulheres seguem esse perfil</h2>
+      <p>O perfil fala com as duas, mas cada post escolhe uma. Post que tenta falar com as duas não prende nenhuma.</p>
+    </header>
+    <div class="persona">
+      <div class="card">
+        <span class="chip ok" style="justify-self:start">Cliente final</span>
+        <h3>Camila, 32, Ribeirão Preto</h3>
+        <dl class="kv">
+          <dt>Dor</dt><dd>Sobrancelha falhada de anos de pinça, ou cansou de henna que borra. Quer acordar pronta.</dd>
+          <dt>Medo</dt><dd>Ficar "marcada", artificial, ou cair em quem estraga.</dd>
+          <dt>Segue quando</dt><dd>Vê transformação natural em rosto parecido com o dela.</dd>
+          <dt>Compra quando</dt><dd>Confia na profissional e vê agenda aberta.</dd>
+          <dt>Conteúdo</dt><dd>Antes e depois, mitos, cuidados, "qual técnica é pra mim".</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <span class="chip you" style="justify-self:start">Aluna / profissional</span>
+        <h3>Juliana, 27, esteticista ou designer iniciante</h3>
+        <dl class="kv">
+          <dt>Dor</dt><dd>Agenda vazia, ticket baixo, insegurança na técnica, cliente que não volta.</dd>
+          <dt>Desejo</dt><dd>Faturar mais por atendimento e ser referência na cidade.</dd>
+          <dt>Segue quando</dt><dd>Aprende algo útil em 30 segundos. Salva e compartilha.</dd>
+          <dt>Compra quando</dt><dd>Vê resultado das alunas e confia na educadora.</dd>
+          <dt>Conteúdo</dt><dd>Erros comuns, serviço extra rápido, precificação, bastidores de aula.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="curve" style="margin-top:14px">
+      <p class="eyebrow" style="margin-bottom:6px">Mix de conteúdo da semana</p>
+      <div class="pillars">
+        <div class="pill"><div><b>Transformação</b><span class="muted small">Reels antes e depois com ela no vídeo. Traz seguidora nova.</span></div><div class="pct">40%<i style="width:100%"></i></div></div>
+        <div class="pill"><div><b>Ensinar profissional</b><span class="muted small">Técnica, erros, serviço extra, preço. Gera salvamento e alunas.</span></div><div class="pct">25%<i style="width:62%"></i></div></div>
+        <div class="pill"><div><b>Ensinar cliente</b><span class="muted small">Qual técnica, quanto dura, cuidados. Gera agendamento.</span></div><div class="pct">15%<i style="width:38%"></i></div></div>
+        <div class="pill"><div><b>Autoridade e bastidores</b><span class="muted small">Aulas, HAIR, trajetória, alunas formadas.</span></div><div class="pct">10%<i style="width:25%"></i></div></div>
+        <div class="pill"><div><b>Oferta</b><span class="muted small">Agenda aberta, turma nova. Nunca mais que 1 em 10.</span></div><div class="pct">10%<i style="width:25%"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="legendas">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow"><span class="chip ok">Pronto</span></p>
+      <h2>9 legendas prontas</h2>
+      <p>Uma para cada quadrado do layout. Copie e cole. Onde houver [colchetes], troque pelo dado real. Tempos e durações de procedimento: confirme com a Estefania antes de postar.</p>
+    </header>
+    <div class="cards" id="captions"></div>
+  </div>
+</section>
+
+<section id="reels">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow"><span class="chip ok">Pronto</span></p>
+      <h2>6 roteiros de Reels</h2>
+      <p>Gravação em lote: um dia por semana, celular na vertical, luz da janela ou ring light de frente. Ela grava os ganchos olhando para a câmera; o procedimento é filmado de cima e de lado.</p>
+    </header>
+    <div class="cards" id="scripts"></div>
+  </div>
+</section>
+
+<section id="calendario">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Novembro 2026</p>
+      <h2>Calendário dos primeiros 30 dias</h2>
+      <p>7 posts por semana. Domingo só Stories. Horários de teste: 12h e 19h30; depois de 3 semanas a gente fixa o horário que mais performou.</p>
+    </header>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Semana</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr></thead>
+        <tbody>
+          <tr><td><b>1 · 02–07</b>Reforma</td><td><b>Reel</b>Post 9: Quem é Estefania (fixar)</td><td><b>Carrossel</b>Post 8: 6 transformações (fixar)</td><td><b>Reel</b>Post 7: Brow Lamination</td><td><b>Reel</b>Post 6: Serviço extra 15 min</td><td><b>Reel</b>Post 5: Reconstrução</td><td><b>Carrossel</b>Post 4: Qual técnica é pra você</td></tr>
+          <tr><td><b>2 · 09–14</b>Prova</td><td><b>Reel</b>Post 3: ASMR do procedimento</td><td><b>Carrossel</b>Post 2: 5 erros que fazem a cliente não voltar</td><td><b>Reel</b>Antes e depois nova cliente (collab)</td><td><b>Reel</b>Post 1: Turma aberta (fixar)</td><td><b>Reel</b>Reflectocil: cílios em 10 min</td><td><b>Foto</b>Retrato jaleco + história</td></tr>
+          <tr><td><b>3 · 16–21</b>Escala</td><td><b>Reel</b>Repetir formato do Reel que mais trouxe seguidor</td><td><b>Carrossel</b>Quanto cobrar por Brow Lamination</td><td><b>Reel</b>Mito: "lamination estraga o fio"</td><td><b>Reel</b>Aluna antes × depois do curso</td><td><b>Reel</b>Transformação (collab cliente)</td><td><b>Reel teste</b>Trial Reel só para não seguidores</td></tr>
+          <tr><td><b>4 · 23–28</b>Conversão</td><td><b>Reel</b>Transformação mais forte do mês</td><td><b>Carrossel</b>Cuidados nas 24h depois da lamination</td><td><b>Reel</b>Dia de aula na HAIR (collab HAIR)</td><td><b>Reel</b>Erro de mapeamento: como corrigir</td><td><b>Reel</b>Agenda de dezembro aberta</td><td><b>Live</b>30 min com convidada / perguntas</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card">
+        <div class="head"><h3>Rotina diária de Stories</h3><button class="copy" data-copy="c-stories">Copiar</button></div>
+        <pre class="copytext" id="c-stories">MANHÃ (2 stories)
+• Bom dia + agenda do dia ("hoje: 3 laminations e 1 reconstrução")
+• Enquete: "Você já fez Brow Lamination? Sim / Tenho medo"
+
+ATENDIMENTO (3 stories)
+• Processo em 3 cortes de 5s (com autorização da cliente)
+• Caixinha: "Pergunte o que quiser sobre sobrancelha"
+• Resultado final + sticker de link para agendar
+
+NOITE (1–2 stories)
+• Responder 1 pergunta da caixinha em vídeo
+• Repostar o Reel do dia</pre>
+      </div>
+      <div class="card">
+        <div class="head"><h3>Regras de gravação</h3></div>
+        <ul class="order" style="list-style:disc">
+          <li>Gancho nos 2 primeiros segundos, com texto na tela.</li>
+          <li>Ela aparece em todo Reel, mesmo que só no início ou no fim.</li>
+          <li>Reels de 7 a 20 segundos para alcance; até 45 s só para ensinar.</li>
+          <li>Sempre pedir autorização de imagem da cliente (modelo no WhatsApp).</li>
+          <li>Legenda automática ligada: muita gente assiste sem som.</li>
+          <li>Áudio em alta do momento, volume baixo, quando não houver fala.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="motor">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Motor de crescimento</p>
+      <h2>De onde vêm as 17 mil seguidoras</h2>
+      <p>Postar bem mantém quem chegou. Seguidora nova vem de alcance fora da base. São cinco motores ligados ao mesmo tempo.</p>
+    </header>
+    <div class="curve">
+      <svg viewBox="0 0 640 230" role="img" aria-label="Projeção de seguidores: 2.579 hoje, 4 mil no mês 1, 6,5 mil no mês 2, 9,5 mil no mês 3, 13 mil no mês 4, 16,5 mil no mês 5 e 20 mil no mês 6">
+        <g stroke="var(--line)" stroke-width="1">
+          <line x1="50" y1="190" x2="620" y2="190"/><line x1="50" y1="137.5" x2="620" y2="137.5"/><line x1="50" y1="85" x2="620" y2="85"/><line x1="50" y1="32.5" x2="620" y2="32.5"/>
+        </g>
+        <g text-anchor="end"><text x="42" y="194">0</text><text x="42" y="141">7 mil</text><text x="42" y="89">14 mil</text><text x="42" y="36">21 mil</text></g>
+        <path d="M60 170.7 L153 160 L246 141.3 L339 118.8 L432 92.5 L525 66.3 L615 40 L615 190 L60 190 Z" fill="var(--wine)" opacity=".12"/>
+        <polyline points="60,170.7 153,160 246,141.3 339,118.8 432,92.5 525,66.3 615,40" fill="none" stroke="var(--wine)" stroke-width="2.5"/>
+        <g fill="var(--wine)"><circle cx="60" cy="170.7" r="4"/><circle cx="153" cy="160" r="3"/><circle cx="246" cy="141.3" r="3"/><circle cx="339" cy="118.8" r="3"/><circle cx="432" cy="92.5" r="3"/><circle cx="525" cy="66.3" r="3"/><circle cx="615" cy="40" r="5"/></g>
+        <g text-anchor="middle"><text x="60" y="212">hoje</text><text x="153" y="212">mês 1</text><text x="246" y="212">mês 2</text><text x="339" y="212">mês 3</text><text x="432" y="212">mês 4</text><text x="525" y="212">mês 5</text><text x="600" y="212">mês 6</text></g>
+        <text class="lbl" x="68" y="163">2.579</text><text class="lbl" x="246" y="131" text-anchor="middle">6,5 mil</text><text class="lbl" x="339" y="108" text-anchor="middle">9,5 mil</text><text class="lbl" x="606" y="30" text-anchor="end">20 mil</text>
+      </svg>
+      <p class="small muted">[HIPÓTESE] Projeção com os 5 motores ligados e 7 posts por semana. Revisamos a curva com os números reais no fim de cada mês.</p>
+    </div>
+    <div class="engine" style="margin-top:14px">
+      <div class="card"><h3>1. Reels de transformação</h3><p class="small">5 por semana, sempre com ela no vídeo. O Reel é o único formato que o Instagram mostra em massa para quem não segue. Uso o recurso "Reel de teste" (mostra só para não seguidores) para testar ganchos sem gastar a base.</p></div>
+      <div class="card"><h3>2. Collab com cliente, aluna e HAIR</h3><p class="small">Todo antes e depois sai como post em colaboração com a cliente; toda aula sai em collab com a conta da HAIR. O post aparece no feed das duas contas. É o motor mais barato que existe.</p></div>
+      <div class="card"><h3>3. Isca no direct</h3><p class="small">"Comente BROW que eu te mando os 5 serviços extras de 15 minutos." Resposta automática envia o material. Comentário em massa sobe o alcance do Reel e traz profissional para a lista de futuras alunas.</p></div>
+      <div class="card"><h3>4. Anúncio no Reel campeão</h3><p class="small">R$ 20 a 30 por dia impulsionando o Reel que já foi bem no orgânico, objetivo "visitas ao perfil". Dois públicos: mulheres 22–50 a 30 km de Ribeirão (clientes) e Brasil com interesse em design de sobrancelha e estética (alunas).<br><span class="muted">[HIPÓTESE] Custo por seguidora entre R$ 0,40 e R$ 1,20. Medimos na 1ª semana antes de subir verba.</span></p></div>
+      <div class="card"><h3>5. Turmas como canal</h3><p class="small">Cada aluna formada posta o certificado marcando @steoliveira92 e segue a página. Arte do certificado para Stories eu preparo. Turma de 15 alunas = 15 vitrines.</p></div>
+      <div class="card"><h3>Higiene do perfil</h3><p class="small">Deixar de seguir perfis aleatórios (até 100 por dia) até ficar abaixo de 800. Responder todo comentário na 1ª hora. Nunca apagar post que foi mal: arquivar.</p></div>
+    </div>
+    <div class="callout risk" style="margin-top:14px">
+      <b class="t">🔴 Não comprar seguidores nem usar "ganha seguidores"</b>
+      <p class="small">Seguidor comprado não assiste Reel. O Instagram mede a taxa de quem assiste e passa a mostrar menos o conteúdo para todo mundo: o alcance cai e as 20 mil viram número vazio, sem cliente nem aluna. Também arrisca bloqueio da conta. Todo o plano acima é orgânico com anúncio oficial.</p>
+    </div>
+    <div class="callout info" style="margin-top:14px">
+      <b class="t">🔵 Automação: postagem e relatório sem você mexer</b>
+      <p class="small">Esta sessão tem integração com o Metricool. Conectando o Instagram dela lá (login dela, 2 minutos), eu deixo os posts da semana agendados com legenda e mando todo mês o relatório de seguidores, alcance e o Reel que mais trouxe seguidora. Você só aprova.</p>
+    </div>
+  </div>
+</section>
+
+<section id="fotos">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow"><span class="chip you">Depende de você</span></p>
+      <h2>Fotos e vídeos que eu preciso</h2>
+      <p>Pode mandar tudo de uma vez, bagunçado. Eu separo. Prioridade de cima para baixo.</p>
+    </header>
+    <div class="cards">
+      <div class="card">
+        <div class="head"><h3>Lista para mandar</h3><button class="copy" data-copy="c-fotos">Copiar</button></div>
+        <pre class="copytext" id="c-fotos">1. 6 a 10 antes e depois de sobrancelha (mesma luz, mesmo ângulo)
+2. Vídeos brutos de procedimentos (qualquer duração, celular na vertical)
+3. 3 a 5 retratos dela de jaleco, fundo limpo
+4. Fotos e vídeos de turma em aula / alunas com certificado
+5. Prints de depoimentos de clientes e alunas
+6. Fotos antigas da carreira (para o Reel "18 anos")
+7. Fotos dela com equipe e espaço da HAIR</pre>
+      </div>
+      <div class="card">
+        <div class="head"><h3>Mensagem para mandar à Estefania</h3><button class="copy" data-copy="c-msg">Copiar</button></div>
+        <pre class="copytext" id="c-msg">Oi, Estefania! Comecei o projeto do seu Instagram. Meta: 20 mil seguidoras em 6 meses, com cliente e aluna de verdade.
+
+Preciso de 3 coisas suas essa semana:
+1. Me manda antes e depois e vídeos de procedimentos que você já tem no celular (pode mandar tudo, eu separo).
+2. Reserva 1 manhã por semana para a gente gravar os Reels em lote (uns 40 minutos).
+3. Sempre que atender, pede autorização de imagem da cliente para postar em collab.
+
+Já deixei bio, destaques e as primeiras legendas prontas. Bora!</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Projeto Estefania 20K · plano criado em 31/10/2026 · revisão mensal com dados reais do Instagram.</div>
+</footer>
+
+<script>
+const TILES = [
+  {n:1,cls:"t-wine",kind:"REEL",pin:true,t:"Turma <em>aberta</em>",title:"Turma aberta",type:"Reel · oferta · fixado",goal:"Converter seguidora em aluna.",what:"Ela fala 10 s para a câmera + cortes da última turma. Texto: datas, vagas, link da bio."},
+  {n:2,cls:"t-nude",kind:"CARROSSEL",t:"5 erros que fazem a cliente <em>não voltar</em>",title:"5 erros que fazem a cliente não voltar",type:"Carrossel · profissional",goal:"Salvamentos e compartilhamentos entre profissionais.",what:"7 slides: capa, 5 erros, CTA para comentar BROW."},
+  {n:3,cls:"t-photo",kind:"REEL",t:"ASMR",title:"ASMR do procedimento",type:"Reel · transformação",goal:"Alcance de não seguidoras (vídeo hipnótico, alta retenção).",what:"Sem fala. Close no pincel, escova e fio alinhando. 12 s."},
+  {n:4,cls:"t-split",kind:"CARROSSEL",t:"Qual técnica é <em>pra você?</em>",title:"Henna, Brow Lamination ou Reconstrução: qual é pra você?",type:"Carrossel · cliente",goal:"Educar a cliente e levar para agendamento.",what:"6 slides comparando as técnicas por tipo de sobrancelha."},
+  {n:5,cls:"t-photo",kind:"REEL",t:"Reconstrução",title:"Reconstrução de sobrancelha falhada",type:"Reel · transformação",goal:"Alcance e prova técnica.",what:"Antes falhado → processo → depois. Ela aparece no fim explicando em 1 frase."},
+  {n:6,cls:"t-wine",kind:"REEL",t:"+15 min, +R$ no <em>ticket</em>",title:"Serviço extra de 15 minutos",type:"Reel · profissional",goal:"Atrair profissionais (futuras alunas) e gerar comentários BROW.",what:"Reflectocil nos cílios com a cliente já na maca."},
+  {n:7,cls:"t-split",kind:"REEL",t:"Brow <em>Lamination</em>",title:"Brow Lamination: ela achou que precisava de henna",type:"Reel · transformação",goal:"Alcance com o serviço da moda.",what:"Gancho com texto, processo em 4 cortes, revelação."},
+  {n:8,cls:"t-nude",kind:"CARROSSEL",pin:true,t:"6 transformações",title:"6 transformações reais",type:"Carrossel · prova · fixado",goal:"Quem visita o perfil vê resultado na hora.",what:"Capa + 6 antes e depois + slide final 'Agende pelo link'."},
+  {n:9,cls:"t-black",kind:"REEL",pin:true,t:"18 anos em <em>30 segundos</em>",title:"Quem é Estefania",type:"Reel · autoridade · fixado",goal:"Apresentar quem ela é para quem acabou de chegar.",what:"Fotos antigas → hoje na HAIR. Narração dela. Fecha com 'segue que eu te ensino'."}
+];
+const reelIcon = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>';
+const carIcon = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M3 7v12a2 2 0 002 2h12"/></svg>';
+const grid = document.getElementById('grid9');
+const detail = document.getElementById('tileDetail');
+function show(t){
+  detail.innerHTML = '<span class="k">Post '+t.n+(t.pin?' · fixado':'')+'</span><h3>'+t.title+'</h3><dl class="kv"><dt>Formato</dt><dd>'+t.type+'</dd><dt>Objetivo</dt><dd>'+t.goal+'</dd><dt>Conteúdo</dt><dd>'+t.what+'</dd></dl><a class="small" href="#cap-'+t.n+'">Ver legenda do post '+t.n+' ↓</a>';
+}
+[1,8,9,2,3,4,5,6,7].map(n=>TILES.find(t=>t.n===n)).forEach(t=>{
+  const b=document.createElement('button');
+  b.type='button'; b.className='tile '+t.cls+(t.pin?' pin':'');
+  b.setAttribute('aria-label','Post '+t.n+': '+t.title);
+  b.innerHTML='<span class="k">'+t.n+'</span>'+(t.kind==='REEL'?reelIcon:carIcon)+(t.pin?'<span class="pinmark">FIXADO</span>':'')+'<span class="tt">'+t.t+'</span>';
+  b.addEventListener('click',()=>show(t));
+  grid.appendChild(b);
+});
+show(TILES[0]);
+document.getElementById('orderList').innerHTML = TILES.slice().reverse().map(t=>'<li>Post '+t.n+' · '+t.title+(t.pin?' <span class="chip ok">fixar</span>':'')+'</li>').join('');
+
+const TAGS_CLI = "#sobrancelhas #designdesobrancelhas #browlamination #ribeiraopreto #sobrancelhanatural";
+const TAGS_PRO = "#designerdesobrancelhas #cursodesobrancelha #browlamination #esteticista #reflectocil";
+const CAPTIONS = [
+ [9,"Quem é Estefania", `18 anos atrás eu peguei uma pinça pela primeira vez sem imaginar onde isso ia dar.
+
+Hoje sou Educadora Master na HAIR Academia da Beleza, já formei [número] profissionais e atendo mulheres que querem uma coisa só: sobrancelha bonita que pareça dela.
+
+Aqui você vai encontrar:
+✦ transformações reais, sem filtro
+✦ o que eu aprendi em 18 anos, para quem é da área
+✦ dicas para você cuidar da sua sobrancelha em casa
+
+Me conta nos comentários: você veio como cliente ou como profissional?
+
+${TAGS_CLI}`],
+ [8,"6 transformações reais", `6 mulheres, 6 sobrancelhas diferentes, 1 objetivo: parecer natural.
+
+Arrasta para o lado e me diz qual foi a sua preferida ➡️
+
+Cada sobrancelha é desenhada a partir do rosto da cliente, não de um molde. Por isso nenhuma fica igual à outra.
+
+Quer a sua? Agendamento pelo link da bio.
+📍 Ribeirão Preto
+
+${TAGS_CLI}`],
+ [7,"Brow Lamination", `Ela chegou achando que precisava de henna. Saiu assim.
+
+Brow Lamination não é só deixar o fio pra cima. É alinhar os fios, preencher visualmente as falhas e dar forma, sem agulha e sem dor.
+
+Duração do resultado: [X] a [Y] semanas.
+Tempo de procedimento: cerca de [X] minutos.
+
+Quer saber se a sua sobrancelha tem indicação? Comenta LAMINATION que eu te respondo no direct.
+
+${TAGS_CLI}`],
+ [6,"Serviço extra de 15 minutos", `Sua cliente já está deitada na maca. Em 15 minutos você pode aumentar o valor desse atendimento.
+
+Coloração de cílios com Reflectocil:
+✦ rápida
+✦ resultado na hora
+✦ a cliente sai vendo diferença no espelho
+
+Esse é 1 dos 5 serviços extras que eu ensino para as minhas alunas aumentarem o ticket sem aumentar a agenda.
+
+Comenta BROW que eu te mando os 5 no direct 💌
+
+${TAGS_PRO}`],
+ [5,"Reconstrução", `Anos de pinça deixaram essa sobrancelha assim. Arrasta até o fim do vídeo.
+
+Reconstrução é paciência e técnica: a gente trabalha o desenho, o crescimento e o preenchimento até a sobrancelha voltar a ter forma.
+
+Se a sua tem falha e você acha que não tem jeito, me chama no direct. Eu avalio e te digo com sinceridade o que dá para fazer.
+
+${TAGS_CLI} #reconstrucaodesobrancelha`],
+ [4,"Qual técnica é pra você?", `Henna, Brow Lamination ou Reconstrução? Salva este post para não esquecer 📌
+
+Slide 2: Henna. Para quem quer cor e preenchimento rápido.
+Slide 3: Brow Lamination. Para fios rebeldes e falhas leves, efeito volumoso.
+Slide 4: Reconstrução. Para sobrancelha muito falhada ou que parou de crescer.
+Slide 5: Dá para combinar? Sim, e eu te explico como.
+
+Ficou em dúvida? Me manda uma foto da sua sobrancelha no direct.
+
+${TAGS_CLI}`],
+ [3,"ASMR do procedimento", `Assiste até o fim com som 🎧
+
+Esse é o momento em que tudo se alinha.
+
+Você conseguiria assistir isso o dia inteiro? Porque eu faço isso há 18 anos e ainda não cansei.
+
+${TAGS_CLI}`],
+ [2,"5 erros que fazem a cliente não voltar", `Salva e manda para aquela amiga designer 📌
+
+1. Desenhar sem medir o rosto da cliente
+2. Não explicar os cuidados pós-procedimento
+3. Não marcar o retorno antes da cliente ir embora
+4. Não oferecer nenhum serviço complementar
+5. Não postar o resultado (com autorização)
+
+O 4 é o que mais faz dinheiro ficar na mesa. Comenta BROW que eu te mando os 5 serviços extras que eu ensino.
+
+${TAGS_PRO}`],
+ [1,"Turma aberta", `Turma [Iniciante/Avançado] aberta 📚
+
+📅 [data]
+📍 HAIR Academia da Beleza, Ribeirão Preto
+🎯 [o que a aluna sai sabendo fazer]
+👩‍🏫 Com Estefania Oliveira, 18 anos de experiência
+
+Vagas limitadas a [X] alunas para eu acompanhar cada uma de perto.
+
+Comenta EU QUERO ou chama no link da bio.
+
+${TAGS_PRO}`]
+];
+document.getElementById('captions').innerHTML = CAPTIONS.map(([n,t,c])=>
+ '<div class="card" id="cap-'+n+'"><div class="head"><h3>Post '+n+' · '+t+'</h3><button class="copy" data-copy="cap-txt-'+n+'">Copiar</button></div><pre class="copytext" id="cap-txt-'+n+'"></pre></div>').join('');
+CAPTIONS.forEach(([n,,c])=>{document.getElementById('cap-txt-'+n).textContent=c});
+
+const SCRIPTS = [
+ {t:"Post 9 · 18 anos em 30 segundos",hook:"“18 anos atrás eu não sabia nem segurar uma pinça.”",scenes:["0–2s: ela olhando para a câmera, frase do gancho","2–12s: fotos antigas da carreira, trocando a cada 1 s","12–22s: cortes rápidos de atendimentos e aulas na HAIR","22–28s: ela de jaleco: “Hoje eu ensino o que levei 18 anos para aprender.”","28–30s: “Segue que eu te mostro.”"],txt:"18 anos em 30 segundos",audio:"Narração dela + trilha suave",dur:"30 s"},
+ {t:"Post 7 · Brow Lamination",hook:"“Ela achou que precisava de henna.”",scenes:["0–2s: close da sobrancelha antes, texto do gancho","2–6s: aplicação do produto","6–9s: escovação dos fios para cima","9–12s: revelação com a cliente sorrindo","12–14s: Estefania ao lado: “Brow Lamination.”"],txt:"Ela achou que precisava de henna… 👀",audio:"Áudio em alta",dur:"14 s"},
+ {t:"Post 6 · Serviço extra",hook:"“Sua cliente já está na maca. Não deixa ela levantar ainda.”",scenes:["0–3s: Estefania falando para a câmera","3–10s: aplicação do Reflectocil nos cílios","10–14s: antes × depois dos cílios lado a lado","14–18s: “Esse é 1 de 5. Comenta BROW que eu te mando os outros.”"],txt:"+15 min no atendimento = + valor no ticket",audio:"Fala dela",dur:"18 s"},
+ {t:"Post 5 · Reconstrução",hook:"“Disseram que essa sobrancelha não tinha jeito.”",scenes:["0–2s: close da falha, texto do gancho","2–8s: mapeamento e desenho","8–14s: evolução por sessão (se houver)","14–18s: resultado + Estefania: “Tem jeito, sim.”"],txt:"Disseram que não tinha jeito",audio:"Áudio em alta, emotivo",dur:"18 s"},
+ {t:"Post 3 · ASMR",hook:"Sem fala. O primeiro movimento do pincel já é o gancho.",scenes:["0–4s: close extremo do pincel no fio","4–8s: escova alinhando os fios em câmera lenta","8–12s: resultado girando o rosto da cliente devagar"],txt:"Assiste com som 🎧",audio:"Som original do procedimento, volume alto",dur:"12 s"},
+ {t:"Post 1 · Turma aberta",hook:"“Se você quer viver de sobrancelha, presta atenção.”",scenes:["0–3s: Estefania na sala de aula da HAIR","3–12s: cortes de alunas praticando e com certificado","12–18s: “Turma [data]. [X] vagas. Link na bio.”"],txt:"Turma aberta · [data]",audio:"Fala dela + trilha animada",dur:"18 s"}
+];
+document.getElementById('scripts').innerHTML = SCRIPTS.map((s,i)=>{
+ const plain = s.t+"\nGancho: "+s.hook+"\n\nCenas:\n"+s.scenes.map(x=>"• "+x).join("\n")+"\n\nTexto na tela: "+s.txt+"\nÁudio: "+s.audio+"\nDuração: "+s.dur;
+ return '<div class="card script"><div class="head"><h3>'+s.t+'</h3><button class="copy" data-copy="scr-'+i+'">Copiar</button></div><p class="hook">'+s.hook+'</p><ol>'+s.scenes.map(x=>'<li>'+x+'</li>').join('')+'</ol><dl class="kv"><dt>Texto</dt><dd>'+s.txt+'</dd><dt>Áudio</dt><dd>'+s.audio+'</dd><dt>Duração</dt><dd>'+s.dur+'</dd></dl><pre id="scr-'+i+'" hidden></pre></div>';
+}).join('');
+SCRIPTS.forEach((s,i)=>{document.getElementById('scr-'+i).textContent = s.t+"\nGancho: "+s.hook+"\n\nCenas:\n"+s.scenes.map(x=>"• "+x).join("\n")+"\n\nTexto na tela: "+s.txt+"\nÁudio: "+s.audio+"\nDuração: "+s.dur});
+
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('.copy'); if(!b) return;
+  const el=document.getElementById(b.dataset.copy); if(!el) return;
+  const txt=el.textContent;
+  try{ await navigator.clipboard.writeText(txt); b.textContent='Copiado'; b.classList.add('done'); }
+  catch(_){ if(!el.hidden){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);} b.textContent='Selecionado, copie'; }
+  setTimeout(()=>{b.textContent='Copiar';b.classList.remove('done')},1800);
+});
+</script>
