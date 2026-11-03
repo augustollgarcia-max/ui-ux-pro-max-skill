@@ -42,3 +42,20 @@ ffmpeg -i render-silencioso.mp4 -i trilha.wav -c:v copy -c:a aac -b:a 160k -shor
 ```
 
 A tabela `TL` em `motion.html` e `PRE/POST` em `build-audio.py` têm que bater: a duração de cada cena é pré + narração + pós.
+
+## Revisão (agente revisor, 03/11/2026)
+
+Checagem em 64 quadros com faixa de área segura (0–200 px e 1720–1920 px cobertos pela interface do WhatsApp/Instagram), simulação a 390 px e página `index.html` em iPhone 13 / 320 / 360 / 430 px.
+
+Veredito: **aprovado com ajustes**. Ajustes aplicados antes do render final:
+
+- Cena dos mestres: grade subiu (560 px) e cards ficaram com 500 px; a frase "Cada educador com o seu polo educacional" saiu da faixa coberta e passou a entrar depois do último card.
+- Textos secundários maiores para o celular: 36–40 px (formatos, polos, recursos do app, chips, certificado, CTAs, leads).
+- Logo HAIR nas cenas 01 e 11 desceu para 230 px (fora da barra de status).
+- Sombra de texto nos títulos e no eyebrow (contraste sobre o braço tatuado e os espelhos iluminados).
+- "Todo o suporte necessário…" entra 1,2 s antes na cena dos formatos.
+- Nome oficial "HAIR Academia da Beleza" no eyebrow de abertura e no título da página.
+- "Ambientes personalizados" → "Ambientes reais" (termo do briefing).
+- Foto da turma grande deixou de repetir em duas cenas seguidas.
+
+Ficou como está, de propósito: a cena 05 tem 3 fotos em 5,4 s (montagem rápida); as 4 fotos de arte "Técnica. Presença. …" não entram porque já têm texto dentro.
