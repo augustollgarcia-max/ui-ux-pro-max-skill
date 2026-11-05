@@ -54,3 +54,20 @@ ui-ux-pro-max-website/*
 
 cli/playwright-report/
 cli/test-results/
+
+# reels-automatico: mídia e saídas ficam fora do git (só código, perfil e pastas)
+reels-automatico/ARQUIVO-BRUTO/*
+reels-automatico/REFERENCIAS/*
+reels-automatico/IMAGENS/*
+reels-automatico/SAIDA/*
+!reels-automatico/ARQUIVO-BRUTO/.gitkeep
+!reels-automatico/REFERENCIAS/.gitkeep
+!reels-automatico/IMAGENS/.gitkeep
+!reels-automatico/SAIDA/.gitkeep
+reels-automatico/ESTILO/transcricoes/
+reels-automatico/ESTILO/analise-referencias.json
+reels-automatico/remotion/node_modules/
+reels-automatico/remotion/public/
+reels-automatico/remotion/package-lock.json
+reels-automatico/hyperframes/
+reels-automatico/**/__pycache__/
