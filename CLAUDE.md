@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ REGRA PERMANENTE — O QUE ESTÁ PRONTO VAI PRO AR: MERGE E PUBLICAÇÃO SEM FICAR PARADO (Augusto, 05/11/2026)
+Pedido do dono, em áudio: "tudo que eu peço para você que está bem alinhado e bem ordenado tem que ser posto na merge e posto no ar, senão não tem como eu ficar gastando dinheiro e token à toa. Sobe tudo que está parado. Eu estou autorizando. Coloca na memória central, fixa."
+Vale para toda sessão, todo chat e todo agente (Claude, Claude Code, Codex, GPT) em todos os repositórios do Augusto. Texto completo e critérios no `CLAUDE.md` do `conexao-hair-deploy` (memória central).
+1. Entrega concluída = PR aberto, CI verde, **mesclado** e publicado na mesma sessão. "Deixei na branch" não é entrega.
+2. Antes de começar, olhar PRs e branches parados e subir o que está bem alinhado (diff lido inteiro, CI verde, sem conflito, testado).
+3. Só fica para o dono: chave/custo novo, mudança de banco/auth em produção, página pública que ele pediu para revisar antes. Avisar com o motivo em uma linha.
+4. O relatório termina com "🚀 NO AR": o que subiu (link do PR) e o que ficou parado, com o motivo.
+
 ## ⚠️ REGRA PERMANENTE: CÓDIGO PARA COPIAR + LINK PARA CLICAR (Augusto, 30/10/2026)
 Pedido do dono, para toda sessão, todo chat e todo agente na conta do Luiz Augusto: "Toda vez que você me manda em código, você vai me mandar o link também. É código para mim copiar e link para mim clicar."
 - Todo link vai **duas vezes**: em bloco de código (para copiar e mandar para alguém) **e** como link clicável fora do bloco (para abrir na hora).
