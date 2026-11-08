@@ -213,3 +213,10 @@
   d.addEventListener('hair:pagechange', function () { guardarOrigem(); preferencias(); iniciar(); pagina(); });
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();
+
+// Atendimento público separado da medição: abrir o chat não ativa cookies nem pixels.
+(function(){
+  if(window.__haraPublicLoader)return;window.__haraPublicLoader=true;
+  function load(){var s=document.createElement('script');s.src='/hara/chat.js';s.defer=true;document.head.appendChild(s);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
+})();
