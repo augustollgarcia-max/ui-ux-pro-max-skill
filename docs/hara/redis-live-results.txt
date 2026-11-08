@@ -1,0 +1,5 @@
+PASS real Redis concurrency: 20 requests, 6 allowed, 14 rejected
+PASS actual counter expiration <= 120s / 24h / 24h
+PASS actual daily per-IP cap
+PASS actual global daily cap
+PASS actual Redis expiry

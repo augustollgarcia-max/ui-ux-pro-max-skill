@@ -1,0 +1,33 @@
+{"event":"hara_public_model","model":"google/gemini-2.5-flash-lite","result":"approved_topics"}
+{"event":"hara_public_model","model":"google/gemini-2.5-flash-lite","result":"approved_topics"}
+✔ valores nunca saem da HARA, inclusive desconto, parcelas e instruções maliciosas (5.683173ms)
+✔ base cobre processos, metodologia, apps, carreira, modelos e garantia (1.05171ms)
+✔ Gemini fixado e chamadas conhecidas/preço não gastam modelo (1.089013ms)
+✔ Gemini só seleciona fatos aprovados, nunca devolve texto gerado ao visitante (2.172096ms)
+✔ Gemini com saída inválida, valor próprio ou falha cai em texto verificado (1.886342ms)
+✔ Gemini pode reconhecer preço indireto mas a frase continua controlada pelo servidor (1.113674ms)
+✔ lead normaliza contato, mantém consentimentos separados e assina somente relay configurado (4.40868ms)
+✔ aceite atual não permite follow-up mesmo se o cliente tentar forjar autorização (1.624034ms)
+✔ sem cidade/telefone/email/consentimento e com destino grupo fornecido pelo cliente são recusados (1.524492ms)
+✔ captação permanece fechada sem relay autorizado; não aceita URL arbitrária (0.830369ms)
+✔ sem confirmação de CRM e fila, não confirma cadastro nem redireciona (2.368107ms)
+✔ respostas verificadas para cursos, parceiros, endereço e contato (3.940251ms)
+✔ não inventa preços, horários nem disponibilidade (0.992634ms)
+✔ método, origem exata, fetch-site e JSON obrigatórios (1.223859ms)
+✔ desligado por padrão, sem afrouxar autenticação (0.373438ms)
+✔ consentimento, esquema estrito e limites de corpo (1.08086ms)
+✔ bloqueia dados pessoais comuns sem persistir conteúdo (1.189081ms)
+✔ falha fechada com IP ausente, proxy falso ou fora da Vercel (9.403844ms)
+✔ limite negado devolve 429 e Retry-After (1.542404ms)
+✔ falha fechada se provedor cair, JSON inválido ou config ausente (1.685178ms)
+✔ Redis recebe apenas HMAC e contagens, TTL até 24h e rotação diária (1.702866ms)
+✔ prompt malicioso não executa ferramentas nem acessa dados privados (1.060839ms)
+✔ preview aceita somente hostname exato informado pela Vercel, nunca em produção (0.642345ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 213.444472

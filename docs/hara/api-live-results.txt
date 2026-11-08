@@ -1,0 +1,7 @@
+PASS live API bad origin: HTTP 403
+PASS live API missing consent: HTTP 400
+PASS live API unexpected field: HTTP 400
+PASS live API personal data: HTTP 400
+PASS live API long message: HTTP 400
+PASS live API rate control: 5 HTTP 200, 5 HTTP 429 (shared test egress IP, earlier requests also counted)
+PASS live response sources and official WhatsApp
