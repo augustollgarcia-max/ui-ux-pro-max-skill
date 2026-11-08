@@ -10,7 +10,7 @@
 
 - Nunca informar valor, preço de tabela, estimativa, parcela, desconto numérico ou custo do curso ao visitante. A instrução de08/11/2026 sobrepõe o Core antigo que permitia tabela. Explicar: “Como os valores alteram de acordo com as promoções e campanhas, eu vou te direcionar direto para o WhatsApp”.
 - Destino comercial validado: (16)99255-8810; não usar números antigos encontrados no Core. Todo CTA comercial da HARA e do site deve favorecer essa continuidade, sem alegar que um clique comprova mensagem enviada.
-- Captar cidade, telefone e e-mail com consentimento específico; resumo revisável para a equipe. Follow-up depende de aceite separado.
+- Captar cidade, telefone e e-mail com consentimento específico; contexto enviado conforme termo de atendimento, sem caixa de resumo. Sem autorização para contatos futuros.
 - O link do grupo e a integração de envio ainda precisam ser confirmados; não tratar convite de grupo como credencial deAPI nem declarar notificação entregue sem confirmação do provedor.
 - Usar somente conhecimento público/autorizado. Não copiar dados de alunos, segredos ou trechos internos do Core para o atendimento público.
 
@@ -21,3 +21,10 @@
 - Um único checkbox discreto por formulário, com texto visível “Li e aceito” e link para o termo. Tentar enviar sem marcar não envia dados: destaca o checkbox com animação suave; respeitar movimento reduzido.
 - Remover aceite para contatos futuros. Enviar followup:false e recusar autorização posterior forjada; essa orientação mais recente substitui a proposta anterior de opt-in opcional.
 - Para continuidade entre páginas, histórico só na sessão da aba e somente após aceite; “Apagar conversa” remove e revoga o aceite.
+
+## Ampliação econômica da base pública
+
+- Consultar primeiro fichas públicas aprovadas por assunto; perguntas reconhecidas não devem chamar modelo. Nunca enviar documentos completos, histórico de visitantes ou dados internos para classificar intenção.
+- Gemini só recebe índice compacto de IDs e assuntos, limitado a 6000 caracteres, e continua sem liberdade para gerar fatos ou valores.
+- Toda ficha nova deve ter fonte, revisão, evidência e hash; mudanças na fonte exigem revisão. Proposta interna, calendário antigo, credenciais e dados de alunos não entram automaticamente.
+- Não generalizar dois meses para Beauty. Manicure/estética em construção não são turmas abertas. Não misturar Renata Scatena e Renata Salviato.
