@@ -2,6 +2,8 @@
 (()=>{
   'use strict';
   if(document.getElementById('hara-lead-host'))return;
+  let intakeReady=false;
+  fetch('/api/hara-config',{credentials:'omit',cache:'no-store',signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(c=>{intakeReady=c?.leadsEnabled===true;}).catch(()=>{});
   const host=document.createElement('div');host.id='hara-lead-host';document.body.append(host);
   const root=host.attachShadow({mode:'open'});
   root.innerHTML=`<style>
@@ -68,7 +70,7 @@
   }
   // composedPath inclui âncoras do Shadow DOM aberto da HARA, sem acoplar seus controles.
   document.addEventListener('click',e=>{
-    if(e.defaultPrevented||e.button!==0||e.composedPath().includes(host))return;
+    if(!intakeReady||e.defaultPrevented||e.button!==0||e.composedPath().includes(host))return;
     const anchor=e.composedPath().find(node=>node instanceof HTMLAnchorElement);
     if(!anchor||!officialUrl(anchor.href))return;
     e.preventDefault();e.stopImmediatePropagation();open(anchor);

@@ -34,6 +34,7 @@ const timers = new Set();
 const server = http.createServer(async (req, res) => {
   try {
     const route = new URL(req.url, 'http://fixture').pathname;
+    if (route === '/api/hara-config') { res.writeHead(200,{'Content-Type':'application/json'}); return res.end(JSON.stringify({leadsEnabled:true})); }
     if (route === '/api/hara-public') {
       calls++;
       let body = '';

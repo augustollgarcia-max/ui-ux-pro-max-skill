@@ -7,6 +7,15 @@ const origins=new Set(['https://hairacademiadabeleza.com.br','https://www.hairac
 const LUA=`for i=1,3 do if tonumber(redis.call('GET',KEYS[i]) or '0') >= tonumber(ARGV[i]) then return 0 end end
 for i=1,3 do local n=redis.call('INCR',KEYS[i]); if n==1 then redis.call('EXPIRE',KEYS[i],tonumber(ARGV[i+3])) end end return 1`;
 async function limit(ip,env,fetcher,now,scope='chat') {
+  if(env.HARA_RATE_BACKEND==='acervo') {
+    const secret=env.HARA_RATE_HMAC,token=env.HARA_ACERVO_SERVICE_TOKEN;
+    if(!secret||secret.length<32||!token||token.length<32||!['chat','lead'].includes(scope))throw Error('rate unavailable');
+    const day=Math.floor(now/86400000),minute=Math.floor(now/60000);
+    const hash=createHmac('sha256',secret).update(`hara-rate:${day}:${ip}`).digest('hex');
+    const r=await fetcher('https://hair-acervo-central.financeiro-hairacade.chatgpt.site/api/hara-rate',{method:'POST',headers:{'OAI-Sites-Authorization':`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify({scope,day,minute,hash}),redirect:'error',signal:AbortSignal.timeout(2500)});
+    if(!r.ok)throw Error('rate unavailable');const body=await r.json();
+    if(typeof body.allowed!=='boolean')throw Error('rate unavailable');return body.allowed;
+  }
   const url=env.HARA_RATE_REST_URL, token=env.HARA_RATE_REST_TOKEN, secret=env.HARA_RATE_HMAC;
   if(!url || !/^https:\/\/[a-zA-Z0-9-]+\.upstash\.io\/?$/.test(url) || !token || !secret || secret.length<32) throw Error('rate unavailable');
   const day=Math.floor(now/86400000),minute=Math.floor(now/60000);

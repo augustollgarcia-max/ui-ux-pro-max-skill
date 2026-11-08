@@ -1,10 +1,14 @@
 // Gemini is a semantic selector over approved cards, never a source of prices or facts.
 const {answer,topics,fromTopics,isPriceQuestion,selectTopics,PRICE_REPLY}=require('./knowledge.cjs');
+const {consultAcervo}=require('./acervo.cjs');
 const MODEL='google/gemini-2.5-flash-lite'; // Verified in the live AI Gateway catalog on 08/11/2026.
 const ENDPOINT='https://ai-gateway.vercel.sh/v1/chat/completions';
 async function publicAnswer(message,{env=process.env,fetcher=fetch}={}) {
   // Money is handled deterministically before any model call. Known topics also cost no tokens.
-  if(isPriceQuestion(message)||selectTopics(message).length||env.HARA_GEMINI_ENABLED!=='true')return answer(message);
+  if(isPriceQuestion(message))return answer(message);
+  const fromAcervo=await consultAcervo(message,{env,fetcher});
+  if(fromAcervo)return fromAcervo;
+  if(selectTopics(message).length||env.HARA_GEMINI_ENABLED!=='true')return answer(message);
   const token=env.AI_GATEWAY_API_KEY||env.VERCEL_OIDC_TOKEN;
   if(!token)return answer(message);
   const cards=[...topics.map(({id,label})=>({id,label:label||id})),{id:'valores',label:'Preço, desconto, parcelas, bolsa: encaminhar ao WhatsApp'}];
