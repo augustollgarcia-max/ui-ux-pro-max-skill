@@ -1,4 +1,6 @@
-# HARA pública — homologação executada
+# HARA pública — primeira homologação executada
+
+Atualização comercial posterior: consultar `FUNIL-COMERCIAL.md` e `AUTOMACAO.md`. Esta seção registra a etapa anterior à captação e ao seletor Gemini; seus resultados não equivalem à validação integral do fluxo novo.
 
 08/11/2026. O usuário aprovou exclusivamente homologação e configuração dos limites. Não há autorização de merge nem de produção nesta etapa.
 

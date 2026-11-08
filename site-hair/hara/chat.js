@@ -23,14 +23,14 @@
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
   </style><button class="launch" aria-haspopup="dialog">Conversar com a HARA</button>
   <dialog aria-labelledby="hara-title"><div class="panel"><header><div><strong id="hara-title">HARA · Atendimento HAIR</strong><p>Assistente automática com informações do site</p></div><button class="close" aria-label="Fechar conversa">×</button></header>
-  <div class="body"><section class="notice"><p>Olá! Ajudo com cursos, academias parceiras e localização. Horários, vagas e valores são confirmados pela equipe.</p>
-  <p>Ao enviar, sua pergunta será processada pelo site para responder. Não envie nome, telefone, documentos, senhas ou informações sensíveis. Não salvamos o texto no atendimento; a infraestrutura processa dados técnicos de conexão. Contadores de segurança usam um identificador derivado do IP, com expiração em até 24 horas.</p>
-  <p>A conversa fica somente nesta página. “Apagar conversa” limpa as mensagens e retira o aceite. O WhatsApp só abre quando você tocar no link, sem anexar a conversa. <a href="/privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade</a>.</p>
+  <div class="body"><section class="notice"><p>Olá! Ajudo com cursos, academias parceiras e localização. Explico o funcionamento da HAIR; valores e condições comerciais seguem para o WhatsApp.</p>
+  <p>Ao enviar, sua pergunta será processada pelo site para responder. Não envie nome, telefone, documentos, senhas ou informações sensíveis. Se o apoio Gemini estiver habilitado, sua pergunta poderá ser processada pelo Google via Vercel para identificar o assunto. Não gravamos o texto no banco do chat; a infraestrutura e os provedores processam dados técnicos conforme suas políticas. Contadores de segurança usam um identificador derivado do IP, com expiração em até 24 horas.</p>
+  <p>A conversa fica somente nesta página. “Apagar conversa” limpa as mensagens e retira o aceite. Ao continuar no WhatsApp, você poderá preencher seus dados e revisar um resumo para a equipe. O compartilhamento exige um aceite separado no formulário. <a href="/privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade</a>.</p>
   <label class="consent"><input type="checkbox"> <span>Li o aviso e concordo com o processamento da pergunta para este atendimento.</span></label></section>
   <div class="topics"><button data-question="Quais cursos vocês oferecem?">Cursos</button><button data-question="Quais academias parceiras?">Academias</button><button data-question="Quais horários e valores?">Horários e valores</button><button data-question="Onde fica o atendimento presencial?">Localização</button></div>
   <div class="messages" role="log" aria-live="polite" aria-relevant="additions"></div><p class="status" role="status"></p></div>
   <form><input type="text" aria-label="Sua pergunta" placeholder="Pergunte sobre a HAIR" maxlength="500" required disabled autocomplete="off"><button type="submit" disabled>Enviar</button></form>
-  <footer><a href="https://wa.me/5516992558810?text=Ol%C3%A1%2C%20quero%20informa%C3%A7%C3%B5es%20sobre%20os%20cursos%20da%20HAIR." target="_blank" rel="noopener noreferrer">Equipe no WhatsApp</a><button class="clear" type="button">Apagar conversa</button></footer></div></dialog>`;
+  <footer><a href="https://wa.me/5516992558810?text=Ol%C3%A1%2C%20quero%20informa%C3%A7%C3%B5es%20sobre%20os%20cursos%20da%20HAIR." target="_blank" rel="noopener noreferrer">Continuar no WhatsApp</a><button class="clear" type="button">Apagar conversa</button></footer></div></dialog>`;
   const $=s=>root.querySelector(s),dialog=$('dialog'),input=$('input[type=text]'),consent=$('input[type=checkbox]'),submit=$('button[type=submit]'),messages=$('.messages'),status=$('.status');
   let pending=false,controller=null,generation=0,count=0;
   function controls(){input.disabled=submit.disabled=!consent.checked||pending;root.querySelectorAll('[data-question]').forEach(b=>b.disabled=!consent.checked||pending);}
@@ -46,7 +46,7 @@
     pending=true;controls();status.textContent='Consultando informações…';append(text,'user');input.value='';
     const version=generation;controller=new AbortController();const timeout=setTimeout(()=>controller?.abort(),8000);
     try{
-      const r=await fetch('/api/hara-public',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,consent:'public-chat-v1'}),signal:controller.signal});
+      const r=await fetch('/api/hara-public',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,consent:'public-chat-v2'}),signal:controller.signal});
       const data=await r.json();if(version!==generation)return;
       if(!r.ok)throw Error(data.error||'Atendimento indisponível. Use o WhatsApp oficial.');
       if(typeof data.reply!=='string')throw Error('Resposta indisponível. Use o WhatsApp oficial.');

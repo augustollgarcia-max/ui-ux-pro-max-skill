@@ -217,6 +217,6 @@
 // Atendimento público separado da medição: abrir o chat não ativa cookies nem pixels.
 (function(){
   if(window.__haraPublicLoader)return;window.__haraPublicLoader=true;
-  function load(){var s=document.createElement('script');s.src='/hara/chat.js';s.defer=true;document.head.appendChild(s);}
+  function load(){['/hara/chat.js','/hara/lead-form.js'].forEach(function(src){var s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s);});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
 })();

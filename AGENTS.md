@@ -5,3 +5,11 @@
 - Reexecutar os testes relevantes automaticamente quando o código da HARA pública mudar. Diagnosticar e corrigir falhas antes de entregar.
 - Manter secrets, dados reais de alunos e credenciais de produção fora dos testes e dos artefatos.
 - A preferência por automação não concede autorização para merge, mudança de permissões, alteração de serviços produtivos ou publicação. Para a integração pública HARA desta tarefa, essas ações continuam dependendo de aprovação específica do usuário.
+
+# Atendimento público HARA
+
+- Nunca informar valor, preço de tabela, estimativa, parcela, desconto numérico ou custo do curso ao visitante. A instrução de08/11/2026 sobrepõe o Core antigo que permitia tabela. Explicar: “Como os valores alteram de acordo com as promoções e campanhas, eu vou te direcionar direto para o WhatsApp”.
+- Destino comercial validado: (16)99255-8810; não usar números antigos encontrados no Core. Todo CTA comercial da HARA e do site deve favorecer essa continuidade, sem alegar que um clique comprova mensagem enviada.
+- Captar cidade, telefone e e-mail com consentimento específico; resumo revisável para a equipe. Follow-up depende de aceite separado.
+- O link do grupo e a integração de envio ainda precisam ser confirmados; não tratar convite de grupo como credencial deAPI nem declarar notificação entregue sem confirmação do provedor.
+- Usar somente conhecimento público/autorizado. Não copiar dados de alunos, segredos ou trechos internos do Core para o atendimento público.

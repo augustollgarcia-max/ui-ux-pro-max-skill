@@ -42,7 +42,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p output/hara-unit
-          node --test scripts/hara/security.test.cjs | tee output/hara-unit/security.txt
+          node --test scripts/hara/security.test.cjs scripts/hara/business.test.cjs | tee output/hara-unit/security.txt
           python3 scripts/site-hair/checar-contrato.py | tee output/hara-unit/site-contract.txt
           node --check site-hair/api/hara-public.js
           node --check site-hair/hara/chat.js

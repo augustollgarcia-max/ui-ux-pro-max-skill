@@ -1,20 +1,33 @@
-✔ respostas verificadas para cursos, parceiros, endereço e contato (2.458189ms)
-✔ não inventa preços, horários nem disponibilidade (0.929261ms)
-✔ método, origem exata, fetch-site e JSON obrigatórios (1.359517ms)
-✔ desligado por padrão, sem afrouxar autenticação (0.757111ms)
-✔ consentimento, esquema estrito e limites de corpo (1.682678ms)
-✔ bloqueia dados pessoais comuns sem persistir conteúdo (1.076618ms)
-✔ falha fechada com IP ausente, proxy falso ou fora da Vercel (10.392681ms)
-✔ limite negado devolve 429 e Retry-After (1.861029ms)
-✔ falha fechada se provedor cair, JSON inválido ou config ausente (2.791671ms)
-✔ Redis recebe apenas HMAC e contagens, TTL até 24h e rotação diária (2.079015ms)
-✔ prompt malicioso não executa ferramentas nem acessa dados privados (0.780769ms)
-✔ preview aceita somente hostname exato informado pela Vercel, nunca em produção (0.684167ms)
-ℹ tests 12
+{"event":"hara_public_model","model":"google/gemini-2.5-flash-lite","result":"approved_topics"}
+{"event":"hara_public_model","model":"google/gemini-2.5-flash-lite","result":"approved_topics"}
+✔ valores nunca saem da HARA, inclusive desconto, parcelas e instruções maliciosas (5.911396ms)
+✔ base cobre processos, metodologia, apps, carreira, modelos e garantia (1.167309ms)
+✔ Gemini fixado e chamadas conhecidas/preço não gastam modelo (0.654711ms)
+✔ Gemini só seleciona fatos aprovados, nunca devolve texto gerado ao visitante (2.389643ms)
+✔ Gemini com saída inválida, valor próprio ou falha cai em texto verificado (1.904796ms)
+✔ Gemini pode reconhecer preço indireto mas a frase continua controlada pelo servidor (0.736741ms)
+✔ lead normaliza contato, mantém consentimentos separados e assina somente relay configurado (5.026267ms)
+✔ follow-up só é encaminhado como autorizado com aceite opcional true (2.391469ms)
+✔ sem cidade/telefone/email/consentimento e com destino grupo fornecido pelo cliente são recusados (4.375531ms)
+✔ captação permanece fechada sem relay autorizado; não aceita URL arbitrária (0.544663ms)
+✔ sem confirmação de CRM e fila, não confirma cadastro nem redireciona (1.861698ms)
+✔ respostas verificadas para cursos, parceiros, endereço e contato (5.162246ms)
+✔ não inventa preços, horários nem disponibilidade (1.443992ms)
+✔ método, origem exata, fetch-site e JSON obrigatórios (1.437318ms)
+✔ desligado por padrão, sem afrouxar autenticação (0.307104ms)
+✔ consentimento, esquema estrito e limites de corpo (0.714429ms)
+✔ bloqueia dados pessoais comuns sem persistir conteúdo (0.842011ms)
+✔ falha fechada com IP ausente, proxy falso ou fora da Vercel (10.035267ms)
+✔ limite negado devolve 429 e Retry-After (1.4023ms)
+✔ falha fechada se provedor cair, JSON inválido ou config ausente (1.321885ms)
+✔ Redis recebe apenas HMAC e contagens, TTL até 24h e rotação diária (1.396851ms)
+✔ prompt malicioso não executa ferramentas nem acessa dados privados (1.019099ms)
+✔ preview aceita somente hostname exato informado pela Vercel, nunca em produção (0.463486ms)
+ℹ tests 23
 ℹ suites 0
-ℹ pass 12
+ℹ pass 23
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 202.579142
+ℹ duration_ms 243.094456

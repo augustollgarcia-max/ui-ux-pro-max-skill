@@ -145,7 +145,7 @@ async function main() {
         await host.getByRole('button', { name: 'Localização', exact: true }).click();
         await host.getByText('HARA: O atendimento presencial', { exact: false }).waitFor();
         assert.equal(calls, before + 1);
-        const whatsapp = host.getByRole('link', { name: 'Equipe no WhatsApp', exact: true });
+        const whatsapp = host.getByRole('link', { name: 'Continuar no WhatsApp', exact: true });
         const url = new URL(await whatsapp.getAttribute('href'));
         assert.equal(url.origin, 'https://wa.me');
         assert.equal(url.pathname, '/5516992558810');
@@ -216,6 +216,95 @@ async function main() {
     await host.getByText('HARA: O atendimento presencial', { exact: false }).waitFor();
     assert.deepEqual(page.uiErrors, []);
     console.log('PASS local browser timeout and subsequent successful response');
+
+    // Lead UI contract only: explicit browser mock, synthetic contact details,
+    // no CRM, WhatsApp, private group, relay or production backend is contacted.
+    await input.fill('Qual o preço do curso?');
+    await submit.click();
+    await host.getByText('HARA: Como os valores alteram de acordo com as promoções e campanhas', { exact: false }).waitFor();
+    const leadRequests = [];
+    let leadReply = 'unavailable';
+    let popups = 0;
+    page.on('popup', async popup => { popups++; await popup.close(); });
+    await page.route('**/api/hara-lead', async route => {
+      assert.equal(route.request().method(), 'POST');
+      leadRequests.push(route.request().postDataJSON());
+      return route.fulfill({
+        status: leadReply === 'unavailable' ? 503 : 200,
+        contentType: 'application/json',
+        body: JSON.stringify(leadReply === 'unavailable' ? { error: 'Mock relay not configured' } : {
+          reference: 'HAIR-TEST1234',
+          whatsappUrl: leadReply === 'malicious' ? 'https://example.invalid/collect' : 'https://wa.me/5516992558810?text=Teste',
+        }),
+      });
+    });
+    await host.getByRole('link', { name: 'Continuar no WhatsApp', exact: true }).click();
+    const lead = page.locator('#hara-lead-host');
+    await lead.getByRole('dialog').waitFor();
+    const contactConsent = lead.getByRole('checkbox', { name: /^Autorizo usar meu nome/ });
+    const followup = lead.getByRole('checkbox', { name: /^Também autorizo contatos posteriores/ });
+    const leadSubmit = lead.getByRole('button', { name: 'Enviar e continuar para o WhatsApp', exact: true });
+    const leadStatus = lead.locator('.status');
+    const whatsappContinue = lead.getByRole('link', { name: 'Abrir WhatsApp oficial', exact: true });
+    assert.ok(!await contactConsent.isChecked());
+    assert.ok(!await followup.isChecked());
+    assert.equal(leadRequests.length, 0, 'opening contact UI must not share conversation or contact data');
+    assert.equal(await lead.getByLabel('Cidade', { exact: true }).inputValue(), 'Ribeirão Preto');
+    await lead.getByLabel('Cidade', { exact: true }).selectOption('other');
+    await lead.getByLabel('Cidade da região', { exact: true }).selectOption('Jardinópolis');
+    await lead.getByLabel('Telefone com DDD', { exact: true }).fill('(16) 99999-1234');
+    await lead.getByLabel('E-mail', { exact: true }).fill('lead@example.invalid');
+    const review = lead.getByLabel('Resumo do atendimento (você pode revisar)', { exact: true });
+    assert.ok(await review.isVisible());
+    assert.ok((await review.inputValue()).includes('Qual o preço do curso?'));
+    const reviewedSummary = 'Teste sintético: interesse no curso; resumo revisado pelo visitante.';
+    await review.fill(reviewedSummary);
+    await leadSubmit.click();
+    assert.equal(leadRequests.length, 0, 'explicit contact consent must precede POST');
+    await contactConsent.check();
+    await leadSubmit.click();
+    await lead.getByText('Não foi possível confirmar o recebimento.', { exact: false }).waitFor();
+    assert.ok(await lead.getByRole('dialog').isVisible());
+    assert.ok(!await whatsappContinue.isVisible());
+    assert.ok(!(await leadStatus.innerText()).includes('Solicitação recebida'));
+    assert.equal(await lead.getByLabel('E-mail', { exact: true }).inputValue(), 'lead@example.invalid');
+    assert.equal(popups, 0);
+    leadReply = 'success';
+    await leadSubmit.click();
+    await whatsappContinue.waitFor();
+    assert.equal(await whatsappContinue.getAttribute('href'), 'https://wa.me/5516992558810?text=Teste');
+    assert.ok((await leadStatus.innerText()).includes('HAIR-TEST1234'));
+    assert.equal(leadRequests.length, 2);
+    const payload = leadRequests[0];
+    assert.equal(payload.eventId, leadRequests[1].eventId, 'retry must retain idempotency identifier');
+    assert.match(payload.eventId, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
+    assert.equal(payload.city, 'Jardinópolis');
+    assert.equal(payload.phone, '(16) 99999-1234');
+    assert.equal(payload.email, 'lead@example.invalid');
+    assert.equal(payload.consent, 'lead-contact-v1');
+    assert.equal(payload.followup, false);
+    assert.equal(payload.context.page, '/');
+    assert.equal(payload.context.summary, reviewedSummary);
+    assert.ok(payload.context.topics.includes('valores'));
+    assert.deepEqual(leadRequests[1], payload);
+    assert.equal(popups, 0, 'successful collection exposes explicit WhatsApp link without navigation');
+    await page.screenshot({ path: path.join(ARTIFACTS, `lead-mobile-${ENGINE}.png`) });
+    await lead.getByRole('button', { name: 'Fechar formulário de contato', exact: true }).click();
+
+    leadReply = 'malicious';
+    await host.getByRole('link', { name: 'Continuar no WhatsApp', exact: true }).click();
+    await lead.getByLabel('Telefone com DDD', { exact: true }).fill('(16) 99999-1234');
+    await lead.getByLabel('E-mail', { exact: true }).fill('lead@example.invalid');
+    await contactConsent.check();
+    await leadSubmit.click();
+    await lead.getByText('Não foi possível confirmar o recebimento.', { exact: false }).waitFor();
+    assert.ok(!await whatsappContinue.isVisible());
+    assert.equal(await whatsappContinue.getAttribute('href'), null);
+    assert.equal(popups, 0);
+    assert.notEqual(leadRequests[2].eventId, payload.eventId, 'new contact opening gets a new identifier');
+    assert.deepEqual(page.uiErrors, []);
+    const leadChecks = ['price promotion reply', 'CTA opens contact form', 'city/contact fields', 'reviewable summary', 'separate consent/followup', '503 preserves form', 'retry idempotency', 'validated WhatsApp link', 'malicious URL rejection'];
+    console.log(`PASS ${ENGINE} ${leadChecks.length} lead UI checks with explicit mocked API only`);
     await context.close();
     currentPage = null;
     fs.writeFileSync(path.join(ARTIFACTS, 'summary.json'), JSON.stringify({
@@ -224,6 +313,7 @@ async function main() {
       layoutCases: cases, routes: ['/', '/business', '/beauty', '/inicio'],
       viewports: [[320, 640], [390, 844], [768, 900], [1440, 900], [812, 375], [340, 234]],
       pageThirdPartyRequestsSent: 0, interceptedExternalOrigins: [...externalOrigins],
+      lead: { fixture: 'page.route mock only; synthetic data; no CRM, group or relay validation', checkCount: leadChecks.length, checks: leadChecks, simulatedRequests: leadRequests.length },
       checks: ['consent', 'bounds', 'footer visibility', 'official WhatsApp', 'XSS literal rendering', 'no transcript storage', 'erase/revoke', 'Escape/focus', '429 recovery', 'pending-request erase', 'timeout recovery'],
     }, null, 2));
     console.log(`PASS ${ENGINE} ${cases} local browser layouts and recovery checks; no real provider or production requests`);

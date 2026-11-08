@@ -172,7 +172,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <p>O chat público utiliza somente informações públicas verificadas e é separado do aplicativo do aluno.
     Antes do primeiro envio, você deve aceitar o aviso específico do atendimento. Não informe nome,
     telefone, documentos, senhas ou outros dados pessoais na pergunta. O texto é processado para responder,
-    sem ser gravado em banco, CRM ou logs de aplicação pelo atendimento e sem envio a modelos externos de IA.
+    sem ser gravado em banco, CRM ou logs de aplicação pelo atendimento e Quando habilitado, o apoio Gemini identifica o assunto da pergunta pela infraestrutura da Vercel e do Google, sem acesso ao cadastro do aluno ou aos dados do formulário comercial. As respostas exibidas são selecionadas de uma base pública verificada; o modelo não define condições comerciais.
     As mensagens permanecem apenas na memória da página. “Apagar conversa” remove as mensagens e revoga
     o aceite para novos envios. Fechar a página também descarta esse histórico.</p>
     <p>Para prevenir abuso, o servidor deriva um identificador do IP com segredo de servidor e rotação diária.
@@ -181,6 +181,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     as retenções e região dos provedores devem ser validadas antes da ativação do atendimento.
     O chat não ativa medição de anúncios. O link do WhatsApp abre mensagem genérica,
     sem anexar automaticamente a conversa; o envio é confirmado por você no WhatsApp.</p>
+
+    <h3>Continuidade comercial, CRM e grupo da equipe</h3>
+    <p>Ao solicitar continuidade pelo WhatsApp, o formulário pede cidade, telefone e e-mail, com nome opcional.
+    Você pode revisar o resumo antes de enviar. Somente com o aceite específico, esses dados, a página de origem
+    e os assuntos informados serão encaminhados ao atendimento comercial para cadastro no CRM e aviso no grupo
+    interno autorizado da equipe. A confirmação na tela significa solicitação recebida; não comprova mensagem
+    enviada pelo visitante no WhatsApp nem entrega da notificação ao grupo. Esses dados de cadastro não são
+    enviados ao Gemini. Os registros comerciais têm tratamento e retenção próprios, distintos dos contadores de
+    segurança de até 24 horas do chat, e podem ser consultados ou ter exclusão solicitada pelos canais desta política.</p>
+    <p>O aceite de contatos posteriores é separado, opcional e inicialmente desmarcado. Sem esse aceite não é
+    autorizado follow-up proativo. Você pode retirar a autorização pelo contato oficial. Fechar o formulário ou
+    apagar a conversa remove os dados locais, mas não cancela uma solicitação que o servidor já tenha recebido.</p>
 
     <h2>5. Por quanto tempo guardamos</h2>
     <ul>
