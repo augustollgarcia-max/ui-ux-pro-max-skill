@@ -1,15 +1,15 @@
-✔ respostas verificadas para cursos, parceiros, endereço e contato (2.31287ms)
-✔ não inventa preços, horários nem disponibilidade (0.618573ms)
-✔ método, origem exata, fetch-site e JSON obrigatórios (0.76442ms)
-✔ desligado por padrão, sem afrouxar autenticação (0.220265ms)
-✔ consentimento, esquema estrito e limites de corpo (0.763937ms)
-✔ bloqueia dados pessoais comuns sem persistir conteúdo (0.612621ms)
-✔ falha fechada com IP ausente, proxy falso ou fora da Vercel (8.745763ms)
-✔ limite negado devolve 429 e Retry-After (2.095972ms)
-✔ falha fechada se provedor cair, JSON inválido ou config ausente (1.594353ms)
-✔ Redis recebe apenas HMAC e contagens, TTL até 24h e rotação diária (1.551009ms)
-✔ prompt malicioso não executa ferramentas nem acessa dados privados (0.614652ms)
-✔ preview aceita somente hostname exato informado pela Vercel, nunca em produção (0.437954ms)
+✔ respostas verificadas para cursos, parceiros, endereço e contato (2.458189ms)
+✔ não inventa preços, horários nem disponibilidade (0.929261ms)
+✔ método, origem exata, fetch-site e JSON obrigatórios (1.359517ms)
+✔ desligado por padrão, sem afrouxar autenticação (0.757111ms)
+✔ consentimento, esquema estrito e limites de corpo (1.682678ms)
+✔ bloqueia dados pessoais comuns sem persistir conteúdo (1.076618ms)
+✔ falha fechada com IP ausente, proxy falso ou fora da Vercel (10.392681ms)
+✔ limite negado devolve 429 e Retry-After (1.861029ms)
+✔ falha fechada se provedor cair, JSON inválido ou config ausente (2.791671ms)
+✔ Redis recebe apenas HMAC e contagens, TTL até 24h e rotação diária (2.079015ms)
+✔ prompt malicioso não executa ferramentas nem acessa dados privados (0.780769ms)
+✔ preview aceita somente hostname exato informado pela Vercel, nunca em produção (0.684167ms)
 ℹ tests 12
 ℹ suites 0
 ℹ pass 12
@@ -17,4 +17,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 227.305429
+ℹ duration_ms 202.579142

@@ -1,6 +1,6 @@
 # HARA pública — proposta para revisão
 
-Data: 08/11/2026. Estado: código local preparado; produção não alterada; publicação bloqueada até aprovação e validação dos pontos pendentes.
+Data: 08/11/2026. Preparação inicial aprovada para homologação pelo usuário. Homologação implantada e testes reais realizados; produção não alterada. Consulte HOMOLOGACAO.md para o estado atual e as limitações restantes.
 
 ## Origem comprovada do site
 
