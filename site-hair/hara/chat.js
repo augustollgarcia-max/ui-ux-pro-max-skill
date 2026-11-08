@@ -1,64 +1,47 @@
-/* HARA pública: sem cookies, sem histórico persistente, sem eventos de marketing. */
+/* HARA pública: painel flutuante; sessão da aba, sem cookies ou histórico no servidor. */
 (()=>{
   if(document.getElementById('hara-public-host'))return;
   const host=document.createElement('div');host.id='hara-public-host';document.body.append(host);
-  const root=host.attachShadow({mode:'open'});
+  const root=host.attachShadow({mode:'open'}),SESSION='hara_chat_tab_v3';
   root.innerHTML=`<style>
-  :host{all:initial;color-scheme:dark;font:15px/1.5 system-ui,sans-serif}
-  *{box-sizing:border-box}button,input{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}
-  button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e7c773;outline-offset:3px}
-  .launch{position:fixed;right:16px;bottom:calc(100px + env(safe-area-inset-bottom));z-index:990;background:#d9bb76;color:#181710;border:1px solid #f4dfa8;border-radius:28px;padding:12px 18px;font-weight:700;min-height:48px;box-shadow:0 6px 24px #0006}
-  dialog{color:#f5f2e9;background:#141816;border:1px solid #746640;border-radius:18px;width:min(420px,calc(100vw - 20px));height:min(650px,calc(100dvh - 20px));padding:0;margin:auto;box-shadow:0 12px 70px #0009}
-  dialog::backdrop{background:#0008} .panel{height:100%;display:flex;flex-direction:column}
-  header{padding:16px;border-bottom:1px solid #43473d;display:flex;justify-content:space-between;gap:10px}header p{margin:0;font-size:12px;color:#cdcabb}
-  button{background:#26332c;color:#f5f2e9;border:1px solid #687462;border-radius:10px;min-height:44px;padding:8px 12px} .close{font-size:20px}
-  .body{overflow-y:auto;padding:16px;flex:1;min-height:0;overflow-wrap:anywhere}p{margin:0 0 12px}a{color:#e7c773}
-  .consent{display:flex;gap:10px;align-items:flex-start;margin:12px 0}input[type=checkbox]{width:22px;height:22px;flex-shrink:0}
-  .topics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.topics button{font-size:13px}
-  .msg{padding:12px;border-radius:12px;background:#243128;white-space:pre-wrap;margin:12px 0}.user{background:#30312c}
-  form{padding:12px;border-top:1px solid #43473d;display:flex;gap:8px}input[type=text]{width:100%;min-width:0;border:1px solid #788271;border-radius:8px;background:#0e120f;color:#fff;padding:10px}button:disabled,input:disabled{opacity:.55;cursor:default}
-  footer{padding:0 12px 12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}.status{font-size:13px;color:#dfd5b5;min-height:20px}
-  [hidden]{display:none!important}
-  @media(max-height:450px){dialog{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border-radius:0}header{padding:8px;flex-shrink:0}header p{font-size:11px}header strong{font-size:14px}.close{min-height:40px;padding:4px 10px}form{padding:8px;flex-shrink:0}footer{padding:0 8px 8px;gap:6px;font-size:12px;flex-shrink:0}footer button{min-height:40px;padding:4px 8px}.body{padding:8px}}
-  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-  </style><button class="launch" aria-haspopup="dialog">Conversar com a HARA</button>
-  <dialog aria-labelledby="hara-title"><div class="panel"><header><div><strong id="hara-title">HARA · Atendimento HAIR</strong><p>Assistente automática com informações do site</p></div><button class="close" aria-label="Fechar conversa">×</button></header>
-  <div class="body"><section class="notice"><p>Olá! Ajudo com cursos, academias parceiras e localização. Explico o funcionamento da HAIR; valores e condições comerciais seguem para o WhatsApp.</p>
-  <p>Ao enviar, sua pergunta será processada pelo site para responder. Não envie nome, telefone, documentos, senhas ou informações sensíveis. Se o apoio Gemini estiver habilitado, sua pergunta poderá ser processada pelo Google via Vercel para identificar o assunto. Não gravamos o texto no banco do chat; a infraestrutura e os provedores processam dados técnicos conforme suas políticas. Contadores de segurança usam um identificador derivado do IP, com expiração em até 24 horas.</p>
-  <p>A conversa fica somente nesta página. “Apagar conversa” limpa as mensagens e retira o aceite. Ao continuar no WhatsApp, você poderá preencher seus dados e revisar um resumo para a equipe. O compartilhamento exige um aceite separado no formulário. <a href="/privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade</a>.</p>
-  <label class="consent"><input type="checkbox"> <span>Li o aviso e concordo com o processamento da pergunta para este atendimento.</span></label></section>
-  <div class="topics"><button data-question="Quais cursos vocês oferecem?">Cursos</button><button data-question="Quais academias parceiras?">Academias</button><button data-question="Quais horários e valores?">Horários e valores</button><button data-question="Onde fica o atendimento presencial?">Localização</button></div>
-  <div class="messages" role="log" aria-live="polite" aria-relevant="additions"></div><p class="status" role="status"></p></div>
-  <form><input type="text" aria-label="Sua pergunta" placeholder="Pergunte sobre a HAIR" maxlength="500" required disabled autocomplete="off"><button type="submit" disabled>Enviar</button></form>
-  <footer><a href="https://wa.me/5516992558810?text=Ol%C3%A1%2C%20quero%20informa%C3%A7%C3%B5es%20sobre%20os%20cursos%20da%20HAIR." target="_blank" rel="noopener noreferrer">Continuar no WhatsApp</a><button class="clear" type="button">Apagar conversa</button></footer></div></dialog>`;
-  const $=s=>root.querySelector(s),dialog=$('dialog'),input=$('input[type=text]'),consent=$('input[type=checkbox]'),submit=$('button[type=submit]'),messages=$('.messages'),status=$('.status');
-  let pending=false,controller=null,generation=0,count=0;
-  function controls(){input.disabled=submit.disabled=!consent.checked||pending;root.querySelectorAll('[data-question]').forEach(b=>b.disabled=!consent.checked||pending);}
+  :host{all:initial;color-scheme:dark;font:14px/1.5 system-ui,sans-serif}*{box-sizing:border-box}button,input{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}a{color:#e7c773}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #e7c773;outline-offset:2px}
+  .launch{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:990;border:1px solid #b59a5d;background:#1a211d;color:#edddb4;border-radius:22px;padding:9px 14px;font-weight:600;min-height:42px;box-shadow:0 4px 18px #0004}
+  .widget{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:995;color:#f5f2e9;background:#141816;border:1px solid #746640;border-radius:14px;width:min(350px,calc(100vw - 24px));height:min(500px,calc(100dvh - 32px));box-shadow:0 8px 30px #0005;overflow:hidden}
+  .panel{height:100%;display:flex;flex-direction:column}header{padding:11px 12px;border-bottom:1px solid #343c34;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}header p{margin:0;font-size:11px;color:#c4c5b8}header strong{font-size:14px}
+  button{background:#26332c;color:#f5f2e9;border:1px solid #56624f;border-radius:8px;min-height:38px;padding:7px 10px}.close{font-size:19px;min-width:34px;padding:3px 8px}.body{overflow-y:auto;padding:12px;flex:1;min-height:0;overflow-wrap:anywhere;overscroll-behavior:contain}p{margin:0 0 10px}.intro{font-size:13px;color:#e1e3d8}.topics{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.topics button{font-size:12px;min-height:32px;padding:5px 8px}.msg{padding:9px 10px;border-radius:9px;background:#243128;white-space:pre-wrap;margin:9px 0;font-size:13px}.user{background:#30312c}.sources{font-size:11px;margin-top:6px}
+  form{padding:9px 10px 6px;border-top:1px solid #343c34;flex-shrink:0}.compose{display:flex;gap:6px}input[type=text]{width:100%;min-width:0;border:1px solid #68745f;border-radius:8px;background:#0e120f;color:#fff;padding:8px}.consent{display:flex;align-items:center;gap:6px;margin-top:7px;min-height:22px;font-size:11px;color:#bdc4b3}.consent input{appearance:auto;width:14px;height:14px;margin:0;flex:0 0 14px;accent-color:#d9bb76}.consent a{color:inherit;text-underline-offset:2px}.needs-consent input{outline:2px solid #e7c773;outline-offset:3px;animation:consent-pulse .7s ease-in-out 3}@keyframes consent-pulse{50%{box-shadow:0 0 0 4px #d9bb764d}}
+  footer{padding:0 10px 9px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;flex-shrink:0}.clear{background:none;border:0;min-height:28px;padding:2px 0;color:#b6bdad;font-size:11px;text-decoration:underline}.status{font-size:11px;color:#dfd5b5;min-height:0;margin:6px 0 0}button:disabled,input:disabled{opacity:.55;cursor:default}[hidden]{display:none!important}
+  @media(max-width:480px){.widget{right:10px;bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100vw - 20px);height:min(460px,calc(100dvh - 24px))}.launch{right:10px;font-size:12px}}
+  @media(max-height:450px){.widget{height:calc(100dvh - 16px);bottom:8px;right:8px;width:min(350px,calc(100vw - 16px))}header{padding:6px 9px}header p{display:none}.body{padding:7px 9px}form{padding:6px 9px 3px}footer{padding:0 9px 5px}.consent{margin-top:3px}.topics{margin:6px 0}}
+  @media(prefers-reduced-motion:reduce){.needs-consent input{animation:none}}
+  </style><button class="launch" aria-controls="hara-chat" aria-expanded="false">Conversar com a HARA</button>
+  <section class="widget" id="hara-chat" role="dialog" aria-modal="false" aria-labelledby="hara-title" hidden><div class="panel"><header><div><strong id="hara-title">HARA · Assistente HAIR</strong><p>Tire suas dúvidas enquanto navega</p></div><button class="close" aria-label="Fechar conversa">×</button></header>
+  <div class="body"><p class="intro">Olá! Posso tirar suas dúvidas aqui ou te mostrar os perfis das academias no site. Como prefere começar?</p><div class="topics"><button data-question="Quais cursos vocês oferecem?">Cursos</button><button data-question="Quais academias parceiras?">Ver academias</button><button data-question="Como funciona a jornada?">Como funciona</button></div><div class="messages" role="log" aria-live="polite" aria-relevant="additions"></div><p class="status" role="status"></p></div>
+  <form novalidate><div class="compose"><input type="text" aria-label="Sua pergunta" placeholder="Sua dúvida…" maxlength="500" required autocomplete="off"><button type="submit">Enviar</button></div><div class="consent"><input id="hara-accept" type="checkbox" aria-label="Li e aceito os termos de atendimento"><label for="hara-accept"><a href="/hara/termos" target="_blank" rel="noopener noreferrer">Li e aceito</a></label></div></form>
+  <footer><a href="https://wa.me/5516992558810?text=Ol%C3%A1%2C%20vim%20do%20site%20da%20HAIR." target="_blank" rel="noopener noreferrer">Continuar no WhatsApp</a><button class="clear" type="button">Apagar conversa</button></footer></div></section>`;
+  const $=s=>root.querySelector(s),widget=$('.widget'),input=$('input[type=text]'),consent=$('#hara-accept'),submit=$('button[type=submit]'),messages=$('.messages'),status=$('.status'),launcher=$('.launch');
+  let pending=false,controller=null,generation=0,count=0,history=[];
+  function save(){try{sessionStorage.setItem(SESSION,JSON.stringify({v:3,accepted:consent.checked,open:!widget.hidden,history:history.slice(-30)}));}catch{}}
+  function controls(){input.disabled=submit.disabled=pending;root.querySelectorAll('[data-question]').forEach(b=>b.disabled=pending);}
+  function setOpen(open,focus=true){widget.hidden=!open;launcher.hidden=open;launcher.setAttribute('aria-expanded',String(open));save();if(focus)(open?input:launcher).focus();}
+  function nudge(){const line=$('.consent');line.classList.remove('needs-consent');void line.offsetWidth;line.classList.add('needs-consent');consent.setAttribute('aria-invalid','true');status.textContent='Marque “Li e aceito” para enviar.';consent.focus();}
+  function append(text,who){const p=document.createElement('p');p.className='msg '+who;p.textContent=(who==='user'?'Você: ':'HARA: ')+text;messages.append(p);return p;}
+  function sources(urls){const p=document.createElement('p');p.className='sources';for(const src of (urls||[]).slice(0,3)){try{const u=new URL(src);if(u.origin!=='https://www.hairacademiadabeleza.com.br'||u.pathname.startsWith('//'))continue;const a=document.createElement('a');a.href=u.pathname+u.hash;a.textContent='Ver no site → ';p.append(a);}catch{}}if(p.childNodes.length)messages.append(p);}
+  function scrollConversation(){const body=$('.body');body.scrollTop=body.scrollHeight;}
+  function clear(){generation++;controller?.abort();controller=null;pending=false;count=0;history=[];messages.replaceChildren();status.textContent='';input.value='';consent.checked=false;consent.removeAttribute('aria-invalid');$('.consent').classList.remove('needs-consent');controls();try{sessionStorage.removeItem(SESSION);}catch{}}
+  $('.launch').onclick=()=>setOpen(true);$('.close').onclick=()=>setOpen(false);$('.clear').onclick=clear;
+  widget.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();setOpen(false);}});
+  consent.onchange=()=>{if(!consent.checked){clear();save();}else{consent.removeAttribute('aria-invalid');$('.consent').classList.remove('needs-consent');status.textContent='';save();}};
+  try{const old=JSON.parse(sessionStorage.getItem(SESSION)||'null');if(old?.v===3&&old.accepted===true&&Array.isArray(old.history)){consent.checked=true;for(const turn of old.history.slice(-30)){if(typeof turn?.user!=='string'||turn.user.length>500||typeof turn?.reply!=='string'||turn.reply.length>6000)continue;const item={user:turn.user,reply:turn.reply,sources:Array.isArray(turn.sources)?turn.sources.slice(0,3):[]};history.push(item);append(item.user,'user');append(item.reply,'assistant');sources(item.sources);}count=history.length;if(old.open===true){widget.hidden=false;launcher.hidden=true;launcher.setAttribute('aria-expanded','true');scrollConversation();}}}catch{}
   controls();
-  $('.launch').onclick=()=>dialog.showModal();$('.close').onclick=()=>dialog.close();
-  function clear(){generation++;controller?.abort();controller=null;pending=false;count=0;messages.replaceChildren();status.textContent='';input.value='';consent.checked=false;controls();}
-  $('.clear').onclick=clear;
-  consent.onchange=()=>{if(!consent.checked)clear();else controls();};
-  function append(text,who){const p=document.createElement('p');p.className='msg '+who;p.textContent=(who==='user'?'Você: ':'HARA: ')+text;messages.append(p);p.scrollIntoView({block:'nearest'});}
   async function send(text){
-    if(!consent.checked||pending||!text.trim())return;
-    if(count>=30){status.textContent='Limite desta conversa atingido. Fale com a equipe pelo WhatsApp.';return;}
-    pending=true;controls();status.textContent='Consultando informações…';append(text,'user');input.value='';
+    if(pending)return;if(!consent.checked){nudge();return;}if(!text.trim()){input.reportValidity();return;}
+    if(count>=30){status.textContent='Para continuar, fale com a equipe pelo WhatsApp.';return;}
+    pending=true;controls();status.textContent='Consultando…';const userNode=append(text,'user');input.value='';scrollConversation();
     const version=generation;controller=new AbortController();const timeout=setTimeout(()=>controller?.abort(),8000);
-    try{
-      const r=await fetch('/api/hara-public',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,consent:'public-chat-v2'}),signal:controller.signal});
-      const data=await r.json();if(version!==generation)return;
-      if(!r.ok)throw Error(data.error||'Atendimento indisponível. Use o WhatsApp oficial.');
-      if(typeof data.reply!=='string')throw Error('Resposta indisponível. Use o WhatsApp oficial.');
-      append(data.reply,'assistant');count++;
-      // Links fixos no código; nunca interpretar HTML ou URLs retornadas pelo visitante.
-      status.textContent='Informações verificadas no conteúdo público em 08/11/2026. Confirme condições atuais com a equipe.';
-      const sources=document.createElement('p');
-      for(const src of data.sources||[]){try{const u=new URL(src);if(u.origin!=='https://www.hairacademiadabeleza.com.br')continue;const a=document.createElement('a');a.href=u.href;a.textContent='Consultar fonte oficial ';a.target='_blank';a.rel='noopener noreferrer';sources.append(a);}catch{}}
-      messages.append(sources);
-    }catch(e){if(version===generation)status.textContent=e.name==='AbortError'?'Tempo esgotado. Tente novamente ou fale com a equipe.':e.message;}
-    finally{clearTimeout(timeout);if(version===generation){pending=false;controller=null;controls();if(dialog.open)input.focus();}}
+    try{const r=await fetch('/api/hara-public',{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,consent:'public-chat-v3'}),signal:controller.signal});const data=await r.json();if(version!==generation)return;if(!r.ok)throw Error(data.error||'Não consegui responder agora. Tente novamente.');if(typeof data.reply!=='string'||data.reply.length>6000)throw Error('Resposta indisponível. Tente novamente.');append(data.reply,'assistant');sources(data.sources);count++;history.push({user:text,reply:data.reply,sources:Array.isArray(data.sources)?data.sources.slice(0,3):[]});save();status.textContent='';scrollConversation();}
+    catch(e){if(version===generation){userNode.remove();status.textContent=e.name==='AbortError'?'Tempo esgotado. Tente novamente ou fale com a equipe.':e.message;}}
+    finally{clearTimeout(timeout);if(version===generation){pending=false;controller=null;controls();if(!widget.hidden)input.focus();}}
   }
-  $('form').onsubmit=e=>{e.preventDefault();send(input.value);};
-  root.querySelectorAll('[data-question]').forEach(b=>b.onclick=()=>send(b.dataset.question));
+  $('form').onsubmit=e=>{e.preventDefault();send(input.value);};root.querySelectorAll('[data-question]').forEach(b=>b.onclick=()=>{input.value=b.dataset.question;send(input.value);});
 })();

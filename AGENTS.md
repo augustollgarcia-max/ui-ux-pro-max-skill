@@ -13,3 +13,11 @@
 - Captar cidade, telefone e e-mail com consentimento específico; resumo revisável para a equipe. Follow-up depende de aceite separado.
 - O link do grupo e a integração de envio ainda precisam ser confirmados; não tratar convite de grupo como credencial deAPI nem declarar notificação entregue sem confirmação do provedor.
 - Usar somente conhecimento público/autorizado. Não copiar dados de alunos, segredos ou trechos internos do Core para o atendimento público.
+
+## Correção de interface solicitada depois
+
+- Chat público modeless, flutuante à direita, sem escurecer ou bloquear a navegação do site. Explicar que pode atender ali e indicar os perfis para navegar.
+- Não exibir a caixa de resumo da conversa no formulário. Contexto acompanha o atendimento somente conforme o termo aceito.
+- Um único checkbox discreto por formulário, com texto visível “Li e aceito” e link para o termo. Tentar enviar sem marcar não envia dados: destaca o checkbox com animação suave; respeitar movimento reduzido.
+- Remover aceite para contatos futuros. Enviar followup:false e recusar autorização posterior forjada; essa orientação mais recente substitui a proposta anterior de opt-in opcional.
+- Para continuidade entre páginas, histórico só na sessão da aba e somente após aceite; “Apagar conversa” remove e revoga o aceite.

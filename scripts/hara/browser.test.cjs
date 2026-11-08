@@ -116,7 +116,7 @@ async function main() {
     async function expectBounds(page) {
       const result = await page.evaluate(() => {
         const root = document.querySelector('#hara-public-host').shadowRoot;
-        const dialog = root.querySelector('dialog');
+        const dialog = root.querySelector('.widget');
         const r = dialog.getBoundingClientRect();
         const footer = root.querySelector('footer').getBoundingClientRect();
         return {
@@ -138,11 +138,32 @@ async function main() {
         const consent = host.getByRole('checkbox');
         const submit = host.getByRole('button', { name: 'Enviar', exact: true });
         assert.equal(calls, before, 'opening the chat must not submit a request');
-        assert.ok(await input.isDisabled());
-        assert.ok(await submit.isDisabled());
+        assert.ok(await input.isEnabled());
+        assert.ok(await submit.isEnabled());
+        assert.equal(await host.getByRole('dialog').getAttribute('aria-modal'), 'false');
+        assert.equal(await host.getByRole('link', { name: 'Li e aceito', exact: true }).getAttribute('href'), '/hara/termos');
+        await input.fill('Onde fica o atendimento presencial?');
+        await submit.click();
+        assert.equal(calls, before, 'sending without acceptance must only highlight consent');
+        assert.equal(await consent.getAttribute('aria-invalid'), 'true');
+        assert.ok(await host.locator('.consent').evaluate(element => element.classList.contains('needs-consent')));
+        assert.equal(await consent.evaluate(element => getComputedStyle(element).width), '14px');
+        if (route === '/' && width === 1440) {
+          // A real outside control remains clickable/focusable with the panel open.
+          await page.evaluate(() => {
+            const button = document.createElement('button');button.id = 'fixture-outside-control';
+            button.textContent = 'Fixture outside control';button.style.cssText = 'position:fixed;top:0;left:0;z-index:10000';
+            document.body.append(button);
+          });
+          await page.locator('#fixture-outside-control').click();
+          assert.ok(await page.locator('#fixture-outside-control').evaluate(element => document.activeElement === element));
+          assert.ok(await host.getByRole('dialog').isVisible());
+          await page.locator('#fixture-outside-control').evaluate(element => element.remove());
+        }
         await expectBounds(page);
         await consent.check();
-        await host.getByRole('button', { name: 'Localização', exact: true }).click();
+        await input.fill('Onde fica o atendimento presencial?');
+        await submit.click();
         await host.getByText('HARA: O atendimento presencial', { exact: false }).waitFor();
         assert.equal(calls, before + 1);
         const whatsapp = host.getByRole('link', { name: 'Continuar no WhatsApp', exact: true });
@@ -155,7 +176,10 @@ async function main() {
         await host.getByText('HARA: A HAIR oferece', { exact: false }).waitFor();
         assert.equal(await host.locator('.messages img').count(), 0, 'user text must not become HTML');
         assert.equal(await page.evaluate(() => localStorage.getItem('hair_consent_v1')), 'denied');
-        assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => /hara/i.test(key))), false, 'chat must not persist a transcript');
+        assert.equal(await page.evaluate(() => Object.keys(localStorage).some(key => /hara/i.test(key))), false, 'chat must not persist transcript beyond tab session storage');
+        const saved = await page.evaluate(() => JSON.parse(sessionStorage.getItem('hara_chat_tab_v3')));
+        assert.equal(saved.accepted, true);
+        assert.equal(saved.history.length, 2);
         await expectBounds(page);
         if (route === '/' && [390, 1440, 340].includes(width)) {
           await page.screenshot({ path: path.join(ARTIFACTS, `chat-${width === 1440 ? 'desktop' : width === 340 ? 'short' : 'mobile'}-${ENGINE}.png`) });
@@ -163,7 +187,8 @@ async function main() {
         await host.getByRole('button', { name: 'Apagar conversa', exact: true }).click();
         assert.equal(await host.locator('.messages').innerText(), '');
         assert.ok(!await consent.isChecked());
-        assert.ok(await input.isDisabled());
+        assert.ok(await input.isEnabled());
+        assert.equal(await page.evaluate(() => sessionStorage.getItem('hara_chat_tab_v3')), null);
         await page.keyboard.press('Escape');
         assert.ok(!await host.getByRole('dialog').isVisible());
         assert.ok(await host.getByRole('button', { name: 'Conversar com a HARA', exact: true }).evaluate(element => element === element.getRootNode().activeElement));
@@ -187,21 +212,23 @@ async function main() {
     await host.getByText('Limite de atendimento atingido.', { exact: false }).waitFor();
     assert.ok(await submit.isEnabled());
     rateAllowed = true;
-    await host.getByRole('button', { name: 'Localização', exact: true }).click();
+    await input.fill('Onde fica o atendimento presencial?');
+    await submit.click();
     await host.getByText('HARA: O atendimento presencial', { exact: false }).waitFor();
     await page.screenshot({ path: path.join(ARTIFACTS, 'chat-mobile.png') });
     console.log('PASS local browser simulated HTTP 429 and recovery');
 
     delayMs = 1500;
     await host.getByRole('button', { name: 'Cursos', exact: true }).click();
-    await host.getByText('Consultando informações…', { exact: true }).waitFor();
+    await host.getByText('Consultando…', { exact: true }).waitFor();
     assert.ok(await input.isDisabled());
     await host.getByRole('button', { name: 'Apagar conversa', exact: true }).click();
     await page.waitForTimeout(1800);
     assert.equal(await host.locator('.messages').innerText(), '');
     assert.equal(await host.locator('.status').innerText(), '');
     assert.ok(!await consent.isChecked());
-    assert.ok(await input.isDisabled());
+    assert.ok(await input.isEnabled());
+    assert.equal(await page.evaluate(() => sessionStorage.getItem('hara_chat_tab_v3')), null);
     console.log('PASS local browser revoke/erase while request is pending');
 
     delayMs = 10000;
@@ -212,10 +239,16 @@ async function main() {
     assert.ok(await submit.isEnabled());
     assert.equal(await host.locator('.messages .assistant').count(), 0);
     delayMs = 0;
-    await host.getByRole('button', { name: 'Localização', exact: true }).click();
+    await input.fill('Onde fica o atendimento presencial?');
+    await submit.click();
     await host.getByText('HARA: O atendimento presencial', { exact: false }).waitFor();
     assert.deepEqual(page.uiErrors, []);
     console.log('PASS local browser timeout and subsequent successful response');
+    await input.fill('lead@example.invalid');
+    await submit.click();
+    await host.getByText('Não envie dados pessoais', { exact: false }).waitFor();
+    assert.ok(!(await host.locator('.messages').innerText()).includes('lead@example.invalid'));
+    assert.ok(!JSON.stringify(await page.evaluate(() => sessionStorage.getItem('hara_chat_tab_v3'))).includes('lead@example.invalid'));
 
     // Lead UI contract only: explicit browser mock, synthetic contact details,
     // no CRM, WhatsApp, private group, relay or production backend is contacted.
@@ -241,26 +274,27 @@ async function main() {
     await host.getByRole('link', { name: 'Continuar no WhatsApp', exact: true }).click();
     const lead = page.locator('#hara-lead-host');
     await lead.getByRole('dialog').waitFor();
-    const contactConsent = lead.getByRole('checkbox', { name: /^Autorizo usar meu nome/ });
-    const followup = lead.getByRole('checkbox', { name: /^Também autorizo contatos posteriores/ });
+    const contactConsent = lead.getByRole('checkbox', { name: 'Li e aceito os termos de contato', exact: true });
     const leadSubmit = lead.getByRole('button', { name: 'Enviar e continuar para o WhatsApp', exact: true });
     const leadStatus = lead.locator('.status');
     const whatsappContinue = lead.getByRole('link', { name: 'Abrir WhatsApp oficial', exact: true });
     assert.ok(!await contactConsent.isChecked());
-    assert.ok(!await followup.isChecked());
+    assert.equal(await lead.getByRole('checkbox').count(), 1, 'no follow-up checkbox');
+    assert.equal(await lead.locator('textarea').count(), 0, 'summary stays in memory and terms, not form UI');
+    assert.equal(await lead.getByRole('link', { name: 'Li e aceito', exact: true }).getAttribute('href'), '/hara/termos');
     assert.equal(leadRequests.length, 0, 'opening contact UI must not share conversation or contact data');
     assert.equal(await lead.getByLabel('Cidade', { exact: true }).inputValue(), 'Ribeirão Preto');
     await lead.getByLabel('Cidade', { exact: true }).selectOption('other');
     await lead.getByLabel('Cidade da região', { exact: true }).selectOption('Jardinópolis');
     await lead.getByLabel('Telefone com DDD', { exact: true }).fill('(16) 99999-1234');
     await lead.getByLabel('E-mail', { exact: true }).fill('lead@example.invalid');
-    const review = lead.getByLabel('Resumo do atendimento (você pode revisar)', { exact: true });
-    assert.ok(await review.isVisible());
-    assert.ok((await review.inputValue()).includes('Qual o preço do curso?'));
-    const reviewedSummary = 'Teste sintético: interesse no curso; resumo revisado pelo visitante.';
-    await review.fill(reviewedSummary);
+    const expectedSummary = (await host.locator('.messages .msg').allTextContents()).join('\n').slice(0, 2000);
+    assert.ok(expectedSummary.includes('Qual o preço do curso?'));
     await leadSubmit.click();
     assert.equal(leadRequests.length, 0, 'explicit contact consent must precede POST');
+    assert.equal(await contactConsent.getAttribute('aria-invalid'), 'true');
+    assert.ok(await lead.locator('.check').evaluate(element => element.classList.contains('needs-consent')));
+    assert.equal(await contactConsent.evaluate(element => getComputedStyle(element).width), '14px');
     await contactConsent.check();
     await leadSubmit.click();
     await lead.getByText('Não foi possível confirmar o recebimento.', { exact: false }).waitFor();
@@ -281,10 +315,10 @@ async function main() {
     assert.equal(payload.city, 'Jardinópolis');
     assert.equal(payload.phone, '(16) 99999-1234');
     assert.equal(payload.email, 'lead@example.invalid');
-    assert.equal(payload.consent, 'lead-contact-v1');
+    assert.equal(payload.consent, 'lead-contact-v2');
     assert.equal(payload.followup, false);
     assert.equal(payload.context.page, '/');
-    assert.equal(payload.context.summary, reviewedSummary);
+    assert.equal(payload.context.summary, expectedSummary);
     assert.ok(payload.context.topics.includes('valores'));
     assert.deepEqual(leadRequests[1], payload);
     assert.equal(popups, 0, 'successful collection exposes explicit WhatsApp link without navigation');
@@ -303,8 +337,31 @@ async function main() {
     assert.equal(popups, 0);
     assert.notEqual(leadRequests[2].eventId, payload.eventId, 'new contact opening gets a new identifier');
     assert.deepEqual(page.uiErrors, []);
-    const leadChecks = ['price promotion reply', 'CTA opens contact form', 'city/contact fields', 'reviewable summary', 'separate consent/followup', '503 preserves form', 'retry idempotency', 'validated WhatsApp link', 'malicious URL rejection'];
+    const leadChecks = ['price promotion reply', 'CTA opens contact form', 'city/contact fields', 'memory-only summary with no textarea', 'small terms consent and no followup control', '503 preserves form', 'retry idempotency', 'validated WhatsApp link', 'malicious URL rejection'];
     console.log(`PASS ${ENGINE} ${leadChecks.length} lead UI checks with explicit mocked API only`);
+    await lead.getByRole('button', { name: 'Fechar formulário de contato', exact: true }).click();
+    const cached = await page.evaluate(() => JSON.parse(sessionStorage.getItem('hara_chat_tab_v3')));
+    assert.equal(cached.accepted, true);
+    assert.ok(cached.history.length > 0 && cached.history.length <= 30);
+    const source = host.locator('.sources a').first();
+    assert.ok((await source.getAttribute('href')).startsWith('/'));
+    assert.equal(await source.getAttribute('target'), null, 'source navigation stays in this tab');
+    const beforeNavigation = calls;
+    await page.goto(base + '/business', { waitUntil: 'load' });
+    await host.getByRole('dialog').waitFor();
+    assert.ok(await consent.isChecked());
+    assert.equal(await host.locator('.messages .assistant').count(), cached.history.length);
+    assert.ok((await host.locator('.messages').innerText()).includes('Qual o preço do curso?'));
+    assert.equal(calls, beforeNavigation, 'restoring tab history must not resubmit messages');
+    await host.getByRole('button', { name: 'Apagar conversa', exact: true }).click();
+    assert.equal(await page.evaluate(() => sessionStorage.getItem('hara_chat_tab_v3')), null);
+    await page.goto(base + '/beauty', { waitUntil: 'load' });
+    await host.getByRole('button', { name: 'Conversar com a HARA', exact: true }).waitFor();
+    await host.getByRole('button', { name: 'Conversar com a HARA', exact: true }).click();
+    assert.ok(!await consent.isChecked());
+    assert.equal(await host.locator('.messages .msg').count(), 0);
+    assert.deepEqual(page.uiErrors, []);
+    console.log('PASS tab-session history survives navigation; erase revokes and stays erased');
     await context.close();
     currentPage = null;
     fs.writeFileSync(path.join(ARTIFACTS, 'summary.json'), JSON.stringify({
@@ -314,7 +371,7 @@ async function main() {
       viewports: [[320, 640], [390, 844], [768, 900], [1440, 900], [812, 375], [340, 234]],
       pageThirdPartyRequestsSent: 0, interceptedExternalOrigins: [...externalOrigins],
       lead: { fixture: 'page.route mock only; synthetic data; no CRM, group or relay validation', checkCount: leadChecks.length, checks: leadChecks, simulatedRequests: leadRequests.length },
-      checks: ['consent', 'bounds', 'footer visibility', 'official WhatsApp', 'XSS literal rendering', 'no transcript storage', 'erase/revoke', 'Escape/focus', '429 recovery', 'pending-request erase', 'timeout recovery'],
+      checks: ['small terms consent/nudge without request', 'modeless outside-page interaction', 'bounds', 'footer visibility', 'official WhatsApp', 'XSS literal rendering', 'PII rejected without history', 'no localStorage transcript', 'tab-session history/navigation', 'erase/revoke after navigation', 'Escape/focus', '429 recovery', 'pending-request erase', 'timeout recovery'],
     }, null, 2));
     console.log(`PASS ${ENGINE} ${cases} local browser layouts and recovery checks; no real provider or production requests`);
   } catch (error) {

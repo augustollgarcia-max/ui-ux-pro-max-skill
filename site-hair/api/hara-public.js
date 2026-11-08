@@ -29,7 +29,7 @@ function createHandler({env=process.env,fetcher=fetch,now=Date.now}={}) {
     if(!/^application\/json(?:\s*;.*)?$/i.test(req.headers['content-type']||''))return send(415,'Envie JSON.');
     let b=req.body;
     try {if(Buffer.byteLength(typeof b==='string'?b:JSON.stringify(b)||'')>2048)return send(413,'Mensagem muito longa.');if(typeof b==='string')b=JSON.parse(b);}catch{return send(400,'Mensagem inválida.');}
-    if(!b || Array.isArray(b) || Object.keys(b).some(k=>!['message','consent'].includes(k)) || b.consent!=='public-chat-v2' || typeof b.message!=='string' || !b.message.trim() || b.message.length>500)return send(400,'Aceite o aviso e envie uma pergunta de até 500 caracteres.');
+    if(!b || Array.isArray(b) || Object.keys(b).some(k=>!['message','consent'].includes(k)) || b.consent!=='public-chat-v3' || typeof b.message!=='string' || !b.message.trim() || b.message.length>500)return send(400,'Aceite o aviso e envie uma pergunta de até 500 caracteres.');
     // Defesa adicional; não garante detectar todos os dados pessoais. Nenhum texto é persistido.
     if(/@|(?:\d[\s().+/-]*){8,}|\b(?:cpf|rg|senha|cartao)\s*[:=]/i.test(b.message)) return send(400,'Não envie dados pessoais, documentos, senhas ou telefone. Use o contato oficial.');
     const ip=String(req.headers['x-vercel-forwarded-for']||'').trim();

@@ -13,7 +13,7 @@ function relayConfig(env){
 function validate(input){
   if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(k=>!['name','phone','email','city','context','consent','followup','eventId'].includes(k)))return null;
   const {name,phone,email,city,context,consent,followup,eventId}=input;
-  if(typeof name!=='string'||name.length>100||typeof phone!=='string'||phone.length>25||typeof email!=='string'||email.length>254||typeof city!=='string'||city.trim().length<2||city.length>100||typeof followup!=='boolean'||consent!=='lead-contact-v1'||typeof eventId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(eventId))return null;
+  if(typeof name!=='string'||name.length>100||typeof phone!=='string'||phone.length>25||typeof email!=='string'||email.length>254||typeof city!=='string'||city.trim().length<2||city.length>100||followup!==false||consent!=='lead-contact-v2'||typeof eventId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(eventId))return null;
   const digits=phone.replace(/\D/g,'');let normalized=digits;
   if(digits.length===10||digits.length===11)normalized='55'+digits;
   if(!/^55[1-9]\d\d{8,9}$/.test(normalized)||!/^[\s()+.\d-]+$/.test(phone))return null;
@@ -38,7 +38,7 @@ function createLeadHandler({env=process.env,fetcher=fetch,now=Date.now}={}){
   const timestamp=Math.floor(now()/1000).toString();
   // The relay must atomically deduplicate this eventId, save the CRM lead and enqueue an internal notification.
   // followup=false forbids proactive follow-up. Notification means a requested handoff, never proof of a sent WA message.
-  const payload=JSON.stringify({event:'site_handoff_requested',...data,consentAcceptedAt:new Date(now()).toISOString(),followupConsent:data.followup?'lead-followup-v1':null});
+  const payload=JSON.stringify({event:'site_handoff_requested',...data,consentAcceptedAt:new Date(now()).toISOString(),followupConsent:null});
   const signature=createHmac('sha256',cfg.secret).update(timestamp+'.'+payload).digest('hex');
   try{
    const r=await fetcher(cfg.url,{method:'POST',headers:{'Content-Type':'application/json','X-Hara-Timestamp':timestamp,'X-Hara-Signature':'sha256='+signature,'Idempotency-Key':data.eventId},body:payload,signal:AbortSignal.timeout(8000)});

@@ -9,25 +9,22 @@
     dialog{color:#f5f2e9;background:#141816;border:1px solid #746640;border-radius:16px;width:min(520px,calc(100vw - 20px));max-height:calc(100dvh - 20px);padding:0;margin:auto;overflow:auto}
     dialog::backdrop{background:#0009}header{position:sticky;top:0;z-index:1;background:#141816;padding:12px 16px;border-bottom:1px solid #43473d;display:flex;align-items:center;justify-content:space-between;gap:12px}h2{font-size:18px;margin:0}
     form{padding:16px}p{margin:0 0 12px}label.field{display:block;margin:12px 0}input,select,textarea,button,a{font:inherit}input:not([type=checkbox]),select,textarea{display:block;width:100%;padding:10px;margin-top:5px;background:#0e120f;color:#fff;border:1px solid #788271;border-radius:8px}textarea{min-height:110px;resize:vertical}
-    button,.continue{display:inline-block;min-height:44px;padding:10px 14px;border-radius:9px;border:1px solid #e7c773;background:#d9bb76;color:#181710;text-align:center;cursor:pointer;text-decoration:none}.close{background:#26332c;color:#fff;border-color:#687462}.check{display:flex;gap:10px;align-items:flex-start;margin:16px 0}.check input{width:22px;height:22px;flex-shrink:0}a{color:#e7c773}.status{margin:12px 0;overflow-wrap:anywhere}[hidden]{display:none!important}:focus-visible{outline:3px solid #e7c773;outline-offset:3px}:disabled{opacity:.6;cursor:default}
+    button,.continue{display:inline-block;min-height:44px;padding:10px 14px;border-radius:9px;border:1px solid #e7c773;background:#d9bb76;color:#181710;text-align:center;cursor:pointer;text-decoration:none}.close{background:#26332c;color:#fff;border-color:#687462}.check{display:flex;gap:6px;align-items:center;margin:10px 0;font-size:11px;min-height:24px}.check input{width:14px;height:14px;margin:0;flex:0 0 14px;accent-color:#d9bb76}.check a{color:#c7cbbf;text-underline-offset:2px}.needs-consent input{outline:2px solid #e7c773;outline-offset:3px;animation:lead-pulse .7s ease-in-out 3}@keyframes lead-pulse{50%{box-shadow:0 0 0 4px #d9bb764d}}@media(prefers-reduced-motion:reduce){.needs-consent input{animation:none}}a{color:#e7c773}.status{margin:12px 0;overflow-wrap:anywhere}[hidden]{display:none!important}:focus-visible{outline:3px solid #e7c773;outline-offset:3px}:disabled{opacity:.6;cursor:default}
     @media(max-height:450px){dialog{width:100vw;max-width:none;max-height:100dvh;margin:0;border-radius:0}header,form{padding:8px 12px}}
   </style><dialog aria-labelledby="lead-title" aria-describedby="lead-notice"><header><h2 id="lead-title">Fale com a equipe HAIR</h2><button type="button" class="close" aria-label="Fechar formulário de contato">×</button></header>
-  <form><p id="lead-notice">Preencha seus dados para a equipe comercial continuar o atendimento. Revise o resumo antes de enviar. Não inclua documentos, senhas ou informações sensíveis.</p>
+  <form novalidate><p id="lead-notice">Se preferir, continue o atendimento com nossa equipe pelo WhatsApp.</p>
     <label class="field">Nome (opcional)<input name="name" autocomplete="name" maxlength="100"></label>
     <label class="field">Cidade<select name="city" required><option value="Ribeirão Preto">Ribeirão Preto</option><option value="other">Outras cidades</option></select></label>
     <label class="field" id="region-field" hidden>Cidade da região<select name="region"><option value="">Selecione sua cidade</option><option>Sertãozinho</option><option>Jardinópolis</option><option>Cravinhos</option><option>Serrana</option><option>Brodowski</option><option>Dumont</option><option>Barrinha</option><option>Pradópolis</option><option>Pontal</option><option>Batatais</option><option value="other">Outra cidade</option></select></label>
     <label class="field" id="other-field" hidden>Qual cidade?<input name="otherCity" autocomplete="address-level2" maxlength="100"></label>
     <label class="field">Telefone com DDD<input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="25" required></label>
     <label class="field">E-mail<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
-    <label class="field">Resumo do atendimento (você pode revisar)<textarea name="summary" maxlength="2000" aria-describedby="summary-notice"></textarea></label>
-    <p id="summary-notice">O resumo usa somente as mensagens da HARA nesta página. A página de origem e os assuntos da conversa também serão enviados à equipe.</p>
-    <label class="check"><input name="consent" type="checkbox" required><span>Autorizo usar meu nome, telefone, e-mail, cidade e o resumo para atender esta solicitação, cadastrar o contato no CRM e encaminhar à equipe comercial em seu grupo interno privado. Li a <a href="/privacidade" target="_blank" rel="noopener noreferrer">Política de privacidade</a>.</span></label>
-    <label class="check"><input name="followup" type="checkbox"><span>Também autorizo contatos posteriores sobre cursos e oportunidades da HAIR. Este aceite é opcional.</span></label>
+    <div class="check"><input id="lead-accept" name="consent" type="checkbox" aria-label="Li e aceito os termos de contato"><label for="lead-accept"><a href="/hara/termos" target="_blank" rel="noopener noreferrer">Li e aceito</a></label></div>
     <button type="submit">Enviar e continuar para o WhatsApp</button><p class="status" role="status" aria-live="polite"></p><a class="continue" hidden target="_blank" rel="noopener noreferrer">Abrir WhatsApp oficial</a>
   </form></dialog>`;
   const $=s=>root.querySelector(s),dialog=$('dialog'),form=$('form'),status=$('.status'),continueLink=$('.continue'),submit=$('button[type=submit]');
   const field=n=>form.elements.namedItem(n);
-  let controller=null,version=0,returnFocus=null,topics=[],eventId=null;
+  let controller=null,version=0,returnFocus=null,topics=[],eventId=null,contextSummary='';
   function conversationTopics(chat){
     // Identificadores da base pública; classificar perguntas, não os textos de resposta.
     const selected=new Set();
@@ -57,15 +54,15 @@
     $('#other-field').hidden=!other;field('otherCity').required=other;field('otherCity').disabled=!other;
   }
   field('city').addEventListener('change',cities);field('region').addEventListener('change',cities);cities();
-  function close(){stopPending();dialog.close();form.reset();cities();status.textContent='';continueLink.hidden=true;continueLink.removeAttribute('href');topics=[];eventId=null;returnFocus?.focus();}
+  function close(){stopPending();dialog.close();form.reset();cities();status.textContent='';continueLink.hidden=true;continueLink.removeAttribute('href');topics=[];eventId=null;contextSummary='';returnFocus?.focus();}
   $('.close').addEventListener('click',close);dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
-  field('consent').addEventListener('change',()=>{if(!field('consent').checked){stopPending();status.textContent='Envio interrompido. Se a solicitação já chegou ao servidor, o fechamento não desfaz seu processamento.';continueLink.hidden=true;continueLink.removeAttribute('href');}});
+  field('consent').addEventListener('change',()=>{field('consent').removeAttribute('aria-invalid');$('.check').classList.remove('needs-consent');if(!field('consent').checked){stopPending();status.textContent='Envio interrompido. Se a solicitação já chegou ao servidor, o fechamento não desfaz seu processamento.';continueLink.hidden=true;continueLink.removeAttribute('href');}});
   function open(anchor){
     if(dialog.open)return;
-    returnFocus=anchor;eventId=globalThis.crypto?.randomUUID?.()||null;form.reset();cities();status.textContent='';continueLink.hidden=true;continueLink.removeAttribute('href');
+    field('consent').removeAttribute('aria-invalid');$('.check').classList.remove('needs-consent');returnFocus=anchor;eventId=globalThis.crypto?.randomUUID?.()||null;form.reset();cities();status.textContent='';continueLink.hidden=true;continueLink.removeAttribute('href');
     const chat=document.getElementById('hara-public-host')?.shadowRoot;
     const messages=[...(chat?.querySelectorAll('.messages .msg')||[])].map(p=>p.textContent||'');
-    const summary=messages.join('\n').slice(0,2000);field('summary').value=summary;
+    contextSummary=messages.join('\n').slice(0,2000);
     topics=conversationTopics(chat);
     dialog.showModal();field('name').focus();
   }
@@ -77,14 +74,14 @@
     e.preventDefault();e.stopImmediatePropagation();open(anchor);
   },true);
   form.addEventListener('submit',async e=>{
-    e.preventDefault();if(controller||!form.reportValidity())return;
+    e.preventDefault();if(controller)return;if(!field('consent').checked){const line=$('.check');line.classList.remove('needs-consent');void line.offsetWidth;line.classList.add('needs-consent');field('consent').setAttribute('aria-invalid','true');status.textContent='Marque “Li e aceito” para enviar.';field('consent').focus();return;}if(!form.reportValidity())return;
     const digits=field('phone').value.replace(/\D/g,'');
     if(digits.length<10||digits.length>15){status.textContent='Informe um telefone válido com DDD (10 a 15 dígitos).';field('phone').focus();return;}
     const city=field('city').value==='other'?(field('region').value==='other'?field('otherCity').value.trim():field('region').value):field('city').value;
     if(!city){status.textContent='Informe sua cidade.';return;}
     if(!eventId){status.textContent='Não foi possível preparar o envio seguro. Atualize a página em uma conexão HTTPS.';return;}
     // O mesmo identificador acompanha retries; somente uma nova abertura inicia outra solicitação.
-    const payload={name:field('name').value.trim(),phone:field('phone').value.trim(),email:field('email').value.trim(),city,context:{page:location.pathname.slice(0,300),topics:topics.slice(0,10),summary:field('summary').value.trim().slice(0,2000)},consent:'lead-contact-v1',followup:field('followup').checked,eventId};
+    const payload={name:field('name').value.trim(),phone:field('phone').value.trim(),email:field('email').value.trim(),city,context:{page:location.pathname.slice(0,300),topics:topics.slice(0,10),summary:contextSummary},consent:'lead-contact-v2',followup:false,eventId};
     const request=new AbortController();controller=request;const current=++version;submit.disabled=true;status.textContent='Enviando sua solicitação…';continueLink.hidden=true;
     const timeout=setTimeout(()=>request.abort(),12000);
     try{
