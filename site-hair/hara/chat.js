@@ -18,7 +18,9 @@
   .msg{padding:12px;border-radius:12px;background:#243128;white-space:pre-wrap;margin:12px 0}.user{background:#30312c}
   form{padding:12px;border-top:1px solid #43473d;display:flex;gap:8px}input[type=text]{width:100%;min-width:0;border:1px solid #788271;border-radius:8px;background:#0e120f;color:#fff;padding:10px}button:disabled,input:disabled{opacity:.55;cursor:default}
   footer{padding:0 12px 12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}.status{font-size:13px;color:#dfd5b5;min-height:20px}
-  [hidden]{display:none!important}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  [hidden]{display:none!important}
+  @media(max-height:450px){dialog{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border-radius:0}header{padding:8px;flex-shrink:0}header p{font-size:11px}header strong{font-size:14px}.close{min-height:40px;padding:4px 10px}form{padding:8px;flex-shrink:0}footer{padding:0 8px 8px;gap:6px;font-size:12px;flex-shrink:0}footer button{min-height:40px;padding:4px 8px}.body{padding:8px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
   </style><button class="launch" aria-haspopup="dialog">Conversar com a HARA</button>
   <dialog aria-labelledby="hara-title"><div class="panel"><header><div><strong id="hara-title">HARA · Atendimento HAIR</strong><p>Assistente automática com informações do site</p></div><button class="close" aria-label="Fechar conversa">×</button></header>
   <div class="body"><section class="notice"><p>Olá! Ajudo com cursos, academias parceiras e localização. Horários, vagas e valores são confirmados pela equipe.</p>
