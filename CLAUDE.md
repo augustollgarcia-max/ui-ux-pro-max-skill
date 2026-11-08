@@ -34,6 +34,11 @@ Pedido do dono: "A logo da Vértice e da Hair jamais pode mudar."
 - `scripts/checar-logos.sh` (workflow `guarda-logos`) confere byte a byte cada arquivo listado em `scripts/logos-protegidos.sha256`: qualquer alteração deixa o CI vermelho.
 - Só o dono autoriza trocar uma logo. Nesse caso o manifesto é atualizado no mesmo PR, citando o pedido dele.
 
+## 🎬 REELS AUTOMÁTICO (Augusto, 05/11/2026)
+Máquina de Reels em `reels-automatico/` (skill `.claude/skills/reels-automatico`): vídeo bruto → cortes de silêncio, 9:16, áudio -14 LUFS,
+legendas palavra a palavra (Whisper), gancho e B-roll, tudo por comando (`python3 reel.py montar|ajustar|renderizar|aprender|baixar`).
+Instalação: `bash reels-automatico/setup.sh`. Mídia e saídas ficam fora do git. Detalhes em `reels-automatico/README.md` e `reels-automatico/CLAUDE.md`.
+
 ## Project Overview
 
 UI UX Pro Max is an AI-powered design intelligence toolkit providing searchable databases of UI styles, color palettes, font pairings, chart types, and UX guidelines. It works as a skill/workflow for AI coding assistants (Claude Code, Windsurf, Cursor, etc.).
