@@ -28,3 +28,8 @@
 - Gemini só recebe índice compacto de IDs e assuntos, limitado a 6000 caracteres, e continua sem liberdade para gerar fatos ou valores.
 - Toda ficha nova deve ter fonte, revisão, evidência e hash; mudanças na fonte exigem revisão. Proposta interna, calendário antigo, credenciais e dados de alunos não entram automaticamente.
 - Não generalizar dois meses para Beauty. Manicure/estética em construção não são turmas abertas. Não misturar Renata Scatena e Renata Salviato.
+
+## Programação oficial das Academias (Augusto, 09/11/2026)
+
+O Conexão Hair é a referência oficial de turmas, dias, horários, datas e status. Em divergência, corrigir o site com base no aplicativo; nunca alterar o aplicativo para justificar texto antigo do site. Consultar public.turmas antes de publicar. Não presumir vagas, duração uniforme nem horário final ausente. Turma inativa não aparece como oferta ativa. O recorte em hair-business-/site/turmas_app.json registra a consulta; não é sincronização automática. Preservar nomes públicos e contatos comerciais aprovados, distintos dos contatos internos.
+
