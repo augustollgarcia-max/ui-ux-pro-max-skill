@@ -313,6 +313,12 @@ body.vt .abas button[aria-selected="true"]{background:#0a1127;color:#fff}
 .pr-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .pr-item div{display:flex;flex-direction:column;min-width:0}
 @media (prefers-reduced-motion:reduce){.info,.leq-btn,.chip,.pf-modelo,.abas button,.res-cinza,.res-azul{transition:none}}
+/* evolução: Instagram e cadastro */
+.ig-btn{margin-top:8px}
+figure .ig-btn{width:100%}
+.cd-cod{font-size:clamp(2rem,10vw,2.8rem);font-weight:700;letter-spacing:.18em;color:var(--gold-hi);margin:0;font-variant-numeric:tabular-nums}
+#cd-box{display:flex;flex-direction:column;gap:14px;scroll-margin-top:90px}
+input[aria-invalid="true"]{border:1.5px solid var(--f-falta)}
 </style>
 </head>
 <body>
@@ -339,7 +345,7 @@ body.vt .abas button[aria-selected="true"]{background:#0a1127;color:#fff}
       <span class="script">Ana Paula de Oliveira</span>
       <h1 class="gold">Seu ritual de cuidado começa aqui.</h1>
       <p class="muted" id="c-intro"></p>
-      <div class="row"><a class="btn" href="#pacotes" data-act="goto" data-target="pacotes">Ver os pacotes</a></div>
+      <div class="row"><a class="btn" href="#pacotes" data-act="goto" data-target="pacotes">Ver os pacotes</a><button class="btn ghost" type="button" data-act="goto" data-target="cd-box">Fazer meu cadastro</button></div>
     </div>
     <img src="/vertice/meu-salao/espaco-ana-paula/campanha/carrossel-01-capa.jpg" width="1080" height="1350" alt="Arte do Espaço Ana Paula de Oliveira: Seu ritual de cuidado começa aqui">
   </section>
@@ -351,6 +357,30 @@ body.vt .abas button[aria-selected="true"]{background:#0a1127;color:#fff}
     <h2 id="c-titulo">Os dois incluem quatro escovas</h2>
     <p class="muted" id="c-central"></p>
     <div class="packs" id="c-packs"></div>
+  </section>
+
+  <section id="cd-box">
+    <span class="eyebrow">Cadastro</span>
+    <h2>Faça o seu cadastro</h2>
+    <p class="muted">Leva um minuto. No fim você recebe um código e envia pelo seu WhatsApp para confirmar.</p>
+    <div class="panel" id="cd-form">
+      <div class="fields">
+        <label for="cd-nome">Seu nome<input id="cd-nome" autocomplete="name" maxlength="80"></label>
+        <label for="cd-fone">Seu WhatsApp<input id="cd-fone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(16) 99999-0000"></label>
+        <label for="cd-end">Endereço (opcional)<input id="cd-end" autocomplete="street-address" maxlength="200" placeholder="Rua, número e bairro"></label>
+        <label for="cd-int">O que você procura<select id="cd-int"><option value="">Ainda não sei</option><option>Escova com Máscara Pró Liso</option><option>Cronograma Capilar Completo com Escova</option><option>Escova avulsa</option></select></label>
+      </div>
+      <p class="small alert" id="cd-erro" role="alert" hidden></p>
+      <div class="row"><button class="btn" type="button" data-act="cd-enviar">Gerar meu código</button></div>
+      <p class="small muted">Seus dados vão só para o WhatsApp do salão, na mensagem que você mesma envia. Nada fica guardado nesta página.</p>
+    </div>
+    <div class="panel" id="cd-ok" hidden>
+      <h3>Quase lá</h3>
+      <p class="muted small">Seu código de confirmação</p>
+      <p class="cd-cod num" id="cd-cod" aria-live="polite"></p>
+      <div class="row"><a class="btn" id="cd-zap" target="_blank" rel="noopener" href="#cliente">Enviar pelo meu WhatsApp</a><button class="btn ghost sm" type="button" data-act="cd-corrigir">Corrigir meus dados</button></div>
+      <p class="small muted">A mensagem já vai pronta com o seu nome e o código. É só tocar em enviar. O salão confirma por lá.</p>
+    </div>
   </section>
 
   <section>
@@ -501,8 +531,8 @@ body.vt .abas button[aria-selected="true"]{background:#0a1127;color:#fff}
     <div class="panel" id="e-outbox" hidden>
       <h3>3. Sua arte</h3>
       <div class="arts">
-        <figure><img id="e-feed" alt="Arte para o feed"><figcaption>Feed · 1080 × 1350</figcaption><button class="btn sm" type="button" data-act="e-save" data-f="feed">Salvar feed</button></figure>
-        <figure><img id="e-story" alt="Arte para o story"><figcaption>Story · 1080 × 1920</figcaption><button class="btn sm" type="button" data-act="e-save" data-f="story">Salvar story</button></figure>
+        <figure><img id="e-feed" alt="Arte para o feed"><figcaption>Feed · 1080 × 1350</figcaption><button class="btn sm" type="button" data-act="e-save" data-f="feed">Salvar feed</button><button class="btn ghost sm ig-btn" type="button" data-act="ig-arte" data-f="feed">Postar no Instagram</button></figure>
+        <figure><img id="e-story" alt="Arte para o story"><figcaption>Story · 1080 × 1920</figcaption><button class="btn sm" type="button" data-act="e-save" data-f="story">Salvar story</button><button class="btn ghost sm ig-btn" type="button" data-act="ig-arte" data-f="story">Postar no Instagram</button></figure>
       </div>
       <p class="small muted">Se o botão de salvar não abrir, toque e segure na imagem e escolha “Salvar”.</p>
       <h3>Legenda</h3><div class="msg" id="e-leg"></div>
@@ -662,6 +692,13 @@ body.vt .abas button[aria-selected="true"]{background:#0a1127;color:#fff}
   <section id="g-visitas">
     <h2>Clientes e pacotes</h2>
     <div class="out" id="g-sum"></div>
+    <div class="panel" id="cr-box">
+      <h3>Cadastro recebido no WhatsApp</h3>
+      <p class="small muted">A cliente se cadastrou pela sua página e mandou a mensagem com o código? Copie a mensagem dela e cole aqui.</p>
+      <label for="cr-txt">Mensagem da cliente<textarea id="cr-txt" maxlength="1200" placeholder="Cole aqui a mensagem que começa com “Olá! Quero fazer meu cadastro…”"></textarea></label>
+      <div class="row"><button class="btn ghost sm" type="button" data-act="cr-ler">Ler cadastro</button></div>
+      <div id="cr-out"></div>
+    </div>
     <div class="panel">
       <h3>Novo pacote vendido</h3>
       <form id="f-new" class="fields" novalidate>
@@ -786,7 +823,7 @@ body.vt .abas button[aria-selected="true"]{background:#0a1127;color:#fff}
 <script>
 (function(){
 "use strict";
-var BUILD={"versao":"5.0.0","iaEndpoint":"","modulos":["00-nucleo","01-registro","02-textos","03-whatsapp","04-cliente","05-formularios","06-comparacoes","07-simulador","08-estoque","09-clientes","10-mensagens-campanha","11-promocoes","12-conta-livre","13-estudio","14-ajustes","20-modelo","30-inicio","32-vender","40-aplicacao","50-ia","60-facil","90-eventos","91-telas","99-partida"]};
+var BUILD={"versao":"5.0.0","iaEndpoint":"","modulos":["00-nucleo","01-registro","02-textos","03-whatsapp","04-cliente","05-formularios","06-comparacoes","07-simulador","08-estoque","09-clientes","10-mensagens-campanha","11-promocoes","12-conta-livre","13-estudio","14-ajustes","20-modelo","30-inicio","32-vender","40-aplicacao","50-ia","60-facil","62-evolucao","90-eventos","91-telas","99-partida"]};
 var KEY="apo-pacotes-v1";
 var PIN_DEF="55c5de31ec754ba40fb1687ff4f4e0d95142f5ca2765c4839b618329190a434b";
 function defCalc(){return {nome:"Primeira escova",normal:80,visitas:1,primeira:50,desc:null,descTipo:"pct",gratis:null,fechado:null,cartao:null,parcelas:1,taxaPix:null,taxaCartao:null,custo:null,dur:null}}
@@ -1917,7 +1954,7 @@ function fc_decorar(){var g=$("v-gestao")||document.body;
     var b=document.createElement("button");b.type="button";b.className="info";b.setAttribute("data-act","info");b.setAttribute("aria-label","O que colocar aqui");b.textContent="i";
     var t=document.createElement("span");t.className="dica";t.hidden=true;t.textContent=d[1];
     lab.insertBefore(b,el);lab.appendChild(t)})});
-  LEQUES.forEach(function(q){g.querySelectorAll(q[0]).forEach(function(el){if(el.tagName!=="INPUT"||el.dataset.leque)return;el.dataset.leque=q[1].join("|");
+  LEQUES.forEach(function(q){g.querySelectorAll(q[0]).forEach(function(el){if(el.tagName!=="INPUT"||el.dataset.leque||el===document.activeElement)return;el.dataset.leque=q[1].join("|");
     var lab=el.closest("label");if(!lab||lab.querySelector(".leq-btn"))return;
     var w=document.createElement("span");w.className="inw";el.parentNode.insertBefore(w,el);w.appendChild(el);
     var b=document.createElement("button");b.type="button";b.className="leq-btn";b.setAttribute("data-act","leque");b.setAttribute("aria-label","Abrir opções de valor");b.textContent="▾";
@@ -2031,7 +2068,9 @@ ACT["pf-copiar"]=function(b){copy($("pf-msg").textContent,b)};
 ACT["pf-salvar"]=function(){var f=pf_estado(),r=pf_calc(f);if(!r.ok)return;S.promos.unshift({id:uid(),nome:r.nome,data:pf_paraCalc(f,r)});save();renderCalc();toast("Promoção salva")};
 ACT["pf-avancado"]=function(){var f=pf_estado(),r=pf_calc(f);if(!r.ok)return;S.calc=merge(defCalc(),pf_paraCalc(f,r));save();fillCalcInputs();renderCalc();fc_aba("avanc");var t=$("k-nome");if(t)t.scrollIntoView({block:"center"})};
 AO_DIGITAR.push(function(el){if(!el.closest||!el.closest("#pf-box")||!el.dataset.pf)return false;var f=pf_estado(),x=n(el.value);
-  if(x!=null&&x<0){el.setAttribute("aria-invalid","true");return true}el.removeAttribute("aria-invalid");f[el.dataset.pf]=x;save();pf_render();return true});
+  if(x!=null&&x<0){el.setAttribute("aria-invalid","true");return true}el.removeAttribute("aria-invalid");f[el.dataset.pf]=x;
+  if(el.dataset.pf==="desc"&&pf_modelo(f).tipo==="desc"&&(x===10||x===20||x===30)){f.modelo="d"+x;document.querySelectorAll("#pf-modelos .pf-modelo").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.k===f.modelo?"true":"false")})}
+  save();pf_render();return true});
 
 /* ===== 6. MONTE SEU PACOTE (avançado): a tabela é dela ===== */
 function mp_padrao(){return {nome:"",visitas:4,preco:null,desc:null,un:"g",itens:[{nome:"",preco:null,emb:null,uso:null}]}}
@@ -2100,6 +2139,71 @@ function pr_montar(el){if($("pr-box"))return;var box=document.createElement("sec
     '<p class="small muted">Não peça logo nem embalagem com rótulo: a IA inventa o texto errado. Para mostrar o produto real, use a sua foto.</p></div>';
   el.appendChild(box)}
 ACT["pr-copiar"]=function(b){copy(pr_texto(b.dataset.k,$("pr-fmt").value),b)};
+/* ---------- evolução: postar no Instagram, cadastro da cliente com código pelo WhatsApp, colar cadastro na gestão ---------- */
+var IG={cache:{}};
+function ig_nome(s){return (String(s||"arte").toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"arte")+".jpg"}
+function ig_legendaDe(chave){var ms=messages(),alvo=/pro-liso/.test(chave)?"Pró Liso":/cronograma/.test(chave)?"Cronograma":/festas/.test(chave)?"Festas de fim de ano":/primeira/.test(chave)?"Novidade":"";
+  var m=ms.filter(function(x){return alvo&&x.t.indexOf(alvo)>=0})[0]||ms.filter(function(x){return x.t==="WhatsApp curto"})[0];return m?m.m:""}
+async function ig_baixar(blob,nome){var dl=null;try{dl=window.claude&&claude.use?await claude.use("downloads"):null}catch(e){}
+  if(dl){try{await dl.save({filename:nome,data:blob});return true}catch(e2){return false}}
+  try{var u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=nome;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);return true}catch(e3){return false}}
+/* fonte = Blob pronto ou caminho da imagem. A legenda é copiada antes, ainda dentro do toque. */
+async function ig_postar(fonte,nome,leg,b){var copiou=false;
+  if(leg){try{navigator.clipboard.writeText(leg).catch(function(){});copiou=true}catch(e){}}
+  var blob=fonte instanceof Blob?fonte:IG.cache[fonte];
+  if(!blob){if(b)b.disabled=true;try{var r=await fetch(fonte);if(!r.ok)throw new Error("http");blob=IG.cache[fonte]=await r.blob()}catch(e1){if(b)b.disabled=false;toast("Não consegui carregar a imagem. Tente de novo.");return}if(b)b.disabled=false}
+  var file=null;try{file=new File([blob],nome,{type:blob.type||"image/jpeg"})}catch(e2){}
+  var aviso=copiou?"Legenda copiada: cole no Instagram":"Abra o Instagram e poste a imagem";
+  if(file&&navigator.canShare&&navigator.share&&navigator.canShare({files:[file]})){
+    try{await navigator.share({files:[file]});toast(aviso);return}
+    catch(e3){if(e3&&e3.name==="AbortError")return;if(e3&&e3.name==="NotAllowedError"){toast("Imagem pronta. Toque de novo para abrir o Instagram.");return}}}
+  var ok=await ig_baixar(blob,nome);
+  toast(ok?(copiou?"Imagem baixada e legenda copiada. Abra o Instagram e poste.":"Imagem baixada. Abra o Instagram e poste."):"Toque e segure na imagem para salvar")}
+ACT["ig-arte"]=function(b){var bl=E.blobs&&E.blobs[b.dataset.f];if(!bl){toast("Crie a arte primeiro");return}ig_postar(bl,ig_nome(b.dataset.f+"-"+(getRec().tit||"arte")),E.leg,b)};
+ACT["ig-camp"]=function(b){ig_postar(b.dataset.src,ig_nome(b.dataset.k),ig_legendaDe(b.dataset.k),b)};
+function ig_decorarGalerias(){["g-gallery","g-sug"].forEach(function(id){var g=$(id);if(!g)return;g.querySelectorAll("figure").forEach(function(f){if(f.querySelector("[data-act='ig-camp']"))return;var a=f.querySelector("a[href]");if(!a)return;
+  var src=a.getAttribute("href"),k=src.replace(/^.*\//,"").replace(/\.jpg$/,"");if(/miniatura/.test(k))return;
+  var b=document.createElement("button");b.type="button";b.className="btn sm ig-btn";b.setAttribute("data-act","ig-camp");b.dataset.src=src;b.dataset.k=k;b.textContent="Postar no Instagram";f.appendChild(b)})})}
+new MutationObserver(function(){ig_decorarGalerias()}).observe(document.documentElement,{childList:true,subtree:true});
+
+/* ===== cadastro da cliente (página pública) ===== */
+var CD={codigo:null};
+function cd_fone(d){d=String(d||"").replace(/\D/g,"");if(d.length===13&&d.indexOf("55")===0)d=d.slice(2);if(d.length===12&&d.indexOf("55")===0)d=d.slice(2);
+  return d.length===11?"("+d.slice(0,2)+") "+d.slice(2,7)+"-"+d.slice(7):d.length===10?"("+d.slice(0,2)+") "+d.slice(2,6)+"-"+d.slice(6):d}
+function cd_codigo(){var a=new Uint32Array(1);try{crypto.getRandomValues(a)}catch(e){a[0]=Math.floor(Math.random()*4294967296)}return String(a[0]%1000000).padStart(6,"0")}
+function cd_texto(c){return "Olá! Quero fazer meu cadastro no "+fc_salao()+" 💛\nNome: "+c.nome+"\nWhatsApp: "+cd_fone(c.fone)+(c.end?"\nEndereço: "+c.end:"")+(c.int?"\nInteresse: "+c.int:"")+"\nCódigo: "+c.codigo}
+/* lê a mensagem de cadastro colada na gestão */
+function cd_ler(txt){var t=String(txt||""),pega=function(r){var m=t.match(r);return m?m[1].replace(/\s+/g," ").trim():""};
+  var c={nome:pega(/Nome:\s*([^\n]+)/i),fone:pega(/WhatsApp:\s*([^\n]+)/i),end:pega(/Endere[çc]o:\s*([^\n]+)/i),int:pega(/Interesse:\s*([^\n]+)/i),codigo:pega(/C[óo]digo:\s*(\d{6})/i)};
+  if(!c.nome||c.nome.length<2)return {ok:false,erro:"Não achei o nome na mensagem."};
+  if(!waNum(c.fone))return {ok:false,erro:"Não achei um WhatsApp válido na mensagem."};
+  return {ok:true,c:c}}
+ACT["cd-enviar"]=function(){var nome=$("cd-nome").value.replace(/\s+/g," ").trim(),fone=$("cd-fone").value,end=$("cd-end").value.replace(/\s+/g," ").trim(),er=$("cd-erro");
+  var marca=function(id,ruim){var el=$(id);if(ruim)el.setAttribute("aria-invalid","true");else el.removeAttribute("aria-invalid")};
+  marca("cd-nome",nome.length<2);marca("cd-fone",!waNum(fone));
+  if(nome.length<2){er.hidden=false;er.textContent="Escreva o seu nome.";$("cd-nome").focus();return}
+  if(!waNum(fone)){er.hidden=false;er.textContent="Confira o WhatsApp: precisa do DDD e do número. Ex.: (16) 99999-0000.";$("cd-fone").focus();return}
+  var salao=waNum(S.cfg.salao&&S.cfg.salao.whatsapp);if(!salao){er.hidden=false;er.textContent="O salão ainda não informou o WhatsApp. Avise a profissional.";return}
+  er.hidden=true;if(!CD.codigo)CD.codigo=cd_codigo();
+  var c={nome:nome.slice(0,80),fone:fone,end:end.slice(0,200),int:$("cd-int").value,codigo:CD.codigo};
+  $("cd-cod").textContent=c.codigo.slice(0,3)+" "+c.codigo.slice(3);$("cd-zap").href=waLink(salao,cd_texto(c));
+  $("cd-form").hidden=true;$("cd-ok").hidden=false;$("cd-ok").scrollIntoView({block:"center"})};
+ACT["cd-corrigir"]=function(){$("cd-ok").hidden=true;$("cd-form").hidden=false};
+
+/* ===== gestão: colar o cadastro que chegou no WhatsApp ===== */
+function cr_mostrar(h){$("cr-out").innerHTML=h}
+ACT["cr-ler"]=function(){var r=cd_ler($("cr-txt").value);
+  if(!r.ok){cr_mostrar('<p class="small alert">'+esc(r.erro)+' Cole a mensagem inteira que a cliente mandou.</p>');return}
+  var c=r.c,dup=pessoaDuplicadas(c.nome,c.fone);
+  var h='<div class="out">'+kv("Nome",esc(c.nome))+kv("WhatsApp",esc(cd_fone(c.fone)))+(c.end?kv("Endereço",esc(c.end)):"")+(c.int?kv("Interesse",esc(c.int)):"")+kv("Código",c.codigo?esc(c.codigo):"Sem código")+'</div>';
+  if(dup.length)h+='<p class="small alert">Já existe cliente com esse nome ou WhatsApp: '+esc(dup.map(function(p){return p.nome}).join(", "))+'. Nada foi duplicado.</p>';
+  else h+='<p class="small muted">Confira se a mensagem veio do mesmo número informado acima. Isso prova que o WhatsApp é dela.</p><div class="row"><button class="btn sm" type="button" data-act="cr-add">Adicionar cliente</button></div>';
+  cr_mostrar(h)};
+ACT["cr-add"]=function(){var r=cd_ler($("cr-txt").value);if(!r.ok)return;var c=r.c;
+  var res=pessoaCriar({nome:c.nome,fone:cd_fone(c.fone),obs:(c.end?"Endereço: "+c.end+". ":"")+(c.int?"Interesse: "+c.int+". ":"")+"Cadastro pela página"+(c.codigo?", código "+c.codigo:"")+"."});
+  if(!res.ok){cr_mostrar('<p class="small alert">'+(res.erro==="duplicada"?"Essa cliente já está cadastrada. Nada foi duplicado.":"Não consegui cadastrar. Confira o nome.")+'</p>');return}
+  changed();$("cr-txt").value="";var num=waNum(c.fone),msg="Oi, "+c.nome.split(" ")[0]+"! Seu cadastro no "+fc_salao()+" está confirmado 💛\nQuando quiser agendar, é só me chamar por aqui.";
+  cr_mostrar('<p class="small"><b>'+esc(c.nome)+'</b> entrou na lista de clientes.</p><div class="row"><a class="btn sm" id="cr-zap" target="_blank" rel="noopener" href="'+esc(waLink(num,msg))+'">Confirmar no WhatsApp dela</a><button class="btn ghost sm" type="button" data-act="copy-text" data-text="'+esc(msg)+'">Copiar mensagem</button></div>');toast("Cliente cadastrada")};
 /* ---------- eventos ---------- */
 document.addEventListener("input",function(e){var el=e.target;
   if(el.id&&el.id.indexOf("e-")===0&&el.id!=="e-oferta"&&el.id!=="e-up")E.editado=true;
