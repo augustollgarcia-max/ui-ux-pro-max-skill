@@ -237,6 +237,21 @@ async function executar() {
         await p.goForward();
         await tick();
         check('Avançar após × reabre o voucher', await p.locator('#voucher').isVisible());
+        // Conversa aberta na tela de escolha + troca de página sem recarga:
+        // o primeiro voltar tem de devolver a tela de escolha, não só o endereço.
+        await abrir('/');
+        const lancar = p.locator('#hara-public-host .launch');
+        if (await lancar.isVisible().catch(() => false)) {
+          await lancar.click();
+          await tick();
+        }
+        await p.evaluate(() => document.querySelector('a[href="/beauty"]').click());
+        await p.waitForURL('**/beauty', { timeout: 15000 });
+        await tick();
+        await p.goBack();
+        await p.locator('.esc-grade').waitFor({ timeout: 15000 }).catch(() => {});
+        check('Voltar da escolha com a conversa aberta devolve a tela de escolha',
+          new URL(p.url()).pathname === '/' && await p.locator('.esc-grade').isVisible().catch(() => false));
         check('Sem envio de dados', posted.length === 0, posted);
       } finally {
         await ctx.close();
@@ -258,7 +273,7 @@ async function principal() {
   }
   const resumo = registrar({
     app: 'HAIR · site público', raiz: path.dirname(root), pasta: out, motor: engine, versao: mode,
-    previstas: larguras.length * 22,
+    previstas: larguras.length * 23,
     fotosPrevistas: landings.length + 12, resultados: results, capturas, erro
   });
   console.log(mode, resumo.aprovadas + '/' + resumo.executadas, 'verificações aprovadas.',

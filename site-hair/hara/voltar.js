@@ -51,6 +51,18 @@ addEventListener("popstate", evento => {
   finalizar?.();
 }, true);
 
+// A tela de escolha troca a página inteira sem recarregar e guarda o próprio
+// popstate para recarregar ao voltar. As janelas abertas antes da troca deixam
+// de existir: sem esquecê-las aqui, o voltar seria tratado como "fechar janela"
+// e a pessoa ficaria na página nova com o endereço da anterior.
+document.addEventListener("hair:pagechange", () => {
+  for (let i = pilha.length - 1; i >= 0; i--) { try { pilha[i].ocultar(); } catch (e) {} }
+  pilha = [];
+  registros.clear();
+  depois = null;
+  concluindo = false;
+});
+
 export function carregarEstilo(raiz, caminho) {
   if (raiz.querySelector('link[rel="stylesheet"]')) return;
   const folha = document.createElement("link");
