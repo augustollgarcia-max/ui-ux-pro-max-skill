@@ -122,3 +122,53 @@ jobs:
           path: output/hara-browser/
           if-no-files-found: warn
           retention-days: 7
+
+  navegacao:
+    name: Navegação pública em ${{ matrix.browser }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    env:
+      BROWSER_ENGINE: ${{ matrix.browser }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Instalar navegador de teste
+        id: instalar_navegador
+        run: |
+          npm install --prefix "$RUNNER_TEMP/hara-nav" --no-save --no-package-lock playwright@1.62.1
+          node "$RUNNER_TEMP/hara-nav/node_modules/playwright/cli.js" install --with-deps "${{ matrix.browser }}"
+          echo "NODE_PATH=$RUNNER_TEMP/hara-nav/node_modules" >> "$GITHUB_ENV"
+      - name: Baixar versão anterior para comparação de navegação
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base-anterior
+          persist-credentials: false
+      - name: Registrar navegação da versão anterior
+        if: github.event_name == 'pull_request'
+        env:
+          NAV_ROOT: base-anterior
+        run: node scripts/site-hair/navegacao.cjs --observar
+      - name: Verificar navegação nas landings
+        if: ${{ !cancelled() && steps.instalar_navegador.outcome == 'success' }}
+        run: node scripts/site-hair/navegacao.cjs
+      - name: Montar galeria com as capturas disponíveis
+        if: always()
+        run: node scripts/site-hair/galeria-navegacao.cjs output/navegacao-www "${{ matrix.browser }}"
+      - name: Guardar as capturas e o resultado da navegação
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: navegacao-www-${{ matrix.browser }}-${{ github.run_id }}
+          path: output/navegacao-www/
+          retention-days: 14
