@@ -448,7 +448,7 @@ p{margin:0}
 }
 .modal-box h3{font-size:1.85rem;margin:14px 0 14px;line-height:1.16}
 .modal-box .m-intro{font-size:.92rem;line-height:1.62;color:#D2D4CF;font-weight:300}
-.modal-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid rgba(201,162,39,.3);border-radius:50%;background:transparent;color:var(--text);font-size:1.3rem;line-height:1;display:grid;place-items:center}
+.modal-close{position:absolute;top:14px;right:14px;width:44px;height:44px;border:1px solid rgba(201,162,39,.3);border-radius:50%;background:transparent;color:var(--text);font-size:1.3rem;line-height:1;display:grid;place-items:center}
 .modal-close:hover{border-color:var(--gold);color:var(--gold)}
 .m-block{margin-top:24px;padding-top:20px;border-top:1px solid rgba(201,162,39,.16)}
 .m-block h4{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 12px}
@@ -571,7 +571,7 @@ html.js-anim .rv.in{opacity:1;transform:none}
   .foot-base{flex-direction:column;gap:8px}
 
   .modal{padding:0;align-items:flex-end}
-  .modal-box{max-height:92vh;border-radius:14px 14px 0 0;padding:34px 22px 30px}
+  .modal-box{max-height:92vh;max-height:92dvh;overscroll-behavior:contain;border-radius:14px 14px 0 0;padding:34px 22px max(30px,env(safe-area-inset-bottom))}
   .modal-box h3{font-size:1.55rem}
   .modal-actions{display:grid;grid-template-columns:1fr}
 }
@@ -1450,6 +1450,7 @@ body{background:radial-gradient(120% 60% at 50% -10%,#0B1510 0%,var(--bg) 46%) v
   var mCareer = document.getElementById("mCareer");
   var mWa     = document.getElementById("mWa");
   var mEnroll = document.getElementById("mEnroll");
+  const navegacao = () => window.hairVoltarPublico ||= import("/hara/voltar.js").catch(() => null);
   var lastFocus = null;
 
   function openCourse(key){
@@ -1485,17 +1486,26 @@ body{background:radial-gradient(120% 60% at 50% -10%,#0B1510 0%,var(--bg) 46%) v
 
   /* ─── Utilidades de modal ─── */
   function openModal(el){
+    navegacao().then(function(nav){
+      if(nav) nav.abrir(el.id, () => mostrarModal(el), () => ocultarModal(el));
+      else mostrarModal(el);
+    });
+  }
+  function closeModal(el){
+    navegacao().then(function(nav){ if(!nav || !nav.fechar(el.id)) ocultarModal(el); });
+  }
+  function mostrarModal(el){
     el.classList.add("open");
     el.setAttribute("aria-hidden","false");
     document.body.style.overflow = "hidden";
     var c = el.querySelector(".modal-close");
     if(c) c.focus();
   }
-  function closeModal(el){
+  function ocultarModal(el){
     el.classList.remove("open");
     el.setAttribute("aria-hidden","true");
     document.body.style.overflow = "";
-    if(lastFocus && lastFocus.focus) lastFocus.focus();
+    if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
   }
   document.querySelectorAll(".modal").forEach(function(el){
     el.addEventListener("click", function(e){ if(e.target === el) closeModal(el); });
@@ -1505,28 +1515,44 @@ body{background:radial-gradient(120% 60% at 50% -10%,#0B1510 0%,var(--bg) 46%) v
   });
   document.addEventListener("keydown", function(e){
     if(e.key === "Escape"){
-      document.querySelectorAll(".modal.open").forEach(closeModal);
-      closeMenu();
+      if(e.defaultPrevented || e.composedPath().some(n => n.id === "hara-public-host" || n.id === "hara-lead-host")) return;
+      var aberta = document.querySelector(".modal.open");
+      if(aberta) closeModal(aberta);
+      else if(mobileNav?.classList.contains("open")) sairMenu();
     }
   });
 
   /* ─── Menu móvel ─── */
   var menuBtn = document.getElementById("menuBtn");
   var mobileNav = document.getElementById("mobileNav");
-  function closeMenu(){
-    if(!menuBtn || !mobileNav) return;
-    mobileNav.classList.remove("open");
-    menuBtn.setAttribute("aria-expanded","false");
-    menuBtn.setAttribute("aria-label","Abrir menu");
-    document.body.style.overflow = "";
+  function mostrarMenu(aberto){
+    mobileNav.classList.toggle("open", aberto);
+    menuBtn.setAttribute("aria-expanded", String(aberto));
+    menuBtn.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+    document.body.style.overflow = aberto ? "hidden" : "";
+    if(!aberto) menuBtn.focus({ preventScroll:true });
+  }
+  function sairMenu(continuar){
+    navegacao().then(function(nav){
+      if(nav && nav.fechar("menu", continuar)) return;
+      mostrarMenu(false);
+      if(continuar) continuar();
+    });
   }
   if(menuBtn && mobileNav) menuBtn.addEventListener("click", function(){
-    var open = mobileNav.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", String(open));
-    menuBtn.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
-    document.body.style.overflow = open ? "hidden" : "";
+    if(mobileNav.classList.contains("open")) return sairMenu();
+    navegacao().then(function(nav){
+      if(nav) nav.abrir("menu", () => mostrarMenu(true), () => mostrarMenu(false));
+      else mostrarMenu(true);
+    });
   });
-  if(mobileNav) mobileNav.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMenu); });
+  if(mobileNav) mobileNav.addEventListener("click", function(e){
+    var a=e.target.closest("a[href]");
+    if(!a || e.defaultPrevented || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    if(a.target === "_blank") return sairMenu();
+    e.preventDefault();
+    sairMenu(() => location.assign(a.href));
+  });
 
   /* ─── Header ao rolar ─── */
   var header = document.getElementById("header");

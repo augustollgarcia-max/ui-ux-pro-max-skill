@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-08.1",
-  "sourceCommit": "43351a2a66c265b505493ae34fc438065524a9b0",
+  "version": "2026-11-18.1",
+  "sourceCommit": "3a5aa6bf3ffc7825682c420004e0d83cb884e862",
   "cards": [
     {
       "id": "lan-perfil",
@@ -57,9 +57,9 @@
       "text": "Renata Scatena é a Especialista 05 da HAIR Business Beauty, com ensino de corte feminino, colorimetria, luzes e mechas, escova e finalização. O perfil destaca teste de mecha e segurança na química, com prática acompanhada.",
       "path": "/business/beauty-05-renata-scatena",
       "sourceFile": "site-hair/business/beauty-05-renata-scatena.html",
-      "sourceBlob": "40970f4f0674b2543dbf7582a558cb3a5e3c0668",
+      "sourceBlob": "24f6b1d42e1b26d946df1af442886a7d2265eddc",
       "evidence": "Teste de mecha e segurança na química",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {
@@ -69,9 +69,9 @@
       "text": "Estefania Oliveira é a Especialista 06, na área Brow & Lash. O conteúdo publicado inclui leitura do rosto e do fio, design com pinça e linha, henna, Refectocil, Brow Lamination e recuperação de sobrancelhas. Há formação iniciante, workshop e especialização; a equipe confirma o formato adequado.",
       "path": "/business/beauty-06-estefania-oliveira",
       "sourceFile": "site-hair/business/beauty-06-estefania-oliveira.html",
-      "sourceBlob": "1998084e2546b89df0aea12094022bc37da932af",
+      "sourceBlob": "4bd07ac2b0631b4d7f7c7298c14d509c18a7cb95",
       "evidence": "Leitura do rosto e do fio",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {
@@ -81,9 +81,9 @@
       "text": "A HAIR Business Beauty apresenta Renata Scatena para cabelo e Estefania Oliveira para sobrancelhas e cílios. Manicure e estética aparecem como áreas em construção no site: não confirmo matrícula ou turma ativa para elas. Qual área você procura?",
       "path": "/beauty",
       "sourceFile": "site-hair/beauty.html",
-      "sourceBlob": "95d3ffdcaa2091b5822baf7bfd58ce535466cc89",
+      "sourceBlob": "931bac7eaf85fa9e3f03faeea58e46f415860074",
       "evidence": "Em construção",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {
@@ -117,9 +117,9 @@
       "text": "Os perfis Beauty informam certificado de conclusão de curso livre emitido pela HAIR Academia da Beleza, conforme frequência e prática. A equipe confirma os requisitos e a carga horária do formato escolhido; este chat não declara reconhecimento pelo MEC nem emite certificados.",
       "path": "/business/beauty-05-renata-scatena",
       "sourceFile": "site-hair/business/beauty-05-renata-scatena.html",
-      "sourceBlob": "40970f4f0674b2543dbf7582a558cb3a5e3c0668",
+      "sourceBlob": "24f6b1d42e1b26d946df1af442886a7d2265eddc",
       "evidence": "Certificado de curso livre.",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {
@@ -141,9 +141,9 @@
       "text": "Os perfis Beauty descrevem prática em pessoas reais com a educadora acompanhando. No perfil da Renata, há treino em boneca antes da prática em modelos. A organização dos modelos e a participação de cada aluno devem ser confirmadas com a equipe para a aula específica.",
       "path": "/business/beauty-05-renata-scatena",
       "sourceFile": "site-hair/business/beauty-05-renata-scatena.html",
-      "sourceBlob": "40970f4f0674b2543dbf7582a558cb3a5e3c0668",
+      "sourceBlob": "24f6b1d42e1b26d946df1af442886a7d2265eddc",
       "evidence": "Você treina em boneca e depois em pessoas reais.",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {
@@ -285,9 +285,9 @@
       "text": "O perfil da Renata Scatena apresenta corte feminino, colorimetria, luzes e mechas, escova e finalização, além de formatos como Curso de Luzes e Escovista & Corte. As aulas destacam teste de mecha e segurança na química; a equipe confirma conteúdo, formato e próxima turma.",
       "path": "/business/beauty-05-renata-scatena",
       "sourceFile": "site-hair/business/beauty-05-renata-scatena.html",
-      "sourceBlob": "40970f4f0674b2543dbf7582a558cb3a5e3c0668",
+      "sourceBlob": "24f6b1d42e1b26d946df1af442886a7d2265eddc",
       "evidence": "Escovista &amp; Corte",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {
@@ -297,9 +297,9 @@
       "text": "A formação de design apresentada por Estefania reúne leitura dos fios e do rosto, simetria, biossegurança, marcação, retirada de fios e acabamento, com modelos reais. Também aborda postura, comunicação e posicionamento profissional. Habilitação pessoal da educadora não confirma oferta de curso de micropigmentação ou nanoblading.",
       "path": "/business/beauty-06-estefania-oliveira",
       "sourceFile": "site-hair/business/beauty-06-estefania-oliveira.html",
-      "sourceBlob": "1998084e2546b89df0aea12094022bc37da932af",
+      "sourceBlob": "4bd07ac2b0631b4d7f7c7298c14d509c18a7cb95",
       "evidence": "Fundamentos e leitura técnica",
-      "reviewedAt": "2026-11-08",
+      "reviewedAt": "2026-11-18",
       "priority": 100
     },
     {

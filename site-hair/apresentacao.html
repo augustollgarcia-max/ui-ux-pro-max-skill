@@ -40,14 +40,16 @@ a{text-decoration:none;color:inherit}.app{max-width:620px;margin:auto;background
 .note{margin-top:11px;font-size:11px;color:#ecd7d0}.foot{background:#120f0e;color:var(--cash);padding:16px;text-align:center;font-size:11px;font-weight:800;letter-spacing:.06em}
 #voucher{position:fixed;inset:0;display:none;z-index:100;background:rgba(15,10,9,.84);padding:22px;align-items:center;justify-content:center}
 #voucher:target{display:flex}.voucher-card{width:min(100%,430px);background:linear-gradient(155deg,#fffaf3,#f4eee6 65%,#ead7bb);border:1px solid rgba(180,138,74,.65);border-radius:28px;padding:34px 24px 24px;text-align:center;position:relative;box-shadow:0 28px 80px rgba(0,0,0,.4)}
-.close{position:absolute;right:12px;top:10px;width:38px;height:38px;border-radius:50%;background:var(--black);color:#fff;display:grid;place-items:center;font-size:25px}
+.close{position:absolute;right:12px;top:10px;width:44px;height:44px;border-radius:50%;background:var(--black);color:#fff;display:grid;place-items:center;font-size:25px}
 .vbrand{font-size:11px;font-weight:900;letter-spacing:.12em}.vkicker{margin-top:20px;font-size:12px;font-weight:900;letter-spacing:.18em;color:var(--burg)}.voucher-card h3{font-family:Georgia,serif;font-size:76px;line-height:.9;margin:15px 0 2px;color:var(--burg)}.off{font-weight:900;letter-spacing:.12em}.rule{width:72px;height:2px;background:var(--gold);margin:20px auto}.voucher-card p{line-height:1.48;color:#514640;margin:0}.code{display:inline-block;margin:22px 0 18px;border:1px dashed var(--gold);border-radius:12px;padding:10px 14px;color:var(--burg);font-size:13px;letter-spacing:.08em}.wa{display:flex;min-height:58px;align-items:center;justify-content:center;border-radius:999px;background:#25D366;color:#073b1c;font-weight:900;padding:0 18px}.small{font-size:10px;line-height:1.35;color:var(--taupe);margin-top:13px}
 @media(min-width:700px){body{padding:24px 0}.app{border-radius:26px;box-shadow:0 20px 80px rgba(0,0,0,.35)}}
+.saida-campanha{display:inline-flex;align-items:center;min-height:44px;min-width:44px;margin-inline:max(16px,env(safe-area-inset-left));padding-inline:8px;border-radius:8px;color:inherit;font:600 16px/1.2 system-ui,sans-serif;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}.saida-campanha:focus-visible{outline:3px solid currentColor;outline-offset:1px}@media(prefers-reduced-motion:no-preference){.saida-campanha:active{transform:scale(.96)}}
 </style>
 <script src="/business/rastreio.js" defer></script>
 </head>
 <body>
 <main class="app">
+<a href="/inicio" class="saida-campanha">‹ Voltar à HAIR</a>
 <section class="hero">
   <img src="/assets/card-beauty.webp" alt="Formação profissional de beleza HAIR">
   <div class="hero-copy">
@@ -123,5 +125,16 @@ a{text-decoration:none;color:inherit}.app{max-width:620px;margin:auto;background
     <div class="small">Atendimento pelo WhatsApp • benefício sujeito às condições comerciais vigentes.</div>
   </div>
 </section>
+<script>
+  const entradaVoucher = document.querySelector('a[href="#voucher"]');
+  function prepararVoltaVoucher(evento) {
+    if (evento.defaultPrevented || evento.metaKey || evento.ctrlKey || evento.shiftKey || evento.altKey) return;
+    entradaVoucher.removeEventListener("click", prepararVoltaVoucher);
+    import("/hara/voltar.js")
+      .then(nav => nav.sairDeAncora(entradaVoucher, document.querySelector("#voucher .close")))
+      .catch(() => entradaVoucher.addEventListener("click", prepararVoltaVoucher));
+  }
+  entradaVoucher.addEventListener("click", prepararVoltaVoucher);
+</script>
 </body>
 </html>

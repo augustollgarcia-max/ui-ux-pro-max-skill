@@ -9,10 +9,7 @@
   root.innerHTML=`<style>
     :host{all:initial;color-scheme:dark;font:15px/1.5 system-ui,sans-serif}*{box-sizing:border-box}
     dialog{color:#f5f2e9;background:#141816;border:1px solid #746640;border-radius:16px;width:min(520px,calc(100vw - 20px));max-height:calc(100dvh - 20px);padding:0;margin:auto;overflow:auto}
-    dialog::backdrop{background:#0009}header{position:sticky;top:0;z-index:1;background:#141816;padding:12px 16px;border-bottom:1px solid #43473d;display:flex;align-items:center;justify-content:space-between;gap:12px}h2{font-size:18px;margin:0}
-    form{padding:16px}p{margin:0 0 12px}label.field{display:block;margin:12px 0}input,select,textarea,button,a{font:inherit}input:not([type=checkbox]),select,textarea{display:block;width:100%;padding:10px;margin-top:5px;background:#0e120f;color:#fff;border:1px solid #788271;border-radius:8px}textarea{min-height:110px;resize:vertical}
-    button,.continue{display:inline-block;min-height:44px;padding:10px 14px;border-radius:9px;border:1px solid #e7c773;background:#d9bb76;color:#181710;text-align:center;cursor:pointer;text-decoration:none}.close{background:#26332c;color:#fff;border-color:#687462}.check{display:flex;gap:6px;align-items:center;margin:10px 0;font-size:11px;min-height:24px}.check input{width:14px;height:14px;margin:0;flex:0 0 14px;accent-color:#d9bb76}.check a{color:#c7cbbf;text-underline-offset:2px}.needs-consent input{outline:2px solid #e7c773;outline-offset:3px;animation:lead-pulse .7s ease-in-out 3}@keyframes lead-pulse{50%{box-shadow:0 0 0 4px #d9bb764d}}@media(prefers-reduced-motion:reduce){.needs-consent input{animation:none}}a{color:#e7c773}.status{margin:12px 0;overflow-wrap:anywhere}[hidden]{display:none!important}:focus-visible{outline:3px solid #e7c773;outline-offset:3px}:disabled{opacity:.6;cursor:default}
-    @media(max-height:450px){dialog{width:100vw;max-width:none;max-height:100dvh;margin:0;border-radius:0}header,form{padding:8px 12px}}
+    dialog::backdrop{background:#0009}header,form{padding:12px 16px}label.field,input:not([type=checkbox]),select{display:block}button,.continue{min-height:44px}.close{min-width:44px}[hidden]{display:none}a{color:#e7c773}
   </style><dialog aria-labelledby="lead-title" aria-describedby="lead-notice"><header><h2 id="lead-title">Fale com a equipe HAIR</h2><button type="button" class="close" aria-label="Fechar formulário de contato">×</button></header>
   <form novalidate><p id="lead-notice">Se preferir, continue o atendimento com nossa equipe pelo WhatsApp.</p>
     <label class="field">Nome (opcional)<input name="name" autocomplete="name" maxlength="100"></label>
@@ -57,7 +54,9 @@
   }
   field('city').addEventListener('change',cities);field('region').addEventListener('change',cities);cities();
   function close(){stopPending();dialog.close();form.reset();cities();status.textContent='';continueLink.hidden=true;continueLink.removeAttribute('href');topics=[];eventId=null;contextSummary='';returnFocus?.focus();}
-  $('.close').addEventListener('click',close);dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
+  const navegacao = () => window.hairVoltarPublico ||= import("/hara/voltar.js").catch(() => null);
+  function sair(){ stopPending();navegacao().then(nav => { if(!nav || !nav.fechar('contato')) close(); }); }
+  $('.close').addEventListener('click',sair);dialog.addEventListener('cancel',e=>{e.preventDefault();sair();});
   field('consent').addEventListener('change',()=>{field('consent').removeAttribute('aria-invalid');$('.check').classList.remove('needs-consent');if(!field('consent').checked){stopPending();status.textContent='Envio interrompido. Se a solicitação já chegou ao servidor, o fechamento não desfaz seu processamento.';continueLink.hidden=true;continueLink.removeAttribute('href');}});
   function open(anchor){
     if(dialog.open)return;
@@ -73,7 +72,12 @@
     if(!intakeReady||e.defaultPrevented||e.button!==0||e.composedPath().includes(host))return;
     const anchor=e.composedPath().find(node=>node instanceof HTMLAnchorElement);
     if(!anchor||!officialUrl(anchor.href))return;
-    e.preventDefault();e.stopImmediatePropagation();open(anchor);
+    e.preventDefault();e.stopImmediatePropagation();
+    navegacao().then(nav => {
+      nav?.carregarEstilo(root, "/hara/lead-form.css");
+      if(nav) nav.abrir('contato', () => open(anchor), close);
+      else open(anchor);
+    });
   },true);
   form.addEventListener('submit',async e=>{
     e.preventDefault();if(controller)return;if(!field('consent').checked){const line=$('.check');line.classList.remove('needs-consent');void line.offsetWidth;line.classList.add('needs-consent');field('consent').setAttribute('aria-invalid','true');status.textContent='Marque “Li e aceito” para enviar.';field('consent').focus();return;}if(!form.reportValidity())return;
