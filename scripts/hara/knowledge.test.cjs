@@ -32,8 +32,12 @@ const cases=[
  ['Posso visitar e fazer aula experimental?','visita','não realiza a reserva']
 ];
 test('26 fichas adicionais têm fonte pública versionada, sem promoção automática de acervo interno',()=>{
+ const revisadasEmNovembro18 = new Set([
+  'renata-perfil', 'estefania-perfil', 'beauty-oferta', 'certificacao',
+  'pratica-modelos', 'cabelo-formacao', 'design-formacao'
+ ]);
  assert.equal(corpus.cards.length,26);assert.equal(topics.length,41);assert.equal(new Set(topics.map(c=>c.id)).size,41);
- for(const c of corpus.cards){assert.match(c.path,/^\/(?!\/)/);assert.match(c.sourceFile,/^site-hair\//);const content=fs.readFileSync(path.join(__dirname,'../..',c.sourceFile));const blob=createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex');assert.equal(blob,c.sourceBlob,`Revisar ficha após mudança da fonte: ${c.id}`);assert.ok(content.toString().includes(c.evidence),`${c.id}: evidência removida`);assert.equal(c.reviewedAt,'2026-11-08');assert.ok(!/R\$|\d+[.,]\d{2}|\b(?:senha|token|secret)\s*[:=]/i.test(c.text),c.id);}
+ for(const c of corpus.cards){assert.match(c.path,/^\/(?!\/)/);assert.match(c.sourceFile,/^site-hair\//);const content=fs.readFileSync(path.join(__dirname,'../..',c.sourceFile));const blob=createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex');assert.equal(blob,c.sourceBlob,`Revisar ficha após mudança da fonte: ${c.id}`);assert.ok(content.toString().includes(c.evidence),`${c.id}: evidência removida`);assert.equal(c.reviewedAt,revisadasEmNovembro18.has(c.id)?'2026-11-18':'2026-11-08',c.id);assert.ok(!/R\$|\d+[.,]\d{2}|\b(?:senha|token|secret)\s*[:=]/i.test(c.text),c.id);}
 });
 test('26 intenções públicas recuperam ficha específica e dispensam chamada à IA',async()=>{
  let calls=0;
