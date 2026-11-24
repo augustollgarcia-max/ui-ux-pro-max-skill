@@ -55,11 +55,37 @@
     return d?'No Conexão Work desde '+fmt(d):'Conexão Work';
   }
   const locationOf=j=>[j.city,j.state].filter(Boolean).join(' · ');
+  let lastJob, turn=0;
+  const quiet=window.matchMedia('(prefers-reduced-motion: reduce)');
+  function speak(job) {
+    const changed=lastJob!==job.id;
+    if(changed && lastJob!=null)turn++;
+    lastJob=job.id;
+    const place=['baixo','alto','lado'][turn%3];
+    bubble.dataset.place=place;
+    const age=Date.now()-Date.parse(job.entered);
+    const fresh=age>=0 && age<3600000;
+    const intro=fresh?'Ei, chegou uma vaga': ['Ei, tem uma vaga','Olha esta oportunidade','Encontrei uma vaga'][turn%3];
+    // Keep the complete published title in the detail sheet.
+    const role=job.title.replace(/^vaga (?:para|de)\s+/i,'').split(/\s+[—–]\s+/)[0];
+    const name=role.charAt(0).toLocaleLowerCase('pt-BR')+role.slice(1);
+    const speech=intro+' para '+name+(job.city?' em '+job.city:'')+'.';
+    const byline=make('span','','hb-byline');
+    byline.append(make('b','HARA'),make('small',entered(job.entered)));
+    const parts=[byline,make('strong',speech)];
+    if(job.salary)parts.push(make('span','O anúncio informa '+job.salary+'.','hb-pay'));
+    parts.push(make('span','Ver oportunidade →','hb-read'));
+    jobsButton.replaceChildren(...parts);
+    if(changed && !quiet.matches && bubble.animate) {
+      const start=place==='lado'?'translateX(8px)':place==='alto'?'translateY(-6px)':'translateY(8px)';
+      bubble.animate([{opacity:0,transform:start},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
+    }
+  }
   function render() {
     const j=jobs[ji], e=events[ei];
     bubble.hidden=!j; strip.hidden=!e;
     document.body.classList.toggle('hb-with-agenda',!!e);
-    if(j) jobsButton.replaceChildren(make('small',entered(j.entered)),make('strong',/^vaga para /i.test(j.title)?j.title:'Vaga para '+j.title),make('span',[locationOf(j),j.salary].filter(Boolean).join(' · ')),make('b','Ver oportunidade →'));
+    if(j) speak(j);
     if(e) eventButton.replaceChildren(make('small',e.open?'Inscrições abertas':'Agenda HAIR'),make('strong',[e.title,e.city,e.date&&fmt(e.date)].filter(Boolean).join(' · ')),make('b','Participar →'));
   }
   function show(title) {
