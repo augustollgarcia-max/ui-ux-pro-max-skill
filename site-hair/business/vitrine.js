@@ -83,6 +83,10 @@
   function eventCard(e) {
     if(!e)return;
     show(e.title); panel.append(make('p',[e.city,e.date&&fmt(e.date)].filter(Boolean).join(' · ')));
+    if(e.classCode) {
+      panel.append(link('Consultar a turma '+e.classCode,e.detail,'hb-primary'));
+      return;
+    }
     if(e.exclusive) panel.append(make('h3','Seja aluno HAIR para participar'),link('Quero ser aluno HAIR',enrollment,'hb-primary'));
     else if(e.registration || e.info) panel.append(link(e.registration?'Inscrição oficial →':'Ver página do evento →',e.registration||e.info,'hb-primary'));
     panel.append(link('Ver evento no Conexão Work',work+'evento='+encodeURIComponent(e.id),'hb-secondary'));
@@ -134,5 +138,15 @@
     if(events.length)ei=(ei+1)%events.length;
     render();
   },7000);
+  const requestedClass=new URLSearchParams(location.search).get('turma');
+  if(requestedClass) {
+    const card=Array.from(document.querySelectorAll('[data-turma]')).find(n=>n.dataset.turma===requestedClass);
+    if(card) {
+      card.id='turma-'+requestedClass;
+      card.tabIndex=-1;
+      const reveal=()=>{card.scrollIntoView({block:'center'});card.focus({preventScroll:true});};
+      if(document.readyState==='complete')reveal();else window.addEventListener('load',reveal,{once:true});
+    }
+  }
   refresh();setInterval(refresh,60000);document.addEventListener('visibilitychange',refresh);
 })();

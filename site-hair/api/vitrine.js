@@ -55,9 +55,22 @@ function event(e) {
   return {id:e.id,title:e.titulo,city:e.cidade,date:e.data,area:area(e.titulo),open,exclusive,
     registration:!exclusive && (registration || phone) ? url : '', info:exclusive?'':url};
 }
+async function upcomingClasses() {
+  // Only classes selected for the public school website can enter this feed.
+  const published = new Set(require('../business/turmas_app.json').turmas.map(t=>t.codigo));
+  const day=dateBR();
+  const rows=await catalog('turmas',{select:'id,codigo,nome,curso,status,data_inicio,inicio',status:'eq.ativa',
+    or:'(data_inicio.gte.'+day+',inicio.gte.'+day+')',order:'id.asc'});
+  return rows.filter(t=>published.has(t.codigo) && (t.data_inicio || t.inicio)>=day).map(t=>({
+    id:'turma-'+t.id, title:t.nome, date:t.data_inicio || t.inicio, area:area(t.curso || t.nome),
+    open:false, exclusive:false, classCode:t.codigo,
+    detail:'https://www.hairacademiadabeleza.com.br/business?turma='+encodeURIComponent(t.codigo),
+    registration:'',info:''
+  }));
+}
 async function events() {
-  const rows = await catalog('work_eventos',{select:'id,titulo,cidade,data,descricao',ativo:'eq.true',or:'(data.is.null,data.gte.'+dateBR()+')',order:'data.asc.nullslast,id.asc'});
-  return rows.map(event).filter(Boolean);
+  const [rows,classes] = await Promise.all([catalog('work_eventos',{select:'id,titulo,cidade,data,descricao',ativo:'eq.true',or:'(data.is.null,data.gte.'+dateBR()+')',order:'data.asc.nullslast,id.asc'}),upcomingClasses()]);
+  return rows.map(event).filter(Boolean).concat(classes);
 }
 module.exports = async function(req,res) {
   if(req.method !== 'GET') return res.status(405).end();
