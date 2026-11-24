@@ -110,3 +110,15 @@
     e.preventDefault(); e.stopPropagation(); abrir(el);
   }, true);
 })();
+
+// The chooser can navigate between pages without reloading their external scripts.
+(() => {
+  const base=new URL('.',document.currentScript.src);
+  function loadShowcase() {
+    const url=document.querySelector('link[rel=canonical]')?.href;
+    if(!url||!['/business','/beauty'].includes(new URL(url).pathname.replace(/\/$/,''))||document.getElementById('hb-showcase-script'))return;
+    const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('vitrine.css',base);document.head.append(css);
+    const script=document.createElement('script');script.id='hb-showcase-script';script.src=new URL('vitrine.js',base);document.head.append(script);
+  }
+  loadShowcase();document.addEventListener('hair:pagechange',loadShowcase);
+})();
