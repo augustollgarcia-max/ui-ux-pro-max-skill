@@ -1,3 +1,5 @@
+Antes de iniciar ou retomar uma tarefa, leia integralmente as regras comuns em `.github/instructions/regras-agentes.instructions.md` e aplique também as instruções locais abaixo.
+
 # Preferências permanentes neste projeto
 
 - Automatizar verificações repetitivas sempre que houver uma forma segura e verificável de fazê-lo. Para testes de navegador, utilizar agente/robô e um ambiente adequado em vez de encerrar o trabalho por limitação do sandbox local.
