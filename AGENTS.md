@@ -33,3 +33,6 @@
 
 O Conexão Hair é a referência oficial de turmas, dias, horários, datas e status. Em divergência, corrigir o site com base no aplicativo; nunca alterar o aplicativo para justificar texto antigo do site. Consultar public.turmas antes de publicar. Não presumir vagas, duração uniforme nem horário final ausente. Turma inativa não aparece como oferta ativa. O recorte em hair-business-/site/turmas_app.json registra a consulta; não é sincronização automática. Preservar nomes públicos e contatos comerciais aprovados, distintos dos contatos internos.
 
+## Merge após revisão
+
+Após revisar o diff da versão atual do PR e confirmar que os testes pertinentes e as verificações obrigatórias passaram, o agente deve fazer o merge sem pedir nova aprovação de rotina. Respeite revisões obrigatórias, proteções da branch e instruções explícitas de aguardar. Se houver falha, conflito ou risco concreto de regressão, resolva o que estiver no escopo e registre o bloqueio restante. Após o merge, acompanhe o fluxo de publicação previsto e informe separadamente o commit integrado e o estado do deploy.
