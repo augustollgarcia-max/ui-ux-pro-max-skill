@@ -1,0 +1,158 @@
+{
+  "fonte": "Conexão Hair · public.turmas",
+  "consultado_em": "2026-11-09",
+  "regra": "O aplicativo é a referência oficial; o site reproduz os dados cadastrados, sem presumir vagas ou disponibilidade.",
+  "turmas": [
+    {
+      "codigo": "GR07",
+      "nome": "Gustavo Rossatti — Iniciante GR07",
+      "professor": "Gustavo Rossatti",
+      "inicio": "2026-12-08",
+      "termino": "2027-01-28",
+      "dias": [
+        2,
+        4
+      ],
+      "horario": "Terça e quinta · 19h30 às 21h30 · 16 aulas · início 08/12/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "KN-ESP01",
+      "nome": "Kenny Wolf — Avançada somente tesoura KN-ESP01",
+      "professor": "Kenny Wolf",
+      "inicio": null,
+      "termino": null,
+      "dias": [
+        0
+      ],
+      "horario": "Domingos · 10h às 14h (intervalo para almoço) · opção 14h às 18h · 1 mês e meio · início a definir",
+      "status": "ativa"
+    },
+    {
+      "codigo": "KN01",
+      "nome": "Kenny Wolf — Turma KN01 domingo manhã",
+      "professor": "Kenny Wolf",
+      "inicio": "2026-11-08",
+      "termino": "2027-02-21",
+      "dias": [
+        0
+      ],
+      "horario": "Domingos · 08h às 10h · 4 meses · 16 aulas · início 08/11/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "KN02",
+      "nome": "Kenny Wolf — Iniciante noturno KN02",
+      "professor": "Kenny Wolf",
+      "inicio": "2026-11-11",
+      "termino": "2027-01-04",
+      "dias": [
+        1,
+        3
+      ],
+      "horario": "Segunda e quarta · 19h45 às 22h · 16 aulas · início 11/11/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "KN03",
+      "nome": "Kenny Wolf — Iniciante manhã KN03",
+      "professor": "Kenny Wolf",
+      "inicio": "2026-11-16",
+      "termino": "2027-01-06",
+      "dias": [
+        1,
+        3
+      ],
+      "horario": "Segunda e quarta · 08h às 10h · 16 aulas · início 16/11/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "KN04",
+      "nome": "Kenny Wolf — 4ª iniciante: identificação pendente",
+      "professor": "Kenny Wolf",
+      "inicio": null,
+      "termino": null,
+      "dias": [],
+      "horario": "Código provisório reservado · dias, turno e início a confirmar · não confundir com a turma de domingo da programação externa",
+      "status": "inativa"
+    },
+    {
+      "codigo": "LN01",
+      "nome": "LAN Academy — Turma LAN01 noturna",
+      "professor": "Alan Rick (Lan)",
+      "inicio": "2026-11-16",
+      "termino": "2027-01-06",
+      "dias": [
+        1,
+        3
+      ],
+      "horario": "Segunda e quarta · 19h45 às 22h · 16 aulas · início 16/11/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "LN02",
+      "nome": "Lan — Iniciante LN02",
+      "professor": "Alan Rick (Lan)",
+      "inicio": "2026-12-08",
+      "termino": "2027-01-28",
+      "dias": [
+        2,
+        4
+      ],
+      "horario": "Terça e quinta · 19h45 · término a confirmar · 16 aulas · início 08/12/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "SH01",
+      "nome": "Wesley Sharper — Iniciante noturno SH01",
+      "professor": "Wesley Sharper",
+      "inicio": null,
+      "termino": null,
+      "dias": [
+        1,
+        3
+      ],
+      "horario": "Segunda e quarta · 19h45 às 22h · 16 aulas · início a definir",
+      "status": "ativa"
+    },
+    {
+      "codigo": "SH02",
+      "nome": "Wesley Sharper — Iniciante manhã SH02",
+      "professor": "Wesley Sharper",
+      "inicio": "2026-11-04",
+      "termino": "2026-12-28",
+      "dias": [
+        1,
+        3
+      ],
+      "horario": "Segunda e quarta · 09h às 11h · 16 aulas · início 04/11/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "VOSS01",
+      "nome": "César Voss — VOSS 01",
+      "professor": "César Voss",
+      "inicio": "2026-11-14",
+      "termino": "2027-02-27",
+      "dias": [
+        6
+      ],
+      "horario": "Sábados · 08h às 10h · 16 aulas · início 14/11/2026",
+      "status": "ativa"
+    },
+    {
+      "codigo": "VOSS02",
+      "nome": "César VOSS — Iniciante noturno VOSS02",
+      "professor": "César Voss",
+      "inicio": "2026-11-17",
+      "termino": "2027-01-07",
+      "dias": [
+        2,
+        4
+      ],
+      "horario": "Terça e quinta · Noturno · horário exato a confirmar · início 17/11/2026",
+      "status": "ativa"
+    }
+  ]
+}
+
